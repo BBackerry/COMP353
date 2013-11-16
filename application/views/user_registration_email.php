@@ -10,17 +10,17 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/bootstrap.min.css">
         <style>
             body {
                 padding-top: 50px;
                 padding-bottom: 20px;
             }
         </style>
-        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/main.css">
 
-        <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="<?php echo base_url();?>/assets/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -34,11 +34,11 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SEMS ConfSys</a>
+          <a class="navbar-brand" href="<?php echo base_url();?>">SEMS ConfSys</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="<?php echo base_url();?>">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             <li class="dropdown">
@@ -62,7 +62,6 @@
               <input type="password" placeholder="Password" class="form-control">
             </div>
             <button type="submit" class="btn btn-success">Sign in</button>
-			<a href="<?php echo site_url('UserRegistration/index/') ?>" class="btn btn-primary">Register</a>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
@@ -71,33 +70,34 @@
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-lg-2">
-          <h3>Upcoming Dates:</h3>
-		  <ul class="list-group">
-			<li class="list-group-item"><a href="#">Link to event</a></li>
-			<li class="list-group-item"><a href="#">Link to event</a></li>
-			<li class="list-group-item"><a href="#">Link to event</a></li>
-			<li class="list-group-item"><a href="#">Link to event</a></li>
-			<li class="list-group-item"><a href="#">Link to event</a></li>
-		  </ul>
+        <div class="col-lg-12">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3 class="panel-title">ConfSys New User Sign Up</h3>
+				</div>
+				<div class="panel-body">
+					<p>You need to be sign up as a user in Confsys to be able to access the features provided to various of its group of users. The system allows signed-up users to be associated with one or more conference series and on-line journals. All access to information and functions associated with these are managed by ConfSys.</p>
+					<p>Important: please make sure to input your valid email address, confirmation emails will be sent to you to help you complete the Step 2 of the sign up. You may change your email address once you have completed your sign up process. 
+					Please keep your profile and email address updated.</p>
+					
+					<form role="form" class="form-horizontal">
+						<div class="form-group">
+							<label for="firstEmail" class="col-lg-2 control-label">Email</label>
+							<div class="col-lg-10">
+								<input type="email" class="form-control" id="firstEmail" placeholder="Email">
+							</div>
+						</div>
+						<div class="form-group">
+							<label for="confirmationEmail" class="col-lg-2 control-label">Confirm Email</label>
+							<div class="col-lg-10">
+								<input type="email" class="form-control" id="confirmationEmail" placeholder="Email">
+							</div>
+						</div>
+						<a href="<?php echo site_url('UserRegistration/registration/') ?>" class="btn btn-success" style="float:right;">Submit</a>
+					</form>
+				</div>
+			</div>
         </div>
-        <div class="col-lg-10">
-          <h2>News</h2>
-		  <div class="panel panel-default row">
-			  <div class="panel-heading">Title here</div>
-			  <div class="col-lg-12">
-				  <p>This is a news about the ConfSys system that the admin only can post</p>
-				  <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-			  </div>
-		  </div>
-		  <div class="panel panel-default row">
-			  <div class="panel-heading">Title here</div>
-			  <div class="col-lg-12">
-				  <p>This is another news about the ConfSys system that the admin only can post</p>
-				  <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-			  </div>
-		  </div>
-       </div>
       </div>
 
       <hr>
@@ -108,9 +108,9 @@
     </div> <!-- /container -->
 	
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-		<script src="assets/js/vendor/bootstrap.min.js"></script>
-		<script src="assets/js/plugins.js"></script>
-		<script src="assets/js/main.js"></script>
+		<script>window.jQuery || document.write('<script src="../../<?php echo base_url();?>/<?php echo base_url();?>/assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/vendor/bootstrap.min.js"></script>
+		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/plugins.js"></script>
+		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/main.js"></script>
     </body>
 </html>
