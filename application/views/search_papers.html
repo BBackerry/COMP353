@@ -44,13 +44,9 @@
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
+                <li><a href="#">My Profile</a></li>
+                <li><a href="#">My Interests</a></li>
+                <li><a href="#">My Registration</a></li>
               </ul>
             </li>
           </ul>
@@ -64,27 +60,35 @@
       <div class="container">
       <h3>Search for Paper:</h3>
                   
-        <form>
-        <table border="1">
+        <form role="form" class="form-horizontal">
+        <table border="1" class="table">
         <tr>
-        <td>Event:</td>
-        <td><input type="text" name="event"/></td> 
-        </tr>
+		<div class="form-group">
+        		<td><label for="title" class="col-lg-2 control-label">Event:</label></td>
+        		<td><div class="col-lg-10"><input type="text" name="event" id="event"/></div></td> 
+        	</div>
+	</tr>
         
         <tr>
-        <td>Author:</td>
-        <td><input type="text" name="author"/></td>  
-        </tr>          
+		<div class="form-group">
+        		<td><label for="title" class="col-lg-2 control-label">Author:</label></td>
+        		<td><div class="col-lg-10"><input type="text" name="author" id="author"/></div></td>  
+       		</div>
+ 	</tr>          
 
 	<tr>
-        <td>Keywords:</td>
-        <td><input type="text" name="keywords"/></td>  
-        </tr>           
+		<div class="form-group">
+        		<td><label for="title" class="col-lg-2 control-label">Keywords:</label></td>
+        		<td><div class="col-lg-10"><input type="text" name="keywords" id="keywords"/></div></td>  
+        	</div>
+	</tr>           
 	
 	<tr>
-        <td>Title:</td>
-        <td><input type="text" name="title"/></td>  
-        </tr>   
+		<div class="form-group">
+        		<td><label for="title" class="col-lg-2 control-label">Title:</label></td>
+        		<td><div class="col-lg-10"><input type="text" name="title" id="title"/></div></td>  
+        	</div>
+	</tr>   
 	
         </table>
 	<button type="button">Search</button>
