@@ -72,58 +72,79 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-      <h2>Add a new Event</h2>
+      
+      <h2 class="panel-title">Add a new Event</h2>
+            
+      <div class="panel-body">
         <p>Add a new Event for conference:</p>
-        <table border="1" class ="table">
+        
+        <form role="form" class="form-horizontal">
+        <table class="table">
+        
         <tr>
-        <td><h4>Event Title </h4></td>
-        <td><input type="text" name ="event name"></td>        
+        <div class="form-group">
+        <td><h4 class="panel-title">Event Title </h4></td>
+        <td><input type="text" class="form-control" name ="event name"></td>  
+        </div>        
         </tr>
         
         <tr>
-        <td><h4>Event Description</h4></td>
-        <td><input type="text" name ="event description" style= "height:200px;"></td>
+        <div class="form-group">
+        <td><h4 class="panel-title">Event Description</h4></td>
+        <td><input type="text"  class="form-control" name ="event description" style= "height:200px;"></td>
+        </div>
         </tr>
         
         <tr>
+        <div class="form-group">
         <td><h4>Subject Hierarchy Class </h4></td>
-        <td><select>
+        <td><select class="form-control" id="idTopicHierarchy">
         <option value = "ACM">ACM</option>
         <option value="??">??</option>
         </select>
         </td>        
+        </div>
         </tr>
         
          <tr>
+         <div class="form-group">
         <td><h4>Start Date: </h4></td>
-        <td><input type="text" name ="event start date"></td>        
+        <td><input type="text" class="form-control" name ="event start date" id="startDate"></td>        
+        </div>
         </tr>
         
           <tr>
+          <div class="form-group">
         <td><h4>End Date: </h4></td>
-        <td><input type="text" name ="event end date"></td>        
+        <td><input type="text" class="form-control" name ="event end date" id="endDate"></td>        
+        </div>
         </tr>
         
         <tr>
+        <div class="form-group">
         <td><h4>Scheduling Template </h4></td>
-        <td><select>
+        <td><select class="form-control">
         <option value = "Use the system default">Use the system default</option>
         <option value="??">??</option>
         </select>
         </td>        
+        </div>
         </tr>
         
         <tr>
+        <div class="form-group">
         <td><h4>Copy Groups From </h4></td>
-        <td><select>
+        <td><select class="form-control">
         <option value = "don't copy">Don't copy</option>
         <option value="??">??</option>
         </select>
         </td>        
+        </div>
         </tr>
         
         
         <tr>
+        <div class="form-group">
         <td><h4>Scheduling Template </h4></td>
         <td>
         <div class="col-lg-6">
@@ -151,18 +172,26 @@
         <input type="checkbox" name="ninethcheckbox" value="Request slide">Request Slide<br>
         <input type="checkbox" name="tenthcheckbox" value="Enable presentation/meeting">Enable Presentation/Meeting<br>
         <input type="checkbox" name="eleventhcheckbox" value="Check Embedded Fonts of PDF file">Check Embedded Fonts of PDF file<br>
-        </td>        
+        </td> 
+        </div>        
         </tr>
+        
         </table>
+        </form>
+        
         
         <div class="form-group">
         <button type="buton" class="btn btn-default">Add this new Event</button>
-        <button type="buton" class="btn btn-default">cancel</button>
+        <button type="cancel" class="btn btn-default">cancel</button>
        <!-- <a href="<?php echo site_url('UserRegistration/index/') ?>" class="btn btn-primary">??</a>
        -->
        </div>
        
+       
       </div>
+    </div>
+    </div>
+    </div>
     </div>
 
     <div class="container">
