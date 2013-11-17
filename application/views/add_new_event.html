@@ -64,7 +64,7 @@
       <div class="container">
       <h2>Add a new Event</h2>
         <p>Add a new Event for conference:</p>
-        <table border="1">
+        <table border="1" class ="table">
         <tr>
         <td><h4>Event Title </h4></td>
         <td><input type="text" name ="event name"></td>        
@@ -116,9 +116,15 @@
         <tr>
         <td><h4>Scheduling Template </h4></td>
         <td>
+        <div class="col-lg-6">
+        <div class="input-group">
+        <span class="input-group-addon">
         <input type="radio" name="first" value="Request Full Paper"> Request Full Paper
+        </span>
+        <span class="input-group-addon">
         <input type="radio" name="second" value="Request Abstract"> Request Abstract   <br>
-        <input type="checkbox" name="firstcheckbox" value="Enable Registration Control">Enable Registration Control<br>
+       </span>
+       <input type="checkbox" name="firstcheckbox" value="Enable Registration Control">Enable Registration Control<br>
         <input type="checkbox" name="secondcheckbox" value="Enable Paper Auction">Enable Paper Auction<br>
         <input type="checkbox" name="thirdcheckbox" value="Enable Paper Review">Enable Paper Review<br>
         <input type="checkbox" name="fourthcheckbox" value="Enable Auto Review Allocation">Enable Auto Review Allocation<br>
@@ -139,9 +145,12 @@
         </tr>
         </table>
         
-        <button type="buton">Add this new Event</button>
-        <button type="buton">cancel</button>
-       
+        <div class="form-group">
+        <button type="buton" class="btn btn-default">Add this new Event</button>
+        <button type="buton" class="btn btn-default">cancel</button>
+       <!-- <a href="<?php echo site_url('UserRegistration/index/') ?>" class="btn btn-primary">??</a>
+       -->
+       </div>
        
       </div>
     </div>
