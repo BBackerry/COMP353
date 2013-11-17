@@ -77,32 +77,41 @@
 
 
             
-        <form>
-        <table border="1">
+        <form role="form" class="form-horizontal">
+        <table border="1" class="table">
         <tr>
-        <td><h4>*Paper Title:</h4></td>
-        <td><input type="text" name="title"/></td> 
+		<div class="form-group">
+        		<td><label for="title" class="col-lg-2 control-label">*Paper Title:</label></td>
+        		<td><div class="col-lg-10">
+				<input type="text" name="title" id="title"/></div>
+			</td>
+		</div> 
         </tr>
         
         <tr>
-        <td><h4>*Paper Abstract:</h4></td>        
-        <td><input type="text" name="abstract"/></td> 
+		<div class="form-group">
+        		<td><label for="abstract" class="col-lg-2 control-label">*Paper Abstract:</label></td>        
+        		<td><div class="col-lg-10">
+				<input type="text" name="abstract" id="abstract"/></div>
+			</td> 
+		</div>
         </tr>  
         
         <tr>
-        <td><h4>*Paper File(PDF):</h4></td>        
-        <td><input type="text" name="file"/>
-		<button type="button">Browse</button></td>         		   
+		<div class="form-group">
+        		<td><label for="abstract" class="col-lg-2 control-label">*Paper File(PDF):</label></td>        
+        		<td><div class="col-lg-10"><input type="text" name="file" id="file"/></div>
+				<button type="button">Browse</button></td>         		   
 	</tr> 
         
         <tr>
-        <td><h4>*Keywords:</h4></td>        
-        <td><input type="text" name="keywords"/></td> 
+        <td><label for="abstract" class="col-lg-2 control-label">*Keywords:</label></td>        
+        <td><div class="col-lg-10"><input type="text" name="keywords" id="keywords"/><div></td> 
         </tr> 
 
 	<tr>
-        <td><h4>*Paper Subject:</h4></td>        
-        <td><select>
+        <td><label for="abstract" class="col-lg-2 control-label">*Paper Subject:</label></td>        
+        <td><select id="subject">
   		<option value="subject1">subject1</option>
   		<option value="subject2">subject2</option>
  		<option value="subject3">subject3</option>
