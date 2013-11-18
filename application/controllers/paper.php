@@ -6,4 +6,14 @@ class Paper extends CI_Controller {
 	{
 		$this->load->view('submit_new_paper');
 	}
+
+	public function submitted()
+	{
+		$this->load->view('submitted_papers');
+	}
+
+	public function search()
+	{
+		$this->load->view('search_papers');
+	}
 }
