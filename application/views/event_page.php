@@ -71,50 +71,50 @@
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
       <div class="container">
-          <h3>Add a new Event for conference:</h3>  
+      
+      <h2 class="panel-title">Event Page</h2>
+            
       <div class="panel-body">
+        <p>Event for conference:</p>
         
-        
+       
     
         <div class="form-group">
-        <p> Event Title </p>
-        <input type="text" class="form-control" name ="event name">
+        <h4 class="panel-title">Event Title </h4>
+      
         </div>        
         
         
         
         <div class="form-group">
-        <p>Event Description</p>
-        <input type="text"  class="form-control" name ="event description" style= "height:200px;">
+        <h4 class="panel-title">Event Description</h4>
+       
         </div>
    
         
         
         <div class="form-group">
-        <p>Subject Hierarchy Class </p>
-        <select class="form-control" id="idTopicHierarchy">
-        <option value = "ACM">ACM</option>
-        <option value="??">??</option>
-        </select>
+        <h4>Subject Hierarchy Class </h4>
+        
               
         </div>
        
         
          
          <div class="form-group">
-        <p>Start Date: </p>
-        <input type="text" class="form-control" name ="event start date" id="startDate">
+        <h4>Start Date: </h4>
+     
         </div>
        
           <div class="form-group">
-        <p>End Date: </p>
-        <input type="text" class="form-control" name ="event end date" id="endDate">        
+        <h4>End Date: </h4>
+               
         </div>
         
         
         
         <div class="form-group">
-        <p>Scheduling Template </p>
+        <h4>Scheduling Template </h4>
         <select class="form-control">
         <option value = "Use the system default">Use the system default</option>
         <option value="??">??</option>
@@ -123,63 +123,17 @@
         </div>
         
         
-        
-        <div class="form-group">
-        <p>Copy Groups From </p>
-        <select class="form-control">
-        <option value = "don't copy">Don't copy</option>
-        <option value="??">??</option>
-        </select>
-                
-        </div>
-        
-        
-        
-        
-        <div class="form-group">
-        <p>Choose Event Parameter </p>
-        
-        <div class="col-lg-6">
-       
-        <input type="radio" name="first" value="Request Full Paper"> Request Full Paper <br>
-    
-        <input type="radio" name="second" value="Request Abstract"> Request Abstract<br>
       
-       <input type="checkbox" name="firstcheckbox" value="Enable Registration Control">Enable Registration Control<br>
-        <input type="checkbox" name="secondcheckbox" value="Enable Paper Auction">Enable Paper Auction<br>
-        <input type="checkbox" name="thirdcheckbox" value="Enable Paper Review">Enable Paper Review<br>
-        <input type="checkbox" name="fourthcheckbox" value="Enable Auto Review Allocation">Enable Auto Review Allocation<br>
-        <input type="checkbox" name="fifthcheckbox" value="Enable Blind Debate">Enable Blind Debate<br>
-        <input type="checkbox" name="sixthcheckbox" value="Request Publisher Copyright Form">Request Publisher Copyright Form<br>
-            
-       <input type="radio" name="upload" value="upload"> Upload<br>
-        <input type="radio" name="inline" value="inline"> Inline<br>
-        <input type="radio" name="online" value="online"> Online<br>
-        <br>
-        <input type="checkbox" name="seventhcheckbox" value="Request CINDI Copyright Form">Request CINDI Copyright Form<br>
-        <input type="radio" name="upload" value="upload"> Upload<br>
-        <input type="radio" name="inline" value="inline"> Inline<br>
-        <input type="radio" name="online" value="online"> Online<br>
-        <br>
-        <input type="checkbox" name="eighthcheckbox" value="Request Final Version">Request Final Version<br>
-        <input type="checkbox" name="ninethcheckbox" value="Request slide">Request Slide<br>
-        <input type="checkbox" name="tenthcheckbox" value="Enable presentation/meeting">Enable Presentation/Meeting<br>
-        <input type="checkbox" name="eleventhcheckbox" value="Check Embedded Fonts of PDF file">Check Embedded Fonts of PDF file<br>
         
-         <a href="<?php echo site_url('Event/submit/') ?>" class="btn btn-success" >Add New Event</a>
         
-        <button type="cancel" class="btn btn-success" >cancel</button>
         
-        </div>        
-        </div>
-       
+         
         
-
-       
-      </div>
-    </div>
-    </div>
     
+        
+  
+       
+     
 
     <div class="container">
       <!-- Example row of columns -->
