@@ -73,7 +73,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
 				<h3>Submit New Paper:</h3>
-				<p>Paper Info<p>
+				<p>Paper Info:<p>
 				<p>Uploading paper period is from 2012-07-15 to 2013-09-27<p>
 				<p>You can only change the Title, Abstract, Authors, or paper file during this period. No author can be added or deleted after this period.<p>
 				<p>Fields with * are required.<p>
@@ -120,8 +120,7 @@
 							</div>
 						</div>
 					</div>
-					
-					<a href="#" class="btn btn-success" style="float:right;">Submit</a>
+					<a style="float:right;" href="<?php echo site_url('Paper/submitted/') ?>" class="btn btn-primary">Submit</a>
 				</form>
 			  
 			</div>

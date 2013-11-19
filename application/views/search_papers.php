@@ -61,57 +61,67 @@
             <div class="form-group">
               <input type="password" placeholder="Password" class="form-control">
             </div>
-          <!--  <button type="submit" class="btn btn-success">Sign in</button> -->
-            <a href="siged-in-page.html">Sign in</a>
+            <button type="submit" class="btn btn-success">Sign in</button>
           </form>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-      <div class="row">
-        <div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3 class="panel-title">ConfSys New User Sign Up</h3>
-				</div>
-				<div class="panel-body">
-					<p>You need to be sign up as a user in Confsys to be able to access the features provided to various of its group of users. The system allows signed-up users to be associated with one or more conference series and on-line journals. All access to information and functions associated with these are managed by ConfSys.</p>
-					<p>Important: please make sure to input your valid email address, confirmation emails will be sent to you to help you complete the Step 2 of the sign up. You may change your email address once you have completed your sign up process. 
-					Please keep your profile and email address updated.</p>
-					
-					<form role="form" class="form-horizontal">
-						<div class="form-group">
-							<label for="firstEmail" class="col-lg-2 control-label">Email</label>
-							<div class="col-lg-10">
-								<input type="email" class="form-control" id="Email" placeholder="Email">
-							</div>
+      <div class="container">
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-body">
+      				<h3>Search for Paper:</h3>
+                  
+        			<form role="form" class="form-horizontal">
+					<div class="form-group">
+        					<label for="title" class="col-lg-2 control-label">Event:</label>
+        					<div class="col-lg-10">
+							<input type="text" name="event" id="event"/>
 						</div>
-						<div class="form-group">
-							<label for="confirmationEmail" class="col-lg-2 control-label">Confirm Email</label>
-							<div class="col-lg-10">
-								<input type="email" class="form-control" id="onfirmationEmail" placeholder="Email">
-							</div>
+        				</div>
+
+					<div class="form-group">
+        					<label for="title" class="col-lg-2 control-label">Author:</label>
+        					<div class="col-lg-10">
+							<input type="text" name="author" id="author"/>
 						</div>
-						<a href="home_page.html">Submit</a>
-					</form>
-				</div>
+       					</div>
+ 	         
+					<div class="form-group">
+        					<label for="title" class="col-lg-2 control-label">Keywords:</label>
+        					<div class="col-lg-10">
+						<input type="text" name="keywords" id="keywords"/>
+						</div>  
+        				</div>
+	
+					<div class="form-group">
+        					<label for="title" class="col-lg-2 control-label">Title:</label>
+        					<div class="col-lg-10">
+							<input type="text" name="title" id="title"/>
+						</div>  
+        				</div>
+			
+					<a href="#" class="btn btn-success" style="float:right;">Submit</a>
+
+				</form>
 			</div>
-        </div>
+		</div>
+	</div>
       </div>
 
-      <hr>
+    <div class="container">
+      <!-- Example row of columns -->
 
-      <footer>
+         <footer>
         <p>&copy; Best Concordia Team</p>
       </footer>
     </div> <!-- /container -->
 	
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="../../<?php echo base_url();?>/<?php echo base_url();?>/assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/vendor/bootstrap.min.js"></script>
-		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/plugins.js"></script>
-		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/main.js"></script>
+		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+		<script src="assets/js/vendor/bootstrap.min.js"></script>
+		<script src="assets/js/plugins.js"></script>
+		<script src="assets/js/main.js"></script>
     </body>
 </html>

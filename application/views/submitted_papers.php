@@ -10,17 +10,17 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
 
-        <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/bootstrap.min.css">
         <style>
             body {
                 padding-top: 50px;
                 padding-bottom: 20px;
             }
         </style>
-        <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
-        <link rel="stylesheet" href="assets/css/main.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/bootstrap-theme.min.css">
+        <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/main.css">
 
-        <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="<?php echo base_url();?>/assets/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -34,70 +34,60 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">SEMS ConfSys</a>
+          <a class="navbar-brand" href="<?php echo base_url();?>">SEMS ConfSys</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">Home</a></li>
+            <li class="active"><a href="<?php echo base_url();?>">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li><a href="#">My Profile</a></li>
-                <li><a href="#">My Interests</a></li>
-                <li><a href="#">My Registration</a></li>
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
               </ul>
             </li>
           </ul>
-        
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Username" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
+    
       <div class="container">
-      <h3>Search for Paper:</h3>
+	<div class="row">
+		<div class="panel panel-default">
+			<div class="panel-body">
+      				<h3>My Paper List:</h3>
                   
-        <form role="form" class="form-horizontal">
-        <table border="1" class="table">
-        <tr>
-		<div class="form-group">
-        		<td><label for="title" class="col-lg-2 control-label">Event:</label></td>
-        		<td><div class="col-lg-10"><input type="text" name="event" id="event"/></div></td> 
-        	</div>
-	</tr>
+        			<p>Paper ID 1</p>
+        			<p>Title: This is a title</p> 
+        			<br/>
+        			<p>Paper ID 2</p>
+        			<p>Title: This is a title</p>  
+                
+				<form role="form" class="form-horizontal">
+					<a style="float:right;" href="<?php echo site_url('Paper/submit/') ?>" class="btn btn-primary">Submit New Paper</a>
+				</form>
         
-        <tr>
-		<div class="form-group">
-        		<td><label for="title" class="col-lg-2 control-label">Author:</label></td>
-        		<td><div class="col-lg-10"><input type="text" name="author" id="author"/></div></td>  
-       		</div>
- 	</tr>          
-
-	<tr>
-		<div class="form-group">
-        		<td><label for="title" class="col-lg-2 control-label">Keywords:</label></td>
-        		<td><div class="col-lg-10"><input type="text" name="keywords" id="keywords"/></div></td>  
-        	</div>
-	</tr>           
-	
-	<tr>
-		<div class="form-group">
-        		<td><label for="title" class="col-lg-2 control-label">Title:</label></td>
-        		<td><div class="col-lg-10"><input type="text" name="title" id="title"/></div></td>  
-        	</div>
-	</tr>   
-	
-        </table>
-	<button type="button">Search</button>
-</form>
-        
-       
-       
+      			</div>
+    		</div>
+	</div>
       </div>
-    </div>
 
     <div class="container">
       <!-- Example row of columns -->
