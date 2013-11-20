@@ -22,6 +22,7 @@
 
         <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
+    
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
@@ -33,13 +34,12 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button>           
-       
-   <a class="navbar-brand" href="<?php echo base_url();?>">SEMS ConfSys</a>
+          </button>
+          <a class="navbar-brand" href="#">SEMS ConfSys</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="<?php echo base_url();?>">Home</a></li>
+            <li class="active"><a href="#">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             <li class="dropdown">
@@ -55,17 +55,23 @@
               </ul>
             </li>
           </ul>
-         
+          <form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Username" class="form-control">
+            </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+			<a href="<?php echo site_url('UserRegistration/index/') ?>" class="btn btn-primary">Register</a>
+          </form>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
     <div class="jumbotron">
-       <div class="row">
-        <div class="col-lg-12">
-			<div class="panel panel-default">
-				<div class="panel-heading">
+       <div class="container">
       <h3 class="panel-title">Paper Review (Paper DEtail)</h3>
       	<div class="panel-body">
       <p>If you are unable to review this paper, you may assign it to an external reviewer who is:<br>
@@ -74,71 +80,58 @@
       
       <hr>
       
-      <form role="form" class="form-horizontal">
-      <table class="table">
-      <tr>
+     
+      
       <div class="form-group">
-      <td> External Reviewer Email:</td>
-      <td><input type="text" name="email" id="Email"></td>
-      <td><button type="button"> Assign </button>
+      <h3> External Reviewer Email:</h3>
+      <input type="text" name="email" class="form-control" id="Email">
+      <button type="button"> Assign </button>
       </div>
-      </tr>
-      </table>
-      </form>
+    
 
       <hr>  
       
-        <form role="form" class="form-horizontal">
-        <table border="1" class="table">
+     
         
-        <caption> Paper Information</caption>
-        <tr>
+        <h3 class="panel-title"> Paper Information</h3>
+       
         <div class="form-group">
-        <td><h4 class="panel-title">Paper</h4></td>
+        <h4 class="panel-title">Paper</h4>
         <div class="col-lg-10">
-        <td>This title of this paper is 1212</td> 
+        <h3 class="panel-title">This title of this paper is 1212</h3> 
         </div>        
         </div>
-        </tr>
         
-        <tr>
+        
+       
         <div class="form-group">
-        <td><h4 class="panel-title">Paper Abstract</h4></td>        
+        <h4 class="panel-title">Paper Abstract</h4>       
         <div class="col-lg-10">
-        <td>This is a short summary of the paper whose title is given above 1212</td>        
+        <h3 class="panel-title">This is a short summary of the paper whose title is given above 1212</h3>        
         </div>
         </div>
-       </tr>  
-        
-        <tr>
+       
         <div class="form-group">
-        <td><h4 class="panel-title">Paper Subjects</h4></td>        
+        <h4 class="panel-title">Paper Subjects</h4>
+        
         <div class="col-lg-10">
-        <td>[<ICCM>2.21] ICCM:Milti-functional composites<br>[<ICCM>2.41]ICCM:Nanotechnology composites</td> 
+        <h3>[<ICCM>2.21] ICCM:Milti-functional composites<br>[<ICCM>2.41]ICCM:Nanotechnology composites</h3> 
          </div>
          </div>
-         </tr> 
         
-        <tr>
+       
         <div class="form-group">
-        <td><h4 class="panel-title">Version</h4></td>        
+        <h4 class="panel-title">Version</h4>        
         <div class="col-lg-10">
-        <td>Version 1 [2013-01-16 17:59:54]: icing, carbon nanotubes, aerosurface, thermal, electrical</td> 
+        <h3>Version 1 [2013-01-16 17:59:54]: icing, carbon nanotubes, aerosurface, thermal, electrical</h3> 
         </div>
-        </div>
-        </tr>       
+        </div>     
+      
+      
+        <h3 class="panel-title">My Review Result{* Indicated required fields. Please see the on-line help about timeout.)</h3>
         
-        </table>
-        </form>
-        
-        <form role="form" class="form-horizontal">
-        <table border="1" class="table">
-        <caption>My Review Result{* Indicated required fields. Please see the on-line help about timeout.)</caption>
-        <tr>
         <div class="form-group">
-        <td><h4 class="panel-title">Paper Score</h4></td>
-        
-        <td>
+        <h4 class="panel-title">Paper Score</h4>               
         <div class="col-lg-10">
         <select class="form-control" id="score">
         <option>1.0</option>
@@ -153,16 +146,15 @@
         <option>10.0</option>         
         </select>
         </div>
-        </td>
-        </div>
-        </tr>
         
-        <tr>
+        </div>
+        
+               
         <div class="form-group">
-        <td><h4 class="panel-title">My Confidence:</h4></td>
-        <td>
+        <h4 class="panel-title">My Confidence:</h4>
+        
         <div class="col-lg-10">
-        <select class="form-control">
+        <select class="form-control" id="confidence">
         <option>1.0</option>
         <option>2.0</option>
         <option>3.0</option>
@@ -170,16 +162,15 @@
         <option>5.0</option>
         </select>
         </div>
-        </td>
-        </div>
-        </tr>
         
-        <tr>
+        </div>
+                
+        
         <div class="form-group">
-        <td><h4 class="panel-title">Originality:</h4></td>
-        <td>
+        <h4 class="panel-title">Originality:</h4>
+        
         <div class="col-lg-10">
-        <select class="form-control">
+        <select class="form-control" id="originality">
         <option>Very Good</option>
         <option>Good</option>
         <option>Aerage</option>
@@ -187,46 +178,40 @@
         <option>Very Bad</option>
         </select>
         </div>
-        </td>
+        
         </div>
-        </tr>
         
-        <tr>
+        
         <div class="form-group">
-        <td><h4 class="panel-title">Strong Point:</h4></td>
+        <h4 class="panel-title">Strong Point:</h4>
         
-        <td><input type="text" name="point" class="form-control" style="width:500px"></td>
+        <input type="text" name="point" class="form-control" style="width:500px">
         </div>
-        </tr>
+                
         
-        <tr>
         <div class="form-group">
-        <td><h4 class="panel-title">Other Comment:</h4></td>
-        <td><input type="text" name="point" class="form-control" style="height:200px; width:500px" id="comment"></td>
+        <h4 class="panel-title">Other Comment:</h4>
+        <input type="text" name="point" class="form-control" style="height:200px; width:500px" id="comment">
+        </div>
+        
         <div class="form-group">
-        </tr>        
-        </table>
-        </form>
         <hr>
-        <h4 class="panel-title">Paper Comments</h4>
-        
+        <h4 class="panel-title">Paper Comments</h4>        
         <h4 class="panel-title">My Comments to Authors (Would be shown to the author)</h4>
-        <input type="text" name="point" class="form-control" style="height:200px; width:600px">
-        
-        <hr>
-        
+        <input type="text" name="point" class="form-control" style="height:200px; width:600px">        
+        <hr>        
         <h4 class="panel-title">My Comments to Program/General Chair(Show only to a General/Program Chair)</h4>
         <input type="text" name="point"  class="form-control" style="height:200px; width:600px">
-        
         <hr>
-        <button type="button" >Submit</button>
-       
-       
+        <a href="<?php echo site_url('Event/submit/') ?>" class="btn btn-success" >Submit</a>
+        
+             
       </div>
+      
     </div>
     </div>
     </div>
-    </div></div>
+    
 
     <div class="container">
       <!-- Example row of columns -->

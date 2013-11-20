@@ -16,4 +16,14 @@ class Paper extends CI_Controller {
 	{
 		$this->load->view('search_papers');
 	}
+    
+    public function paperReview()
+	{
+		$this->load->view('paper_review');
+	}
+    
+    public function detailedPaperReview()
+	{
+		$this->load->view('detailed_paper_review');
+	}
 }
