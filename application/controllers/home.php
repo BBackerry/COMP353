@@ -7,4 +7,10 @@ class Home extends CI_Controller {
 		$this->load->view('header');
 		$this->load->view('home_page');
 	}
+    
+    public function signIn()
+	{
+		$this->load->view('header');
+		$this->load->view('signed-in-page');
+	}
 }
