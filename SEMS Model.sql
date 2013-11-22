@@ -2,15 +2,16 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE SCHEMA IF NOT EXISTS `wyc353_2` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
-USE `wyc353_2` ;
+DROP SCHEMA IF EXISTS `comp353` ;
+CREATE SCHEMA IF NOT EXISTS `comp353` DEFAULT CHARACTER SET utf8 COLLATE utf8_general_ci ;
+USE `comp353` ;
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`country`
+-- Table `comp353`.`country`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`country` ;
+DROP TABLE IF EXISTS `comp353`.`country` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`country` (
+CREATE TABLE IF NOT EXISTS `comp353`.`country` (
   `idCountry` INT NOT NULL AUTO_INCREMENT,
   `countryName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idCountry`),
@@ -19,11 +20,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`organization`
+-- Table `comp353`.`organization`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`organization` ;
+DROP TABLE IF EXISTS `comp353`.`organization` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`organization` (
+CREATE TABLE IF NOT EXISTS `comp353`.`organization` (
   `idOrganization` INT NOT NULL AUTO_INCREMENT,
   `organizationName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idOrganization`),
@@ -32,11 +33,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`department`
+-- Table `comp353`.`department`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`department` ;
+DROP TABLE IF EXISTS `comp353`.`department` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`department` (
+CREATE TABLE IF NOT EXISTS `comp353`.`department` (
   `idDepartment` INT NOT NULL AUTO_INCREMENT,
   `departmentName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idDepartment`),
@@ -45,50 +46,50 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`user`
+-- Table `comp353`.`user`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`user` ;
+DROP TABLE IF EXISTS `comp353`.`user` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`user` (
+CREATE TABLE IF NOT EXISTS `comp353`.`user` (
   `idUser` VARCHAR(45) NOT NULL,
-  `Password` VARCHAR(45) NOT NULL,
-  `First Name` VARCHAR(45) NULL,
-  `Last Name` VARCHAR(45) NULL,
-  `Email` VARCHAR(45) NOT NULL,
-  `Country` INT NOT NULL,
-  `Organization` INT NOT NULL,
-  `Confirmed` BINARY NULL DEFAULT 0,
-  `Department` INT NOT NULL,
+  `password` VARCHAR(45) NOT NULL,
+  `firstName` VARCHAR(45) NULL,
+  `lastName` VARCHAR(45) NULL,
+  `email` VARCHAR(45) NOT NULL,
+  `country` INT NOT NULL,
+  `organization` INT NOT NULL,
+  `confirmed` TINYINT NULL DEFAULT 0,
+  `department` INT NOT NULL,
   PRIMARY KEY (`idUser`),
-  INDEX `Country_user` (`Country` ASC),
-  INDEX `Organization_user` (`Organization` ASC),
-  INDEX `Department_user` (`Department` ASC),
-  UNIQUE INDEX `Email_UNIQUE` (`Email` ASC),
+  INDEX `Country_user` (`country` ASC),
+  INDEX `Organization_user` (`organization` ASC),
+  INDEX `Department_user` (`department` ASC),
+  UNIQUE INDEX `Email_UNIQUE` (`email` ASC),
   UNIQUE INDEX `idUser_UNIQUE` (`idUser` ASC),
   CONSTRAINT `user_country`
-    FOREIGN KEY (`Country`)
-    REFERENCES `wyc353_2`.`country` (`idCountry`)
+    FOREIGN KEY (`country`)
+    REFERENCES `comp353`.`country` (`idCountry`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `user_organization`
-    FOREIGN KEY (`Organization`)
-    REFERENCES `wyc353_2`.`organization` (`idOrganization`)
+    FOREIGN KEY (`organization`)
+    REFERENCES `comp353`.`organization` (`idOrganization`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `user_department`
-    FOREIGN KEY (`Department`)
-    REFERENCES `wyc353_2`.`department` (`idDepartment`)
+    FOREIGN KEY (`department`)
+    REFERENCES `comp353`.`department` (`idDepartment`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`position`
+-- Table `comp353`.`position`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`position` ;
+DROP TABLE IF EXISTS `comp353`.`position` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`position` (
+CREATE TABLE IF NOT EXISTS `comp353`.`position` (
   `idPosition` INT NOT NULL AUTO_INCREMENT,
   `positionName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idPosition`),
@@ -97,11 +98,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`event`
+-- Table `comp353`.`event`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`event` ;
+DROP TABLE IF EXISTS `comp353`.`event` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`event` (
+CREATE TABLE IF NOT EXISTS `comp353`.`event` (
   `idEvent` INT NOT NULL AUTO_INCREMENT,
   `startDate` TIMESTAMP NULL,
   `endDate` TIMESTAMP NULL,
@@ -110,18 +111,18 @@ CREATE TABLE IF NOT EXISTS `wyc353_2`.`event` (
   INDEX `createdBy_event` (`createdBy` ASC),
   CONSTRAINT `event_user`
     FOREIGN KEY (`createdBy`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`role`
+-- Table `comp353`.`role`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`role` ;
+DROP TABLE IF EXISTS `comp353`.`role` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`role` (
+CREATE TABLE IF NOT EXISTS `comp353`.`role` (
   `idUser` VARCHAR(45) NOT NULL,
   `idEvent` INT NOT NULL,
   `idPosition` INT NOT NULL,
@@ -131,28 +132,28 @@ CREATE TABLE IF NOT EXISTS `wyc353_2`.`role` (
   INDEX `idEvent_role` (`idEvent` ASC),
   CONSTRAINT `role_user`
     FOREIGN KEY (`idUser`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `role_position`
     FOREIGN KEY (`idPosition`)
-    REFERENCES `wyc353_2`.`position` (`idPosition`)
+    REFERENCES `comp353`.`position` (`idPosition`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `role_event`
     FOREIGN KEY (`idEvent`)
-    REFERENCES `wyc353_2`.`event` (`idEvent`)
+    REFERENCES `comp353`.`event` (`idEvent`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`place`
+-- Table `comp353`.`place`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`place` ;
+DROP TABLE IF EXISTS `comp353`.`place` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`place` (
+CREATE TABLE IF NOT EXISTS `comp353`.`place` (
   `idPlace` INT NOT NULL AUTO_INCREMENT,
   `placeName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idPlace`),
@@ -161,11 +162,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`meeting`
+-- Table `comp353`.`meeting`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`meeting` ;
+DROP TABLE IF EXISTS `comp353`.`meeting` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`meeting` (
+CREATE TABLE IF NOT EXISTS `comp353`.`meeting` (
   `idMeeting` INT NOT NULL AUTO_INCREMENT,
   `idPlace` INT NOT NULL,
   `createdBy` VARCHAR(45) NOT NULL,
@@ -174,23 +175,23 @@ CREATE TABLE IF NOT EXISTS `wyc353_2`.`meeting` (
   INDEX `idPlace_meeting` (`idPlace` ASC),
   CONSTRAINT `meeting_user`
     FOREIGN KEY (`createdBy`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `meeting_place`
     FOREIGN KEY (`idPlace`)
-    REFERENCES `wyc353_2`.`place` (`idPlace`)
+    REFERENCES `comp353`.`place` (`idPlace`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`topic`
+-- Table `comp353`.`topic`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`topic` ;
+DROP TABLE IF EXISTS `comp353`.`topic` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`topic` (
+CREATE TABLE IF NOT EXISTS `comp353`.`topic` (
   `idTopic` INT NOT NULL,
   `topicName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idTopic`),
@@ -199,51 +200,51 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`interestInTopic`
+-- Table `comp353`.`interestInTopic`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`interestInTopic` ;
+DROP TABLE IF EXISTS `comp353`.`interestInTopic` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`interestInTopic` (
+CREATE TABLE IF NOT EXISTS `comp353`.`interestInTopic` (
   `idUser` VARCHAR(45) NOT NULL,
   `idTopic` INT NOT NULL,
   PRIMARY KEY (`idUser`, `idTopic`),
   INDEX `idTopic_idx` (`idTopic` ASC),
   CONSTRAINT `interestintopic_user`
     FOREIGN KEY (`idUser`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `interestintopic_topic`
     FOREIGN KEY (`idTopic`)
-    REFERENCES `wyc353_2`.`topic` (`idTopic`)
+    REFERENCES `comp353`.`topic` (`idTopic`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`topicHierarchy`
+-- Table `comp353`.`topicHierarchy`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`topicHierarchy` ;
+DROP TABLE IF EXISTS `comp353`.`topicHierarchy` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`topicHierarchy` (
+CREATE TABLE IF NOT EXISTS `comp353`.`topicHierarchy` (
   `idTopic` INT NOT NULL,
   `idTopicHierarchy` INT NOT NULL,
   PRIMARY KEY (`idTopic`, `idTopicHierarchy`),
   CONSTRAINT `idTopic`
     FOREIGN KEY (`idTopic`)
-    REFERENCES `wyc353_2`.`topic` (`idTopic`)
+    REFERENCES `comp353`.`topic` (`idTopic`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`phaseType`
+-- Table `comp353`.`phaseType`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`phaseType` ;
+DROP TABLE IF EXISTS `comp353`.`phaseType` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`phaseType` (
+CREATE TABLE IF NOT EXISTS `comp353`.`phaseType` (
   `idPhase` INT NOT NULL,
   `phaseName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idPhase`),
@@ -252,11 +253,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`phase`
+-- Table `comp353`.`phase`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`phase` ;
+DROP TABLE IF EXISTS `comp353`.`phase` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`phase` (
+CREATE TABLE IF NOT EXISTS `comp353`.`phase` (
   `idPhase` INT NOT NULL,
   `idMeeting` INT NOT NULL,
   `startTime` TIMESTAMP NULL,
@@ -267,51 +268,51 @@ CREATE TABLE IF NOT EXISTS `wyc353_2`.`phase` (
   INDEX `idMeeting_phase` (`idMeeting` ASC),
   CONSTRAINT `phase_phasetype`
     FOREIGN KEY (`idPhase`)
-    REFERENCES `wyc353_2`.`phaseType` (`idPhase`)
+    REFERENCES `comp353`.`phaseType` (`idPhase`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `phase_user`
     FOREIGN KEY (`createdBy`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `phase_meeting`
     FOREIGN KEY (`idMeeting`)
-    REFERENCES `wyc353_2`.`meeting` (`idMeeting`)
+    REFERENCES `comp353`.`meeting` (`idMeeting`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`meetingEvent`
+-- Table `comp353`.`meetingEvent`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`meetingEvent` ;
+DROP TABLE IF EXISTS `comp353`.`meetingEvent` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`meetingEvent` (
+CREATE TABLE IF NOT EXISTS `comp353`.`meetingEvent` (
   `idEvent` INT NOT NULL,
   `idMeeting` INT NOT NULL,
   PRIMARY KEY (`idEvent`, `idMeeting`),
   INDEX `idMeeting_idx` (`idMeeting` ASC),
   CONSTRAINT `meetingevent_event`
     FOREIGN KEY (`idEvent`)
-    REFERENCES `wyc353_2`.`event` (`idEvent`)
+    REFERENCES `comp353`.`event` (`idEvent`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `meetingevent_meeting`
     FOREIGN KEY (`idMeeting`)
-    REFERENCES `wyc353_2`.`meeting` (`idMeeting`)
+    REFERENCES `comp353`.`meeting` (`idMeeting`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`paper`
+-- Table `comp353`.`paper`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`paper` ;
+DROP TABLE IF EXISTS `comp353`.`paper` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`paper` (
+CREATE TABLE IF NOT EXISTS `comp353`.`paper` (
   `idPaper` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(45) NOT NULL,
   `abstract` VARCHAR(200) NOT NULL,
@@ -322,83 +323,83 @@ CREATE TABLE IF NOT EXISTS `wyc353_2`.`paper` (
   INDEX `submittedBy_paper` (`submittedBy` ASC),
   CONSTRAINT `paper_user`
     FOREIGN KEY (`submittedBy`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`paperTopics`
+-- Table `comp353`.`paperTopics`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`paperTopics` ;
+DROP TABLE IF EXISTS `comp353`.`paperTopics` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`paperTopics` (
+CREATE TABLE IF NOT EXISTS `comp353`.`paperTopics` (
   `idPaper` INT NOT NULL,
   `idTopic` INT NOT NULL,
   PRIMARY KEY (`idPaper`, `idTopic`),
   INDEX `idTopic_idx` (`idTopic` ASC),
   CONSTRAINT `papertopic_paper`
     FOREIGN KEY (`idPaper`)
-    REFERENCES `wyc353_2`.`paper` (`idPaper`)
+    REFERENCES `comp353`.`paper` (`idPaper`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `papertopic_topic`
     FOREIGN KEY (`idTopic`)
-    REFERENCES `wyc353_2`.`topic` (`idTopic`)
+    REFERENCES `comp353`.`topic` (`idTopic`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`paperAuthor`
+-- Table `comp353`.`paperAuthor`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`paperAuthor` ;
+DROP TABLE IF EXISTS `comp353`.`paperAuthor` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`paperAuthor` (
+CREATE TABLE IF NOT EXISTS `comp353`.`paperAuthor` (
   `idPaper` INT NOT NULL,
   `idUser` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idPaper`, `idUser`),
   INDEX `idUser_idx` (`idUser` ASC),
   CONSTRAINT `paperauthor_paper`
     FOREIGN KEY (`idPaper`)
-    REFERENCES `wyc353_2`.`paper` (`idPaper`)
+    REFERENCES `comp353`.`paper` (`idPaper`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `paperauthor_user`
     FOREIGN KEY (`idUser`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`news`
+-- Table `comp353`.`news`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`news` ;
+DROP TABLE IF EXISTS `comp353`.`news` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`news` (
-  `idnews` INT NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `comp353`.`news` (
+  `idNews` INT NOT NULL AUTO_INCREMENT,
   `newsDescription` VARCHAR(300) NOT NULL,
   `createdBy` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idnews`),
+  PRIMARY KEY (`idNews`),
   INDEX `idUser_news` (`createdBy` ASC),
   CONSTRAINT `news_user`
     FOREIGN KEY (`createdBy`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`reviewAssignment`
+-- Table `comp353`.`reviewAssignment`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`reviewAssignment` ;
+DROP TABLE IF EXISTS `comp353`.`reviewAssignment` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`reviewAssignment` (
+CREATE TABLE IF NOT EXISTS `comp353`.`reviewAssignment` (
   `idAssignedBy` VARCHAR(45) NOT NULL,
   `idAssignedTo` VARCHAR(45) NOT NULL,
   `idPaper` INT NOT NULL,
@@ -409,28 +410,28 @@ CREATE TABLE IF NOT EXISTS `wyc353_2`.`reviewAssignment` (
   INDEX `idAssignedTo_idx` (`idAssignedTo` ASC),
   CONSTRAINT `reviewassignment_by`
     FOREIGN KEY (`idAssignedBy`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `reviewassignment_to`
     FOREIGN KEY (`idAssignedTo`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `reviewassignment_paper`
     FOREIGN KEY (`idPaper`)
-    REFERENCES `wyc353_2`.`paper` (`idPaper`)
+    REFERENCES `comp353`.`paper` (`idPaper`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`commiteeBid`
+-- Table `comp353`.`commiteeBid`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`commiteeBid` ;
+DROP TABLE IF EXISTS `comp353`.`commiteeBid` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`commiteeBid` (
+CREATE TABLE IF NOT EXISTS `comp353`.`commiteeBid` (
   `idUser` VARCHAR(45) NOT NULL,
   `idPaper` INT NOT NULL,
   `bid` DECIMAL(2,2) NOT NULL,
@@ -438,62 +439,67 @@ CREATE TABLE IF NOT EXISTS `wyc353_2`.`commiteeBid` (
   INDEX `idPaper_idx` (`idPaper` ASC),
   CONSTRAINT `commiteeBid_user`
     FOREIGN KEY (`idUser`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `commiteeBid_paper`
     FOREIGN KEY (`idPaper`)
-    REFERENCES `wyc353_2`.`paper` (`idPaper`)
+    REFERENCES `comp353`.`paper` (`idPaper`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`experttInTopic`
+-- Table `comp353`.`experttInTopic`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`experttInTopic` ;
+DROP TABLE IF EXISTS `comp353`.`experttInTopic` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`experttInTopic` (
+CREATE TABLE IF NOT EXISTS `comp353`.`experttInTopic` (
   `idUser` VARCHAR(45) NOT NULL,
   `idTopic` INT NOT NULL,
   PRIMARY KEY (`idUser`, `idTopic`),
   INDEX `idTopic_idx` (`idTopic` ASC),
   CONSTRAINT `expertintopic_user`
     FOREIGN KEY (`idUser`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `expertintopic_topic`
     FOREIGN KEY (`idTopic`)
-    REFERENCES `wyc353_2`.`topic` (`idTopic`)
+    REFERENCES `comp353`.`topic` (`idTopic`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `wyc353_2`.`paperDecision`
+-- Table `comp353`.`paperDecision`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `wyc353_2`.`paperDecision` ;
+DROP TABLE IF EXISTS `comp353`.`paperDecision` ;
 
-CREATE TABLE IF NOT EXISTS `wyc353_2`.`paperDecision` (
+CREATE TABLE IF NOT EXISTS `comp353`.`paperDecision` (
   `idPaper` INT NOT NULL,
-  `decision` BINARY NULL,
+  `decision` TINYINT NULL,
   `decidedBy` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idPaper`),
   INDEX `decidedBy_paper` (`decidedBy` ASC),
   CONSTRAINT `paperDecision_paper`
     FOREIGN KEY (`idPaper`)
-    REFERENCES `wyc353_2`.`paper` (`idPaper`)
+    REFERENCES `comp353`.`paper` (`idPaper`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `paperDecision_user`
     FOREIGN KEY (`decidedBy`)
-    REFERENCES `wyc353_2`.`user` (`idUser`)
+    REFERENCES `comp353`.`user` (`idUser`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
+
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'ComputerScience');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('1', 'ConcordiaUniversity');
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('tom', 'tommy', 'tom', 'tucker', 'tomtom@gmail.com', '1', '1', '1', '1');
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
