@@ -20,15 +20,33 @@ class Paper extends CI_Controller {
 		$this->load->view('search_papers');
 	}
     
-    public function paperReview()
+    	public function paperReview()
 	{
 		$this->load->view('header');
 		$this->load->view('paper_review');
 	}
     
-    public function detailedPaperReview()
+   	public function detailedPaperReview()
 	{
 		$this->load->view('header');
 		$this->load->view('detailed_paper_review');
 	}
+
+	public function getPaperDetails()
+	{
+		$title = $this->input->get('title');
+		$abstract = $this->input->get('abstract');
+		$file = $this->input->get('file');
+		$keywords = $this->input->get('keywords');
+		$subject = $this->input->get('subject');
+	}
+
+	public function getSearchDetails()
+	{
+		$event = $this->input->get('event');
+		$author = $this->input->get('author');
+		$keywords = $this->input->get('keywords');
+		$title = $this->input->get('title');
+	}	
+
 }

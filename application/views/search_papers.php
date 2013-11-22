@@ -8,28 +8,28 @@
 					<div class="form-group">
         					<label for="title" class="col-lg-2 control-label">Event:</label>
         					<div class="col-lg-10">
-							<input type="text" name="event" id="event"/>
+							<input type="text" name="event" id="event" name="event"/>
 						</div>
         				</div>
 
 					<div class="form-group">
         					<label for="title" class="col-lg-2 control-label">Author:</label>
         					<div class="col-lg-10">
-							<input type="text" name="author" id="author"/>
+							<input type="text" name="author" id="author" name="author"/>
 						</div>
        					</div>
  	         
 					<div class="form-group">
         					<label for="title" class="col-lg-2 control-label">Keywords:</label>
         					<div class="col-lg-10">
-						<input type="text" name="keywords" id="keywords"/>
+						<input type="text" name="keywords" id="keywords" name="keywords"/>
 						</div>  
         				</div>
 	
 					<div class="form-group">
         					<label for="title" class="col-lg-2 control-label">Title:</label>
         					<div class="col-lg-10">
-							<input type="text" name="title" id="title"/>
+							<input type="text" name="title" id="title" name="title"/>
 						</div>  
         				</div>
 			

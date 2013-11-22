@@ -1,5 +1,5 @@
     <div class="container">
-      <!-- Example row of columns -->
+      
       <div class="row">
 		<div class="panel panel-default">
 			<div class="panel-body">
@@ -15,33 +15,33 @@
 					<div class="form-group">
 						<label for="title" class="col-lg-2 control-label">*Paper Title:</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="title">
+							<input type="text" class="form-control" id="title" name="title">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="abstract" class="col-lg-2 control-label">*Paper Abstract:</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="abstract">
+							<input type="text" class="form-control" id="abstract" name="abstract">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="file" class="col-lg-2 control-label">*Paper File(PDF):</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="file">
+							<input type="text" class="form-control" id="file" name="file">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="keywords" class="col-lg-2 control-label">*Keywords:</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="keywords">
+							<input type="text" class="form-control" id="keywords" name="keywords">
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label for="subject" class="col-lg-2 control-label">*Paper Subject:</label>
+						<label id="subject" name="subject" for="subject" class="col-lg-2 control-label">*Paper Subject:</label>
 						<div class="col-lg-10">
 							<div class="checkbox">
 								<label><input type="checkbox">Subject 1</label>
