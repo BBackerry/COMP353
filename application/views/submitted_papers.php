@@ -2,16 +2,18 @@
 	<div class="row">
 		<div class="panel panel-default">
 			<div class="panel-body">
+				
       				<h3>My Paper List:</h3>
-                  
-        			<p>Paper ID 1</p>
-        			<p>Title: This is a title</p> 
-        			<br/>
-        			<p>Paper ID 2</p>
-        			<p>Title: This is a title</p>  
-                
-				<form role="form" class="form-horizontal">
-					<a style="float:right;" href="<?php echo site_url('Paper/submit/') ?>" class="btn btn-primary">Submit New Paper</a>
+      				
+        			<?php foreach($first as $row):?> 
+        			<h4>Title: <?=$row->title?></h4>
+        			<h5>Abstract: <?=$row->abstract?></h5>
+        			<h5>Keywords: <?=$row->keywords?></h5>
+        			<br />
+        			<?php endforeach;?>
+        			
+				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submit/') ?>">
+					<button style="float:right;" class="btn btn-primary">Submit New Paper</button>
 				</form>
         
       			</div>

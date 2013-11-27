@@ -38,7 +38,20 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="<?php echo base_url();?>">Home</a></li>
+		<?php if ($this->session->userdata('logged_in') == false) { ?>
+            		<li class="active"><a href="<?php echo base_url();?>">Home</a></li>
+		<?php } else { ?>
+			<li class="active"><a href="<?php echo base_url();?>">Home</a></li>
+			<li class="dropdown">
+              			<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<b class="caret"></b></a>
+              			<ul class="dropdown-menu">
+                			<li><a href="#">My Profile</a></li>
+                			<li><a href="#">My Interests</a></li>
+                			<li><a href="#">My Registration</a></li>
+              			</ul>
+           		</li>
+		<?php } ?>
+
           </ul>
 		  <?php if ($this->session->userdata('logged_in') == false) { ?>
 			  <form class="navbar-form navbar-right" action="<?php echo site_url('User/login'); ?>">

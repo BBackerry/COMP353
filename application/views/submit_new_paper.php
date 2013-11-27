@@ -11,7 +11,7 @@
 				<p>The abstract must be at least 20 words, but no more than 200 characters including blank spaces. You can write the abstract in a text editor then copy and paste it in the appropriate field.<p>
 			  
 				
-				<form role="form" class="form-horizontal">
+				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submitted/') ?>">
 					<div class="form-group">
 						<label for="title" class="col-lg-2 control-label">*Paper Title:</label>
 						<div class="col-lg-10">
@@ -51,7 +51,7 @@
 							</div>
 						</div>
 					</div>
-					<a style="float:right;" href="<?php echo site_url('Paper/submitted/') ?>" class="btn btn-primary">Submit</a>
+					<button style="float:right;" class="btn btn-primary">Submit</button>
 				</form>
 			  
 			</div>
