@@ -2,21 +2,38 @@
 
 class Paper extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('paper_model');
+	}
 	public function submit()
 	{
-		$this->load->view('header');
-		$this->load->view('submit_new_paper');
+		$username = $this->session->userdata('idUser');
+		if ($username) {
+			$this->load->view('header');
+			$this->load->view('submit_new_paper');
+		}
+		else {
+			$errors['errorMessages'] = array("Sorry but you have to be logged in to submit papers");
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
 	}
 
 	public function submittedPapers()
-	{	
-		include '/system/database/DB_Paper.php';
-		$this->session->set_userdata('userId','testUser');
-        //$query = db_get_papers_by_userId($this->session->userdata('userId'));
-        $query['first'] = db_get_papers_by_userId('testUser')->result();
-		$this->load->view('header');
-		$this->load->view('submitted_papers', $query);
-		//$this->output->set_output(var_dump($query['first']));
+	{
+		$username = $this->session->userdata('idUser');
+		if ($username) {
+			$query['papers'] = $this->paper_model->get_paper_by_user($username);
+			$this->load->view('header');
+			$this->load->view('submitted_papers', $query);
+		}
+		else {
+			$errors['errorMessages'] = array("Sorry but you have to be logged in to submit papers");
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
 	}
 
 	public function search()
@@ -39,18 +56,25 @@ class Paper extends CI_Controller {
 
 	public function submitted()
 	{
-		$title = $this->input->get('title');
-		$abstract = $this->input->get('abstract');
-		$document = $this->input->get('file');
-		$keywords = $this->input->get('keywords');
-		$subject = $this->input->get('subject');
-		$submittedby = "testUser";
-		
-        include '/system/database/DB_Paper.php';
-        db_create_paper($title, $abstract, $submittedby, $document, $keywords);
-
-		$this->load->view('header');
-		$this->load->view('paper_submitted_successfully');
+		$username = $this->session->userdata('idUser');
+		if ($username) {
+			$title = $this->input->get('title');
+			$abstract = $this->input->get('abstract');
+			$document = $this->input->get('file');
+			$keywords = $this->input->get('keywords');
+			$subject = $this->input->get('subject');
+			$submittedby = $username;
+			
+			$this->paper_model->create_paper($title, $abstract, $submittedby, $document, $keywords);
+			
+			$this->load->view('header');
+			$this->load->view('paper_submitted_successfully');
+		}
+		else {
+			$errors['errorMessages'] = array("Sorry but you have to be logged in to submit papers");
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
 	}
 
 	public function getSearchDetails()

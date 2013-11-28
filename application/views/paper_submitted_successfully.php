@@ -6,7 +6,7 @@
 				<h3>Your paper has been submitted successfully.</h3>
 				
 				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submittedPapers/') ?>">
-					<button style="float:left;" class="btn btn-primary">Submitted Papers</button>
+					<button style="float:left;" class="btn btn-info">Submitted Papers</button>
 				</form>
 				
 				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submit/') ?>">

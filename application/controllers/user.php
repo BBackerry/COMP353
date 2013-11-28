@@ -4,12 +4,14 @@ class User extends CI_Controller {
 	
 	public function login()
 	{
-		if ($this->verify_login()) {
-		$this->session->set_userdata('logged_in', true);
-		redirect('Home', 'index'); }
+		$username = $this->input->get('username');
+		$password = $this->input->get('password');
+		if ($this->verify_login($username, $password)) {
+			$this->session->set_userdata('idUser', $username);}
 		else {
-		$this->session->set_userdata('logged_in', false);
-		redirect('Home', 'index'); }
+			$this->session->set_userdata('idUser', false);
+		}
+		redirect('Home', 'index'); 
 	}
 	
 	public function register_email()
@@ -26,17 +28,18 @@ class User extends CI_Controller {
 	
 	public function logout()
 	{
-		$this->session->set_userdata('logged_in', false);
+		$this->session->set_userdata('idUser', false);
 		redirect('Home', 'index');
 	}
 	
-	private function verify_login()
+	private function verify_login($username, $password)
 	{
-		if ($this->input->get('username') != '')
-		{
-			return true;
+		$this->load->model('user_model');
+		$user = $this->user_model->get_user($username);
+		if (!empty($user)) {
+			if ($user[0]->password == $password)
+				return true;
 		}
-		
-		return false;
+		else return false;
 	}
 }

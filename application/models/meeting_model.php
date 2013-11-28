@@ -1,0 +1,47 @@
+<?php
+class Meeting_model extends CI_Model {
+
+	function get_meeting($idMeeting)
+	{
+		$sql = "SELECT * FROM meeting WHERE idMeeting = ? ";
+		$query = $this->db->query($sql, array($idMeeting)); 
+		return $query->result();
+	}
+
+	function get_meeting_by_place($idPlace)
+	{
+		$sql = "SELECT * FROM meeting WHERE idPlace = ? ";
+		$query = $this->db->query($sql, array($idPlace)); 
+		return $query->result();
+	}
+
+	function get_all_meeting()
+	{
+		$sql = "SELECT * FROM meeting ";
+		$query = $this->db->query($sql); 
+		return $query->result();
+	}
+
+	function create_meeting($idMeeting, $idPlace, $createdBy)
+	{
+		$sql = "INSERT INTO meeting VALUES( ?, ?, ? )";
+		$query = $this->db->query($sql, array($idMeeting, $idPlace, $createdBy)); 
+		return $query;
+	}
+
+	function update_meeting($idMeeting, $idPlace, $createdBy)
+	{
+		$sql = "UPDATE meeting SET idPlace = ?, createdBy = ?  WHERE idMeeting = ? ";
+		$query = $this->db->query($sql, array( $idPlace, $createdBy, $idMeeting)); 
+		return $query;
+	}
+
+	function delete_meeting($idMeeting)
+	{
+		$sql = "DELETE FROM meeting WHERE idMeeting= ? ";
+		$query = $this->db->query($sql, array($idMeeting)); 
+		return $query;
+	}
+
+}
+?>

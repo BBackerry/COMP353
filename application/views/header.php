@@ -38,22 +38,23 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-		<?php if ($this->session->userdata('logged_in') == false) { ?>
+		<?php if ($this->session->userdata('idUser') == false) { ?>
             		<li class="active"><a href="<?php echo base_url();?>">Home</a></li>
 		<?php } else { ?>
 			<li class="active"><a href="<?php echo base_url();?>">Home</a></li>
 			<li class="dropdown">
-              			<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<b class="caret"></b></a>
-              			<ul class="dropdown-menu">
-                			<li><a href="#">My Profile</a></li>
-                			<li><a href="#">My Interests</a></li>
-                			<li><a href="#">My Registration</a></li>
-              			</ul>
-           		</li>
+				<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<b class="caret"></b></a>
+				<ul class="dropdown-menu">
+					<li><a href="#">My Profile</a></li>
+					<li><a href="#">My Interests</a></li>
+					<li><a href="#">My Registration</a></li>
+				</ul>
+           	</li>
+			<li><a href="<?php echo site_url('Paper/submittedPapers');?>">Papers</a></li>
 		<?php } ?>
 
           </ul>
-		  <?php if ($this->session->userdata('logged_in') == false) { ?>
+		  <?php if ($this->session->userdata('idUser') == false) { ?>
 			  <form class="navbar-form navbar-right" action="<?php echo site_url('User/login'); ?>">
 				<div class="form-group">
 				  <input type="text" name="username" placeholder="Username" class="form-control">
@@ -71,11 +72,22 @@
 		  <?php } else { ?>
 			  <form class="navbar-form navbar-right" action="<?php echo site_url('User/logout'); ?>">
 				<div class="form-group">
-					<p>Welcome, <?php echo $this->session->userdata('first_name') ?>
+					<p>Welcome, <?php echo $this->session->userdata('idUser') ?>
 					<button type="submit" class="btn btn-failure">Log Out</button>
 				</div>
+				
 			  </form>
 		  <?php } ?>
         </div><!--/.navbar-collapse -->
       </div>
     </div>
+	
+	<?php if(isset($errorMessages)): ?>
+	<div>
+		<?php foreach($errorMessages as $error): ?>
+			<div class="alert alert-danger">
+				<?= $error ?>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<?php endif; ?>
