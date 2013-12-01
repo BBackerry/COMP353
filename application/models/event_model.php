@@ -15,10 +15,11 @@ class Event_model extends CI_Model {
 		return $query->result();
 	}
 
-	function create_event($eventName, $startDate, $endDate, $createdBy)
+	function create_event($startDate, $endDate, $createdBy, $eventDescription, $eventName)
 	{
-		$sql = "INSERT INTO event VALUES(NULL, ?, ?, ?, ?)";
-		$query = $this->db->query($sql, array($eventName, $startDate, $endDate, $createdBy)); 
+	$sql = "INSERT INTO event ('startDate', 'endDate', 'createdBy', 'eventDescription', 'eventName') VALUES (?,?,?,?,?)";
+		//$sql = "INSERT INTO event ( VALUES(?, ?, ?, ?)";
+		$query = $this->db->query($sql, array($startDate, $endDate, $createdBy, $eventDescription, $eventName)); 
 		return $query;
 	}
 
