@@ -51,6 +51,10 @@
 				</ul>
            	</li>
 			<li><a href="<?php echo site_url('Paper/submittedPapers');?>">Papers</a></li>
+            <?php if ($this->session->userdata('isAdmin')) { echo "true"; ?>
+                <li><a href="Event/addEvent">Create Event</a></li>
+                <li><a href="Meeting/createMeeting">Create Meeting</a></li>                     
+            <?php } ?>
 		<?php } ?>
 
           </ul>
@@ -72,7 +76,7 @@
 		  <?php } else { ?>
 			  <form class="navbar-form navbar-right" action="<?php echo site_url('User/logout'); ?>">
 				<div class="form-group">
-					<p>Welcome, <?php echo $this->session->userdata('idUser') ?>
+					<p style="color:white">Welcome, <?php echo $this->session->userdata('idUser') ?> &nbsp;
 					<button type="submit" class="btn btn-failure">Log Out</button>
 				</div>
 				

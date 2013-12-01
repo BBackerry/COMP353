@@ -1,13 +1,23 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class User extends CI_Controller {
-	
+    
 	public function login()
 	{
 		$username = $this->input->get('username');
 		$password = $this->input->get('password');
 		if ($this->verify_login($username, $password)) {
-			$this->session->set_userdata('idUser', $username);}
+			$this->session->set_userdata('idUser', $username);
+            
+            $this->load->model('role_model');
+            $query = $this->role_model->get_role_of_user($username);
+			$this->session->set_userdata('isAdmin', false);
+			foreach ($query as $row)
+			{
+				if($row->idPosition == 1 & $row->idEvent == 1)
+				$this->session->set_userdata('isAdmin', true);
+			}
+        }      
 		else {
 			$this->session->set_userdata('idUser', false);
 		}
