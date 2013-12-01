@@ -526,10 +526,13 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'Computer Science &amp; Engineering');
 INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('1', 'Concordia University');
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('admin', 'admin', 'admin', 'admin', 'admin@confsys.ca', '1', '1', '1', '1');
 INSERT INTO `comp353`.`event` (`idEvent`, `startDate`, `endDate`, `createdBy`, `eventDescription`, `eventName`) VALUES ('1', '2013-11-01 01:00:00', '2013-11-01 01:00:00', 'admin', 'permit admin rights', 'global event');
-INSERT INTO `comp353`.`role` (`idUser`, `idEvent`, `idPosition`) VALUES ('admin', '1', '1');
 INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('1', 'admin');
 INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('2', 'program chair');
 INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('3', 'committee member');
+INSERT INTO `comp353`.`role` (`idUser`, `idEvent`, `idPosition`) VALUES ('admin', '1', '1');
+
+
 
 
