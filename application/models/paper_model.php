@@ -1,5 +1,5 @@
 <?php
-class Paper_model_model extends CI_Model {
+class Paper_model extends CI_Model {
 	
 	function get_paper($idPaper)
 	{
@@ -35,6 +35,5 @@ class Paper_model_model extends CI_Model {
 		$query = $this->db->query($sql, array($idpaper)); 
 		return $query;
 	}
-}
 }
 ?>

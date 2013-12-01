@@ -1,5 +1,5 @@
 <?php
-class User_model_model extends CI_Model {
+class User_model extends CI_Model {
 
 	function get_user($userID)
 	{
@@ -35,6 +35,5 @@ class User_model_model extends CI_Model {
 		$query = $this->db->query($sql, array($idUser)); 
 		return $query;
 	}
-}
 }
 ?>
