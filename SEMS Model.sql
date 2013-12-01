@@ -107,6 +107,8 @@ CREATE TABLE IF NOT EXISTS `comp353`.`event` (
   `startDate` TIMESTAMP NULL,
   `endDate` TIMESTAMP NULL,
   `createdBy` VARCHAR(45) NOT NULL,
+  `eventDescription` VARCHAR(200) NULL,
+  `eventName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idEvent`),
   INDEX `createdBy_event` (`createdBy` ASC),
   CONSTRAINT `event_user`
@@ -170,6 +172,8 @@ CREATE TABLE IF NOT EXISTS `comp353`.`meeting` (
   `idMeeting` INT NOT NULL AUTO_INCREMENT,
   `idPlace` INT NOT NULL,
   `createdBy` VARCHAR(45) NOT NULL,
+  `startTime` TIMESTAMP NULL,
+  `endTime` TIMESTAMP NULL,
   PRIMARY KEY (`idMeeting`),
   INDEX `createdBy_meeting` (`createdBy` ASC),
   INDEX `idPlace_meeting` (`idPlace` ASC),
@@ -259,26 +263,19 @@ DROP TABLE IF EXISTS `comp353`.`phase` ;
 
 CREATE TABLE IF NOT EXISTS `comp353`.`phase` (
   `idPhase` INT NOT NULL,
-  `idMeeting` INT NOT NULL,
+  `idEvent` INT NOT NULL,
   `startTime` TIMESTAMP NULL,
   `endTime` TIMESTAMP NULL,
-  `createdBy` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`idPhase`, `idMeeting`),
-  INDEX `createdBy_phase` (`createdBy` ASC),
-  INDEX `idMeeting_phase` (`idMeeting` ASC),
+  PRIMARY KEY (`idPhase`, `idEvent`),
+  INDEX `phase_event_idx` (`idEvent` ASC),
   CONSTRAINT `phase_phasetype`
     FOREIGN KEY (`idPhase`)
     REFERENCES `comp353`.`phaseType` (`idPhase`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
-  CONSTRAINT `phase_user`
-    FOREIGN KEY (`createdBy`)
-    REFERENCES `comp353`.`user` (`idUser`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `phase_meeting`
-    FOREIGN KEY (`idMeeting`)
-    REFERENCES `comp353`.`meeting` (`idMeeting`)
+  CONSTRAINT `phase_event`
+    FOREIGN KEY (`idEvent`)
+    REFERENCES `comp353`.`event` (`idEvent`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -384,6 +381,7 @@ CREATE TABLE IF NOT EXISTS `comp353`.`news` (
   `idNews` INT NOT NULL AUTO_INCREMENT,
   `newsDescription` VARCHAR(300) NOT NULL,
   `createdBy` VARCHAR(45) NOT NULL,
+  `newsDate` TIMESTAMP NOT NULL,
   PRIMARY KEY (`idNews`),
   INDEX `idUser_news` (`createdBy` ASC),
   CONSTRAINT `news_user`
@@ -482,6 +480,7 @@ CREATE TABLE IF NOT EXISTS `comp353`.`paperDecision` (
   `idPaper` INT NOT NULL,
   `decision` TINYINT NULL,
   `decidedBy` VARCHAR(45) NOT NULL,
+  `reason` VARCHAR(200) NULL,
   PRIMARY KEY (`idPaper`),
   INDEX `decidedBy_paper` (`decidedBy` ASC),
   CONSTRAINT `paperDecision_paper`
@@ -496,12 +495,41 @@ CREATE TABLE IF NOT EXISTS `comp353`.`paperDecision` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
-INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'ComputerScience');
-INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('1', 'ConcordiaUniversity');
-INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('tom', 'tommy', 'tom', 'tucker', 'tomtom@gmail.com', '1', '1', '1', '1');
+
+-- -----------------------------------------------------
+-- Table `comp353`.`eventTopic`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `comp353`.`eventTopic` ;
+
+CREATE TABLE IF NOT EXISTS `comp353`.`eventTopic` (
+  `idEvent` INT NOT NULL,
+  `idTopic` INT NOT NULL,
+  PRIMARY KEY (`idEvent`, `idTopic`),
+  INDEX `eventTopic_topic_idx` (`idTopic` ASC),
+  CONSTRAINT `eventTopic_event`
+    FOREIGN KEY (`idEvent`)
+    REFERENCES `comp353`.`event` (`idEvent`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `eventTopic_topic`
+    FOREIGN KEY (`idTopic`)
+    REFERENCES `comp353`.`topic` (`idTopic`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'Computer Science &amp; Engineering');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('1', 'Concordia University');
+INSERT INTO `comp353`.`event` (`idEvent`, `startDate`, `endDate`, `createdBy`, `eventDescription`, `eventName`) VALUES ('1', '2013-11-01 01:00:00', '2013-11-01 01:00:00', 'admin', 'permit admin rights', 'global event');
+INSERT INTO `comp353`.`role` (`idUser`, `idEvent`, `idPosition`) VALUES ('admin', '1', '1');
+INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('1', 'admin');
+INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('2', 'program chair');
+INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('3', 'committee member');
+
+
