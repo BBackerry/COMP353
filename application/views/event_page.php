@@ -4,8 +4,6 @@
       <div class="panel-body">
         <p>Event for conference:</p>
         
-       
-    
         <div class="form-group">
         <h4 class="panel-title">Event Title </h4>
       
@@ -47,9 +45,12 @@
         <option value="??">??</option>
         </select>
         </div>
+	
 		
 		</div>
-	</div>
+		</div>
+	
+	
     <div class="container">
       <!-- Example row of columns -->
 

@@ -10,14 +10,8 @@ public function __construct()
 	
 	public function addEvent()
 	{
-			$username = $this->session->userdata('idUser');
-			$query['roles'] = $this->role_model->get_role_of_user($username);
-			$admin = false;
-			foreach ($query->result() as $row)
-			{
-				if($row->idPosition == 1 & $row->idEvent == 1)
-				$admin = true;
-			}
+			$admin = $this->session->userdata('isAdmin');
+			
 			if ($admin)
 			{
 			$this->load->view('header');
@@ -41,10 +35,11 @@ public function __construct()
 		$startDate = $this->input->get('startDate');
 		$endDate = $this->input->get('endDate');
 					
-		$this->event_model->create_event($eventName, $startDate, $endDate, $username);
+		$this->event_model->create_event($startDate, $endDate, $username, $eventDescription, $eventName);
 			
 		$this->load->view('header');
-		$this->load->view('event_page');		
+		$this->load->view('event_page');	
+				
 		
 	}
 		

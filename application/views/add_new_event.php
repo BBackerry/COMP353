@@ -3,10 +3,10 @@
       <div class="panel-body">
         
         
-    
+		<form role="form" class="form-horizontal" action="<?php echo site_url('Event/submitedEvent/') ?>">
         <div class="form-group">
         <p> Event Title </p>
-        <input type="text" class="form-control" name ="eventTitle" id="eventTitle">
+        <input type="text" class="form-control" name ="eventName" id="eventName">
         </div>        
         
         
@@ -38,10 +38,9 @@
         <p>End Date: </p>
         <input type="text" class="form-control" name ="endDate" id="endDate">        
         </div>
-          
-         <a href="<?php echo site_url('Event/addEvent/') ?>" class="btn btn-success" >Add New Event</a>
-        
-        <button type="cancel" class="btn btn-success" >cancel</button>
+        <button style="float:right;" class="btn btn-primary">Add Event</button>
+       
+        </form>
         
         </div>        
         </div>
