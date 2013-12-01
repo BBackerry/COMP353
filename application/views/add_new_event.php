@@ -17,7 +17,7 @@
         </div>
    
         
-        
+        <!--
         <div class="form-group">
         <p>Subject Hierarchy Class </p>
         <select class="form-control" id="idTopicHierarchy" name="idTopicHierarchy">
@@ -25,7 +25,8 @@
         <option value="??">??</option>
         </select>
               
-        </div>      
+        </div>  
+-->		
         
          
          <div class="form-group">
