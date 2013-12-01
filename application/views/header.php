@@ -55,8 +55,20 @@
            	</li>
 			<li><a href="<?php echo site_url('Paper/submittedPapers');?>">Papers</a></li>
             <?php if ($this->session->userdata('isAdmin')) { ?>
-                <li><a href="Event/addEvent">Create Event</a></li>
-                <li><a href="Meeting/createMeeting">Create Meeting</a></li>                     
+                <li class="dropdown">
+                    <a href="<?php echo site_url('Event/viewEvents'); ?>" class="dropdown-toggle" data-toggle="dropdown">Event<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo site_url('Event/addEvent');?>">Create Event</a></li>
+                        <li><a href="#">Edit Event</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="<?php echo site_url('Meeting/viewMeetings'); ?>" class="dropdown-toggle" data-toggle="dropdown">Meeting<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo site_url('Meeting/createMeeting');?>">Create Meeting</a></li>  
+                        <li><a href="#">Edit Meeting</a></li>
+                    </ul>
+                </li>                 
             <?php } ?>
 		<?php } ?>
 

@@ -22,10 +22,10 @@ class Meeting_model extends CI_Model {
 		return $query->result();
 	}
 
-	function create_meeting($idMeeting, $idPlace, $createdBy)
+	function create_meeting($idPlace, $createdBy, $startTime, $endTime)
 	{
-		$sql = "INSERT INTO meeting VALUES( ?, ?, ? )";
-		$query = $this->db->query($sql, array($idMeeting, $idPlace, $createdBy)); 
+		$sql = "INSERT INTO meeting (idPlace, createdBy, startTime, endTime) VALUES( ?, ?, ?, ? )";
+		$query = $this->db->query($sql, array($idPlace, $createdBy, $startTime, $endTime)); 
 		return $query;
 	}
 

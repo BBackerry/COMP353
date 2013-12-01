@@ -15,10 +15,10 @@ class Place_model extends CI_Model {
 		return $query->result();
 	}
 
-	function create_place($idPlace, $placeName)
+	function create_place($placeName)
 	{
-		$sql = "INSERT INTO place VALUES( ?, ? )";
-		$query = $this->db->query($sql, array($idPlace, $placeName)); 
+		$sql = "INSERT INTO place (placeName) VALUES( ? )";
+		$query = $this->db->query($sql, array($placeName)); 
 		return $query;
 	}
 
