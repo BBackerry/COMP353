@@ -16,20 +16,7 @@
         <input type="text"  class="form-control" name ="eventDescription" style= "height:200px;" id= "eventDescription">
         </div>
    
-        
-        <!--
         <div class="form-group">
-        <p>Subject Hierarchy Class </p>
-        <select class="form-control" id="idTopicHierarchy" name="idTopicHierarchy">
-        <option value = "ACM">ACM</option>
-        <option value="??">??</option>
-        </select>
-              
-        </div>  
--->		
-        
-         
-         <div class="form-group">
         <p>Start Date: </p>
         <input type="text" class="form-control" name ="startDate" id="startDate">
         </div>
@@ -38,10 +25,55 @@
         <p>End Date: </p>
         <input type="text" class="form-control" name ="endDate" id="endDate">        
         </div>
+		
+        <!--
+        <div class="form-group">
+        <p>Subject Hierarchy Class </p>
+        <select class="form-control" id="idTopicHierarchy" name="idTopicHierarchy">
+        <option value = "ACM">ACM</option>
+        <option value="??">??</option>
+        </select>
+              
+        </div>  		
+		-->		
+		
+        <div class="form-group" id = "selectedMeetings" name = "selectedMeetings">
+		<p> Select the meetings: </p>
+		<select multiple class="form-control">
+			<option value="volvo">Volvo</option>
+			<option value="saab">Saab</option>
+			<option value="opel">Opel</option>
+			<option value="audi">Audi</option>
+		</select>
+		</div>
+		
+		<form role="form" class="form-horizontal" action="<?php echo site_url('Meeting/createMeeting') ?>">
+		
+		<button style="float:right;" class="btn btn-primary">Create New Meeting</button>
+		     
+        </form>
+		
+		<hr>
+		<hr>
+		
+		<div class="form-group" id = "selectedMeetings" name = "selectedMeetings">
+		<p> Select the Program Chair: </p>
+		<select multiple class="form-control">
+			<option value="volvo">Volvo</option>
+			<option value="saab">Saab</option>
+			<option value="opel">Opel</option>
+			<option value="audi">Audi</option>
+		</select>
+		</div>
+		
+         
         <button style="float:right;" class="btn btn-primary">Add Event</button>
        
         </form>
         
+		
+		
+	
         </div>        
         </div>
        

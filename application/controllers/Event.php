@@ -34,6 +34,7 @@ public function __construct()
 		$eventDescription = $this->input->get('eventDescription');		
 		$startDate = $this->input->get('startDate');
 		$endDate = $this->input->get('endDate');
+		$selectedMeetings = $this->input->get('selectedMeetings');
 					
 		$this->event_model->create_event($startDate, $endDate, $username, $eventDescription, $eventName);
 			
