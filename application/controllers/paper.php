@@ -6,13 +6,15 @@ class Paper extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('paper_model');
+		$this->load->model('event_model');
 	}
 	public function submit()
-	{
+	{	
+		$query['events'] = $this->event_model->get_all_event();
 		$username = $this->session->userdata('idUser');
 		if ($username) {
 			$this->load->view('header');
-			$this->load->view('submit_new_paper');
+			$this->load->view('submit_new_paper', $query);
 		}
 		else {
 			$errors['errorMessages'] = array("Sorry but you have to be logged in to submit papers");

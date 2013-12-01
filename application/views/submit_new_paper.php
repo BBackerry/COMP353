@@ -13,6 +13,15 @@
 				
 				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submitted/') ?>">
 					<div class="form-group">
+						<label for="title" class="col-lg-2 control-label">*Event:</label>
+						<select>
+							<?php foreach($events as $row):?>
+								<option value="<?= $row->eventName ?>"><?= $row->eventName ?></option>
+        					<?php endforeach; ?>
+						</select>
+					</div>
+					
+					<div class="form-group">
 						<label for="title" class="col-lg-2 control-label">*Paper Title:</label>
 						<div class="col-lg-10">
 							<input type="text" class="form-control" id="title" name="title">
@@ -22,7 +31,7 @@
 					<div class="form-group">
 						<label for="abstract" class="col-lg-2 control-label">*Paper Abstract:</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="abstract" name="abstract">
+							<input type="text" class="form-control" style= "height:200px;" id="abstract" name="abstract">
 						</div>
 					</div>
 					
