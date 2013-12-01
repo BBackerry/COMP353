@@ -51,7 +51,7 @@
 				</ul>
            	</li>
 			<li><a href="<?php echo site_url('Paper/submittedPapers');?>">Papers</a></li>
-            <?php if ($this->session->userdata('isAdmin')) { echo "true"; ?>
+            <?php if ($this->session->userdata('isAdmin')) { ?>
                 <li><a href="Event/addEvent">Create Event</a></li>
                 <li><a href="Meeting/createMeeting">Create Meeting</a></li>                     
             <?php } ?>
