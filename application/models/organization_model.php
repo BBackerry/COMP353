@@ -7,6 +7,13 @@ class Organization_model extends CI_Model {
 		$query = $this->db->query($sql, array($idOrganization)); 
 		return $query->result();
 	}
+	
+	function get_organization_by_name($organizationName)
+	{
+		$sql = "SELECT * FROM organization WHERE organizationName = ? ";
+		$query = $this->db->query($sql, array($organizationName)); 
+		return $query->result();
+	}
 
 	function get_all_organization()
 	{

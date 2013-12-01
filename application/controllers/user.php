@@ -30,10 +30,32 @@ class User extends CI_Controller {
 		$this->load->view('user_registration_email');
 	}
 	
-	public function register_form()
+	public function register_form($email, $errors = null)
 	{
+		$this->load->model('organization_model');
+		$this->load->model('department_model');
+		$this->load->model('country_model');
+		$data['email'] = $email;
+		$data['organizations'] = $this->organization_model->get_all_organization();
+		$data['departments'] = $this->department_model->get_all_department();
+		$data['countries'] = $this->country_model->get_all_country();
 		$this->load->view('header');
-		$this->load->view('user_registration_form');
+		$this->load->view('user_registration_form', $data);
+	}
+	
+	public function register_new()
+	{
+		$this->load->model('user_model');
+		$form = $this->input->post();
+		if (validate_user_registration($form)) {
+			$this->user_model->create_user($form['username'], $form['password'], $form['firstName'], $form['lastName'], $form['email'], (int)$form['country'], (int)$form['organization'], (int)$form['department']);
+			$this->load->view('header');
+			$this->load->view('user_registration_successful');
+		}
+		else {
+			$errors['errorMessages'] = array('Something went wrong. Try again !');
+			register_form($form['email'], $errors);
+		}
 	}
 	
 	public function logout()
@@ -51,5 +73,15 @@ class User extends CI_Controller {
 				return true;
 		}
 		else return false;
+	}
+	
+	public function validate_user_registration()
+	{
+		if (isset($_POST['username'])) {
+			$this->load->model('user_model');
+			$check = $this->user_model->get_user($_POST['username']);
+			if (empty($check)) { echo 1; }
+			else echo 0;
+		}
 	}
 }

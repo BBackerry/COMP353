@@ -11,6 +11,9 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="<?php echo base_url();?>/assets/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css">
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.10.3/jquery-ui.js">
+		
         <style>
             body {
                 padding-top: 50px;

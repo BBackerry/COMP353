@@ -20,7 +20,7 @@
         <link rel="stylesheet" href="assets/css/bootstrap-theme.min.css">
         <link rel="stylesheet" href="assets/css/main.css">
 
-        <script src="assets/js/vendor/modernizr-2.6.2.min.js"></script>
+        <script src="<?php echo base_url();?>/assets/js/vendor/modernizr-2.6.2.min.js"></script>
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -205,8 +205,8 @@
 	
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
 		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-		<script src="assets/js/vendor/bootstrap.min.js"></script>
-		<script src="assets/js/plugins.js"></script>
-		<script src="assets/js/main.js"></script>
+		<script src="<?php echo base_url();?>/assets/js/vendor/bootstrap.min.js"></script>
+		<script src="<?php echo base_url();?>/assets/js/plugins.js"></script>
+		<script src="<?php echo base_url();?>/assets/js/main.js"></script>
     </body>
 </html>

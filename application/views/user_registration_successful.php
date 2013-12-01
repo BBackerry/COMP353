@@ -1,22 +1,10 @@
     <div class="container">
-      
+      <!-- Example row of columns -->
       <div class="row">
-		<div class="panel panel-default">
-			<div class="panel-body">
-				<h3>Your paper has been submitted successfully.</h3>
-				
-				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submittedPapers/') ?>">
-					<button style="float:left;" class="btn btn-info">Submitted Papers</button>
-				</form>
-				
-				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submit/') ?>">
-					<button style="float:right;" class="btn btn-primary">Submit New Paper</button>
-				</form>
-				
-			</div>
-		</div>
-
         <div class="col-lg-12">
+			<div class="jumbotron">
+				<span class="glyphicon glyphicon-user"></span><h2>Thank you for registering. You can now login.</h1>
+			</div>
         </div>
       </div>
 

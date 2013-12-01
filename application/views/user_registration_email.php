@@ -24,12 +24,16 @@
 								<input type="email" class="form-control" id="confirmationEmail" placeholder="Email">
 							</div>
 						</div>
-						<a href="<?php echo site_url('User/register_form/') ?>" class="btn btn-success" style="float:right;">Submit</a>
+						<a id="submit_email" class="btn btn-success" style="float:right;">Submit</a>
 					</form>
 				</div>
 			</div>
         </div>
       </div>
+	  
+	  <div id="confirmation_message" style="display:none;">
+		<p>Thanks, your email has just been verified, <a href="http://localhost/comp353/User/register_form">click here</a> to continue your registration</p>
+	  </div>
 
       <hr>
 
@@ -39,9 +43,18 @@
     </div> <!-- /container -->
 	
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="../../<?php echo base_url();?>/<?php echo base_url();?>/assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/vendor/bootstrap.min.js"></script>
-		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/plugins.js"></script>
-		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/main.js"></script>
+		<script>window.jQuery || document.write('<script src="../../<?php echo base_url();?>/assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+		<script src="<?php echo base_url();?>/assets/js/vendor/bootstrap.min.js"></script>
+		<script src="<?php echo base_url();?>/assets/js/plugins.js"></script>
+		<script src="<?php echo base_url();?>/assets/js/main.js"></script>
+		<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script>
+			$(function() {
+				$( "#submit_email" ).click(function() {
+					$("#confirmation_message").find("a").attr("href", "http://localhost/comp353/User/register_form/" + $("#confirmationEmail").val());
+					$("#confirmation_message").dialog();
+				});
+			});
+		</script>
     </body>
 </html>
