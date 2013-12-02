@@ -29,14 +29,14 @@ class Paper extends CI_Controller {
 			$this->load->view('submit_new_paper', $query);
 		}
 		else {
-			$errors['errorMessages'] = array("Sorry but you have to be logged in to submit papers");
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}
 	}
 
 	public function submit()
-	{	
+	{
 		$this->load->model('event_model');
 		$query['events'] = $this->event_model->get_all_event();
 		
@@ -46,7 +46,7 @@ class Paper extends CI_Controller {
 			$this->load->view('submit_new_paper', $query);
 		}
 		else {
-			$errors['errorMessages'] = array("Sorry but you have to be logged in to submit papers");
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}
@@ -61,7 +61,7 @@ class Paper extends CI_Controller {
 			$this->load->view('submitted_papers', $query);
 		}
 		else {
-			$errors['errorMessages'] = array("Sorry but you have to be logged in to submit papers");
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}
@@ -88,29 +88,65 @@ class Paper extends CI_Controller {
 	public function submitted()
 	{
 		$this->load->model('paperTopics_model');
+		$errors['errorMessages'] = array();
 		$username = $this->session->userdata('idUser');
 		if ($username) {
-			$title = $this->input->get('title');
-			$abstract = $this->input->get('abstract');
-			$document = $this->input->get('file');
-			$keywords = $this->input->get('keywords');
-			$subjects = $this->input->get('subjects');
+			$title = $this->input->post('title');
+			$abstract = $this->input->post('abstract');
+			$keywords = $this->input->post('keywords');
+			$subjects = $this->input->post('subjects');
 			$submittedby = $username;
 			
-			$this->paper_model->create_paper($title, $abstract, $submittedby, $document, $keywords);
-			$idpaper = mysql_insert_id();
-			
-			print $subjects[0];
-			//die();
-			for ($i = 0; $i < count($subjects); $i++) {
-    			$this->paperTopics_model->create_paperTopics($idpaper, $subjects[$i]);
+			//FILE UPLOAD
+			if (!empty($_FILES['file'])) {
+				$file = $_FILES['file'];
+				if ($file['error'] != UPLOAD_ERR_OK) {
+					$error = 'File upload failed. Please try again.';
+					$errors['errorMessages'] = array_push($errors['errorMessages'], $error);
+				}
+				
+				$name = preg_replace('/[^A-Z0-9._-]/i', '_', $file['name']);
+				
+				$fulldir = explode('\\', __DIR__);
+				$upload_dir = $fulldir[0].'\\'.$fulldir[1].'\\'.$fulldir[2].'\\'.$fulldir[3].'\\'.'papers/';
+				$i = 0;
+				$parts = pathinfo($name);
+				while (file_exists($upload_dir . $name)) {
+					$i++;
+					$name = $parts["filename"] . "-" . $i . "." . $parts["extension"];
+				}
+				
+				$success = move_uploaded_file($file["tmp_name"], $upload_dir . $name);
+				if(!$success) {
+					$error = 'File submission failed. Please try again.';
+					$errors['errorMessages'] = array_push($errors['errorMessages'], $error);
+				}
 			}
 			
-			$this->load->view('header');
-			$this->load->view('paper_submitted_successfully');
+			if (empty($errors['errorMessages'])) {
+				$create_paper_check = $this->paper_model->create_paper($title, $abstract, $submittedby, mysql_real_escape_string(file_get_contents($upload_dir . $name)), $keywords);
+				if($create_paper_check) {
+					$idpaper = mysql_insert_id();
+					for ($j = 0; $j < count($subjects); $j++) {
+						$this->paperTopics_model->create_paperTopics($idpaper, $subjects[$j]);
+					}
+					$this->load->view('header');
+					$this->load->view('paper_submitted_successfully');
+				}
+				else {
+					$error = 'Your paper could not be created. Please try again.';
+					$errors['errorMessages'] = array_push($errors['errorMessages'], $error);
+				}
+			}
+			else {
+				$this->load->view('header', $errors);
+				$this->load->view('submitted_papers');
+			}
+			
 		}
 		else {
-			$errors['errorMessages'] = array("Sorry but you have to be logged in to submit papers");
+			$error = 'Sorry but you have to be logged in to submit papers';
+			$errors['errorMessages'] = array_push($errors['errorMessages'], $error);
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}

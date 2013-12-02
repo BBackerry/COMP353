@@ -3,7 +3,7 @@
       <div class="row">
         <div class="col-lg-12">
 			<div class="jumbotron">
-				<span class="glyphicon glyphicon-ok-sign"></span><h2>Thank you for registering. You can now login.</h1>
+				<span class="glyphicon glyphicon-minus-sign"></span><h2>Thank you for registering. You can now login.</h1>
 			</div>
         </div>
       </div>

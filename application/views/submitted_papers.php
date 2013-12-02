@@ -5,12 +5,14 @@
 				
       				<h3>My Paper List:</h3>
       				
-        			<?php foreach($papers as $row):?>
-						<h4>Title: <?= $row->title ?></h4>
-						<h5>Abstract: <?= $row->abstract ?></h5>
-						<h5>Keywords: <?= $row->keywords ?></h5>
-						<br />
-        			<?php endforeach; ?>
+					<?php if(isset($papers)): ?>
+						<?php foreach($papers as $row):?>
+							<h4>Title: <?= $row->title ?></h4>
+							<h5>Abstract: <?= $row->abstract ?></h5>
+							<h5>Keywords: <?= $row->keywords ?></h5>
+							<br />
+						<?php endforeach; ?>
+					<?php endif; ?>
         			
 				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submit/') ?>">
 					<button style="float:right;" class="btn btn-primary">Submit New Paper</button>

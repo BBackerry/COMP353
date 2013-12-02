@@ -15,13 +15,13 @@
 						<div class="form-group">
 							<label for="firstEmail" class="col-lg-2 control-label">Email</label>
 							<div class="col-lg-10">
-								<input type="email" class="form-control" id="firstEmail" placeholder="Email">
+								<input type="email" class="form-control" id="firstEmail" placeholder="Email" data-validate="required,email">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="confirmationEmail" class="col-lg-2 control-label">Confirm Email</label>
 							<div class="col-lg-10">
-								<input type="email" class="form-control" id="confirmationEmail" placeholder="Email">
+								<input type="email" class="form-control" id="confirmationEmail" placeholder="Email" data-validate="required,email,sameEmail">
 							</div>
 						</div>
 						<a id="submit_email" class="btn btn-success" style="float:right;">Submit</a>
@@ -48,12 +48,25 @@
 		<script src="<?php echo base_url();?>/assets/js/plugins.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/main.js"></script>
 		<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script src="<?php echo base_url();?>/assets/js/vendor/verify.notify.min.js"></script>
 		<script>
 			$(function() {
 				$( "#submit_email" ).click(function() {
-					$("#confirmation_message").find("a").attr("href", "http://localhost/comp353/User/register_form/" + $("#confirmationEmail").val());
-					$("#confirmation_message").dialog();
+					if ($("#confirmationEmail").val() == $("#firstEmail").val() && $("#firstEmail") != "") {
+						$("#confirmation_message").find("a").attr("href", "http://localhost/comp353/User/register_form/" + $("#confirmationEmail").val());
+						$("#confirmation_message").dialog();
+					}
 				});
+			});
+		</script>
+		<script>
+			$.verify.addRules({
+				sameEmail: function(r) {
+					if (r.val() == $("#firstEmail").val()) {
+						return true;
+					}
+					else { return "Email do not match"; }
+				}
 			});
 		</script>
     </body>

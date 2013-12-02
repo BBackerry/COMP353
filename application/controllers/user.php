@@ -47,14 +47,13 @@ class User extends CI_Controller {
 	{
 		$this->load->model('user_model');
 		$form = $this->input->post();
-		if (validate_user_registration($form)) {
-			$this->user_model->create_user($form['username'], $form['password'], $form['firstName'], $form['lastName'], $form['email'], (int)$form['country'], (int)$form['organization'], (int)$form['department']);
+		if ($this->user_model->create_user($form['username'], $form['password'], $form['firstName'], $form['lastName'], $form['email'], (int)$form['country'], (int)$form['organization'], (int)$form['department'])) {
 			$this->load->view('header');
 			$this->load->view('user_registration_successful');
 		}
 		else {
-			$errors['errorMessages'] = array('Something went wrong. Try again !');
-			register_form($form['email'], $errors);
+			$this->load->view('header');
+			$this->load->view('user_registration_error');
 		}
 	}
 	

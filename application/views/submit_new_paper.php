@@ -11,7 +11,7 @@
 				<p>The abstract must be at least 20 words, but no more than 200 characters including blank spaces. You can write the abstract in a text editor then copy and paste it in the appropriate field.<p>
 			  
 				
-				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submitted/') ?>">
+				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submitted/') ?>" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
 						<label for="title" class="col-lg-2 control-label">*Event:</label>
 						<div class="col-lg-10">
@@ -46,7 +46,7 @@
 					<div class="form-group">
 						<label for="file" class="col-lg-2 control-label">*Paper File(PDF):</label>
 						<div class="col-lg-10">
-							<input data-validate="required" type="text" class="form-control" id="file" name="file">
+							<input data-validate="required" type="file" class="form-control" id="file" name="file">
 						</div>
 					</div>
 					
@@ -58,9 +58,9 @@
 					</div>
 					
 					<div class="form-group">
-						<label id="subject" name="subject" for="subject" class="col-lg-2 control-label">*Paper Subject:</label>
+						<label id="subject" name="subject" for="subject" class="col-lg-2 control-label">*Paper Topics:</label>
 						<div class="col-lg-10">
-							<select multiple='multiple' name="subjects[]" data-validate="required">
+							<select multiple="multiple" name="subjects[]" data-validate="required">
 								<?php foreach($eventTopic as $row):?>
 									<?php foreach($topics as $topic):?>
 										<?php if ($row->idTopic != $topic->idTopic) continue; ?>
