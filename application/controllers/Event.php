@@ -53,7 +53,7 @@ public function __construct()
 			$this->meetingEvent_model->create_meetingEvent($idEvent, $m);
 		}
 		
-		foreach( $eventTopics as $t)
+		foreach($eventTopics as $t)
 		{
 			$this->eventTopic_model->create_eventTopic($idEvent, $t);
 		}

@@ -50,7 +50,7 @@
 			<label for="eventTopics">Select Topics:</label>
 		     <select multiple class="form-control" name="idTopic[]">
 				 <?php foreach($EventTopic as $t): ?>
-				<option value="<?php $t->idTopic?>"><?php $t->topicName?> </option>
+				<option value="<?php echo $t->idTopic?>"><?php echo $t->topicName?> </option>
 				<?php endforeach; ?>
            </select>
 		</div>
