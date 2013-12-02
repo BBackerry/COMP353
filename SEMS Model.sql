@@ -379,9 +379,10 @@ DROP TABLE IF EXISTS `comp353`.`news` ;
 
 CREATE TABLE IF NOT EXISTS `comp353`.`news` (
   `idNews` INT NOT NULL AUTO_INCREMENT,
-  `newsDescription` VARCHAR(300) NOT NULL,
+  `newsDescription` VARCHAR(2000) NOT NULL,
   `createdBy` VARCHAR(45) NOT NULL,
   `newsDate` TIMESTAMP NOT NULL,
+  `newsTitle` VARCHAR(100) NOT NULL,
   PRIMARY KEY (`idNews`),
   INDEX `idUser_news` (`createdBy` ASC),
   CONSTRAINT `news_user`
@@ -532,7 +533,3 @@ INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('1', 'ad
 INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('2', 'program chair');
 INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('3', 'committee member');
 INSERT INTO `comp353`.`role` (`idUser`, `idEvent`, `idPosition`) VALUES ('admin', '1', '1');
-
-
-
-
