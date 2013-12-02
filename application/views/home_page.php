@@ -12,8 +12,12 @@
 		  </ul>
         </div>
         <div class="col-lg-10">
-          <h2>News</h2>
-          <?php foreach($news as $article) { ?>
+          <h2>News</h2> 
+          <?php if($this->session->userdata('isAdmin') || $this->session->userdata('isProgramChair')) { ?>
+            <a href="<?php echo site_url('News/createNews'); ?>"> Add a News Message </a>
+          <?php } ?>
+          <?php $numOfNews = 5;
+                foreach($news as $article) { ?>
               <div class="panel panel-default row">
 			  <div class="panel-heading"><?php echo $article->newsTitle; ?></div>
 			  <div class="col-lg-12">
@@ -23,9 +27,20 @@
                   <?php } else { ?>
                       <p><?php echo $article->newsDescription; ?></p> 
                   <?php } ?>
-                  <p><i><?php echo $article->createdBy ?></i> - <?php echo date( "Y-m-d H:i:s", strtotime($article->newsDate)); ?></p>
+                  <p>
+                    <i><?php echo $article->createdBy ?></i> - <?php echo date( "Y-m-d H:i:s", strtotime($article->newsDate)); ?> 
+                    <?php if($this->session->userdata('isAdmin') || $this->session->userdata('isProgramChair')) { ?>
+                        <a class="btn btn-default" href="<?php echo site_url('News/editNews?id='.$article->idNews); ?> ">Edit News Message</a>
+                        <a class="btn btn-default" href="<?php echo site_url('News/deleteNews?id='.$article->idNews); ?> ">Delete News Message</a>
+                    <?php } ?>
+                  </p>
 			  </div>
               </div>
+              <?php if($numOfNews == 0){ 
+                        break; 
+                    }else {
+                        $numOfNews = $numOfNews-1;
+                    }?>
           <?php } ?>
         </div>
        </div>
