@@ -115,16 +115,10 @@ class Paper extends CI_Controller {
 					$i++;
 					$name = $parts["filename"] . "-" . $i . "." . $parts["extension"];
 				}
-				
-				$success = move_uploaded_file($file["tmp_name"], $upload_dir . $name);
-				if(!$success) {
-					$error = 'File submission failed. Please try again.';
-					$errors['errorMessages'] = array_push($errors['errorMessages'], $error);
-				}
 			}
 			
 			if (empty($errors['errorMessages'])) {
-				$create_paper_check = $this->paper_model->create_paper($title, $abstract, $submittedby, mysql_real_escape_string(file_get_contents($upload_dir . $name)), $keywords);
+				$create_paper_check = $this->paper_model->create_paper($title, $abstract, $submittedby, mysql_real_escape_string(file_get_contents($file["tmp_name"])), $keywords);
 				if($create_paper_check) {
 					$idpaper = mysql_insert_id();
 					for ($j = 0; $j < count($subjects); $j++) {
