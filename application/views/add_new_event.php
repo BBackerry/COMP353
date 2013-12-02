@@ -46,6 +46,15 @@
         </div>  		
 		-->		
 		
+		<div class="form-group" id = "idTopic" name = "idTopic">
+			<label for="eventTopics">Select Topics:</label>
+		     <select multiple class="form-control" name="idTopic[]">
+				 <?php foreach($EventTopic as $t): ?>
+				<option value="<?php $t->idTopic?>"><?php $t->topicName?> </option>
+				<?php endforeach; ?>
+           </select>
+		</div>
+		
       	
 		<div class="form-group" id = "selectedMeetings" name = "selectedMeetings">
 			<label for="meetingIDs">Select Meetings:</label>
