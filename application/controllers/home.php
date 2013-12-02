@@ -4,8 +4,10 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+        $this->load->model('news_model');
+        $param['news'] = $this->news_model->get_all_news();
 		$this->load->view('header');
-		$this->load->view('home_page');
+		$this->load->view('home_page', $param);
 	}
     
     public function signIn()

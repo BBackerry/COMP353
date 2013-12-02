@@ -13,20 +13,21 @@
         </div>
         <div class="col-lg-10">
           <h2>News</h2>
-		  <div class="panel panel-default row">
-			  <div class="panel-heading">Title here</div>
+          <?php foreach($news as $article) { ?>
+              <div class="panel panel-default row">
+			  <div class="panel-heading"><?php echo $article->newsTitle; ?></div>
 			  <div class="col-lg-12">
-				  <p>This is a news about the ConfSys system that the admin only can post</p>
-				  <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
+                  <?php if(strlen($article->newsDescription) > 300){ ?>
+                      <p><?php echo substr($article->newsDescription, 0, 300) . "..." ?></p>
+                      <p><a class="btn btn-default" href="<?php echo site_url('News/viewNews?id='.$article->idNews); ?> ">View details &raquo;</a></p>
+                  <?php } else { ?>
+                      <p><?php echo $article->newsDescription; ?></p> 
+                  <?php } ?>
+                  <p><i><?php echo $article->createdBy ?></i> - <?php echo date( "Y-m-d H:i:s", strtotime($article->newsDate)); ?></p>
 			  </div>
-		  </div>
-		  <div class="panel panel-default row">
-			  <div class="panel-heading">Title here</div>
-			  <div class="col-lg-12">
-				  <p>This is another news about the ConfSys system that the admin only can post</p>
-				  <p><a class="btn btn-default" href="#">View details &raquo;</a></p>
-			  </div>
-		  </div>
+              </div>
+          <?php } ?>
+        </div>
        </div>
       </div>
 

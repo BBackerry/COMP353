@@ -1,20 +1,21 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Meeting extends CI_Controller {
+class News extends CI_Controller {
 
 public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('meeting_model');
-        $this->load->model('place_model');
+		$this->load->model('news_model');
 	}
-	public function viewMeetings()
-    {
+	public function viewNews()
+    {     
         $this->load->view('header');
-        $param['place'] = $this->place_model->get_all_place();
-        $this->load->view('meeting_page', $param);
+        $param['news'] = $this->news_model->get_news($this->input->get("id"));
+        $this->load->view('news_details', $param);
     }
-	public function createMeeting()
+    
+    //TODO
+	public function createNews()
 	{
         if($this->session->userdata('isAdmin')){
             $this->load->view('header');
@@ -29,8 +30,8 @@ public function __construct()
 		}
 	}
 	
-    
-	public function submitedMeeting()
+    //TODO
+	public function submitedNews()
 	{
 		$createdBy = $this->session->userdata('idUser');
         if (isset($_POST['newPlace'])) {

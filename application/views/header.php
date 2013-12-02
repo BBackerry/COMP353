@@ -110,3 +110,14 @@
 		<?php endforeach; ?>
 	</div>
 	<?php endif; ?>
+    
+    <?php if(isset($successMessages)): ?>
+	<div>
+		<?php foreach($successMessages as $success): ?>
+			<div class="alert alert-success">
+				<?= $success ?>
+			</div>
+		<?php endforeach; ?>
+	</div>
+	<?php endif; ?>
+  
