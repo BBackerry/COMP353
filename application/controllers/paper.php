@@ -87,16 +87,24 @@ class Paper extends CI_Controller {
 
 	public function submitted()
 	{
+		$this->load->model('paperTopics_model');
 		$username = $this->session->userdata('idUser');
 		if ($username) {
 			$title = $this->input->get('title');
 			$abstract = $this->input->get('abstract');
 			$document = $this->input->get('file');
 			$keywords = $this->input->get('keywords');
-			$subject = $this->input->get('subject');
+			$subjects = $this->input->get('subjects');
 			$submittedby = $username;
 			
 			$this->paper_model->create_paper($title, $abstract, $submittedby, $document, $keywords);
+			$idpaper = mysql_insert_id();
+			
+			print $subjects[0];
+			//die();
+			for ($i = 0; $i < count($subjects); $i++) {
+    			$this->paperTopics_model->create_paperTopics($idpaper, $subjects[$i]);
+			}
 			
 			$this->load->view('header');
 			$this->load->view('paper_submitted_successfully');

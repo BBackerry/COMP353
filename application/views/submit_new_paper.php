@@ -15,7 +15,7 @@
 					<div class="form-group">
 						<label for="title" class="col-lg-2 control-label">*Event:</label>
 						<div class="col-lg-10">
-							<select id="eventSelect">
+							<select id="eventSelect" data-validate="required">
 								<option value="0">-</option>
 								<?php foreach($events as $row):?>
 									<?php if ($row->idEvent == 1) continue;?>
@@ -32,35 +32,35 @@
 					<div class="form-group">
 						<label for="title" class="col-lg-2 control-label">*Paper Title:</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="title" name="title">
+							<input data-validate="required" type="text" class="form-control" id="title" name="title">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="abstract" class="col-lg-2 control-label">*Paper Abstract:</label>
 						<div class="col-lg-10">
-							<textarea rows="4" cols="50" type="text" maxlength="200" class="form-control" id="abstract" name="abstract"></textarea>
+							<textarea data-validate="required, max(200)" rows="4" cols="50" type="text" maxlength="200" class="form-control" id="abstract" name="abstract"></textarea>
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="file" class="col-lg-2 control-label">*Paper File(PDF):</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="file" name="file">
+							<input data-validate="required" type="text" class="form-control" id="file" name="file">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label for="keywords" class="col-lg-2 control-label">*Keywords:</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" id="keywords" name="keywords">
+							<input data-validate="required" type="text" class="form-control" id="keywords" name="keywords">
 						</div>
 					</div>
 					
 					<div class="form-group">
 						<label id="subject" name="subject" for="subject" class="col-lg-2 control-label">*Paper Subject:</label>
 						<div class="col-lg-10">
-							<select multiple>
+							<select multiple='multiple' name="subjects[]" data-validate="required">
 								<?php foreach($eventTopic as $row):?>
 									<?php foreach($topics as $topic):?>
 										<?php if ($row->idTopic != $topic->idTopic) continue; ?>
@@ -88,10 +88,12 @@
     </div> <!-- /container -->
 	
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="../../<?php echo base_url();?>/<?php echo base_url();?>/assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/vendor/bootstrap.min.js"></script>
-		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/plugins.js"></script>
-		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/main.js"></script>
+		<script>window.jQuery || document.write('<script src="../../<?php echo base_url();?>/assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+		<script src="<?php echo base_url();?>/assets/js/vendor/bootstrap.min.js"></script>
+		<script src="<?php echo base_url();?>/assets/js/plugins.js"></script>
+		<script src="<?php echo base_url();?>/assets/js/vendor/verify.notify.min.js"></script>
+		<script src="<?php echo base_url();?>/assets/js/main.js"></script>
+
 		<script>  
 			$("#eventSelect").change(function(){
 				console.log('chnage');
