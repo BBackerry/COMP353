@@ -6,11 +6,23 @@ class Paper extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('paper_model');
-		$this->load->model('event_model');
 	}
-	public function submit()
+	public function submitPaper($eventId)
 	{	
+		$this->load->model('event_model');
 		$query['events'] = $this->event_model->get_all_event();
+		
+		if($eventId != 0){
+			$this->load->model('eventTopic_model');
+			$this->load->model('topic_model');
+			
+			$query['eventTopic'] = $this->eventTopic_model->get_eventTopic($eventId);
+			$query['topics'] = $this->topic_model->get_all_topic();
+			$query['eventId'] = $eventId;
+			$event = $this->event_model->get_event($eventId);
+			$query['eventName'] = $event[0]->eventName;
+		}
+		
 		$username = $this->session->userdata('idUser');
 		if ($username) {
 			$this->load->view('header');
@@ -23,6 +35,23 @@ class Paper extends CI_Controller {
 		}
 	}
 
+	public function submit()
+	{	
+		$this->load->model('event_model');
+		$query['events'] = $this->event_model->get_all_event();
+		
+		$username = $this->session->userdata('idUser');
+		if ($username) {
+			$this->load->view('header');
+			$this->load->view('submit_new_paper', $query);
+		}
+		else {
+			$errors['errorMessages'] = array("Sorry but you have to be logged in to submit papers");
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
+	}
+	
 	public function submittedPapers()
 	{
 		$username = $this->session->userdata('idUser');
