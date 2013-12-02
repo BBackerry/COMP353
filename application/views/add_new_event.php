@@ -1,10 +1,17 @@
-      <div class="container">
+	  <script language="JavaScript" src="../assets/js/ts_picker.js">
+		//Script by Denis Gritcyuk: tspicker@yahoo.com
+		//Submitted to JavaScript Kit (http://javascriptkit.com)
+		//Visit http://javascriptkit.com for this script
+	  </script>
+	  
+	  <div class="container">
           <h3>Add a new Event for conference:</h3>  
       <div class="panel-body">
         
         
-		<form role="form" class="form-horizontal" action="<?php echo site_url('Event/submitedEvent/') ?>">
-        <div class="form-group">
+		<form role="form" class="form-horizontal" name="createEvent" action="<?php echo site_url('Event/submitedEvent/') ?>" >
+       
+	   <div class="form-group">
         <p> Event Title </p>
         <input type="text" class="form-control" name ="eventName" id="eventName">
         </div>        
@@ -18,12 +25,14 @@
    
         <div class="form-group">
         <p>Start Date: </p>
-        <input type="text" class="form-control" name ="startDate" id="startDate">
+		<input type="Text" class="form-control" name="startDate"  id="startDate" value="">
+            <a href="javascript:show_calendar('document.createEvent.startDate', document.createEvent.startDate.value);"><img src="../assets/img/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the start Time"></a> 
         </div>
        
           <div class="form-group">
         <p>End Date: </p>
-        <input type="text" class="form-control" name ="endDate" id="endDate">        
+        <input type="Text" class="form-control" name="endDate"  id="endDate" value="">
+            <a href="javascript:show_calendar('document.createEvent.endDate', document.createEvent.endDate.value);"><img src="../assets/img/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the start Time"></a>       
         </div>
 		
         <!--
@@ -37,39 +46,28 @@
         </div>  		
 		-->		
 		
-        <div class="form-group" id = "selectedMeetings" name = "selectedMeetings">
-		<p> Select the meetings: </p>
-		<select multiple class="form-control">
-			<option value="volvo">Volvo</option>
-			<option value="saab">Saab</option>
-			<option value="opel">Opel</option>
-			<option value="audi">Audi</option>
-		</select>
+      	
+		<div class="form-group" id = "selectedMeetings" name = "selectedMeetings">
+			<label for="meetingIDs">Select Meetings:</label>
+		     <select multiple class="form-control" name="meetingIDs[]">
+				 <?php foreach($meeting as $m): ?>
+				<option value="<?php echo $m->idMeeting ?>"><?php echo date( "Y-m-d H:i:s", strtotime($m->startTime))?> - <?php echo date( "Y-m-d H:i:s", strtotime($m->endTime)) ?></option>
+				<?php endforeach; ?>
+           </select>
 		</div>
 		
+		<button style="float:right;" class="btn btn-primary">Add Event</button>
+		
+			</form>
+			
 		<form role="form" class="form-horizontal" action="<?php echo site_url('Meeting/createMeeting') ?>">
 		
 		<button style="float:right;" class="btn btn-primary">Create New Meeting</button>
 		     
         </form>
 		
-		<hr>
-		<hr>
 		
-		<div class="form-group" id = "selectedMeetings" name = "selectedMeetings">
-		<p> Select the Program Chair: </p>
-		<select multiple class="form-control">
-			<option value="volvo">Volvo</option>
-			<option value="saab">Saab</option>
-			<option value="opel">Opel</option>
-			<option value="audi">Audi</option>
-		</select>
-		</div>
-		
-         
-        <button style="float:right;" class="btn btn-primary">Add Event</button>
-       
-        </form>
+        
         
 		
 		
@@ -92,10 +90,9 @@
       </footer>
     </div> <!-- /container -->
 	
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-		<script src="<?php echo base_url();?>/assets/js/vendor/bootstrap.min.js"></script>
-		<script src="<?php echo base_url();?>/assets/js/plugins.js"></script>
-		<script src="<?php echo base_url();?>/assets/js/main.js"></script>
+		<script src="../assets/js/vendor/jquery-1.10.1.min.js"></script>
+		<script src="../assets/js/vendor/bootstrap.min.js"></script>
+		<script src="../assets/js/plugins.js"></script>
+		<script src="../assets/js/main.js"></script>
     </body>
 </html>
