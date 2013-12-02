@@ -14,49 +14,67 @@ public function __construct()
         $this->load->view('news_details', $param);
     }
     
-    //TODO
 	public function createNews()
 	{
-        if($this->session->userdata('isAdmin')){
+        if($this->session->userdata('isAdmin') || $this->session->userdata('isProgramChair')){
             $this->load->view('header');
-            $param['place'] = $this->place_model->get_all_place();
-            $this->load->view('add_new_meeting', $param);
+            $this->load->view('add_new_news');
         }
 		else 
 		{
-			$errors['errorMessages'] = array("Sorry but you are no allowed to create meetings");
+			$errors['errorMessages'] = array("Sorry but you are no allowed to create News");
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}
 	}
+    
+    public function editNews()
+    {
+        $this->load->view('header');
+        $param['news'] = $this->news_model->get_news($this->input->get("id"));
+        $this->load->view('edit_new_news', $param);
+    }
+    
+    public function deleteNews()
+    {
+        $this->news_model->delete_news($this->input->get("id"));
+        $param['successMessages'][0] = "The news has been successfully deleted.";
+        $param['news'] = $this->news_model->get_all_news();
+        $this->load->view('header', $param);
+        $this->load->view('home_page', $param);
+    }
+    
+    public function updateNews()
+    {
+        $createdBy = $this->session->userdata('idUser');
+        $title = $_POST['title'];
+        $description = $_POST['description'];
+        $date = date( "Y-m-d H:i:s", strtotime($_POST['date']));	
+        $idNews = $_POST['id'];
+                
+        $this->news_model->update_news($idNews, $title, $date, $description, $createdBy);
+
+        $param['successMessages'][0] = "The news has been successfully updated.";
+		$this->load->view('header', $param);
+        $param['news'] = $this->news_model->get_news($idNews);
+        $this->load->view('news_details', $param);	
+    }
 	
-    //TODO
 	public function submitedNews()
 	{
 		$createdBy = $this->session->userdata('idUser');
-        if (isset($_POST['newPlace'])) {
-            $placeName = $_POST['newPlaceName'];
-            $this->place_model->create_place($placeName);
-            $idPlace = mysql_insert_id();
-        } else {
-            $idPlace = $_POST['place'];
-        }            
-		$startTime = date( "Y-m-d H:i:s", strtotime($_POST['startTime']));	
-		$endTime = date( "Y-m-d H:i:s", strtotime($_POST['endTime']));
-					
-		$this->meeting_model->create_meeting($idPlace, $createdBy, $startTime, $endTime);
+        $date = new DateTime();
+        $timestamp = $date->getTimestamp();
+        $title = $_POST['title'];
+        $description = $_POST['description'];
         
-        $param['successMessages'][0] = "The meeting has been successfully saved.";
-        $param['startTime'] = $startTime;
-        $param['endTime'] = $endTime;
-        $param['createdBy'] = $createdBy;
-        $place = $this->place_model->get_place($idPlace);
-        foreach ($place as $p){
-            $param['place'] = $p->placeName;
-        }
+		$this->news_model->create_news($title, date( "Y-m-d H:i:s", $timestamp), $description, $createdBy );
+        $idNews = mysql_insert_id();
         
+        $param['successMessages'][0] = "The news has been successfully saved.";
 		$this->load->view('header', $param);
-		$this->load->view('meeting_page');		
+        $param['news'] = $this->news_model->get_news($idNews);
+        $this->load->view('news_details', $param);	
 	}
 		
 			

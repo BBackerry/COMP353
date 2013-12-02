@@ -18,7 +18,7 @@ class News_model extends CI_Model {
 	function create_news($newsTitle, $newsDate, $newsDescription, $createdBy )
 	{
 		$sql = "INSERT INTO news (newsTitle, newsDate, newsDescription, createdBy) VALUES( ?, ?, ?, ?)";
-		$query = $this->db->query($sql, array($idNews, $newsDescription, $createdBy)); 
+		$query = $this->db->query($sql, array($newsTitle, $newsDate, $newsDescription, $createdBy )); 
 		return $query;
 	}
 
