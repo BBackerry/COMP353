@@ -53,7 +53,14 @@
 					<li><a href="#">My Registration</a></li>
 				</ul>
            	</li>
-			<li><a href="<?php echo site_url('Paper/submittedPapers');?>">Papers</a></li>
+           	<li class="dropdown">
+                    <a href="<?php echo site_url('Paper/submittedPapers'); ?>" class="dropdown-toggle" data-toggle="dropdown">Papers<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    	<li><a href="<?php echo site_url('Paper/submittedPapers');?>">My Papers</a></li>
+                        <li><a href="<?php echo site_url('Paper/submit');?>">Submit New Paper</a></li>
+                    </ul>
+            </li>
+			
             <?php if ($this->session->userdata('isAdmin')) { ?>
                 <li class="dropdown">
                     <a href="<?php echo site_url('Event/viewEvents'); ?>" class="dropdown-toggle" data-toggle="dropdown">Event<b class="caret"></b></a>
