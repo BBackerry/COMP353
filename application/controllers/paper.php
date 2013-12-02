@@ -10,7 +10,10 @@ class Paper extends CI_Controller {
 	public function submitPaper($eventId)
 	{	
 		$this->load->model('event_model');
+		$this->load->model('user_model');
+		
 		$query['events'] = $this->event_model->get_all_event();
+		$query['users'] = $this->user_model->get_all_users();
 		
 		if($eventId != 0){
 			$this->load->model('eventTopic_model');
@@ -38,7 +41,10 @@ class Paper extends CI_Controller {
 	public function submit()
 	{
 		$this->load->model('event_model');
+		$this->load->model('user_model');
+		
 		$query['events'] = $this->event_model->get_all_event();
+		$query['users'] = $this->user_model->get_all_users();
 		
 		$username = $this->session->userdata('idUser');
 		if ($username) {
@@ -88,13 +94,17 @@ class Paper extends CI_Controller {
 	public function submitted()
 	{
 		$this->load->model('paperTopics_model');
+		$this->load->model('paperAuthor_model');
+		
 		$errors['errorMessages'] = array();
+		
 		$username = $this->session->userdata('idUser');
 		if ($username) {
 			$title = $this->input->post('title');
 			$abstract = $this->input->post('abstract');
 			$keywords = $this->input->post('keywords');
 			$subjects = $this->input->post('subjects');
+			$authors = $this->input->post('coauthors');
 			$submittedby = $username;
 			
 			//FILE UPLOAD
@@ -124,6 +134,11 @@ class Paper extends CI_Controller {
 					for ($j = 0; $j < count($subjects); $j++) {
 						$this->paperTopics_model->create_paperTopics($idpaper, $subjects[$j]);
 					}
+					
+					for ($k = 0; $k < count($authors); $k++) {
+						$this->paperAuthor_model->create_paperAuthor($idpaper, $authors[$k]);
+					}
+					
 					$this->load->view('header');
 					$this->load->view('paper_submitted_successfully');
 				}

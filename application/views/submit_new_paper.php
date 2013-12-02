@@ -70,7 +70,20 @@
 							</select>
 						</div>
 					</div>
+					
+					<div class="form-group">
+						<label for="co-author" class="col-lg-2 control-label">Co-authors:</label>
+						<div class="col-lg-10">
+							<select multiple="multiple" name="coauthors[]" data-validate="required">
+								<?php foreach($users as $row):?>
+									<option value="<?= $row->idUser ?>"><?= $row->idUser .' - '.$row->lastName . ', '. $row->firstName?></option>
+	        					<?php endforeach; ?>
+							</select>
+						</div>
+					</div>
+					
 					<button style="float:right;" class="btn btn-primary">Submit</button>
+					
 				</form>
 			  
 			</div>

@@ -1,5 +1,12 @@
 <?php
 class User_model extends CI_Model {
+	
+	function get_all_users()
+	{
+		$sql = "SELECT * FROM user ";
+		$query = $this->db->query($sql); 
+		return $query->result();
+	}
 
 	function get_user($userID)
 	{
