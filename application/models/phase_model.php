@@ -1,10 +1,10 @@
 <?php
 class Phase_model extends CI_Model {
 
-	function get_phase($idPhase, $idMeeting)
+	function get_phase($idPhase, $idEvent)
 	{
-		$sql = "SELECT * FROM phase WHERE idPhase = ? AND idMeeting = ?";
-		$query = $this->db->query($sql, array($idPhase, $idMeeting)); 
+		$sql = "SELECT * FROM phase WHERE idPhase = ? AND idEvent = ?";
+		$query = $this->db->query($sql, array($idPhase, $idEvent)); 
 		return $query->result();
 	}
 
@@ -15,31 +15,31 @@ class Phase_model extends CI_Model {
 		return $query->result();
 	}
 
-	function get_all_phase_for_meeting($idMeeting)
+	function get_all_phase_for_meeting($idEvent)
 	{
-		$sql = "SELECT * FROM phase WHERE idMeeting = ?";
-		$query = $this->db->query($sql, array($idMeeting)); 
+		$sql = "SELECT * FROM phase WHERE idEvent = ?";
+		$query = $this->db->query($sql, array($idEvent)); 
 		return $query->result();
 	}
 
-	function create_phase($idPhase, $idMeeting, $startTime, $endTime, $createdBy)
+	function create_phase($idPhase, $idEvent, $startTime, $endTime, $createdBy)
 	{
 		$sql = "INSERT INTO phase VALUES( ?, ?, ?, ?, ?)";
-		$query = $this->db->query($sql, array($idPhase, $idMeeting, $startTime, $endTime, $createdBy)); 
+		$query = $this->db->query($sql, array($idPhase, $idEvent, $startTime, $endTime, $createdBy)); 
 		return $query;
 	}
 
-	function update_phase($idPhase, $idMeeting, $startTime, $endTime, $createdBy )
+	function update_phase($idPhase, $idEvent, $startTime, $endTime, $createdBy )
 	{
-		$sql = "UPDATE phase SET startTime = ?, endTime = ?, createdBy = ? WHERE idPhase = ? AND idMeeting = ? ";
-		$query = $this->db->query($sql, array( $startTime, $endTime, $createdBy, $idPhase, $idMeeting)); 
+		$sql = "UPDATE phase SET startTime = ?, endTime = ?, createdBy = ? WHERE idPhase = ? AND idEvent = ? ";
+		$query = $this->db->query($sql, array( $startTime, $endTime, $createdBy, $idPhase, $idEvent)); 
 		return $query;
 	}
 
-	function delete_phase($idPhase, $idMeeting)
+	function delete_phase($idPhase, $idEvent)
 	{
-		$sql = "DELETE FROM phase WHERE idPhase= ? AND idMeeting = ?";
-		$query = $this->db->query($sql, array($idPhase, $idMeeting)); 
+		$sql = "DELETE FROM phase WHERE idPhase= ? AND idEvent = ?";
+		$query = $this->db->query($sql, array($idPhase, $idEvent)); 
 		return $query;
 	}
 

@@ -46,15 +46,43 @@
         </div>  		
 		-->		
 		
-		<div class="form-group" id = "idTopic" name = "idTopic">
+		<div class="form-group" id = "eventTopics" name = "eventTopics">
 			<label for="eventTopics">Select Topics:</label>
-		     <select multiple class="form-control" name="idTopic[]">
+		     <select multiple class="form-control" name="eventTopics[]">
 				 <?php foreach($EventTopic as $t): ?>
 				<option value="<?php echo $t->idTopic?>"><?php echo $t->topicName?> </option>
 				<?php endforeach; ?>
            </select>
 		</div>
 		
+		<div class="form-group" id = "phaseTypes" name = "phaseTypes">
+			<label for="phaseTypes">Select phase:</label>
+		     <select multiple class="form-control" name="phaseTypes[]">
+				 <?php foreach($phaseType as $p): ?>
+				 
+				<option value="<?php echo $p->idPhase?>"><?php echo $p->phaseName?> </option>
+				<?php endforeach; ?>
+           </select>
+		</div>
+		
+		
+		
+		
+		<div class="form-group" id = "phaseTypes" name = "phaseTypes">
+			<label for="phaseTypes">Select phase:</label>		    
+				 <?php foreach($phaseType as $p): ?>
+				 
+				<?php echo $p->idPhase?>
+				
+					  <label>End Date: </label>
+					<input type="Text" class="form-control" name="endDate"  id="endDate" value="">
+					<a href="javascript:show_calendar('document.createEvent.endDate', document.createEvent.endDate.value);"><img src="../assets/img/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the start Time"></a>       
+        
+			
+				<?php echo $p->phaseName?> 
+				<?php endforeach; ?>
+           </select>
+		</div>
       	
 		<div class="form-group" id = "selectedMeetings" name = "selectedMeetings">
 			<label for="meetingIDs">Select Meetings:</label>

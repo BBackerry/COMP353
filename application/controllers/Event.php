@@ -10,6 +10,8 @@ public function __construct()
 		$this->load->model('meetingEvent_model');
 		$this->load->model('eventTopic_model');
 		$this->load->model('topic_model');
+		$this->load->model('phase_model');
+		$this->load->model('phaseType_model');
 	}
 	
 	public function addEvent()
@@ -17,6 +19,7 @@ public function __construct()
 			$admin = $this->session->userdata('isAdmin');
 			$param['meeting']= $this->meeting_model->get_all_meeting();
 			$param['EventTopic']= $this->topic_model->get_all_topic();
+			$param['phaseType']= $this->phaseType_model->get_all_phaseType();
 			
 			
 			if ($admin)
@@ -36,14 +39,14 @@ public function __construct()
 	public function submitedEvent()
 	{
 		$username = $this->session->userdata('idUser');
-	
-		
+			
 		$eventName = $this->input->get('eventName');
 		$eventDescription = $this->input->get('eventDescription');		
 		$startDate = date( "Y-m-d H:i:s", strtotime($this->input->get('startDate')));	
 		$endDate = date( "Y-m-d H:i:s", strtotime($this->input->get('endDate')));
 		$idMeeting = $this->input->get('meetingIDs');
 		$idTopic = $this->input->get('eventTopics');
+		$idPhase = $this->input->get('phaseTypes');
 					
 		$this->event_model->create_event($startDate, $endDate, $username, $eventDescription, $eventName);
 		$idEvent = mysql_insert_id();
@@ -57,6 +60,12 @@ public function __construct()
 		{
 			$this->eventTopic_model->create_eventTopic($idEvent, $t);
 		}
+		
+		foreach($idPahse  as $p)
+		{ 
+			$this->eventTopic_model->create_phase($p, $idEvent, $startDate, $endDate, $username);
+		}
+		
 		$this->load->view('header');
 		$this->load->view('event_page');	
 				
