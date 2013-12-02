@@ -1,6 +1,33 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class User extends CI_Controller {
+	
+	public function profile()
+	{
+		$this->load->model('user_model');
+		$this->load->model('country_model');
+		$this->load->model('organization_model');
+		$this->load->model('department_model');
+		
+		$username = $this->session->userdata('idUser');
+		$query['user'] = $this->user_model->get_user($username);
+		
+		foreach($query['user'] as $row):
+			$query['country'] = $this->country_model->get_country($row->country);
+			$query['organization'] = $this->organization_model->get_organization($row->organization);
+			$query['department'] = $this->department_model->get_department($row->department);
+		endforeach;
+		
+		if ($username) {
+			$this->load->view('header');
+			$this->load->view('profile', $query);
+		}
+		else {
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
+	}
     
 	public function login()
 	{

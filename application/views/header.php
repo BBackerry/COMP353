@@ -48,9 +48,8 @@
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<b class="caret"></b></a>
 				<ul class="dropdown-menu">
-					<li><a href="#">My Profile</a></li>
-					<li><a href="#">My Interests</a></li>
-					<li><a href="#">My Registration</a></li>
+					<li><a href="<?php echo site_url('User/profile');?>">My Profile</a></li>
+					<li><a href="<?php echo site_url('User/interests');?>">My Interests</a></li>
 				</ul>
            	</li>
            	<li class="dropdown">
