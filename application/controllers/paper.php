@@ -100,6 +100,7 @@ class Paper extends CI_Controller {
 		
 		$username = $this->session->userdata('idUser');
 		if ($username) {
+			$idEvent = $this->input->post('idEvent');
 			$title = $this->input->post('title');
 			$abstract = $this->input->post('abstract');
 			$keywords = $this->input->post('keywords');
@@ -128,7 +129,7 @@ class Paper extends CI_Controller {
 			}
 			
 			if (empty($errors['errorMessages'])) {
-				$create_paper_check = $this->paper_model->create_paper($title, $abstract, $submittedby, mysql_real_escape_string(file_get_contents($file["tmp_name"])), $keywords);
+				$create_paper_check = $this->paper_model->create_paper($title, $abstract, $submittedby, mysql_real_escape_string(file_get_contents($file["tmp_name"])), $keywords, $idEvent);
 				if($create_paper_check) {
 					$idpaper = mysql_insert_id();
 					for ($j = 0; $j < count($subjects); $j++) {

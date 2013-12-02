@@ -15,10 +15,10 @@ class Paper_model extends CI_Model {
 		return $query->result();
 	}
 
-	function create_paper($title, $abstract, $submittedby, $document, $keywords)
+	function create_paper($title, $abstract, $submittedby, $document, $keywords, $idEvent)
 	{
-		$sql = "INSERT INTO paper VALUES(NULL, ?, ?, ?, ?, ?)";
-		$query = $this->db->query($sql, array($title, $abstract, $submittedby, $document, $keywords)); 
+		$sql = "INSERT INTO paper VALUES(NULL, ?, ?, ?, ?, ?, ?)";
+		$query = $this->db->query($sql, array($title, $abstract, $submittedby, $document, $keywords, $idEvent)); 
 		return $query;
 	}
 

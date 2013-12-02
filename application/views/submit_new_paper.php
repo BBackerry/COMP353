@@ -15,9 +15,9 @@
 					<div class="form-group">
 						<label for="title" class="col-lg-2 control-label">*Event:</label>
 						<div class="col-lg-10">
-							<select id="eventSelect" data-validate="required">
+							<select name="idEvent" id="eventSelect" data-validate="required">
 								<option value="0">-</option>
-								<?php foreach($events as $row):?>
+								<?php foreach($events as $row): ?>
 									<?php if ($row->idEvent == 1) continue;?>
 									<?php if ($row->idEvent == $eventId){
 										echo '<option selected="selected" value="'. $row->idEvent .'">'. $eventName .'</option>';
