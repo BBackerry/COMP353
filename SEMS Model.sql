@@ -316,11 +316,18 @@ CREATE TABLE IF NOT EXISTS `comp353`.`paper` (
   `submittedBy` VARCHAR(45) NOT NULL,
   `document` BLOB NOT NULL,
   `keywords` VARCHAR(45) NULL,
+  `idEvent` INT NOT NULL,
   PRIMARY KEY (`idPaper`),
   INDEX `submittedBy_paper` (`submittedBy` ASC),
+  INDEX `paper_event_idx` (`idEvent` ASC),
   CONSTRAINT `paper_user`
     FOREIGN KEY (`submittedBy`)
     REFERENCES `comp353`.`user` (`idUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `paper_event`
+    FOREIGN KEY (`idEvent`)
+    REFERENCES `comp353`.`event` (`idEvent`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -523,6 +530,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'Computer Science &amp; Engineering');
