@@ -14,11 +14,19 @@
 				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submitted/') ?>">
 					<div class="form-group">
 						<label for="title" class="col-lg-2 control-label">*Event:</label>
-						<select>
-							<?php foreach($events as $row):?>
-								<option value="<?= $row->eventName ?>"><?= $row->eventName ?></option>
-        					<?php endforeach; ?>
-						</select>
+						<div class="col-lg-10">
+							<select id="eventSelect">
+								<option value="0">-</option>
+								<?php foreach($events as $row):?>
+									<?php if ($row->idEvent == 1) continue;?>
+									<?php if ($row->idEvent == $eventId){
+										echo '<option selected="selected" value="'. $row->idEvent .'">'. $eventName .'</option>';
+										continue;
+									}?>
+									<option value="<?= $row->idEvent ?>"><?= $row->eventName ?></option>
+	        					<?php endforeach; ?>
+							</select>
+						</div>
 					</div>
 					
 					<div class="form-group">
@@ -31,7 +39,7 @@
 					<div class="form-group">
 						<label for="abstract" class="col-lg-2 control-label">*Paper Abstract:</label>
 						<div class="col-lg-10">
-							<input type="text" class="form-control" style= "height:200px;" id="abstract" name="abstract">
+							<textarea rows="4" cols="50" type="text" maxlength="200" class="form-control" id="abstract" name="abstract"></textarea>
 						</div>
 					</div>
 					
@@ -52,12 +60,14 @@
 					<div class="form-group">
 						<label id="subject" name="subject" for="subject" class="col-lg-2 control-label">*Paper Subject:</label>
 						<div class="col-lg-10">
-							<div class="checkbox">
-								<label><input type="checkbox">Subject 1</label>
-							</div>
-							<div class="checkbox">
-								<label><input type="checkbox">Subject 2</label>
-							</div>
+							<select multiple>
+								<?php foreach($eventTopic as $row):?>
+									<?php foreach($topics as $topic):?>
+										<?php if ($row->idTopic != $topic->idTopic) continue; ?>
+										<option value="<?= $topic->idTopic ?>"><?= $topic->topicName ?></option>
+									<?php endforeach; ?>
+	        					<?php endforeach; ?>
+							</select>
 						</div>
 					</div>
 					<button style="float:right;" class="btn btn-primary">Submit</button>
@@ -78,9 +88,15 @@
     </div> <!-- /container -->
 	
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-		<script>window.jQuery || document.write('<script src="../../<?php echo base_url();?>/assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
-		<script src="<?php echo base_url();?>/assets/js/vendor/bootstrap.min.js"></script>
-		<script src="<?php echo base_url();?>/assets/js/plugins.js"></script>
-		<script src="<?php echo base_url();?>/assets/js/main.js"></script>
+		<script>window.jQuery || document.write('<script src="../../<?php echo base_url();?>/<?php echo base_url();?>/assets/js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/vendor/bootstrap.min.js"></script>
+		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/plugins.js"></script>
+		<script src="<?php echo base_url();?>/<?php echo base_url();?>/assets/js/main.js"></script>
+		<script>  
+			$("#eventSelect").change(function(){
+				console.log('chnage');
+				window.location.href = "<?= site_url('Paper/submitPaper')?>/" + $("#eventSelect").val();
+			});
+		</script>
     </body>
 </html>
