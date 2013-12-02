@@ -5,8 +5,8 @@
 			<div class="panel-body">
 				<h3>Submit New Paper:</h3>
 				<p>Paper Info:<p>
-				<p>Uploading paper period is from 2012-07-15 to 2013-09-27<p>
 				<p>You can only change the Title, Abstract, Authors, or paper file during this period. No author can be added or deleted after this period.<p>
+				<p>You can only submit to an event that is currently in the phase of submitting papers.<p>
 				<p>Fields with * are required.<p>
 				<p>The abstract must be at least 20 words, but no more than 200 characters including blank spaces. You can write the abstract in a text editor then copy and paste it in the appropriate field.<p>
 			  
@@ -76,6 +76,7 @@
 						<div class="col-lg-10">
 							<select multiple="multiple" name="coauthors[]" data-validate="required">
 								<?php foreach($users as $row):?>
+									<?php if ($row->idUser == $username) continue;?>
 									<option value="<?= $row->idUser ?>"><?= $row->idUser .' - '.$row->lastName . ', '. $row->firstName?></option>
 	        					<?php endforeach; ?>
 							</select>

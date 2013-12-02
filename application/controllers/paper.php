@@ -27,6 +27,7 @@ class Paper extends CI_Controller {
 		}
 		
 		$username = $this->session->userdata('idUser');
+		$query['username'] = $username;
 		if ($username) {
 			$this->load->view('header');
 			$this->load->view('submit_new_paper', $query);
@@ -47,6 +48,7 @@ class Paper extends CI_Controller {
 		$query['users'] = $this->user_model->get_all_users();
 		
 		$username = $this->session->userdata('idUser');
+		$query['username'] = $username;
 		if ($username) {
 			$this->load->view('header');
 			$this->load->view('submit_new_paper', $query);
