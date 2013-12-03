@@ -86,12 +86,10 @@
 		<script src="../assets/js/datepicker.js"></script>
 		<script>
 			$("#startDate").datetimepicker({
-				top: 200,
 				dateFormat: "yy-mm-dd",
 				timeFormat: "hh:mm:ss"
 			});
 			$("#endDate").datetimepicker({
-				top: 200,
 				dateFormat: "yy-mm-dd",
 				timeFormat: "hh:mm:ss"
 			});
