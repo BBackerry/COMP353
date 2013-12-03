@@ -1,6 +1,9 @@
 	<div class="container">
-		<h2 class="panel-title">Edit Event</h2>
+	<div class="row">
+		<div class="panel panel-default">
 		<div class="panel-body">
+			<h2>Edit Event</h2>
+			
 			<form role="form" class="form-horizontal" name="editEvent" method="post" action="<?php echo site_url('Event/submitEditEvent/') ?>">
 
 				<div class="form-group">
@@ -43,7 +46,7 @@
 				</div>
 				
 				<div class="form-group" id="selectPhase" name="phases">
-					<label for="phases">Select phase:</label>
+					<label for="phases">Select phases:</label>
 					<select multiple class="form-control" name="phases[]">
 						<?php foreach($phases as $p): ?>
 							<option value="<?= $p->idPhase ?>"><?= $p->phaseName ?></option>
@@ -61,7 +64,10 @@
 				</div>
 			</form>
 		</div>
+		</div>
 	</div>
+	</div>
+	
     <div class="container">
       <!-- Example row of columns -->
 

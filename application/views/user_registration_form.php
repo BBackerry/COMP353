@@ -1,7 +1,6 @@
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-lg-12">
 			<div class="panel panel-default">
 				<div class="panel-heading">
 					<h3 class="panel-title">ConfSys New User Sign Up</h3>
@@ -94,7 +93,6 @@
 						<button class="btn btn-success" style="float:right;">Submit</button>
 					</form>
 				</div>
-			</div>
         </div>
       </div>
 

@@ -107,7 +107,7 @@ class Event extends CI_Controller {
 	public function editEvent()
 	{
 		$idEvent = $this->input->get('idEvent');
-		$data['event'] = $this->event_model->get_event($idEvent);
+		$data['event'] = $this->event_model->get_event($idEvent)[0];
 		$data['meetings']= $this->meeting_model->get_all_meeting();
 		$data['topics']= $this->topic_model->get_all_topic();
 		$data['phases']= $this->phaseType_model->get_all_phaseType();
@@ -115,7 +115,7 @@ class Event extends CI_Controller {
 		$this->load->view('event_edit', $data);
 	}
 	
-	public function submitEditEvent
+	public function submitEditEvent()
 	{
 		$username = $this->session->userdata('idUser');	
 		$eventName = $this->input->get('eventName');
