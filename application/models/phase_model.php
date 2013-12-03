@@ -15,7 +15,7 @@ class Phase_model extends CI_Model {
 		return $query->result();
 	}
 
-	function get_all_phase_for_meeting($idEvent)
+	function get_all_phase_for_event($idEvent)
 	{
 		$sql = "SELECT * FROM phase WHERE idEvent = ?";
 		$query = $this->db->query($sql, array($idEvent)); 

@@ -17,13 +17,18 @@
 						<div class="col-lg-10">
 							<select name="idEvent" id="eventSelect" data-validate="required">
 								<option value="0">-</option>
-								<?php foreach($events as $row): ?>
-									<?php if ($row->idEvent == 1) continue;?>
-									<?php if ($row->idEvent == $eventId){
-										echo '<option selected="selected" value="'. $row->idEvent .'">'. $eventName .'</option>';
-										continue;
-									}?>
-									<option value="<?= $row->idEvent ?>"><?= $row->eventName ?></option>
+								<?php foreach($events as $event): ?>
+									<?php foreach($phases as $phase): ?>
+										<?php if ($event->idEvent == 1) continue;?>
+										<?php if ($event->idEvent == $eventId){
+											echo '<option selected="selected" value="'. $event->idEvent .'">'. $eventName .'</option>';
+											continue;
+										}?>
+										<?php if ($event->idEvent == $phase->idEvent && $phase->idPhase == 1 && 
+												strtotime($phase->startTime) < strtotime(date("Y-m-d H:i:s")) && strtotime($phase->endTime) > strtotime(date("Y-m-d H:i:s"))){
+											echo '<option value="'. $event->idEvent .'">'.$event->eventName.'</option>';
+										}?>
+									<?php endforeach; ?>
 	        					<?php endforeach; ?>
 							</select>
 						</div>

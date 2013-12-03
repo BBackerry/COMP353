@@ -43,9 +43,11 @@ class Paper extends CI_Controller {
 	{
 		$this->load->model('event_model');
 		$this->load->model('user_model');
+		$this->load->model('phase_model');
 		
 		$query['events'] = $this->event_model->get_all_event();
 		$query['users'] = $this->user_model->get_all_users();
+		$query['phases'] = $this->phase_model->get_all_phase();
 		
 		$username = $this->session->userdata('idUser');
 		$query['username'] = $username;
