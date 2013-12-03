@@ -11,9 +11,11 @@ class Paper extends CI_Controller {
 	{	
 		$this->load->model('event_model');
 		$this->load->model('user_model');
+		$this->load->model('phase_model');
 		
 		$query['events'] = $this->event_model->get_all_event();
 		$query['users'] = $this->user_model->get_all_users();
+		$query['phases'] = $this->phase_model->get_all_phase();
 		
 		if($eventId != 0){
 			$this->load->model('eventTopic_model');
@@ -85,8 +87,22 @@ class Paper extends CI_Controller {
     
     	public function paperReview()
 	{
-		$this->load->view('header');
-		$this->load->view('paper_review');
+		$this->load->model('reviewAssignment_model');
+		
+		$username = $this->session->userdata('idUser');
+		
+		$query['assignments'] = $this->reviewAssignment_model->get_reviewAssignment_by_assignedTo($username);
+		$query['papers'] = $this->reviewAssignment_model->get_paper_assignedTo_user($username);
+		
+		if ($username) {
+			$this->load->view('header');
+			$this->load->view('paper_review', $query);
+		}
+		else {
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to review papers');
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
 	}
     
    	public function detailedPaperReview()
@@ -141,6 +157,7 @@ class Paper extends CI_Controller {
 					}
 					
 					for ($k = 0; $k < count($authors); $k++) {
+						if($authors[$k] == NULL) break;
 						$this->paperAuthor_model->create_paperAuthor($idpaper, $authors[$k]);
 					}
 					

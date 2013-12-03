@@ -1,67 +1,37 @@
-      <div class="container">
-     
-      <h3 class="panel-title"><b><br>Paper Review (My Allocated Papers)</b></h3>
-      </div>
-       <div class="panel-body">
-      <h3 class="panel-title">Please click on paper title to see detail information.</h3>
-            
-        <form role="form" class="form-horizontal">
-        <table border="1" class = "table">
-        <tr>
-        <div class="form-group">
-        <td><h4 class="panel-title"><b>id</b></h4></td>
-        <td><h4 class="panel-title"><b>Paper Title</b> </h4></td> 
-        <td><h4 class="panel-title"><b>New Version Updated </b></h4></td> 
-        <td><h4 class="panel-title"><b>New Comments </b></h4></td> 
-        <td><h4 class="panel-title"><b>Score </b></h4></td>
-        <td><h4 class="panel-title"><b>Confidence </b></h4></td> 
-        <td><h4 class="panel-title"><b>Controversial </b></h4></td> 
-        </div>
-        </tr>
-        
-        <tr>
-        <div class="form-group">
-        <td><h4 class="panel-title">1</h4></td>        
-        <td><a href="https://www.google.ca"> First Article</a></td> 
-        <td> - </td>
-        <td> - </td>
-        <td> 0.0 </td>
-        <td> 0.0 </td>
-        <td> - </td>
-        </div>
-        </tr>  
-        
-        <tr>
-        <div class="form-group">
-        <td><h4 class="panel-title">2</h4></td>        
-        <td><a href="https://www.google.ca"> Second Article</a></td> 
-        <td> - </td>
-        <td> - </td>
-        <td> 0.0 </td>
-        <td> 0.0 </td>
-        <td> - </td>
-        </div>
-        </tr> 
-        
-        <tr>
-        <div class="form-group">
-        <td><h4 class="panel-title">3</h4></td>        
-        <td><a href="https://www.google.ca"> third Article</a></td> 
-        <td> - </td>
-        <td> - </td>
-        <td> 0.0 </td>
-        <td> 0.0 </td>
-        <td> - </td>
-        </div>
-        </tr> 
-        </table>
-        </form>
-       
-       
-      </div>
-    </div>
-   
-
+     <div class="container">
+     	<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-body">
+      
+       				<h3 class="panel-title"><b><br>Papers To Review: </b></h3>
+       				<br />
+      				<h3 class="panel-title">Please click on a paper title to see detailed information.</h3>
+      				<br />
+      				<table border="1" class = "table">
+      					<tr>
+      						 <td><h4 class="panel-title"><b>Paper Title</b> </h4></td> 
+      						 <td><h4 class="panel-title"><b>Comments </b></h4></td>
+      						 <td><h4 class="panel-title"><b>Score </b></h4></td>
+      					</tr>
+					   	<?php if(isset($assignments)): ?>
+							<?php foreach($assignments as $row):?>
+								<?php foreach($papers as $paper):?>
+									<?php if($row->idPaper == $paper->idPaper): ?>
+										<tr>
+											<td><a href="<?= site_url('Paper/viewPaper') . '?idPaper=' . $row->idPaper ?>"><?= $paper->title ?></a></td>
+											<td><?= $row->comment ?></td>
+											<td><?= $row->score ?></td>
+										</tr>
+									<?php endif; ?>
+								<?php endforeach; ?>
+							<?php endforeach; ?>
+						<?php endif; ?>
+					</table>
+      			</div>
+    		</div>
+   		</div>
+	</div>
+	
     <div class="container">
       <!-- Example row of columns -->
 
