@@ -5,6 +5,8 @@
       
        				<h3 class="panel-title"><b><br>Papers To Review: </b></h3>
        				<br />
+      				<h3 class="panel-title">Only papers submitted to events that are currently in the review phase are shown.</h3>
+       				<br />
       				<h3 class="panel-title">Please click on a paper title to see detailed information.</h3>
       				<br />
       				<table border="1" class = "table">
@@ -14,15 +16,21 @@
       						 <td><h4 class="panel-title"><b>Score </b></h4></td>
       					</tr>
 					   	<?php if(isset($assignments)): ?>
-							<?php foreach($assignments as $row):?>
+							<?php foreach($assignments as $assignment):?>
 								<?php foreach($papers as $paper):?>
-									<?php if($row->idPaper == $paper->idPaper): ?>
-										<tr>
-											<td><a href="<?= site_url('Paper/detailedPaperReview') . '?idPaper=' . $row->idPaper ?>"><?= $paper->title ?></a></td>
-											<td><?= $row->comment ?></td>
-											<td><?= $row->score ?></td>
-										</tr>
-									<?php endif; ?>
+									<?php foreach($phases as $phase):?>
+										<?php if($phase->idEvent == $paper->idEvent && 
+											strtotime($phase->startTime) < strtotime(date("Y-m-d H:i:s")) && 
+												strtotime($phase->endTime) > strtotime(date("Y-m-d H:i:s"))): ?>
+											<?php if($assignment->idPaper == $paper->idPaper): ?>
+												<tr>
+													<td><a href="<?= site_url('Paper/detailedPaperReview') . '?idPaper=' . $assignment->idPaper ?>"><?= $paper->title ?></a></td>
+													<td><?= $assignment->comment ?></td>
+													<td><?= $assignment->score ?></td>
+												</tr>
+											<?php endif; ?>
+										<?php endif; ?>
+									<?php endforeach; ?>
 								<?php endforeach; ?>
 							<?php endforeach; ?>
 						<?php endif; ?>
