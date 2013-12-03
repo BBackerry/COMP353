@@ -24,7 +24,6 @@
 					<label for="startDate" class="col-lg-2 control-label">Start Date</label>
 					<div class="col-lg-10">
 						<input type="text" class="form-control" id="startDate" name="startDate" value="<?= $event->startDate ?>" data-validate="required">
-						<a href="javascript:show_calendar('document.editEvent.startDate', document.editEvent.startDate.value);"><img src="../assets/img/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the Start Time"></a> 
 					</div>
 				</div>
 				
@@ -32,11 +31,10 @@
 					<label for="endDate" class="col-lg-2 control-label">End Date</label>
 					<div class="col-lg-10">
 						<input type="text" class="form-control" id="endDate" name="endDate" value="<?= $event->endDate ?>" data-validate="required">
-						<a href="javascript:show_calendar('document.editEvent.endDate', document.editEvent.endDate.value);"><img src="../assets/img/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the End Time"></a>
 					</div>
 				</div>
 				
-				<div class="form-group" id ="selectTopics" name="topics">
+				<div class="form-group" id="selectTopics">
 					<label for="topics">Select Topics:</label>
 					<select multiple class="form-control" name="topics[]">
 						<?php foreach($topics as $t): ?>
@@ -45,7 +43,7 @@
 					</select>
 				</div>
 				
-				<div class="form-group" id="selectPhase" name="phases">
+				<div class="form-group" id="selectPhase">
 					<label for="phases">Select phases:</label>
 					<select multiple class="form-control" name="phases[]">
 						<?php foreach($phases as $p): ?>
@@ -54,7 +52,7 @@
 					</select>
 				</div>
 				
-				<div class="form-group" id="selectMeetings" name="meetings">
+				<div class="form-group" id="selectMeetings">
 					<label for="meetings">Select Meetings:</label>
 					<select multiple class="form-control" name="meetings[]">
 						<?php foreach($meetings as $m): ?>
@@ -62,6 +60,9 @@
 						<?php endforeach; ?>
 					</select>
 				</div>
+				
+				<input type="hidden" value="<?= $event->idEvent ?>" name="idEvent">
+				<button style="float:right;" class="btn btn-primary">Edit</button>
 			</form>
 		</div>
 		</div>
@@ -81,10 +82,19 @@
 		<script src="<?php echo base_url();?>/assets/js/vendor/bootstrap.min.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/plugins.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/main.js"></script>
-		<script language="JavaScript" src="../assets/js/ts_picker.js">
-		//Script by Denis Gritcyuk: tspicker@yahoo.com
-		//Submitted to JavaScript Kit (http://javascriptkit.com)
-		//Visit http://javascriptkit.com for this script
-	  </script>
+		<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+		<script src="../assets/js/datepicker.js"></script>
+		<script>
+			$("#startDate").datetimepicker({
+				top: 200,
+				dateFormat: "yy-mm-dd",
+				timeFormat: "hh:mm:ss"
+			});
+			$("#endDate").datetimepicker({
+				top: 200,
+				dateFormat: "yy-mm-dd",
+				timeFormat: "hh:mm:ss"
+			});
+		</script>
     </body>
 </html>

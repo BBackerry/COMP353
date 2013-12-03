@@ -118,10 +118,14 @@ function str2dt (str_datetime) {
 }
 function dt2dtstr (dt_datetime) {
 	return (new String (
-			dt_datetime.getDate()+"-"+(dt_datetime.getMonth()+1)+"-"+dt_datetime.getFullYear()+" "));
+			dt_datetime.getFullYear()+"-"+(dt_datetime.getMonth()+1)+"-"+dt_datetime.getDate()+" "));
 }
 function dt2tmstr (dt_datetime) {
-	return (new String (
-			dt_datetime.getHours()+":"+dt_datetime.getMinutes()+":"+dt_datetime.getSeconds()));
+	var hours = (dt_datetime.getHours() < 10) ? dt_datetime.getHours() : "0"+dt_datetime.getHours();
+	console.log("0" + dt_datetime.getHours());
+	var minutes = dt_datetime.getMinutes() < 10 ? dt_datetime.getMinutes() : "0"+dt_datetime.getMinutes();
+	var seconds = dt_datetime.getSeconds() < 10 ? dt_datetime.getSeconds() : "0"+dt_datetime.getSeconds();
+	return (new String(
+			hours+":"+minutes+":"+seconds));
 }
 

@@ -117,33 +117,43 @@ class Event extends CI_Controller {
 	
 	public function submitEditEvent()
 	{
-		$username = $this->session->userdata('idUser');	
-		$eventName = $this->input->get('eventName');
-		$eventDescription = $this->input->get('eventDescription');		
-		$startDate = date( "Y-m-d H:i:s", strtotime($this->input->get('startDate')));	
-		$endDate = date( "Y-m-d H:i:s", strtotime($this->input->get('endDate')));
-		$topics = $this->input->get('topics');
-		$phases = $this->input->get('phases');
-		$meetings = $this->input->get('meetings');
+		$username = $this->session->userdata('idUser');
+		$idEvent = $this->input->post('idEvent');
+		$eventName = $this->input->post('eventName');
+		$eventDescription = $this->input->post('eventDescription');		
+		$startDate = date( "Y-m-d H:i:s", strtotime($this->input->post('startDate')));	
+		$endDate = date( "Y-m-d H:i:s", strtotime($this->input->post('endDate')));
+		$topics = $this->input->post('topics');
+		$phases = $this->input->post('phases');
+		$meetings = $this->input->post('meetings');
 		
-		$this->event_model->update_event($startDate, $endDate, $username, $eventDescription, $eventName);
+		$this->event_model->update_event($idEvent, $startDate, $endDate, $username, $eventDescription, $eventName);
+		
 
-		$this->eventTopic_model->delete_eventTopic_by_event($idEvent);	//Remove previous associations
-		foreach($topics as $t)
-		{
-			$this->eventTopic_model->create_eventTopic($idEvent, $t);
+		$this->eventTopic_model->delete_eventTopic($idEvent);	//Remove previous associations
+		if(isset($topics) && !empty($topics)) {
+			foreach($topics as $t)
+			{
+				$this->eventTopic_model->create_eventTopic($idEvent, $t);
+			}
 		}
 		
 		$this->phase_model->delete_phase_by_event($idEvent);	//Remove previous associations
-		foreach($phases  as $p)
-		{ 
-			$this->eventTopic_model->create_phase($p, $idEvent, $startDate, $endDate, $username);
+		if(isset($phases) && !empty($phases)) {
+			foreach($phases  as $p)
+			{ 
+				$this->eventTopic_model->create_phase($p, $idEvent, $startDate, $endDate, $username);
+			}
 		}
 		
 		$this->meetingEvent_model->delete_meetingEvent_by_event($idEvent);	//Remove previous associations
-		foreach($meetings as $m)
-		{
-			$this->meetingEvent_model->create_meetingEvent($idEvent, $m);
+		if(isset($meetings) && !empty($meetings)) {
+			foreach($meetings as $m)
+			{
+				$this->meetingEvent_model->create_meetingEvent($idEvent, $m);
+			}
 		}
+		
+		$this->listEvents();
 	}
 }

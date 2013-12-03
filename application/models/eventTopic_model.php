@@ -35,6 +35,8 @@ class eventTopic_model extends CI_Model {
 		$query = $this->db->query($sql, array($idEvent)); 
 		return $query;
 	}
+	
+	
 
 }
 ?>
