@@ -16,7 +16,7 @@
 				<div class="form-group">
 					<label for="eventDescription" class="col-lg-2 control-label">Event Description</label>
 					<div class="col-lg-10">
-						<input type="text" class="form-control" id="eventDescription" name="eventDescription" value="<?= $event->eventDescription ?>" data-validate="required">
+						<textarea rows="5" class="form-control" id="eventDescription" name="eventDescription" value="<?= $event->eventDescription ?>" data-validate="required"></textarea>
 					</div>
 				</div>
 					
@@ -35,34 +35,40 @@
 				</div>
 				
 				<div class="form-group" id="selectTopics">
-					<label for="topics">Select Topics:</label>
-					<select multiple class="form-control" name="topics[]">
-						<?php foreach($topics as $t): ?>
-							<option value="<?= $t->idTopic ?>"><?= $t->topicName ?></option>
-						<?php endforeach; ?>
-					</select>
+					<label for="topics" class="col-lg-2 control-label">Select Topics:</label>
+					<div class="col-lg-10">
+						<select multiple class="form-control" name="topics[]" data-validate="required">
+							<?php foreach($topics as $t): ?>
+								<option value="<?= $t->idTopic ?>"><?= $t->topicName ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
 				</div>
 				
 				<div class="form-group" id="selectPhase">
-					<label for="phases">Select phases:</label>
-					<select multiple class="form-control" name="phases[]">
-						<?php foreach($phases as $p): ?>
-							<option value="<?= $p->idPhase ?>"><?= $p->phaseName ?></option>
-						<?php endforeach; ?>
-					</select>
+					<label for="phases" class="col-lg-2 control-label">Select phases:</label>
+					<div class="col-lg-10">
+						<select multiple class="form-control" name="phases[]" data-validate="required">
+							<?php foreach($phases as $p): ?>
+								<option value="<?= $p->idPhase ?>"><?= $p->phaseName ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
 				</div>
 				
 				<div class="form-group" id="selectMeetings">
-					<label for="meetings">Select Meetings:</label>
-					<select multiple class="form-control" name="meetings[]">
-						<?php foreach($meetings as $m): ?>
-							<option value="<?= $m->idMeeting ?>"><?= date("Y-m-d H:i:s", strtotime($m->startTime)) ?> - <?= date("Y-m-d H:i:s", strtotime($m->endTime)) ?></option>
-						<?php endforeach; ?>
-					</select>
+					<label for="meetings" class="col-lg-2 control-label">Select Meetings:</label>
+					<div class="col-lg-10">
+						<select multiple class="form-control" name="meetings[]" data-validate="required">
+							<?php foreach($meetings as $m): ?>
+								<option value="<?= $m->idMeeting ?>"><?= date("Y-m-d H:i:s", strtotime($m->startTime)) ?> - <?= date("Y-m-d H:i:s", strtotime($m->endTime)) ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
 				</div>
 				
 				<input type="hidden" value="<?= $event->idEvent ?>" name="idEvent">
-				<button style="float:right;" class="btn btn-primary">Edit</button>
+				<button style="float:right;" class="btn btn-success">Edit</button>
 			</form>
 		</div>
 		</div>
@@ -84,6 +90,7 @@
 		<script src="<?php echo base_url();?>/assets/js/main.js"></script>
 		<script src="//code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
 		<script src="../assets/js/datepicker.js"></script>
+		<script src="<?php echo base_url();?>/assets/js/vendor/verify.notify.min.js"></script>
 		<script>
 			$("#startDate").datetimepicker({
 				dateFormat: "yy-mm-dd",
