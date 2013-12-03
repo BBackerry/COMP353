@@ -74,7 +74,8 @@
                         <li><a href="<?php echo site_url('Meeting/createMeeting');?>">Create Meeting</a></li>  
                         <li><a href="#">Edit Meeting</a></li>
                     </ul>
-                </li>             
+                </li>     
+		<li><a href="<?php echo site_url('Admin/manageUsers'); ?>">Manage Users</a></li>        
             <?php } ?>
             
             <?php if ($this->session->userdata('isCommitteeMember')) { ?>

@@ -1,5 +1,5 @@
 <?php
-class TopicHierarchy_model extends CI_Model {
+class topicHierarchy_model extends CI_Model {
 
 	function get_topicHierarchy_of_topic($idTopic)
 	{

@@ -457,11 +457,11 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `comp353`.`experttInTopic`
+-- Table `comp353`.`expertInTopic`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `comp353`.`experttInTopic` ;
+DROP TABLE IF EXISTS `comp353`.`expertInTopic` ;
 
-CREATE TABLE IF NOT EXISTS `comp353`.`experttInTopic` (
+CREATE TABLE IF NOT EXISTS `comp353`.`expertInTopic` (
   `idUser` VARCHAR(45) NOT NULL,
   `idTopic` INT NOT NULL,
   PRIMARY KEY (`idUser`, `idTopic`),
@@ -530,6 +530,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'Computer Science &amp; Engineering');
