@@ -196,7 +196,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `comp353`.`topic` ;
 
 CREATE TABLE IF NOT EXISTS `comp353`.`topic` (
-  `idTopic` INT NOT NULL,
+  `idTopic` INT NOT NULL AUTO_INCREMENT,
   `topicName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idTopic`),
   UNIQUE INDEX `topicName_UNIQUE` (`topicName` ASC))
@@ -530,7 +530,6 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
-
 
 INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'Computer Science &amp; Engineering');
