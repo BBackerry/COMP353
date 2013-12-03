@@ -117,10 +117,12 @@ class Paper extends CI_Controller {
 			$idPaper = $this->input->get('idPaper');
 			
 			$this->reviewAssignment_model->update_reviewAssignment($username, $idPaper, $comment, $score/10);
-			$param['successMessages'][0] = "Your review has been successfully saved.";
+			$query['successMessages'][0] = "Your review has been saved successfully.";
+			$query['assignments'] = $this->reviewAssignment_model->get_reviewAssignment_by_assignedTo($username);
+			$query['papers'] = $this->reviewAssignment_model->get_paper_assignedTo_user($username);
 			
-			$this->load->view('header');
-			$this->load->view('review_submitted');
+			$this->load->view('header', $query);
+			$this->load->view('paper_review');
 		}
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in to review papers');
@@ -200,8 +202,11 @@ class Paper extends CI_Controller {
 						$this->paperAuthor_model->create_paperAuthor($idpaper, $authors[$k]);
 					}
 					
-					$this->load->view('header');
-					$this->load->view('paper_submitted_successfully');
+					$query['papers'] = $this->paper_model->get_paper_by_user($username);
+					$query['successMessages'][0] = "Your paper has been submitted successfully.";
+					
+					$this->load->view('header', $query);
+					$this->load->view('submitted_papers', $query);
 				}
 				else {
 					$error = 'Your paper could not be created. Please try again.';

@@ -27,6 +27,7 @@
 										<?php if ($event->idEvent == $phase->idEvent && $phase->idPhase == 1 && 
 												strtotime($phase->startTime) < strtotime(date("Y-m-d H:i:s")) && strtotime($phase->endTime) > strtotime(date("Y-m-d H:i:s"))){
 											echo '<option value="'. $event->idEvent .'">'.$event->eventName.'</option>';
+											break;
 										}?>
 									<?php endforeach; ?>
 	        					<?php endforeach; ?>
