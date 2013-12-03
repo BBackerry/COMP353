@@ -22,10 +22,10 @@ class Phase_model extends CI_Model {
 		return $query->result();
 	}
 
-	function create_phase($idPhase, $idEvent, $startTime, $endTime, $createdBy)
+	function create_phase($idPhase, $idEvent, $startTime, $endTime)
 	{
-		$sql = "INSERT INTO phase VALUES( ?, ?, ?, ?, ?)";
-		$query = $this->db->query($sql, array($idPhase, $idEvent, $startTime, $endTime, $createdBy)); 
+		$sql = "INSERT INTO phase VALUES( ?, ?, ?, ?)";
+		$query = $this->db->query($sql, array($idPhase, $idEvent, $startTime, $endTime)); 
 		return $query;
 	}
 

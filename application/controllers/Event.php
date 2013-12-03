@@ -47,24 +47,37 @@ public function __construct()
 		$idMeeting = $this->input->get('meetingIDs');
 		$idTopic = $this->input->get('eventTopics');
 		$idPhase = $this->input->get('phaseTypes');
-					
+		$firstStartDate = date( "Y-m-d H:i:s", strtotime($this->input->get('firstStartDate')));	
+		$firstEndDate = date( "Y-m-d H:i:s", strtotime($this->input->get('firstEndDate')));
+		$secondStartDate = date( "Y-m-d H:i:s", strtotime($this->input->get('secondStartDate')));	
+		$secondEndDate = date( "Y-m-d H:i:s", strtotime($this->input->get('secondEndDate')));
+		$thirdStartDate = date( "Y-m-d H:i:s", strtotime($this->input->get('thirdStartDate')));	
+		$thirdEndDate = date( "Y-m-d H:i:s", strtotime($this->input->get('thirdEndDate')));
+		$fourthStartDate = date( "Y-m-d H:i:s", strtotime($this->input->get('fourthStartDate')));	
+		$fourthEndDate = date( "Y-m-d H:i:s", strtotime($this->input->get('fourthEndDate')));
+		$fifthStartDate = date( "Y-m-d H:i:s", strtotime($this->input->get('fifthStartDate')));	
+		$fifthEndDate = date( "Y-m-d H:i:s", strtotime($this->input->get('fifthEndDate')));		
+		
 		$this->event_model->create_event($startDate, $endDate, $username, $eventDescription, $eventName);
 		$idEvent = mysql_insert_id();
+		
+		$this->phase_model->create_phase(1, $idEvent, $firstStartDate, $firstEndDate);
+		$this->phase_model->create_phase(2, $idEvent, $secondStartDate, $secondEndDate);
+		$this->phase_model->create_phase(3, $idEvent, $thirdStartDate, $thirdEndDate);
+		$this->phase_model->create_phase(4, $idEvent, $fourthStartDate, $fourthEndDate);
+		$this->phase_model->create_phase(5, $idEvent, $fifthStartDate, $fifthEndDate);
 				
 		foreach($idMeeting as $m)
 		{
 			$this->meetingEvent_model->create_meetingEvent($idEvent, $m);
 		}
-		
-		foreach($eventTopics as $t)
+		//echo $idTopic;
+		//die();
+		foreach($idTopic as $t)
 		{
 			$this->eventTopic_model->create_eventTopic($idEvent, $t);
 		}
-		
-		foreach($idPahse  as $p)
-		{ 
-			$this->eventTopic_model->create_phase($p, $idEvent, $startDate, $endDate, $username);
-		}
+			
 		
 		$this->load->view('header');
 		$this->load->view('event_page');	
