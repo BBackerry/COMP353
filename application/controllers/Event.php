@@ -52,7 +52,17 @@ class Event extends CI_Controller {
 		}
 	}
 	
-     
+      public function viewEvent()
+	 {
+		$idEvent = $this->input->get('idEvent');
+		$param['eventDetail']= $this->event_model->get_all_event();
+		$param['meetingDetail']= $this->meeting_model->get_all_meeting();
+		$param['EventTopicDetail']= $this->topic_model->get_all_topic();
+		$param['phaseDetail']= $this->phase_model->get_all_phase();
+		$param['phaseTypeDetail']= $this->phaseType_model->get_all_phaseType();
+		
+		$this->load->view('event_page', $param);
+	 }
 	public function submitedEvent()
 	{
 		$username = $this->session->userdata('idUser');
