@@ -18,7 +18,7 @@
 								<?php foreach($papers as $paper):?>
 									<?php if($row->idPaper == $paper->idPaper): ?>
 										<tr>
-											<td><a href="<?= site_url('Paper/viewPaper') . '?idPaper=' . $row->idPaper ?>"><?= $paper->title ?></a></td>
+											<td><a href="<?= site_url('Paper/detailedPaperReview') . '?idPaper=' . $row->idPaper ?>"><?= $paper->title ?></a></td>
 											<td><?= $row->comment ?></td>
 											<td><?= $row->score ?></td>
 										</tr>

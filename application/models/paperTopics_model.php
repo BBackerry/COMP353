@@ -14,7 +14,14 @@ class PaperTopics_model extends CI_Model {
 		$query = $this->db->query($sql); 
 		return $query->result();
 	}
-
+	
+	function get_topic_by_paper($idPaper)
+	{
+		$sql = "SELECT * FROM topic t WHERE EXISTS(SELECT * FROM papertopics p WHERE p.idTopic = t.idTopic AND p.idPaper = ?) ";
+		$query = $this->db->query($sql, array($idPaper)); 
+		return $query->result();
+	}
+	
 	function create_paperTopics($idPaper, $idTopic)
 	{
 		$sql = "INSERT INTO paperTopics VALUES( ?, ? )";

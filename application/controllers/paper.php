@@ -85,7 +85,7 @@ class Paper extends CI_Controller {
 		$this->load->view('search_papers');
 	}
     
-    	public function paperReview()
+    public function paperReview()
 	{
 		$this->load->model('reviewAssignment_model');
 		
@@ -105,10 +105,48 @@ class Paper extends CI_Controller {
 		}
 	}
     
+	public function submitReview()
+	{
+		$this->load->model('reviewAssignment_model');
+		
+		$username = $this->session->userdata('idUser');
+		
+		if ($username){
+			$score = $this->input->post('score');
+			$comment = $this->input->post('comment');
+			$idPaper = $this->input->get('idPaper');
+			
+			$this->reviewAssignment_model->update_reviewAssignment($username, $idPaper, $comment, $score);
+			
+			$this->load->view('header');
+			$this->load->view('review_submitted');
+		}
+		else {
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to review papers');
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
+	}
+	
    	public function detailedPaperReview()
 	{
-		$this->load->view('header');
-		$this->load->view('detailed_paper_review');
+		$this->load->model('paper_model');
+		$this->load->model('paperTopics_model');
+		
+		$username = $this->session->userdata('idUser');
+		$idPaper = $this->input->get('idPaper');
+		$query['paper'] = $this->paper_model->get_paper($idPaper);
+		$query['topics'] = $this->paperTopics_model->get_topic_by_paper($idPaper);
+		
+		if ($username) {
+			$this->load->view('header');
+			$this->load->view('detailed_paper_review',$query);
+		}
+		else {
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to review papers');
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
 	}
 
 	public function submitted()

@@ -50,10 +50,10 @@ class ReviewAssignment_model extends CI_Model {
 		return $query;
 	}
 
-	function update_reviewAssignment($idAssignedBy, $idAssignedTo, $idPaper, $comment, $score)
+	function update_reviewAssignment($idAssignedTo, $idPaper, $comment, $score)
 	{
-		$sql = "UPDATE reviewAssignment SET comment = ?, score = ? WHERE idAssignedBy = ? AND idAssignedTo = ? AND idPaper = ? ";
-		$query = $this->db->query($sql, array( $comment, $score, $idAssignedBy, $idAssignedTo, $idPaper)); 
+		$sql = "UPDATE reviewAssignment SET comment = ?, score = ? WHERE idAssignedTo = ? AND idPaper = ? ";
+		$query = $this->db->query($sql, array( $comment, $score, $idAssignedTo, $idPaper)); 
 		return $query;
 	}
 
