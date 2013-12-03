@@ -126,7 +126,7 @@ class Paper extends CI_Controller {
 			$comment = $this->input->post('comment');
 			$idPaper = $this->input->get('idPaper');
 			
-			$this->reviewAssignment_model->update_reviewAssignment($username, $idPaper, $comment, $score/10);
+			$this->reviewAssignment_model->update_reviewAssignment($username, $idPaper, $comment, $score);
 			$query['successMessages'][0] = "Your review has been saved successfully.";
 			$query['assignments'] = $this->reviewAssignment_model->get_reviewAssignment_by_assignedTo($username);
 			$query['papers'] = $this->reviewAssignment_model->get_paper_assignedTo_user($username);
@@ -153,11 +153,25 @@ class Paper extends CI_Controller {
 	{
 		$this->load->model('paper_model');
 		$this->load->model('paperTopics_model');
+		$this->load->model('event_model');
+		$this->load->model('phase_model');
 		
 		$username = $this->session->userdata('idUser');
 		$idPaper = $this->input->get('idPaper');
 		$query['paper'] = $this->paper_model->get_paper($idPaper);
 		$query['topics'] = $this->paperTopics_model->get_topic_by_paper($idPaper);
+		$events = array();
+		$phases = array();
+		
+		foreach($query['paper'] as $paper):
+			$event = $this->event_model->get_event($paper->idEvent);
+			array_push($events, $event[0]);
+			$phase = $this->phase_model->get_phase(4, $paper->idEvent);
+			array_push($phases, $phase[0]);
+		endforeach;
+		
+		$query['events'] = $events;
+		$query['phases'] = $phases;
 		
 		if ($this->session->userdata('isCommitteeMember')){
 			$this->load->view('header');

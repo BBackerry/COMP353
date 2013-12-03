@@ -19,7 +19,17 @@
 		            	<?php foreach($topics as $topic):?>
 		            		<p><?= $topic->topicName ?></p> 
 		            	<?php endforeach; ?>
-	            	
+	            		
+		            	<label for="eventName" class="col-lg-2 control-label">Submitted to Event:</label> 
+		            	<?php foreach($events as $event):?>
+		            		<p><?= $event->eventName ?></p> 
+		            	<?php endforeach; ?>
+		            	
+		            	<label for="reviewDeadline" class="col-lg-2 control-label">Review Deadline:</label> 
+		            	<?php foreach($phases as $phase):?>
+		            		<p><?= $phase->endTime ?></p> 
+		            	<?php endforeach; ?>
+		            	
 			            <br />
 		            	<h3 class="panel-title"><b>My Review</b></h3>
 		            	<br />
