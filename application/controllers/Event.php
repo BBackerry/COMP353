@@ -2,7 +2,7 @@
 
 class Event extends CI_Controller {
 
-public function __construct()
+	public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('event_model');
@@ -61,17 +61,55 @@ public function __construct()
 			$this->eventTopic_model->create_eventTopic($idEvent, $t);
 		}
 		
-		foreach($idPahse  as $p)
+		foreach($idPhase  as $p)
 		{ 
 			$this->eventTopic_model->create_phase($p, $idEvent, $startDate, $endDate, $username);
 		}
 		
 		$this->load->view('header');
-		$this->load->view('event_page');	
-				
-		
+		$this->load->view('event_page');
 	}
-		
-			
 	
+	public function editEvent()
+	{
+		$idEvent = $this->input->get('idEvent');
+		$data['event'] = $this->event_model->get_event($idEvent);
+		$data['meetings']= $this->meeting_model->get_all_meeting();
+		$data['topics']= $this->topic_model->get_all_topic();
+		$data['phases']= $this->phaseType_model->get_all_phaseType();
+		$this->load->view('header');
+		$this->load->view('event_edit', $data);
+	}
+	
+	public function submitEditEvent
+	{
+		$username = $this->session->userdata('idUser');	
+		$eventName = $this->input->get('eventName');
+		$eventDescription = $this->input->get('eventDescription');		
+		$startDate = date( "Y-m-d H:i:s", strtotime($this->input->get('startDate')));	
+		$endDate = date( "Y-m-d H:i:s", strtotime($this->input->get('endDate')));
+		$topics = $this->input->get('topics');
+		$phases = $this->input->get('phases');
+		$meetings = $this->input->get('meetings');
+		
+		$this->event_model->update_event($startDate, $endDate, $username, $eventDescription, $eventName);
+
+		$this->eventTopic_model->delete_eventTopic_by_event($idEvent);	//Remove previous associations
+		foreach($topics as $t)
+		{
+			$this->eventTopic_model->create_eventTopic($idEvent, $t);
+		}
+		
+		$this->phase_model->delete_phase_by_event($idEvent);	//Remove previous associations
+		foreach($phases  as $p)
+		{ 
+			$this->eventTopic_model->create_phase($p, $idEvent, $startDate, $endDate, $username);
+		}
+		
+		$this->meetingEvent_model->delete_meetingEvent_by_event($idEvent);	//Remove previous associations
+		foreach($meetings as $m)
+		{
+			$this->meetingEvent_model->create_meetingEvent($idEvent, $m);
+		}
+	}
 }

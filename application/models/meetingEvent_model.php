@@ -28,6 +28,13 @@ class MeetingEvent_model extends CI_Model {
 		$query = $this->db->query($sql, array($idEvent, $idMeeting)); 
 		return $query;
 	}
+	
+	function delete_meetingEvent_by_event($idEvent)
+	{
+		$sql = "DELETE FROM meetingEvent WHERE idEvent= ?";
+		$query = $this->db->query($sql, array($idEvent)); 
+		return $query;
+	}
 
 }
 ?>

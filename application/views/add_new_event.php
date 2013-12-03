@@ -20,7 +20,7 @@
         
         <div class="form-group">
         <label>Event Description: </label>
-        <input type="text"  class="form-control" name ="eventDescription" style= "height:200px;" id= "eventDescription">
+        <input type="textarea" rows="5" class="form-control" name ="eventDescription" style= "height:200px;" id= "eventDescription">
         </div>
    
         <div class="form-group">

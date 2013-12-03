@@ -42,6 +42,13 @@ class Phase_model extends CI_Model {
 		$query = $this->db->query($sql, array($idPhase, $idEvent)); 
 		return $query;
 	}
+	
+	function delete_phase_by_event($idEvent)
+	{
+		$sql = "DELETE FROM phase WHERE idEvent = ?";
+		$query = $this->db->query($sql, array($idEvent)); 
+		return $query;
+	}
 
 }
 ?>
