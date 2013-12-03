@@ -7,7 +7,14 @@ class InterestInTopic_model extends CI_Model {
 		$query = $this->db->query($sql, array($idUser)); 
 		return $query->result();
 	}
-
+	
+	function get_Topic_by_interested_user($idUser)
+	{
+		$sql = "SELECT * FROM topic t WHERE EXISTS(SELECT * FROM interestInTopic i WHERE i.idTopic = t.idTopic AND i.idUser = ?) ";
+		$query = $this->db->query($sql, array($idUser)); 
+		return $query->result();
+	}
+	
 	function get_all_interestInTopic()
 	{
 		$sql = "SELECT * FROM interestInTopic ";

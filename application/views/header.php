@@ -62,8 +62,9 @@
 			
             <?php if ($this->session->userdata('isAdmin')) { ?>
                 <li class="dropdown">
-                    <a href="<?php echo site_url('Event/viewEvents'); ?>" class="dropdown-toggle" data-toggle="dropdown">Event<b class="caret"></b></a>
+                    <a href="<?php echo site_url('Event/viewEvents'); ?>" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
                     <ul class="dropdown-menu">
+                    	<li><a href="<?php echo site_url('Event/listEvents');?>">View Events</a></li>
                         <li><a href="<?php echo site_url('Event/addEvent');?>">Create Event</a></li>
                         <li><a href="#">Edit Event</a></li>
                     </ul>
