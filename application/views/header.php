@@ -66,7 +66,6 @@
                     <ul class="dropdown-menu">
                     	<li><a href="<?php echo site_url('Event/listEvents');?>">View Events</a></li>
                         <li><a href="<?php echo site_url('Event/addEvent');?>">Create Event</a></li>
-                        <li><a href="#">Edit Event</a></li>
                     </ul>
                 </li>
                 <li class="dropdown">
