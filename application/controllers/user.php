@@ -58,18 +58,22 @@ class User extends CI_Controller {
             $query = $this->role_model->get_role_of_user($username);
 			$this->session->set_userdata('isAdmin', false);
             $this->session->set_userdata('isProgramChair', false);
+            $this->session->set_userdata('isCommitteeMember', false);
 			foreach ($query as $row)
 			{
 				if($row->idPosition == 1 & $row->idEvent == 1)
 				$this->session->set_userdata('isAdmin', true);
                 if($row->idPosition == 2)
                 $this->session->set_userdata('isProgramChair', true);
+                if($row->idPosition == 3)
+                $this->session->set_userdata('isCommitteeMember', true);
 			}
         }      
 		else {
 			$this->session->set_userdata('idUser', false);
             $this->session->set_userdata('isAdmin', false);
             $this->session->set_userdata('isProgramChair', false);
+            $this->session->set_userdata('isCommitteeMember', false);
 		}
 		redirect('Home', 'index'); 
 	}
@@ -112,6 +116,7 @@ class User extends CI_Controller {
 		$this->session->set_userdata('idUser', false);
         $this->session->set_userdata('isAdmin', false);
         $this->session->set_userdata('isProgramChair', false);
+        $this->session->set_userdata('isCommitteeMember', false);
 		redirect('Home', 'index');
 	}
 	

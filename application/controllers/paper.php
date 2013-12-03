@@ -94,12 +94,12 @@ class Paper extends CI_Controller {
 		$query['assignments'] = $this->reviewAssignment_model->get_reviewAssignment_by_assignedTo($username);
 		$query['papers'] = $this->reviewAssignment_model->get_paper_assignedTo_user($username);
 		
-		if ($username) {
+		if ($this->session->userdata('isCommitteeMember')) {
 			$this->load->view('header');
 			$this->load->view('paper_review', $query);
 		}
 		else {
-			$errors['errorMessages'] = array('Sorry but you have to be logged in to review papers');
+			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to review papers');
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}
@@ -111,7 +111,7 @@ class Paper extends CI_Controller {
 		
 		$username = $this->session->userdata('idUser');
 		
-		if ($username){
+		if ($this->session->userdata('isCommitteeMember')){
 			$score = $this->input->post('score');
 			$comment = $this->input->post('comment');
 			$idPaper = $this->input->get('idPaper');
@@ -125,7 +125,7 @@ class Paper extends CI_Controller {
 			$this->load->view('paper_review');
 		}
 		else {
-			$errors['errorMessages'] = array('Sorry but you have to be logged in to review papers');
+			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to review papers');
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}
@@ -141,12 +141,12 @@ class Paper extends CI_Controller {
 		$query['paper'] = $this->paper_model->get_paper($idPaper);
 		$query['topics'] = $this->paperTopics_model->get_topic_by_paper($idPaper);
 		
-		if ($username) {
+		if ($this->session->userdata('isCommitteeMember')){
 			$this->load->view('header');
 			$this->load->view('detailed_paper_review',$query);
 		}
 		else {
-			$errors['errorMessages'] = array('Sorry but you have to be logged in to review papers');
+			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to review papers');
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}
