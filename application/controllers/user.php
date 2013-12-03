@@ -29,6 +29,24 @@ class User extends CI_Controller {
 		}
 	}
     
+	public function interests()
+	{
+		$username = $this->session->userdata('idUser');
+		
+		$this->load->model('interestInTopic_model');
+		$query['interests'] = $this->interestInTopic_model->get_Topic_by_interested_user($username);
+		
+		if ($username) {
+			$this->load->view('header');
+			$this->load->view('user_interests', $query);
+		}
+		else {
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
+	}
+	
 	public function login()
 	{
 		$username = $this->input->get('username');
