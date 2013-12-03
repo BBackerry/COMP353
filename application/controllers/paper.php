@@ -133,7 +133,7 @@ class Paper extends CI_Controller {
 			}
 			
 			if (empty($errors['errorMessages'])) {
-				$create_paper_check = $this->paper_model->create_paper($title, $abstract, $submittedby, mysql_real_escape_string(file_get_contents($file["tmp_name"])), $keywords, $idEvent);
+				$create_paper_check = $this->paper_model->create_paper($title, $abstract, $submittedby, addslashes(file_get_contents($file["tmp_name"])), $keywords, $idEvent);
 				if($create_paper_check) {
 					$idpaper = mysql_insert_id();
 					for ($j = 0; $j < count($subjects); $j++) {
@@ -164,6 +164,16 @@ class Paper extends CI_Controller {
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}
+	}
+	
+	public function viewPaper()
+	{
+		$idEvent = $this->input->get('idPaper');
+		$this->load->model('paper_model');
+		$paper = $this->paper_model->get_paper($idEvent)[0];
+		$blob = $paper->document;
+		$data = array('paperData' => $blob);
+		$this->load->view('view_paper', $data);
 	}
 
 	public function getSearchDetails()

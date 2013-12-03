@@ -2,29 +2,28 @@
 	<div class="row">
 		<div class="panel panel-default">
 			<div class="panel-body">
-			
+				
+				<h3>My Paper List:</h3>
+				<?php if(isset($papers)): ?>
+					<?php foreach($papers as $row):?>
+						<h2><a href="<?= site_url('Paper/viewPaper') . '?idPaper=' . $row->idPaper ?>"><?= $row->title ?></a></h2>
+						Abstract: <?= $row->abstract ?><br />
+						Keywords: <?= $row->keywords ?><br />
+						Submitted to Event: (SHOULD BE LINK TO VIEW EVENT PAGE) <?= $row->idEvent ?><br />
+						Decision: <br />
+						Comments: <br />
+						<br />
+					<?php endforeach; ?>
+				<?php endif; ?>
+				
 				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submit/') ?>">
-					<button style="float:right;" class="btn btn-primary">Submit New Paper</button>
+				<button style="float:right;" class="btn btn-primary">Submit New Paper</button>
 				</form>
 				
-      				<h3>My Paper List:</h3>
-      				
-					<?php if(isset($papers)): ?>
-						<?php foreach($papers as $row):?>
-							<h4>Title: <?= $row->title ?></h4>
-							<h5>Abstract: <?= $row->abstract ?></h5>
-							<h5>Keywords: <?= $row->keywords ?></h5>
-							<h5>Submitted to Event: </h5>
-							<h5>Decision: </h5>
-							<h5>Comments: </h5>
-							<br />
-						<?php endforeach; ?>
-					<?php endif; ?>
-        
-      			</div>
-    		</div>
+      		</div>
+    	</div>
 	</div>
-      </div>
+    </div>
 
     <div class="container">
       <!-- Example row of columns -->
