@@ -109,18 +109,6 @@
 		<script src="<?php echo base_url();?>/assets/js/main.js"></script>
 		<script src="<?php echo base_url();?>/assets/js/vendor/verify.notify.min.js"></script>
 		<script>
-			$("#username").blur(function () {
-				$.ajax({
-					url: "<?= site_url('User/validate_user_registration') ?>",
-					data: { username: $("#username").val() },
-					type: 'POST',
-					success: function(opt) {
-						window.userNotExist = opt;
-					}
-				});
-			});
-		</script>
-		<script>
 			$.verify.addRules({
 				userNotExist: function(r) {
 					r.prompt(r.field, "Checking username...");

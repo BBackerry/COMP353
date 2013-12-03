@@ -4,28 +4,43 @@ class User extends CI_Controller {
 	
 	public function profile()
 	{
-		$this->load->model('user_model');
-		$this->load->model('country_model');
-		$this->load->model('organization_model');
-		$this->load->model('department_model');
-		
 		$username = $this->session->userdata('idUser');
-		$query['user'] = $this->user_model->get_user($username);
-		
-		foreach($query['user'] as $row):
-			$query['country'] = $this->country_model->get_country($row->country);
-			$query['organization'] = $this->organization_model->get_organization($row->organization);
-			$query['department'] = $this->department_model->get_department($row->department);
-		endforeach;
-		
 		if ($username) {
+			$this->load->model('user_model');
+			$this->load->model('country_model');
+			$this->load->model('organization_model');
+			$this->load->model('department_model');
+			
+			$user = $this->user_model->get_user($username)[0];
+			$data['user'] = $user;
+			$data['oldCountryId'] = $this->country_model->get_country($user->country)[0]->idCountry;
+			$data['oldOrganizationId'] = $this->organization_model->get_organization($user->organization)[0]->idOrganization;
+			$data['oldDepartmentId'] = $this->department_model->get_department($user->department)[0]->idDepartment;
+			
+			$data['countries'] = $this->country_model->get_all_country();
+			$data['organizations'] = $this->organization_model->get_all_organization();
+			$data['departments'] = $this->department_model->get_all_department();
+			
 			$this->load->view('header');
-			$this->load->view('profile', $query);
+			$this->load->view('user_profile', $data);
 		}
 		else {
-			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to edit your profile');
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
+		}
+	}
+	
+	public function update_profile()
+	{
+		$this->load->model('user_model');
+		$username = $this->session->userdata('idUser');
+		$form = $this->input->post();
+		if ($this->user_model->update_user($username, $form['password'], $form['firstName'], $form['lastName'], $form['email'], (int)$form['country'], (int)$form['organization'], (int)$form['department'])) {
+			$this->profile();
+		}
+		else {
+			redirect('Home', 'index');
 		}
 	}
     
@@ -138,6 +153,15 @@ class User extends CI_Controller {
 			$check = $this->user_model->get_user($_POST['username']);
 			if (empty($check)) { echo 1; }
 			else echo 0;
+		}
+	}
+	
+	public function verify_password()
+	{
+		if (isset($_POST['password'])) {
+			$this->load->model('user_model');
+			$password = $this->user_model->get_user($this->session->userdata('idUser'))[0]->password;
+			echo ($_POST['password'] == $password ? 1 : 0);
 		}
 	}
 }

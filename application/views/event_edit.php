@@ -1,9 +1,10 @@
 	<div class="container">
 	<div class="row">
 		<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3 class="panel-title">Edit Event</h3>
+		</div>
 		<div class="panel-body">
-			<h2>Edit Event</h2>
-			
 			<form role="form" class="form-horizontal" name="editEvent" method="post" action="<?php echo site_url('Event/submitEditEvent/') ?>">
 
 				<div class="form-group">
