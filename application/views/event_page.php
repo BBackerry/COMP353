@@ -1,79 +1,73 @@
       <div class="container">
 	  <div class="row">
-      <br>
-      <h3>Event Page</h3>
-      <div class="panel-body">
+	  <div class="panel-body">
 	  
 		<div class="panel panel-default">
-					
-      				 
-		<form role="form" class="form-horizontal" name="viewEvent" action="<?php echo site_url('Event/editEvent/') ?>" >
-       
+      
+      <h3>Event Page</h3>     
 		
-		<?php foreach($eventDetail as $row): ?> 
+		
+		<?php foreach($getEvent as $row): ?> 
 			
         <div class="form-group">	 
-			<label><b>Event Title: </b><br> <?= $row->eventName ?> </label>		
+			<label class="col-lg-2 control-label">Event Title: </label><p><?= $row->eventName ?></p>
         </div>                 
         
         <div class="form-group">
-			<label><b> Event Description: </b><br><?= $row->eventDescription ?></label>
+			<label class="col-lg-2 control-label"> Event Description: </label><p><?= $row->eventDescription ?></p>
         </div>
    
          <div class="form-group">
-			<label><b>Created By: </b><?= $row->createdBy ?></label>
+			<label class="col-lg-2 control-label">Created By: </label><p><?= $row->createdBy ?></p>
         </div>                
          
         <div class="form-group">
-			<label><b>Start Date: </b><?= $row->startDate ?></label>
+			<label class="col-lg-2 control-label">Start Date: </label><p><?= $row->startDate ?></p>
         </div>
        
         <div class="form-group">
-        <label><b>End Date: </b><?= $row->endDate ?></label>               
+        <label class="col-lg-2 control-label">End Date: </label><p><?= $row->endDate ?></p>               
         </div>          
         <?php endforeach; ?>
        
 	   <?php foreach($EventTopicDetail as $row): ?> 
 			<div class="form-group">	 
-				<label><b>Event Topic(s): </b> <br><?= $row->topicName?> </label>		
+				<label class="col-lg-2 control-label">Event Topic(s):</label><p><?= $row->topicName?> </p>		
 			</div> 	
-			<br>			
+						
 		<?php endforeach; ?>
 	
 		
-		 <?php foreach($meetingDetail as $row): ?> 
+		 <?php foreach($meetings as $row): ?> 
 			<div class="form-group">	 
-				<label><b>Event Meeting(s): </b> <br>
-					<?php echo date( "Y-m-d H:i:s", strtotime($row->startTime))?> - <?php echo date( "Y-m-d H:i:s", strtotime($row->endTime)) ?>			
-				</label>	
+				<label class="col-lg-2 control-label">Event Meeting(s): </label>
+					<p><?php echo date( "Y-m-d H:i:s", strtotime($row->startTime))?> - <?php echo date( "Y-m-d H:i:s", strtotime($row->endTime)) ?></p>					
 			</div> 
-			   <br>
+			<br>
 		<?php endforeach; ?>
-		
+		<label class="col-lg-2 control-label">Phase Date Details: </label> <br/><br/>
 		<?php foreach($phaseTypeDetail as $row): ?>
-		<div class="form-group">
-			<label><b>Phase Date Details: </b></label> 
-			<label> Phase<?php echo $row->idPhase?> </label>
-			<label>:</label>
-			<label> <?php echo $row->phaseName?> </label>
-			
-				</div> 
-			   
-		<?php endforeach; ?>
-			
-		 <?php foreach($phaseDetail as $row): ?> 
-		  
-			<div class="form-group">			
-								
-				<label>Phase Start Date: <?php echo date( "Y-m-d H:i:s", strtotime($row->startTime))?> </label>
-				<label>Phase End Date: <?php echo date( "Y-m-d H:i:s", strtotime($row->endTime)) ?></label>
+		
+			<?php foreach($phaseDetail as $phase): ?> 
+				<?php if($row->idPhase == $phase->idPhase):?>
 					
-			</div> 
-			   
+						
+						<label class="col-lg-2 control-label"> Phase <?php echo $row->idPhase?>: <?php echo $row->phaseName?> </label>
+							<br>
+							<br>							
+						<label class="col-lg-2 control-label"> Start Date:</label><p><?php echo date( "Y-m-d H:i:s", strtotime($phase->startTime))?> </p>
+						<label class="col-lg-2 control-label"> End Date:</label> <p><?php echo date( "Y-m-d H:i:s", strtotime($phase->endTime)) ?></p>
+						
+				 
+				<?php endif; ?>				
+			<?php endforeach; ?>	   
 		<?php endforeach; ?>
 
 		
-		
+					
+      				 
+		<form role="form" class="form-horizontal" name="viewEvent" action="<?php echo site_url('Event/editEvent/') ?>" >
+       
 		<button style="float:right;" class="btn btn-primary">Edit Event</button>
 		
 		</form>

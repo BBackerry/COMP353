@@ -7,7 +7,7 @@
 					<ul class="list-group">
 					<?php if(isset($events)): ?>
 						<?php foreach($events as $row):?>
-							<li class="list-group-item"><a href="<?= site_url('Event/editEvent') . '?idEvent=' . $row->idEvent ?>"><?= $row->eventName ?></a></li>
+							<li class="list-group-item"><a href="<?= site_url('Event/viewEvents') . '?idEvent=' . $row->idEvent ?>"><?= $row->eventName ?></a></li>
 						<?php endforeach; ?>
 					<?php endif; ?>
 					</ul>
