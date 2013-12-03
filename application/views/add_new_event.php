@@ -12,7 +12,8 @@
 			
 			<div class="form-group">
 				<label>Event Description:</label>
-				<input type="text"  class="form-control" name ="eventDescription" style= "height:200px;" id= "eventDescription">
+				<textarea style="hight:100px; width:100%;" data-validate="required, max(100)" rows="4" cols="50" type="text" maxlength="100" 
+									class="form-control" id="eventDescription" name="eventDescription"></textarea>
 			</div>
 	   
 			<div class="form-group">

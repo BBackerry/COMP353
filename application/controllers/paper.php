@@ -88,13 +88,22 @@ class Paper extends CI_Controller {
     public function paperReview()
 	{
 		$this->load->model('reviewAssignment_model');
+		$this->load->model('phase_model');
 		
 		$username = $this->session->userdata('idUser');
 		
 		$query['assignments'] = $this->reviewAssignment_model->get_reviewAssignment_by_assignedTo($username);
 		$query['papers'] = $this->reviewAssignment_model->get_paper_assignedTo_user($username);
+		$phases = array();
 		
-		if ($this->session->userdata('isCommitteeMember')) {
+		foreach($query['papers'] as $paper):
+			$phase = $this->phase_model->get_phase(4, $paper->idEvent);
+			array_push($phases, $phase[0]);
+		endforeach;
+		
+		$query['phases'] = $phases;
+		
+		if($this->session->userdata('isCommitteeMember')) {
 			$this->load->view('header');
 			$this->load->view('paper_review', $query);
 		}
@@ -108,6 +117,7 @@ class Paper extends CI_Controller {
 	public function submitReview()
 	{
 		$this->load->model('reviewAssignment_model');
+		$this->load->model('phase_model');
 		
 		$username = $this->session->userdata('idUser');
 		
@@ -120,6 +130,14 @@ class Paper extends CI_Controller {
 			$query['successMessages'][0] = "Your review has been saved successfully.";
 			$query['assignments'] = $this->reviewAssignment_model->get_reviewAssignment_by_assignedTo($username);
 			$query['papers'] = $this->reviewAssignment_model->get_paper_assignedTo_user($username);
+			$phases = array();
+		
+			foreach($query['papers'] as $paper):
+				$phase = $this->phase_model->get_phase(4, $paper->idEvent);
+				array_push($phases, $phase[0]);
+			endforeach;
+		
+			$query['phases'] = $phases;
 			
 			$this->load->view('header', $query);
 			$this->load->view('paper_review');
