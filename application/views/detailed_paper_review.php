@@ -44,7 +44,8 @@
 					        
 					        <div class="form-group">
 					            <label for="Comment" class="col-lg-2 control-label">Comments:</label>
-					            <input type="text" name="comment" class="form-control" style="height:100px; width:600px" id="comment" data-validate="required">
+					            <textarea style="hight:100px; width:800px;" data-validate="required, max(100)" rows="4" cols="50" type="text" maxlength="100" 
+									class="form-control" id="comment" name="comment"></textarea>
 					        </div>
 					        
 					        <button style="float:right;" class="btn btn-primary">Submit</button>

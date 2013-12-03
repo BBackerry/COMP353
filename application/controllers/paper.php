@@ -116,7 +116,8 @@ class Paper extends CI_Controller {
 			$comment = $this->input->post('comment');
 			$idPaper = $this->input->get('idPaper');
 			
-			$this->reviewAssignment_model->update_reviewAssignment($username, $idPaper, $comment, $score);
+			$this->reviewAssignment_model->update_reviewAssignment($username, $idPaper, $comment, $score/10);
+			$param['successMessages'][0] = "Your review has been successfully saved.";
 			
 			$this->load->view('header');
 			$this->load->view('review_submitted');

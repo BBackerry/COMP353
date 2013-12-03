@@ -44,7 +44,8 @@
 					<div class="form-group">
 						<label for="abstract" class="col-lg-2 control-label">*Paper Abstract:</label>
 						<div class="col-lg-10">
-							<textarea data-validate="required, max(200)" rows="4" cols="50" type="text" maxlength="200" class="form-control" id="abstract" name="abstract"></textarea>
+							<textarea data-validate="required, max(200)" rows="4" cols="50" type="text" maxlength="200" 
+									class="form-control" id="abstract" name="abstract"></textarea>
 						</div>
 					</div>
 					
