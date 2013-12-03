@@ -249,7 +249,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `comp353`.`phaseType` ;
 
 CREATE TABLE IF NOT EXISTS `comp353`.`phaseType` (
-  `idPhase` INT NOT NULL,
+  `idPhase` INT NOT NULL AUTO_INCREMENT,
   `phaseName` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`idPhase`),
   UNIQUE INDEX `phaseName_UNIQUE` (`phaseName` ASC))
@@ -531,7 +531,6 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
-
 INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'Computer Science &amp; Engineering');
 INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('1', 'Concordia University');
@@ -541,3 +540,8 @@ INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('1', 'ad
 INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('2', 'program chair');
 INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('3', 'committee member');
 INSERT INTO `comp353`.`role` (`idUser`, `idEvent`, `idPosition`) VALUES ('admin', '1', '1');
+INSERT INTO `comp353`.`phasetype` (`phaseName`) VALUES ('submit');
+INSERT INTO `comp353`.`phasetype` (`phaseName`) VALUES ('bid');
+INSERT INTO `comp353`.`phasetype` (`phaseName`) VALUES ('allocate');
+INSERT INTO `comp353`.`phasetype` (`phaseName`) VALUES ('review');
+INSERT INTO `comp353`.`phasetype` (`phaseName`) VALUES ('decide');
