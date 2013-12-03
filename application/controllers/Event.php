@@ -14,19 +14,36 @@ public function __construct()
 		$this->load->model('phaseType_model');
 	}
 	
+	public function listEvents()
+	{
+		$username = $this->session->userdata('idUser');
+		
+		$param['events'] = $this->event_model->get_all_event();
+		
+		if ($username) {
+			$this->load->view('header');
+			$this->load->view('events_list', $param);
+		}
+		else {
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
+	}
+	
 	public function addEvent()
 	{
-			$admin = $this->session->userdata('isAdmin');
-			$param['meeting']= $this->meeting_model->get_all_meeting();
-			$param['EventTopic']= $this->topic_model->get_all_topic();
-			$param['phaseType']= $this->phaseType_model->get_all_phaseType();
-			
-			
-			if ($admin)
-			{
+		$admin = $this->session->userdata('isAdmin');
+		$param['meeting']= $this->meeting_model->get_all_meeting();
+		$param['EventTopic']= $this->topic_model->get_all_topic();
+		$param['phaseType']= $this->phaseType_model->get_all_phaseType();
+		
+		
+		if ($admin)
+		{
 			$this->load->view('header');
 			$this->load->view('add_new_event', $param);
-			}
+		}
 		else 
 		{
 			$errors['errorMessagesEvent'] = array("Sorry but you are no allowed to create event");
