@@ -70,12 +70,17 @@ class Paper extends CI_Controller {
 		if ($username) {
 			$this->load->model('event_model');
 			$this->load->model('paperDecision_model');
+			$this->load->model('reviewAssignment_model');
 			
 			$papers = $this->paper_model->get_paper_by_user_no_blob($username);
 			
 			for($i = 0; $i < count($papers); ++$i) {
 				$data['papers'][$i]['paper'] = $papers[$i];
 				$data['papers'][$i]['event'] = $this->event_model->get_event_name($papers[$i]->idEvent)[0]->eventName;
+				$paper_decided = $this->paperDecision_model->get_paperDecision($papers[$i]->idPaper);
+				if (isset($paper_decided) && !empty($paper_decided)) {
+					$data['papers'][$i]['reviews'] = $this->reviewAssignment_model->get_reviewAssignment_by_paper($papers[$i]->idPaper);
+				}
 				$data['papers'][$i]['decision'] = $this->paperDecision_model->get_paperDecision($papers[$i]->idPaper);
 			}
 

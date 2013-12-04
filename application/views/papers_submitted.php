@@ -17,6 +17,14 @@
 								Submitted by: <?= $obj['paper']->submittedBy ?><br/>
 								Event: <a href="<?= site_url('Event/viewEvents') . '?idEvent=' . $obj['paper']->idEvent ?>"><?= $obj['event'] ?></a><br/>
 								Keywords: <?= $obj['paper']->keywords ?><br/>
+								<?php if(isset($obj['reviews'])): ?>
+									<?php foreach($obj['reviews'] as $review): ?>
+										Comments:<br/>
+										<ul class="list-group">
+											<li class="list-group-item"><?= $review->comment ?></li>
+										</ul>
+									<?php endforeach; ?>
+								<?php endif; ?>
 								<?php foreach($obj['decision'] as $d): ?>
 									<?php if($d->decision == 1): ?>
 										Decision: Accepted<br/>
