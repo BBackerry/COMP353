@@ -42,6 +42,13 @@ class InterestInTopic_model extends CI_Model {
 		$query = $this->db->query($sql, array($idUser, $idTopic)); 
 		return $query;
 	}
+	
+	function delete_interestInTopic_by_user($idUser)
+	{
+		$sql = "DELETE FROM interestInTopic WHERE idUser= ?";
+		$query = $this->db->query($sql, array($idUser)); 
+		return $query;
+	}
 
 }
 ?>

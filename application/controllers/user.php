@@ -44,23 +44,106 @@ class User extends CI_Controller {
 		}
 	}
     
-	public function interests()
+	public function interests($success = array())
 	{
 		$username = $this->session->userdata('idUser');
 		
 		$this->load->model('interestInTopic_model');
-		$query['interests'] = $this->interestInTopic_model->get_Topic_by_interested_user($username);
+		$this->load->model('topicHierarchy_model');
+		$this->load->model('topic_model');
+		$data['topic'] = $this->topic_model->get_all_topic();
+        $topicParents = $this->topicHierarchy_model->get_all_topicHierarchy();
+        $hierarchy = array();
+        foreach($topicParents as $parent){
+            array_push($hierarchy, array('idTopic' => $parent->idTopic, 'idTopicHierarchy' =>$parent->idTopicHierarchy));
+        }
+        
+        $tree = array();
+        foreach($data['topic'] as $topic){
+            if($this->isParent($topic->idTopic, $topicParents)){
+                array_push($tree, $this->constructHierarchy($hierarchy, $topic->idTopic));
+            }
+        }
+        $data['hierarchy'] = "";
+        foreach($tree as $parent){
+           $data['hierarchy'] .= $this->displayTree($parent, $topicParents);
+        }
+        $data['interest'] = $this->interestInTopic_model->get_interestInTopic_of_user($username);
 		
-		if ($username) {
-			$this->load->view('header');
-			$this->load->view('user_interests', $query);
-		}
-		else {
-			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
-			$this->load->view('header', $errors);
-			$this->load->view('home_page');
-		}
+		$this->load->view('header', $success);
+        $this->load->view('user_interests', $data);
 	}
+	
+	public function update_interests()
+	{
+		$idUser = $this->session->userdata('idUser');
+		$idTopics = $this->input->post('interest');
+		$this->load->model('interestInTopic_model');
+		
+		$this->interestInTopic_model->delete_interestInTopic_by_user($idUser);
+		foreach($idTopics as $topic) {
+			$this->interestInTopic_model->create_interestInTopic($idUser, $topic);
+		}
+		
+		$success['successMessages'] = array('Interests List successfully updated');
+		$this->interests($success);
+	}
+	
+	//=======================================================HIERARCHY CODE=====================================================================
+    function isParent($topic, $topicHierarchy){
+        foreach($topicHierarchy as $relation){
+            if($relation->idTopic == $topic)
+                return false;
+        }
+        return true;
+    }
+    function displayTree($parent,$topicParents,$str=""){    
+        foreach($parent as $key => $value){
+            if($key === "id"){
+                if( $this->isParent($parent["id"], $topicParents)){
+                    $str = $str ."&". $parent["id"];
+                } else {
+                    $str = $str . $parent["id"];
+                }
+            }
+            if($key !== "id"){
+                $str = $str . "["; 
+                $str = $this->displayTree($value, $topicParents, $str);
+                $str = $str . "]";                
+            }
+        }
+        return $str;
+    }
+    
+    function constructHierarchy(array $hierarchyData, $parentId) {
+        $hierarchy = array("id" => $parentId);
+        foreach ($hierarchyData as $relation) {
+            if ($relation['idTopicHierarchy'] == $parentId) {
+                $child = array("id"=>$relation['idTopic']);
+                $children = $this->constructHierarchyNoParent($hierarchyData, $relation['idTopic']);
+                if ($children) {
+                    $child[] = $children;
+                }
+                    $hierarchy[] = $child;
+            }
+        }
+        return $hierarchy;
+    }
+    function constructHierarchyNoParent(array $hierarchyData, $parentId = 1) {
+        $hierarchy = array();
+        foreach ($hierarchyData as $relation) {
+            if ($relation['idTopicHierarchy'] == $parentId) {
+                $child = array("id"=>$relation['idTopic']);
+                $children = $this->constructHierarchyNoParent($hierarchyData, $relation['idTopic']);
+                if ($children) {
+                    $child[] = $children;
+                }
+                    $hierarchy[] = $child;
+            }
+        }
+        return $hierarchy;
+    }
+	//============================================================END HIERARCHY CODE=======================================================================
 	
 	public function login()
 	{
