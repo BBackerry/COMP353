@@ -140,7 +140,12 @@ class Event extends CI_Controller {
 		
 		$this->event_model->create_event($startDate, $endDate, $username, $eventDescription, $eventName);
 		$idEvent = mysql_insert_id();
-				
+		
+		foreach($programChair as $p)
+		{
+			
+			$this->role_model->create_role($p, $idEvent, 2);
+		}
 		foreach($idMeeting as $m)
 		{
 			$this->meetingEvent_model->create_meetingEvent($idEvent, $m);
@@ -158,6 +163,17 @@ class Event extends CI_Controller {
 			$this->phase_model->create_phase($p->idPhase, $idEvent, $startDate, $endDate);
 		}
 		
+		$param['roles'] = $this->role_model->get_role_by_event($idEvent);
+		
+		$programChairs = array();
+		foreach($param['roles'] as $row) {
+			if($row->idPosition == 2)
+			{
+				$chairs = $this->user_model->get_user($row->idUser);
+				array_push($programChairs, $chairs[0]);
+			}
+		}
+		$param['programChairs'] = $programChairs;
         
 		$param['event'] = $this->event_model->get_event($idEvent)[0];
 		$param['meetingDetail']= $this->meetingEvent_model->get_meetingEvent($idEvent);
@@ -165,12 +181,6 @@ class Event extends CI_Controller {
 		$param['phaseDetail']= $this->phase_model->get_all_phase_for_event($idEvent);
 		$param['phaseTypeDetail']= $this->phaseType_model->get_all_phaseType();
 		
-		
-		foreach($programChair as $p)
-			{
-			
-				$this->role_model->create_role($p, $idEvent, 2);
-			}
 		
 		$meetings = array();
 		foreach($param['meetingDetail'] as $row) {
@@ -210,6 +220,18 @@ class Event extends CI_Controller {
 	           $param['hierarchy'] .= displayTree($parent, $topicParents);
 	        }
 		$idEvent = $this->input->get('idEvent');
+		
+		$param['roles'] = $this->role_model->get_role_by_event($idEvent);
+			$programChairs = array();
+		foreach($param['roles'] as $row) {
+			if($row->idPosition == 2)
+			{
+				$chairs = $this->user_model->get_user($row->idUser);
+				array_push($programChairs, $chairs[0]);
+			}
+		}
+		$param['programChairs'] = $programChairs;
+		$param['users'] = $this->user_model->get_all_users();
         
        		$param['eventTopic'] = $this->eventTopic_model->get_eventTopic($idEvent);
 		$param['event'] = $this->event_model->get_event($idEvent)[0];
@@ -232,10 +254,29 @@ class Event extends CI_Controller {
 		$topics = $this->input->post('topics');
 		$idPhase = $this->phaseType_model->get_all_phaseType();	
 		$meetings = $this->input->post('meetings');
+		$programChair = $this->input->post('setProgramChair');
 		
 		$this->event_model->update_event($idEvent, $startDate, $endDate, $username, $eventDescription, $eventName);
+		 $param['roles'] = $this->role_model->get_role_by_event($idEvent);
 		
-
+		
+		foreach($param['roles'] as $row) {
+			if($row->idPosition == 2)
+			{
+				$chairs = $this->user_model->get_user($row->idUser);
+				foreach($chairs as $c)
+				{
+					$this->role_model->delete_role($c->idUser, $idEvent);
+				}
+			}
+		}
+		
+		foreach($programChair as $p)
+			{
+					
+				$this->role_model->create_role($p, $idEvent, 2);
+			}
+		
 		$this->eventTopic_model->delete_eventTopic($idEvent);	//Remove previous associations
 		if(isset($topics) && !empty($topics)) {
 			foreach($topics as $t)
@@ -244,6 +285,18 @@ class Event extends CI_Controller {
 			}
 		}
 		
+		 $param['roles'] = $this->role_model->get_role_by_event($idEvent);
+		
+		$programChairs = array();
+		foreach($param['roles'] as $row) {
+			if($row->idPosition == 2)
+			{
+				$chairs = $this->user_model->get_user($row->idUser);
+				array_push($programChairs, $chairs[0]);
+			}
+		
+		}
+		$param['programChairs'] = $programChairs;
 		foreach($idPhase  as $p)
 		{
 			$startTime = date( "Y-m-d H:i:s", strtotime($this->input->post($p->idPhase."PhaseStart")));	
