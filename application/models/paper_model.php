@@ -8,10 +8,24 @@ class Paper_model extends CI_Model {
 		return $query->result();
 	}
 	
+	function get_paper_no_blob($idPaper)
+	{
+		$sql = "SELECT idPaper, title, abstract, submittedBy, keywords, idEvent FROM paper WHERE idPaper = ? ";
+		$query = $this->db->query($sql, array($idPaper)); 
+		return $query->result();
+	}
+	
 	function get_paper_by_user($idUser)
 	{
 		$sql = "SELECT * FROM paper WHERE submittedBy = ? ";
 		$query = $this->db->query($sql, array($idUser));
+		return $query->result();
+	}
+	
+	function get_paper_by_user_no_blob($idUser)
+	{
+		$sql = "SELECT idPaper, title, abstract, submittedBy, keywords, idEvent FROM paper WHERE submittedBy = ? ";
+		$query = $this->db->query($sql, array($idUser)); 
 		return $query->result();
 	}
 
