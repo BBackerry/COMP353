@@ -8,12 +8,7 @@ public function __construct()
 		$this->load->model('meeting_model');
         $this->load->model('place_model');
 	}
-	public function viewMeetings()
-    {
-        $this->load->view('header');
-        $param['place'] = $this->place_model->get_all_place();
-        $this->load->view('meeting_page', $param);
-    }
+	
 	public function createMeeting()
 	{
         if($this->session->userdata('isAdmin')){
@@ -29,15 +24,14 @@ public function __construct()
 		}
 	}
 	
-	public function ViewAllMeetings()
+	public function viewMeetings($message = null)
 	{
 		$admin = $this->session->userdata('isAdmin');
-		
 		if($admin)
 		{
-		$param['meetings'] = $this->meeting_model->get_all_meeting();
-		$this->load->view('header');
-		$this->load->view('meetings_list', $param);
+			$data['meetings'] = $this->meeting_model->get_all_meeting();
+			$this->load->view('header', $message);
+			$this->load->view('meetings_list', $data);
 		}		
 		else 
 		{
@@ -49,18 +43,41 @@ public function __construct()
 	
 	public function editMeeting()
 	{
-		$idMeeting = $this->input->get('idMeeting');
-		
+		$data['meeting'] = $this->meeting_model->get_meeting($this->input->get('idMeeting'))[0];
+		$data['places'] = $this->place_model->get_all_place();
 		$this->load->view('header');
-		$this->load->view('edit_meeting');
+		$this->load->view('edit_meeting', $data);
+	}
+	
+	public function updateMeeting()
+	{
+		$createdBy = $this->session->userdata('idUser');
+		
+		$meeting = $this->meeting_model->get_meeting($this->input->post('idMeeting'))[0];
+        if ($this->input->post('newLocation')) {
+            $this->place_model->create_place($this->input->post('newLocation'));
+            $idPlace = mysql_insert_id();
+        } else {
+            $idPlace = $this->input->post('place');
+        }
+		$startTime = date( "Y-m-d H:i:s", strtotime($this->input->post('startTime')));	
+		$endTime = date( "Y-m-d H:i:s", strtotime($this->input->post('endTime')));
+		
+		if($this->meeting_model->update_meeting($meeting->idMeeting, $idPlace, $createdBy, $startTime, $endTime)) {
+			$success['sucessMessages'] = array('Meeting successfully updated');
+			$this->viewMeetings($success);
+		}
+		else {
+			$errors['errorMessages'] = array('Meeting update failed. Please try again');
+			$this->viewMeetings($errors);
+		}
 	}
     
 	public function submitMeeting()
 	{
 		$createdBy = $this->session->userdata('idUser');
-        if ($this->input->post('newPlace')) {
-            $placeName = $this->input->post('newPlaceName');
-            $this->place_model->create_place($placeName);
+        if ($this->input->post('newLocation')) {
+            $this->place_model->create_place($this->input->post('newLocation'));
             $idPlace = mysql_insert_id();
         } else {
             $idPlace = $this->input->post('place');
@@ -68,19 +85,14 @@ public function __construct()
 		$startTime = date( "Y-m-d H:i:s", strtotime($this->input->post('startTime')));	
 		$endTime = date( "Y-m-d H:i:s", strtotime($this->input->post('endTime')));
 					
-		$this->meeting_model->create_meeting($idPlace, $createdBy, $startTime, $endTime);
-        
-        $param['successMessages'][0] = "The meeting has been successfully saved.";
-        $param['startTime'] = $startTime;
-        $param['endTime'] = $endTime;
-        $param['createdBy'] = $createdBy;
-        $place = $this->place_model->get_place($idPlace);
-        foreach ($place as $p){
-            $param['place'] = $p->placeName;
+		if ($this->meeting_model->create_meeting($idPlace, $createdBy, $startTime, $endTime)) {
+			$success['successMessages'] = array('Meeting successfully created');
+			$this->viewMeetings($success);
         }
-        
-		$this->load->view('header', $param);
-		$this->load->view('meeting_page');		
+		else {
+			$errors['errorMessages'] = array('Sorry but something went wrong. Please try again');
+			$this->viewMeetings($errors);
+		}	
 	}
 		
 			

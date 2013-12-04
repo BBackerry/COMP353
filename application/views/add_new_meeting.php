@@ -23,9 +23,9 @@
 				<div class="form-group">
 					<label for="place" class="col-lg-2 control-label">Location</label>
 					<div class="col-lg-10">
-						<select class="form-control" name="place">
+						<select class="form-control" name="place" id="place">
 							<?php foreach($place as $p): ?>
-								<option value="<?= $p->idPlace ?>"> <?= $p->placeName ?></option>
+								<option value="<?= $p->idPlace ?>"><?= $p->placeName ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
@@ -79,9 +79,11 @@
 			$("#chkNewLocation").click(function () {
 				if($(this).is(":checked")) {
 					$("#newLocation").prop("disabled", false);
+					$("#place").prop("disabled", true);
 				}
 				else {
 					$("#newLocation").prop("disabled", true);
+					$("#place").prop("disabled", false);
 				}
 			});
 		</script>

@@ -72,7 +72,7 @@
                     <a href="<?php echo site_url('Meeting/viewMeetings'); ?>" class="dropdown-toggle" data-toggle="dropdown">Meeting<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                         <li><a href="<?php echo site_url('Meeting/createMeeting');?>">Create Meeting</a></li>  
-                        <li><a href="<?php echo site_url('Meeting/ViewAllMeetings');?>">View Meetings</a></li>
+                        <li><a href="<?php echo site_url('Meeting/viewMeetings');?>">View Meetings</a></li>
                     </ul>
                 </li>  
                 <li class="dropdown">

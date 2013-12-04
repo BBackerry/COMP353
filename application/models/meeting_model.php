@@ -29,10 +29,10 @@ class Meeting_model extends CI_Model {
 		return $query;
 	}
 
-	function update_meeting($idMeeting, $idPlace, $createdBy)
+	function update_meeting($idMeeting, $idPlace, $createdBy, $startTime, $endTime)
 	{
-		$sql = "UPDATE meeting SET idPlace = ?, createdBy = ?  WHERE idMeeting = ? ";
-		$query = $this->db->query($sql, array( $idPlace, $createdBy, $idMeeting)); 
+		$sql = "UPDATE meeting SET idPlace = ?, createdBy = ?, startTime = ?, endTime = ?  WHERE idMeeting = ? ";
+		$query = $this->db->query($sql, array($idPlace, $createdBy, $startTime, $endTime, $idMeeting)); 
 		return $query;
 	}
 

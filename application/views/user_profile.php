@@ -85,6 +85,7 @@
 						</div>
 					</div>
 					
+					<input type="hidden" value="<?= $meeting->idMeeting ?>" name="idMeeting">
 					<button class="btn btn-success" style="float:right;">Submit</button>
 				</form>
   			</div>
