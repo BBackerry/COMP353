@@ -34,6 +34,15 @@
 					<?php endforeach; ?>
 			   </select>
 			</div>
+			
+			<div class="form-group" id = "setCommitteeMember" name = "setCommitteeMemeber">
+				<label for="users">Set Committee Member:</label>
+				 <select multiple class="form-control" name="setCommitteeMemeber[]">
+					 <?php foreach($users as $u): ?>
+					<option value="<?php echo $u->idUser ?>"><?php echo $u->idUser ?> - <?php echo $u->lastName ?>, <?php echo $u->firstName ?></option>
+					<?php endforeach; ?>
+			   </select>
+			</div>
 				
 			
 			<div class="form-group" id = "eventTopics" name = "eventTopics">
