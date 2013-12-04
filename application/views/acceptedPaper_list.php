@@ -7,7 +7,7 @@
 					<ul class="list-group">
 					<?php if(isset($papers)): ?>
 						<?php foreach($papers as $row):?>
-							<li class="list-group-item"><a href="<?= site_url('Paper/viewEvent') . '?idPaper=' . $row->idPaper ?>"><?= $row->title ?></a></li>
+							<li class="list-group-item"><a href="<?= site_url('Paper/publishPaper') . '?idPaper=' . $row->idPaper ?>"><?= $row->title ?></a></li>
 						<?php endforeach; ?>
 					<?php endif; ?>
 					</ul>

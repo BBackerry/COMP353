@@ -44,8 +44,7 @@ class Paper extends CI_Controller {
 	
 	public function listAcceptedPaper()
 	{
-		$username = $this->session->userdata('idUser');
-		if ($username) {
+		
 			$param['allPapers'] = $this->paper_model->get_all_paper();
 			
 			$acceptedPapers = array();
@@ -61,12 +60,15 @@ class Paper extends CI_Controller {
 			
 				$this->load->view('header');
 				$this->load->view('acceptedPaper_list', $param);
-		}
-		else {
-			$errors['errorMessages'] = array('Sorry but you have to be logged in to view papers');
-			$this->load->view('header', $errors);
-			$this->load->view('home_page');
-		}
+		
+		
+	}
+	
+	public function publishPaper{
+	
+		$this->load->view('header');
+		$this->load->view('acceptedPaper_list');
+	
 	}
 	public function submit()
 	{
