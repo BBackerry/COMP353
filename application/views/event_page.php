@@ -5,43 +5,43 @@
 
 					<h3>Event Page</h3>     
 					 
-					<label class="col-lg-2 control-label">Event Title: </label><div class="col-sm-10"><p class="col-sm-10"><?= $event->eventName ?></p></div>
+					<label class="col-lg-3 control-label">Event Title: </label><div class="col-sm-9"><p class="col-sm-9"><?= $event->eventName ?></p></div>
 					
-					<label class="col-lg-2 control-label"> Event Description: </label><div class="col-sm-10"><p class="col-sm-10"><?= $event->eventDescription ?></p></div>
+					<label class="col-lg-3 control-label"> Event Description: </label><div class="col-sm-9"><p class="col-sm-9"><?= $event->eventDescription ?></p></div>
 					
-					<label class="col-lg-2 control-label">Created By: </label><div class="col-sm-10"><p class="col-sm-10"><?= $event->createdBy ?></p></div>
+					<label class="col-lg-3 control-label">Created By: </label><div class="col-sm-9"><p class="col-sm-9"><?= $event->createdBy ?></p></div>
 					  
-					<label class="col-lg-2 control-label">Start Date: </label><div class="col-sm-10"><p class="col-sm-10"><?= $event->startDate ?></p></div>
+					<label class="col-lg-3 control-label">Start Date: </label><div class="col-sm-9"><p class="col-sm-9"><?= $event->startDate ?></p></div>
 					
-					<label class="col-lg-2 control-label">End Date: </label><div class="col-sm-10"><p class="col-sm-10"><?= $event->endDate ?></p> </div>              
-					<label class="col-lg-2 control-label">Event Program Chair(s): </label>
-                    <div class="col-sm-10">
+					<label class="col-lg-3 control-label">End Date: </label><div class="col-sm-9"><p class="col-sm-9"><?= $event->endDate ?></p> </div>              
+					<label class="col-lg-3 control-label">Event Program Chair(s): </label>
+                    <div class="col-sm-9">
 						<?php foreach($programChairs as $row): ?> 
-								<p class="col-sm-10"><?php echo $row->idUser ?> - <?php echo $row->lastName ?>, <?php echo $row->firstName ?></p>											
+								<p class="col-sm-9"><?php echo $row->idUser ?> - <?php echo $row->lastName ?>, <?php echo $row->firstName ?></p>											
 						<?php endforeach; ?>
-					</div
+					</div>
 				
-					<label class="col-lg-2 control-label">Event Topics:</label><br />
-                    <div class="col-sm-10">
+					<label class="col-lg-3 control-label">Event Topics:</label><br />
+                    <div class="col-sm-9">
 					<?php foreach($topics as $row): ?> 
-						<p class="col-sm-10"><?= $row->topicName?></p>		
+						<p class="col-sm-9"><?= $row->topicName?></p>		
 					<?php endforeach; ?>	
                     </div>
 					<br />
 					<br />
 					<?php if(isset($papers)): ?>
-					<label class="col-lg-2 control-label">Event Meeting(s): </label>
-                    <div class="col-sm-10">
+					<label class="col-lg-3 control-label">Event Meeting(s): </label>
+                    <div class="col-sm-9">
 						<?php foreach($meetings as $row): ?> 
-							<p class="col-sm-10">
+							<p class="col-sm-9">
 								<?php echo date( "Y-m-d H:i:s", strtotime($row->startTime))?> - <?php echo date( "Y-m-d H:i:s", strtotime($row->endTime)) ?>
 							</p>					
 						<?php endforeach; ?>
                     </div>
 					<?php endif; ?>
 					
-					<label class="col-lg-2 control-label">Event Phases: </label>
-                    <div class="col-sm-10">
+					<label class="col-lg-3 control-label">Event Phases: </label>
+                    <div class="col-sm-9">
                         <?php foreach($phaseTypeDetail as $row): ?>
                         <?php foreach($phaseDetail as $phase): ?> 
                             <?php if($row->idPhase == $phase->idPhase):?>
