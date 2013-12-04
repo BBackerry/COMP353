@@ -52,21 +52,28 @@ class Event extends CI_Controller {
 		}
 	}
 	
-	public function viewEvents()
+	public function viewEvent()
 	{
 		$idEvent = $this->input->get('idEvent');
 		$param['event'] = $this->event_model->get_event($idEvent)[0];
 		$param['meetingDetail']= $this->meetingEvent_model->get_meetingEvent($idEvent);
+		$param['EventTopicDetail']= $this->eventTopic_model->get_eventTopic($idEvent);
+		$param['phaseDetail']= $this->phase_model->get_all_phase_for_event($idEvent);
+		$param['phaseTypeDetail']= $this->phaseType_model->get_all_phaseType();
+		
 		$meetings = array();
 		foreach($param['meetingDetail'] as $row) {
 			$meeting = $this->meeting_model->get_meeting($row->idMeeting);
 			array_push($meetings, $meeting[0]);
 		}
 		$param['meetings'] = $meetings;
-
-		$param['EventTopicDetail']= $this->eventTopic_model->get_eventTopic($idEvent);
-		$param['phaseDetail']= $this->phase_model->get_all_phase_for_event($idEvent);
-		$param['phaseTypeDetail']= $this->phaseType_model->get_all_phaseType();
+		
+		$topics = array();
+		foreach($param['EventTopicDetail'] as $row) {
+			$topic = $this->topic_model->get_topic($row->idTopic);
+			array_push($topics, $topic[0]);
+		}
+		$param['topics'] = $topics;
 
 		$this->load->view('header');
 		$this->load->view('event_page', $param);

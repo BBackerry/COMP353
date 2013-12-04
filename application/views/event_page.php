@@ -25,11 +25,9 @@
         <label class="col-lg-2 control-label">End Date: </label><p><?= $event->endDate ?></p>               
         </div>
        
-	   <?php foreach($EventTopicDetail as $row): ?> 
-			<div class="form-group">	 
-				<label class="col-lg-2 control-label">Event Topic(s):</label><p><?= $row->topicName?> </p>		
-			</div> 	
-						
+        <label class="col-lg-2 control-label">Event Topics:</label>
+	   <?php foreach($topics as $row): ?> 
+				<p><?= $row->topicName?></p>		
 		<?php endforeach; ?>
 	
 		

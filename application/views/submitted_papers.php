@@ -11,7 +11,7 @@
 								<h2><a href="<?= site_url('Paper/viewPaper') . '?idPaper=' . $row->idPaper ?>"><?= $row->title ?></a></h2>
 								Abstract: <?= $row->abstract ?><br />
 								Keywords: <?= $row->keywords ?><br />
-								Submitted to Event: <a href="<?= site_url('Event/viewEvents') . '?idEvent=' . $event->idEvent ?>"><?= $event->eventName ?></a><br />
+								Submitted to Event: <a href="<?= site_url('Event/viewEvent') . '?idEvent=' . $event->idEvent ?>"><?= $event->eventName ?></a><br />
 								Decision: <br />
 								Comments: <br />
 								<br />
