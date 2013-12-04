@@ -10,11 +10,14 @@ class Event extends CI_Controller {
 		$this->load->model('meetingEvent_model');
 		$this->load->model('eventTopic_model');
 		$this->load->model('topic_model');
-        	$this->load->model('topicHierarchy_model');
+        $this->load->model('topicHierarchy_model');
 		$this->load->model('phase_model');
 		$this->load->model('phaseType_model');
-       		$this->load->helper('hierarchy_helper');
+       	$this->load->helper('hierarchy_helper');
 		$this->load->model('paper_model');
+		$this->load->model('user_model');
+		$this->load->model('role_model');
+		
 	}
 	
 	public function listEvents()
@@ -49,10 +52,12 @@ class Event extends CI_Controller {
 	{
 		$admin = $this->session->userdata('isAdmin');
 		$param['meeting']= $this->meeting_model->get_all_meeting();
-		$param['phaseType']= $this->phaseType_model->get_all_phaseType();   
+		$param['phaseType']= $this->phaseType_model->get_all_phaseType(); 
+		$param['users'] = $this->user_model->get_all_users();		
 		
 		if ($admin)
-		{
+		{	
+			
 	            $param['topic'] = $this->topic_model->get_all_topic();
 	            $topicParents = $this->topicHierarchy_model->get_all_topicHierarchy();
 	            $hierarchy = array();
@@ -91,6 +96,7 @@ class Event extends CI_Controller {
 		$param['phaseDetail']= $this->phase_model->get_all_phase_for_event($idEvent);
 		$param['phaseTypeDetail']= $this->phaseType_model->get_all_phaseType();
 		
+		
 		$meetings = array();
 		foreach($param['meetingDetail'] as $row) {
 			$meeting = $this->meeting_model->get_meeting($row->idMeeting);
@@ -120,6 +126,7 @@ class Event extends CI_Controller {
 		$idMeeting = $this->input->get('meetingIDs');
 		$idTopic = $this->input->get('eventTopics');
 		$idPhase = $this->phaseType_model->get_all_phaseType();	
+		$programChair = $this->input->get('setProgramChair');
 		
 		$this->event_model->create_event($startDate, $endDate, $username, $eventDescription, $eventName);
 		$idEvent = mysql_insert_id();
@@ -148,6 +155,13 @@ class Event extends CI_Controller {
 		$param['EventTopicDetail']= $this->eventTopic_model->get_eventTopic($idEvent);
 		$param['phaseDetail']= $this->phase_model->get_all_phase_for_event($idEvent);
 		$param['phaseTypeDetail']= $this->phaseType_model->get_all_phaseType();
+		
+		
+		foreach($programChair as $p)
+			{
+			
+				$this->role_model->create_role($p, $idEvent, 2);
+			}
 		
 		$meetings = array();
 		foreach($param['meetingDetail'] as $row) {
@@ -205,11 +219,10 @@ class Event extends CI_Controller {
 		$endDate = date( "Y-m-d H:i:s", strtotime($this->input->post('endDate')));
 		$topics = $this->input->post('topics');
 		$phases = $this->input->post('phases');
-		$meetings = $this->input->post('meetings');
+		$meetings = $this->input->post('meetings');	
 		
 		$this->event_model->update_event($idEvent, $startDate, $endDate, $username, $eventDescription, $eventName);
 		
-
 		$this->eventTopic_model->delete_eventTopic($idEvent);	//Remove previous associations
 		if(isset($topics) && !empty($topics)) {
 			foreach($topics as $t)
