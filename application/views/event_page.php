@@ -13,8 +13,15 @@
 					  
 					<label class="col-lg-2 control-label">Start Date: </label><p><?= $event->startDate ?></p>
 					
-					<label class="col-lg-2 control-label">End Date: </label><p><?= $event->endDate ?></p>               
+					<label class="col-lg-2 control-label">End Date: </label><p><?= $event->endDate ?></p>   
+						
+						<label class="col-lg-2 control-label">Event Program Chair(s): </label>
+				
+						<?php foreach($programChairs as $row): ?> 
+								<p><?php echo $row->idUser ?> - <?php echo $row->lastName ?>, <?php echo $row->firstName ?></p>											
+						<?php endforeach; ?>
 					
+					<br>
 					<label class="col-lg-2 control-label">Event Topics:</label><br />
 					<ul class="list-group">
 					<?php foreach($topics as $row): ?> 

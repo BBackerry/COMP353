@@ -95,6 +95,17 @@ class Event extends CI_Controller {
 		$param['EventTopicDetail']= $this->eventTopic_model->get_eventTopic($idEvent);
 		$param['phaseDetail']= $this->phase_model->get_all_phase_for_event($idEvent);
 		$param['phaseTypeDetail']= $this->phaseType_model->get_all_phaseType();
+		$param['roles'] = $this->role_model->get_role_by_event($idEvent);
+		
+		$programChairs = array();
+		foreach($param['roles'] as $row) {
+			if($row->idPosition == 2)
+			{
+				$chairs = $this->user_model->get_user($row->idUser);
+				array_push($programChairs, $chairs[0]);
+			}
+		}
+		$param['programChairs'] = $programChairs;
 		
 		$meetings = array();
 		foreach($param['meetingDetail'] as $row) {
