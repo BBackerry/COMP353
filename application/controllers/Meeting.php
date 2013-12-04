@@ -55,18 +55,18 @@ public function __construct()
 		$this->load->view('edit_meeting');
 	}
     
-	public function submitedMeeting()
+	public function submitMeeting()
 	{
 		$createdBy = $this->session->userdata('idUser');
-        if (isset($_POST['newPlace'])) {
-            $placeName = $_POST['newPlaceName'];
+        if ($this->input->post('newPlace')) {
+            $placeName = $this->input->post('newPlaceName');
             $this->place_model->create_place($placeName);
             $idPlace = mysql_insert_id();
         } else {
-            $idPlace = $_POST['place'];
+            $idPlace = $this->input->post('place');
         }            
-		$startTime = date( "Y-m-d H:i:s", strtotime($_POST['startTime']));	
-		$endTime = date( "Y-m-d H:i:s", strtotime($_POST['endTime']));
+		$startTime = date( "Y-m-d H:i:s", strtotime($this->input->post('startTime')));	
+		$endTime = date( "Y-m-d H:i:s", strtotime($this->input->post('endTime')));
 					
 		$this->meeting_model->create_meeting($idPlace, $createdBy, $startTime, $endTime);
         
