@@ -29,6 +29,30 @@ public function __construct()
 		}
 	}
 	
+	public function ViewMeetings()
+	{
+		$admin = $this->session->userdata('isAdmin');
+		if($admin)
+		{
+		$param['meetings'] = $this->meeting_model->get_all_meeting();
+		$this->load->view('header');
+		$this->load->view('meetings_list', $param);
+		}		
+		else 
+		{
+			$errors['errorMessages'] = array('Sorry you are not allowed to edit a meeting');
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
+	}
+	
+	public function editMeeting()
+	{
+		$idMeeting = $this->input->get('idMeeting');
+		
+		$this->load->view('header');
+		$this->load->view('edit_meeting');
+	}
     
 	public function submitedMeeting()
 	{

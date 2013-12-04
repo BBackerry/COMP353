@@ -25,17 +25,7 @@
 				<label>End Date:</label>
 				<input type="Text" class="form-control" name="endDate"  id="endDate" value="">
 			</div>
-			
-			<!--
-			<div class="form-group">
-			<p>Subject Hierarchy Class </p>
-			<select class="form-control" id="idTopicHierarchy" name="idTopicHierarchy">
-			<option value = "ACM">ACM</option>
-			<option value="??">??</option>
-			</select>
-				  
-			</div>  		
-			-->		
+				
 			
 			<div class="form-group" id = "eventTopics" name = "eventTopics">
 				<label for="eventTopics">Select Topics:</label>
