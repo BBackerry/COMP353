@@ -2,8 +2,10 @@
       
       <div class="row">
 		<div class="panel panel-default">
+			<div class="panel panel-heading">
+				<h2>Submit New Paper</h2>
+			</div>
 			<div class="panel-body">
-				<h3>Submit New Paper:</h3>
 				<p>Paper Info:<p>
 				<p>You can only change the Title, Abstract, Authors, or paper file during this period. No author can be added or deleted after this period.<p>
 				<p>You can only submit to an event that is currently in the phase of submitting papers.<p>
@@ -13,7 +15,7 @@
 				
 				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submitted/') ?>" method="POST" enctype="multipart/form-data">
 					<div class="form-group">
-						<label for="title" class="col-lg-2 control-label">*Event:</label>
+						<label for="title" class="col-lg-2 control-label">Event:</label>
 						<div class="col-lg-10">
 							<select name="idEvent" id="eventSelect" data-validate="required">
 								<option value="0">-</option>
@@ -36,36 +38,36 @@
 					</div>
 					
 					<div class="form-group">
-						<label for="title" class="col-lg-2 control-label">*Paper Title:</label>
+						<label for="title" class="col-lg-2 control-label">Paper Title:</label>
 						<div class="col-lg-10">
 							<input data-validate="required" type="text" class="form-control" id="title" name="title">
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label for="abstract" class="col-lg-2 control-label">*Paper Abstract:</label>
+						<label for="abstract" class="col-lg-2 control-label">Paper Abstract:</label>
 						<div class="col-lg-10">
-							<textarea data-validate="required, max(200)" rows="4" cols="50" type="text" maxlength="200" 
+							<textarea data-validate="required,max(200)" rows="4" type="text" maxlength="200" 
 									class="form-control" id="abstract" name="abstract"></textarea>
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label for="file" class="col-lg-2 control-label">*Paper File(PDF):</label>
+						<label for="file" class="col-lg-2 control-label">Paper File(PDF):</label>
 						<div class="col-lg-10">
 							<input data-validate="required" type="file" class="form-control" id="file" name="file">
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label for="keywords" class="col-lg-2 control-label">*Keywords:</label>
+						<label for="keywords" class="col-lg-2 control-label">Keywords:</label>
 						<div class="col-lg-10">
 							<input data-validate="required" type="text" class="form-control" id="keywords" name="keywords">
 						</div>
 					</div>
 					
 					<div class="form-group">
-						<label id="subject" name="subject" for="subject" class="col-lg-2 control-label">*Paper Topics:</label>
+						<label id="subject" name="subject" for="subject" class="col-lg-2 control-label">Paper Topics:</label>
 						<div class="col-lg-10">
 							<select multiple="multiple" name="subjects[]" data-validate="required">
 								<?php foreach($eventTopic as $row):?>

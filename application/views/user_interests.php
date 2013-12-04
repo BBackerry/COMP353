@@ -9,7 +9,7 @@
 				<div class="form-group">
 					<label for="interest[]" class="col-sm-2 control-label">Interests List:</label>
 					<div class="col-sm-10">
-						<select name="interest[]" class="form-control" size="10" multiple>
+						<select id="interestSelect" name="interest[]" class="form-control" size="10" multiple>
 							<?php 
 								$parents = explode("&", substr($hierarchy, 1));
 								foreach($parents as $parent){
@@ -97,5 +97,8 @@
 		<script src="<?= base_url(); ?>/assets/js/vendor/bootstrap.min.js"></script>
 		<script src="<?= base_url(); ?>/assets/js/plugins.js"></script>
 		<script src="<?= base_url(); ?>/assets/js/main.js"></script>
+		<script>
+			$("#interestSelect").focus();
+		</script>
     </body>
 </html>
