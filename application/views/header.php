@@ -74,8 +74,14 @@
                         <li><a href="<?php echo site_url('Meeting/createMeeting');?>">Create Meeting</a></li>  
                         <li><a href="<?php echo site_url('Meeting/ViewAllMeetings');?>">View Meetings</a></li>
                     </ul>
-                </li>     
-		<li><a href="<?php echo site_url('Admin/manageUsers'); ?>">Manage Users</a></li>        
+                </li>  
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="<?php echo site_url('Admin/manageUsers'); ?>">Manage Users</a></li>  
+                        <li><a href="<?php echo site_url('Admin/manageTopic'); ?>">Manage Topics</a></li> 
+                    </ul>
+                </li>        
             <?php } ?>
             
             <?php if ($this->session->userdata('isCommitteeMember')) { ?>

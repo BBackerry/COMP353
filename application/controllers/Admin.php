@@ -44,6 +44,7 @@ class Admin extends CI_Controller {
         foreach($tree as $parent){
            $param['hierarchy'] .= $this->displayTree($parent, $topicParents);
         }
+
         
         $UserID = $this->input->get("id");
         
@@ -192,4 +193,65 @@ class Admin extends CI_Controller {
         $this->load->view('edit_user', $param);	
     }
 	
+    public function manageTopic()
+    {
+        $param['topic'] = $this->topic_model->get_all_topic();
+        $param['hierarchy'] = $this->topicHierarchy_model->get_all_topicHierarchy();
+        $this->load->view('header');
+        $this->load->view('edit_topic', $param);	
+    }
+    
+    public function createTopic()
+    {
+        $topicName = $_POST['topicName'];
+        $topicParent = $_POST['topicParent'];
+        
+        if($topicParent == 0) $topicParent = NULL;
+        
+        $this->topic_model->create_topic($topicName);
+        $idTopic = mysql_insert_id();
+        $this->topicHierarchy_model->create_topicHierarchy($idTopic, $topicParent);
+	
+        $param['successMessages'][0] = "The topic has been successfully saved.";
+        $param['topic'] = $this->topic_model->get_all_topic();
+        $param['hierarchy'] = $this->topicHierarchy_model->get_all_topicHierarchy();
+        $this->load->view('header',$param);
+        $this->load->view('edit_topic', $param);	
+    }
+    public function updateTopic()
+    {
+        $param['topic'] = $this->topic_model->get_all_topic();
+        $param['hierarchy'] = $this->topicHierarchy_model->get_all_topicHierarchy();
+        
+        foreach( $param['topic'] as $topic){
+            $topicName = $_POST[$topic->idTopic];
+            $topicParent = $_POST[$topic->idTopic."Parent"];
+            if($topicName != $topic->idTopic){
+                $this->topic_model->update_topic($topic->idTopic, $topicName);
+            }
+            $exists = false;
+            foreach( $param['hierarchy'] as $parent){
+                if($parent->idTopic == $topic->idTopic){
+                    $exists = true;
+                    if($parent->idTopicHierarchy != $topicParent){
+                        if($topicParent == "0"){
+                             $this->topicHierarchy_model->delete_topicHierarchy($topic->idTopic);
+                        } else{
+                            $this->topicHierarchy_model->update_topicHierarchy($topic->idTopic, $topicParent);
+                        }
+                    }
+                    break;
+                }
+            }
+            if(!$exists && $topicParent != "0"){
+                $this->topicHierarchy_model->create_topicHierarchy($topic->idTopic, $topicParent);
+            }
+        }
+        
+        $param['successMessages'][0] = "The topic(s) has been successfully updated.";
+        $param['topic'] = $this->topic_model->get_all_topic();
+        $param['hierarchy'] = $this->topicHierarchy_model->get_all_topicHierarchy();
+        $this->load->view('header',$param);
+        $this->load->view('edit_topic', $param);	
+    }
 }

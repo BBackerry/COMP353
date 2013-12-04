@@ -1,8 +1,4 @@
-    <script language="JavaScript" src="../assets/js/ts_picker.js">
-    //Script by Denis Gritcyuk: tspicker@yahoo.com
-    //Submitted to JavaScript Kit (http://javascriptkit.com)
-    //Visit http://javascriptkit.com for this script
-    </script>    
+  
      <div class="container">
           <h3>Edit User:</h3>  
       <div class="panel-body">

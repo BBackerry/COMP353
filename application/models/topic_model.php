@@ -15,10 +15,10 @@ class Topic_model extends CI_Model {
 		return $query->result();
 	}
 
-	function create_topic($idTopic, $topicName)
+	function create_topic($topicName)
 	{
-		$sql = "INSERT INTO topic VALUES( ?, ? )";
-		$query = $this->db->query($sql, array($idTopic, $topicName)); 
+		$sql = "INSERT INTO topic (topicName) VALUES( ? )";
+		$query = $this->db->query($sql, array($topicName)); 
 		return $query;
 	}
 

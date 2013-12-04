@@ -25,7 +25,7 @@ class User_model extends CI_Model {
 	function update_user($idUser, $password, $firstName, $lastName, $email, $country, $organization, $department)
 	{
 		$sql = "UPDATE user SET password = ?, firstName = ?, lastName = ?, email = ?, country = ?, organization = ?, department = ?  WHERE idUser = ?";
-		$query = $this->db->query($sql, array($password, $firstName, $lastName, $email, $country, $organization, $department, $idUser)); 
+		$query = $this->db->query($sql, array( $password, $firstName, $lastName, $email, $country, $organization, $department, $idUser)); 
 		return $query;
 	}
 
