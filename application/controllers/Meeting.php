@@ -29,7 +29,7 @@ public function __construct()
 		}
 	}
 	
-	public function ViewMeetings()
+	public function ViewAllMeetings()
 	{
 		$admin = $this->session->userdata('isAdmin');
 		if($admin)

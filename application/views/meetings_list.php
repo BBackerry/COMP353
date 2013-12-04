@@ -7,7 +7,7 @@
 					<ul class="list-group">
 					<?php if(isset($meetings): ?>
 						<?php foreach($meetings as $row):?>
-							<li class="list-group-item"><a href="<?= site_url('Event/ViewMeetings') . '?idMeetings=' . $row->idMeeting ?>"><?= $row->eventName ?></a></li>
+							<li class="list-group-item"><a href="<?= site_url('Meeting/ViewAllMeetings') . '?idMeetings=' . $row->idMeeting ?>"><?php echo date( "Y-m-d H:i:s", strtotime($row->startTime))?> - <?php echo date( "Y-m-d H:i:s", strtotime($row->endTime)) ?></a></li>
 						<?php endforeach; ?>
 					<?php endif; ?>
 					</ul>

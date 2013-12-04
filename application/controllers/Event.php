@@ -107,8 +107,7 @@ class Event extends CI_Controller {
 		{
 			$this->meetingEvent_model->create_meetingEvent($idEvent, $m);
 		}
-		//echo $idTopic;
-		//die();
+		
 		foreach($idTopic as $t)
 		{
 			$this->eventTopic_model->create_eventTopic($idEvent, $t);
