@@ -10,10 +10,10 @@ class Event extends CI_Controller {
 		$this->load->model('meetingEvent_model');
 		$this->load->model('eventTopic_model');
 		$this->load->model('topic_model');
-        $this->load->model('topicHierarchy_model');
+        	$this->load->model('topicHierarchy_model');
 		$this->load->model('phase_model');
 		$this->load->model('phaseType_model');
-       	$this->load->helper('hierarchy_helper');
+       		$this->load->helper('hierarchy_helper');
 		$this->load->model('paper_model');
 		$this->load->model('user_model');
 		$this->load->model('role_model');
@@ -96,7 +96,6 @@ class Event extends CI_Controller {
 		$param['phaseDetail']= $this->phase_model->get_all_phase_for_event($idEvent);
 		$param['phaseTypeDetail']= $this->phaseType_model->get_all_phaseType();
 		
-		
 		$meetings = array();
 		foreach($param['meetingDetail'] as $row) {
 			$meeting = $this->meeting_model->get_meeting($row->idMeeting);
@@ -144,9 +143,8 @@ class Event extends CI_Controller {
 		foreach($idPhase  as $p)
 		{
 			$startDate = date( "Y-m-d H:i:s", strtotime($this->input->get($p->idPhase."PhaseStart")));	
-		        $endDate = date( "Y-m-d H:i:s", strtotime($this->input->get($p->idPhase."PhaseEnd")));	
-		        //$this->phase_model->create_phase(1, $idEvent, $firstStartDate, $firstEndDate);
-			$this->phase_model->create_phase($p->idPhase, $idEvent, $startDate, $endDate, $username);
+		   	$endDate = date( "Y-m-d H:i:s", strtotime($this->input->get($p->idPhase."PhaseEnd")));
+			$this->phase_model->create_phase($p->idPhase, $idEvent, $startDate, $endDate);
 		}
 		
         
@@ -189,7 +187,7 @@ class Event extends CI_Controller {
 	        foreach($topicParents as $parent){
 	            array_push($hierarchy, array('idTopic' => $parent->idTopic, 'idTopicHierarchy' =>$parent->idTopicHierarchy));
 	        }
-        
+    
 	        $tree = array();
 	        foreach($param['topic'] as $topic){
 	            if(isParent($topic->idTopic, $topicParents)){
@@ -201,10 +199,13 @@ class Event extends CI_Controller {
 	           $param['hierarchy'] .= displayTree($parent, $topicParents);
 	        }
 		$idEvent = $this->input->get('idEvent');
+        
        		$param['eventTopic'] = $this->eventTopic_model->get_eventTopic($idEvent);
 		$param['event'] = $this->event_model->get_event($idEvent)[0];
 		$param['meetings']= $this->meeting_model->get_all_meeting();
-		$param['phases']= $this->phaseType_model->get_all_phaseType();
+       		$param['meetingDetail']= $this->meetingEvent_model->get_meetingEvent($idEvent);
+		$param['phaseType']= $this->phaseType_model->get_all_phaseType();
+        	$param['phaseDetail']= $this->phase_model->get_all_phase_for_event($idEvent);
 		$this->load->view('header');
 		$this->load->view('event_edit', $param);
 	}
@@ -218,11 +219,12 @@ class Event extends CI_Controller {
 		$startDate = date( "Y-m-d H:i:s", strtotime($this->input->post('startDate')));	
 		$endDate = date( "Y-m-d H:i:s", strtotime($this->input->post('endDate')));
 		$topics = $this->input->post('topics');
-		$phases = $this->input->post('phases');
-		$meetings = $this->input->post('meetings');	
+		$idPhase = $this->phaseType_model->get_all_phaseType();	
+		$meetings = $this->input->post('meetings');
 		
 		$this->event_model->update_event($idEvent, $startDate, $endDate, $username, $eventDescription, $eventName);
 		
+
 		$this->eventTopic_model->delete_eventTopic($idEvent);	//Remove previous associations
 		if(isset($topics) && !empty($topics)) {
 			foreach($topics as $t)
@@ -231,12 +233,11 @@ class Event extends CI_Controller {
 			}
 		}
 		
-		$this->phase_model->delete_phase_by_event($idEvent);	//Remove previous associations
-		if(isset($phases) && !empty($phases)) {
-			foreach($phases  as $p)
-			{ 
-				$this->eventTopic_model->create_phase($p, $idEvent, $startDate, $endDate, $username);
-			}
+		foreach($idPhase  as $p)
+		{
+			$startTime = date( "Y-m-d H:i:s", strtotime($this->input->post($p->idPhase."PhaseStart")));	
+		    $endTime = date( "Y-m-d H:i:s", strtotime($this->input->post($p->idPhase."PhaseEnd")));	
+			$this->phase_model->update_phase($p->idPhase, $idEvent, $startTime, $endTime);
 		}
 		
 		$this->meetingEvent_model->delete_meetingEvent_by_event($idEvent);	//Remove previous associations
