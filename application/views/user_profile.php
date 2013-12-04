@@ -84,7 +84,6 @@
 							</select>
 						</div>
 					</div>
-					
 					<button class="btn btn-success" style="float:right;">Submit</button>
 				</form>
   			</div>

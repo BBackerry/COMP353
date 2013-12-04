@@ -1,24 +1,22 @@
-    <div class="container">
+	<div class="container">
 	<div class="row">
 		<div class="panel panel-default">
 			<div class="panel-body">
-      				<h3>Meetings:</h3>
+					<h3>Meetings:</h3>
 					
-					<ul class="list-group">
+					<div class="list-group">
 						<?php if(isset($meetings)): ?>
 							<?php foreach($meetings as $row):?>
-								<li class="list-group-item"><a href="<?= site_url('Meeting/ViewAllMeetings') . '?idMeetings=' . $row->idMeeting ?>"><?php echo date( "Y-m-d H:i:s", strtotime($row->startTime))?> - <?php echo date( "Y-m-d H:i:s", strtotime($row->endTime)) ?></a></li>
+								<a class="list-group-item" href="<?= site_url('Meeting/editMeeting') . '?idMeeting=' . $row->idMeeting ?>"><?= date( "Y-m-d H:i:s", strtotime($row->startTime))?> - <?= date( "Y-m-d H:i:s", strtotime($row->endTime)) ?></a>
 							<?php endforeach; ?>
 						<?php endif; ?>
-					</ul>
-      		</div>
-    	</div>
+					</div>
+			</div>
+		</div>
 	</div>
-    </div>
+	</div>
 
     <div class="container">
-      <!-- Example row of columns -->
-
          <footer>
         <p>&copy; Best Concordia Team</p>
       </footer>

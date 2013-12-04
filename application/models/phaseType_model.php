@@ -10,7 +10,7 @@ class PhaseType_model extends CI_Model {
 
 	function get_all_phaseType()
 	{
-		$sql = "SELECT * FROM phaseType ";
+		$sql = "SELECT * FROM phaseType ORDER BY idPhase ASC";
 		$query = $this->db->query($sql); 
 		return $query->result();
 	}
