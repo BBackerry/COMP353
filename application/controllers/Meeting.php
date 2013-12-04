@@ -32,6 +32,7 @@ public function __construct()
 	public function ViewAllMeetings()
 	{
 		$admin = $this->session->userdata('isAdmin');
+		
 		if($admin)
 		{
 		$param['meetings'] = $this->meeting_model->get_all_meeting();
