@@ -6,13 +6,17 @@
 				<h3>My Paper List:</h3>
 				<?php if(isset($papers)): ?>
 					<?php foreach($papers as $row):?>
-						<h2><a href="<?= site_url('Paper/viewPaper') . '?idPaper=' . $row->idPaper ?>"><?= $row->title ?></a></h2>
-						Abstract: <?= $row->abstract ?><br />
-						Keywords: <?= $row->keywords ?><br />
-						Submitted to Event: (SHOULD BE LINK TO VIEW EVENT PAGE) <?= $row->idEvent ?><br />
-						Decision: <br />
-						Comments: <br />
-						<br />
+						<?php foreach($events as $event):?>
+							<?php if($row->idEvent == $event->idEvent): ?>
+								<h2><a href="<?= site_url('Paper/viewPaper') . '?idPaper=' . $row->idPaper ?>"><?= $row->title ?></a></h2>
+								Abstract: <?= $row->abstract ?><br />
+								Keywords: <?= $row->keywords ?><br />
+								Submitted to Event: <a href="<?= site_url('Event/viewEvents') . '?idEvent=' . $event->idEvent ?>"><?= $event->eventName ?></a><br />
+								Decision: <br />
+								Comments: <br />
+								<br />
+							<?php endif; ?>
+						<?php endforeach; ?>
 					<?php endforeach; ?>
 				<?php endif; ?>
 				

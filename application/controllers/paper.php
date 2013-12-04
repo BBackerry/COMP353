@@ -66,9 +66,22 @@ class Paper extends CI_Controller {
 	
 	public function submittedPapers()
 	{
+		$this->load->model('event_model');
+		
 		$username = $this->session->userdata('idUser');
+		
 		if ($username) {
 			$query['papers'] = $this->paper_model->get_paper_by_user($username);
+			
+			$events = array();
+		
+			foreach($query['papers'] as $paper):
+				$event = $this->event_model->get_event($paper->idEvent);
+				array_push($events, $event[0]);
+			endforeach;
+			
+			$query['events'] = $events;
+			
 			$this->load->view('header');
 			$this->load->view('submitted_papers', $query);
 		}
