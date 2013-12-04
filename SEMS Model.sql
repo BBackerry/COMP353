@@ -234,9 +234,15 @@ DROP TABLE IF EXISTS `comp353`.`topicHierarchy` ;
 CREATE TABLE IF NOT EXISTS `comp353`.`topicHierarchy` (
   `idTopic` INT NOT NULL,
   `idTopicHierarchy` INT NOT NULL,
-  PRIMARY KEY (`idTopic`, `idTopicHierarchy`),
+  PRIMARY KEY (`idTopic`),
+  INDEX `idTopicHierarchy_idx` (`idTopicHierarchy` ASC),
   CONSTRAINT `idTopic`
     FOREIGN KEY (`idTopic`)
+    REFERENCES `comp353`.`topic` (`idTopic`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idTopicHierarchy`
+    FOREIGN KEY (`idTopicHierarchy`)
     REFERENCES `comp353`.`topic` (`idTopic`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -410,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `comp353`.`reviewAssignment` (
   `idAssignedTo` VARCHAR(45) NOT NULL,
   `idPaper` INT NOT NULL,
   `comment` VARCHAR(100) NOT NULL,
-  `score` DECIMAL(2,2) NOT NULL,
+  `score` DECIMAL(4,2) NOT NULL,
   PRIMARY KEY (`idAssignedBy`, `idAssignedTo`, `idPaper`),
   INDEX `idPaper_idx` (`idPaper` ASC),
   INDEX `idAssignedTo_idx` (`idAssignedTo` ASC),
@@ -433,14 +439,14 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `comp353`.`commiteeBid`
+-- Table `comp353`.`committeeBid`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `comp353`.`commiteeBid` ;
+DROP TABLE IF EXISTS `comp353`.`committeeBid` ;
 
-CREATE TABLE IF NOT EXISTS `comp353`.`commiteeBid` (
+CREATE TABLE IF NOT EXISTS `comp353`.`committeeBid` (
   `idUser` VARCHAR(45) NOT NULL,
   `idPaper` INT NOT NULL,
-  `bid` DECIMAL(2,2) NOT NULL,
+  `bid` DECIMAL(4,2) NOT NULL,
   PRIMARY KEY (`idUser`, `idPaper`),
   INDEX `idPaper_idx` (`idPaper` ASC),
   CONSTRAINT `commiteeBid_user`
@@ -530,6 +536,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'Computer Science &amp; Engineering');
