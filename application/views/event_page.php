@@ -5,30 +5,25 @@
 		<div class="panel panel-default">
       
       <h3>Event Page</h3>     
-		
-		
-		<?php foreach($getEvent as $row): ?> 
-			
         <div class="form-group">	 
-			<label class="col-lg-2 control-label">Event Title: </label><p><?= $row->eventName ?></p>
+			<label class="col-lg-2 control-label">Event Title: </label><p><?= $event->eventName ?></p>
         </div>                 
         
         <div class="form-group">
-			<label class="col-lg-2 control-label"> Event Description: </label><p><?= $row->eventDescription ?></p>
+			<label class="col-lg-2 control-label"> Event Description: </label><p><?= $event->eventDescription ?></p>
         </div>
    
          <div class="form-group">
-			<label class="col-lg-2 control-label">Created By: </label><p><?= $row->createdBy ?></p>
+			<label class="col-lg-2 control-label">Created By: </label><p><?= $event->createdBy ?></p>
         </div>                
          
         <div class="form-group">
-			<label class="col-lg-2 control-label">Start Date: </label><p><?= $row->startDate ?></p>
+			<label class="col-lg-2 control-label">Start Date: </label><p><?= $event->startDate ?></p>
         </div>
        
         <div class="form-group">
-        <label class="col-lg-2 control-label">End Date: </label><p><?= $row->endDate ?></p>               
-        </div>          
-        <?php endforeach; ?>
+        <label class="col-lg-2 control-label">End Date: </label><p><?= $event->endDate ?></p>               
+        </div>
        
 	   <?php foreach($EventTopicDetail as $row): ?> 
 			<div class="form-group">	 
@@ -63,15 +58,8 @@
 			<?php endforeach; ?>	   
 		<?php endforeach; ?>
 
-		
-					
-      				 
-		<form role="form" class="form-horizontal" name="viewEvent" action="<?php echo site_url('Event/editEvent/') ?>" >
-       
-		<button style="float:right;" class="btn btn-primary">Edit Event</button>
-		
-		</form>
-		
+		<a href="<?= site_url('Event/editEvent') . '?idEvent=' . $event->idEvent ?>" style="float:right;" class="btn btn-primary">Edit Event</a>
+
 		</div>
 		</div>
 		</div>
