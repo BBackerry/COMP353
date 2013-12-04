@@ -6,10 +6,8 @@
 				<h2>Submit New Paper</h2>
 			</div>
 			<div class="panel-body">
-				<p>Paper Info:<p>
 				<p>You can only change the Title, Abstract, Authors, or paper file during this period. No author can be added or deleted after this period.<p>
 				<p>You can only submit to an event that is currently in the phase of submitting papers.<p>
-				<p>Fields with * are required.<p>
 				<p>The abstract must be at least 20 words, but no more than 200 characters including blank spaces. You can write the abstract in a text editor then copy and paste it in the appropriate field.<p>
 			  
 				

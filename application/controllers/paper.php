@@ -77,7 +77,7 @@ class Paper extends CI_Controller {
 			}
 
 			$this->load->view('header');
-			$this->load->view('papers_submitted', $data);
+			$this->load->view('papers_submitted', isset($data) ? $data : null);
 		}
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in to view papers');

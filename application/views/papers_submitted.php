@@ -5,6 +5,7 @@
 				<h2>My Papers</h2>
 			</div>
 			<div class="panel-body">
+				<?php if(isset($papers)): ?>
 				<?php foreach($papers as $obj): ?>
 					<div class="list-group">
 						<div class="list-group-item">
@@ -18,6 +19,7 @@
 						</div>
 					</div>
 				<?php endforeach; ?>
+				<?php endif; ?>
 			
 			
 				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submit/') ?>">
