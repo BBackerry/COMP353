@@ -2,7 +2,7 @@
 	<div class="row">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				<h3 class="panel-title">User Profile</h3>
+				<h2>User Profile</h2>
 			</div>
 			<div class="panel-body">
 				<form class="form-horizontal" role="form" method="post" action="<?= site_url('User/update_profile') ?>">

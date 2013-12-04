@@ -12,6 +12,7 @@ class Event extends CI_Controller {
 		$this->load->model('topic_model');
 		$this->load->model('phase_model');
 		$this->load->model('phaseType_model');
+		$this->load->model('paper_model');
 	}
 	
 	public function listEvents()
@@ -29,6 +30,16 @@ class Event extends CI_Controller {
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}
+	}
+	
+	public function eventPapers()
+	{
+		$idEvent = $this->input->get('idEvent');
+		$param['papers'] = $this->paper_model->get_paper_by_event($idEvent);
+		$param['event'] = $this->event_model->get_event($idEvent)[0];
+		
+		$this->load->view('header');
+		$this->load->view('event_papers', $param);
 	}
 	
 	public function addEvent()

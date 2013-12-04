@@ -66,27 +66,21 @@ class Paper extends CI_Controller {
 	
 	public function submittedPapers()
 	{
-		$this->load->model('event_model');
-		
 		$username = $this->session->userdata('idUser');
-		
 		if ($username) {
-			$query['papers'] = $this->paper_model->get_paper_by_user($username);
+			$papers = $this->paper_model->get_paper_by_user_no_blob($username);
+			$this->load->model('event_model');
 			
-			$events = array();
-		
-			foreach($query['papers'] as $paper):
-				$event = $this->event_model->get_event($paper->idEvent);
-				array_push($events, $event[0]);
-			endforeach;
-			
-			$query['events'] = $events;
-			
+			for($i = 0; $i < count($papers); ++$i) {
+				$data['papers'][$i]['paper'] = $papers[$i];
+				$data['papers'][$i]['event'] = $this->event_model->get_event_name($papers[$i]->idEvent)[0]->eventName;
+			}
+
 			$this->load->view('header');
-			$this->load->view('submitted_papers', $query);
+			$this->load->view('papers_submitted', isset($data) ? $data : null);
 		}
 		else {
-			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to view papers');
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}

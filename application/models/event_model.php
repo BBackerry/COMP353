@@ -7,6 +7,13 @@ class Event_model extends CI_Model {
 		$query = $this->db->query($sql, array($idEvent)); 
 		return $query->result();
 	}
+	
+	function get_event_name($idEvent)
+	{
+		$sql = "SELECT eventName FROM event WHERE idEvent = ? ";
+		$query = $this->db->query($sql, array($idEvent)); 
+		return $query->result();
+	}
 
 	function get_all_event()
 	{
