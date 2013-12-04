@@ -35,6 +35,13 @@ class Paper_model extends CI_Model {
 		$query = $this->db->query($sql, array($idUser)); 
 		return $query->result();
 	}
+	
+	function get_paper_by_event_no_blob($idEvent)
+	{
+		$sql = "SELECT idPaper, title, abstract, submittedBy, keywords, idEvent FROM paper WHERE idEvent = ?";
+		$query = $this->db->query($sql, array($idEvent)); 
+		return $query->result();
+	}
 
 	function create_paper($title, $abstract, $submittedby, $document, $keywords, $idEvent)
 	{

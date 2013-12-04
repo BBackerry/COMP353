@@ -93,6 +93,51 @@ class Paper extends CI_Controller {
 			$this->load->view('home_page');
 		}
 	}
+	
+	public function paperDecision($message = null)
+	{
+		$this->load->model('role_model');
+		$this->load->model('event_model');
+		$this->load->model('paper_model');
+		$this->load->model('paperDecision_model');
+		
+		$CMRoles = $this->role_model->get_role_by_position_and_user(2, $this->session->userdata('idUser'));
+		for($i = 0; $i < count($CMRoles); ++$i) {
+			$data['map'][$i]['event'] = $this->event_model->get_event($CMRoles[$i]->idEvent)[0];
+			$data['map'][$i]['papers'] = $this->paper_model->get_paper_by_event_no_blob($CMRoles[$i]->idEvent);
+			for($j = 0; $j < count($data['map'][$i]['papers']); ++$j) {
+				$data['map'][$i]['papers'][$j]->decision = $this->paperDecision_model->get_paperDecision($data['map'][$i]['papers'][$j]->idPaper);
+			}
+		}
+		
+		$this->load->view('header', $message);
+		$this->load->view('paper_decision', $data);
+	}
+	
+	public function updateDecision()
+	{
+		$decision = $this->input->post();
+		$this->load->model('paperDecision_model');
+		$decision_for_paper = $this->paperDecision_model->get_paperDecision_by_paper_and_user($decision['idPaper'], $this->session->userdata('idUser'));
+		if(!empty($decision_for_paper)) {
+			if($this->paperDecision_model->update_paperDecision_by_paper_and_user($decision['idPaper'], $decision['decision'], $this->session->userdata('idUser'), $decision['reason'])) {
+				$message['successMessages'] = array('Paper Decision updated successfully');
+			}
+			else {
+				$message['errorMessages'] = array('Something went wrong while updating paper decision. Please try again');
+			}
+		}
+		else {
+			if($this->paperDecision_model->create_paperDecision($decision['idPaper'], $decision['decision'], $this->session->userdata('idUser'), $decision['reason'])) {
+				$message['successMessages'] = array('Paper Decision created successfully');
+			}
+			else {
+				$message['errorMessages'] = array('Something went wrong while deciding on this paper. Please try again');
+			}
+		}
+		
+		$this->paperDecision($message);
+	}
 
 	public function search()
 	{

@@ -83,6 +83,15 @@
                     </ul>
                 </li>        
             <?php } ?>
+			
+			<?php if($this->session->userdata('isProgramChair')): ?>
+				<li class="dropdown">
+	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Paper Review<b class="caret"></b></a>
+	                <ul class="dropdown-menu">
+	                    <li><a href="<?php echo site_url('Paper/paperDecision'); ?>">Decide on Papers</a></li>  
+	                </ul>
+               </li>
+			<?php endif; ?>
             
             <?php if ($this->session->userdata('isCommitteeMember')) { ?>
 	            <li class="dropdown">
@@ -142,4 +151,3 @@
 		<?php endforeach; ?>
 	</div>
 	<?php endif; ?>
-  

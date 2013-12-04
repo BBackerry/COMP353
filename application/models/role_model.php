@@ -22,6 +22,13 @@ class Role_model extends CI_Model {
 		return $query->result();
 	}
 	
+	function get_role_by_position_and_user($idPosition, $idUser)
+	{
+		$sql = "SELECT * FROM role WHERE idPosition = ? AND idUser = ?";
+		$query = $this->db->query($sql, array($idPosition, $idUser)); 
+		return $query->result();
+	}
+	
 	function get_all_role()
 	{
 		$sql = "SELECT * FROM role ";
