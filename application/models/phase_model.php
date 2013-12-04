@@ -29,10 +29,10 @@ class Phase_model extends CI_Model {
 		return $query;
 	}
 
-	function update_phase($idPhase, $idEvent, $startTime, $endTime, $createdBy )
+	function update_phase($idPhase, $idEvent, $startTime, $endTime)
 	{
-		$sql = "UPDATE phase SET startTime = ?, endTime = ?, createdBy = ? WHERE idPhase = ? AND idEvent = ? ";
-		$query = $this->db->query($sql, array( $startTime, $endTime, $createdBy, $idPhase, $idEvent)); 
+		$sql = "UPDATE phase SET startTime = ?, endTime = ? WHERE idPhase = ? AND idEvent = ? ";
+		$query = $this->db->query($sql, array( $startTime, $endTime, $idPhase, $idEvent)); 
 		return $query;
 	}
 

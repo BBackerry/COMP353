@@ -1,6 +1,13 @@
 <?php
 class Paper_model extends CI_Model {
 	
+	function get_all_paper()
+	{
+		$sql = "SELECT * FROM paper ";
+		$query = $this->db->query($sql); 
+		return $query->result();
+	}
+	
 	function get_paper($idPaper)
 	{
 		$sql = "SELECT * FROM paper WHERE idPaper = ? ";

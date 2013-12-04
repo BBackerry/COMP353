@@ -1,4 +1,5 @@
-	<div class="container">
+	<br/>
+    <div class="container">
 	<div class="row">
 		<div class="panel panel-default">
 		<div class="panel-heading">
@@ -17,7 +18,7 @@
 				<div class="form-group">
 					<label for="eventDescription" class="col-lg-2 control-label">Event Description</label>
 					<div class="col-lg-10">
-						<textarea rows="5" class="form-control" id="eventDescription" name="eventDescription" value="<?= $event->eventDescription ?>" data-validate="required"></textarea>
+						<textarea rows="5" class="form-control" id="eventDescription" name="eventDescription" data-validate="required"><?= $event->eventDescription ?></textarea>
 					</div>
 				</div>
 					
@@ -35,10 +36,29 @@
 					</div>
 				</div>
 				
+				
+					<div class="form-group" id="setProgramChair">
+					<label for="meetings" class="col-lg-2 control-label">Set Program Chair:</label>
+					<div class="col-lg-10">
+						<select multiple class="form-control" name="setProgramChair[]" data-validate="required" size="10">
+							<?php foreach($users as $m):    
+                                    $selected = false;
+                                    foreach($programChairs as $md){
+                                        if($md->idUser == $m->idUser){
+                                            $selected= true;
+                                        }
+                                    }?>
+                                    
+								<option value="<?= $m->idUser ?>" <?php echo $selected ? 'selected' : '';?>><?php echo $m->idUser ?> - <?php echo $m->lastName ?>, <?php echo $m->firstName ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
+				
 				<div class="form-group" id="selectTopics">
 					<label for="topics" class="col-lg-2 control-label">Select Topics:</label>
 					<div class="col-lg-10">
-						<select multiple class="form-control" name="topics[]" data-validate="required">
+						<select multiple class="form-control" name="topics[]" data-validate="required" size="15">
 							<?php 
                                 $parents = explode("&", substr($hierarchy, 1));
                                 foreach($parents as $parent){
@@ -91,8 +111,8 @@
                                         foreach($topic as $t){
                                             if($t->idTopic == $idTopic){ 
                                                 $selected = false;
-                                                foreach($expert as $topicExpert){
-                                                    if($topicExpert->idTopic == $idTopic){
+                                                foreach($eventTopic as $evtTopic){
+                                                    if($evtTopic->idTopic == $idTopic){
                                                         $selected = true;
                                                     }
                                                 } 
@@ -106,31 +126,47 @@
 						</select>
 					</div>
 				</div>
-				
-				<div class="form-group" id="selectPhase">
-					<label for="phases" class="col-lg-2 control-label">Select phases:</label>
-					<div class="col-lg-10">
-						<select multiple class="form-control" name="phases[]" data-validate="required">
-							<?php foreach($phases as $p): ?>
-								<option value="<?= $p->idPhase ?>"><?= $p->phaseName ?></option>
-							<?php endforeach; ?>
-						</select>
-					</div>
-				</div>
+                 <?php foreach($phaseType as $p): 
+                    
+                        $phaseStart = "";
+                        $phaseEnd = "";
+                        foreach($phaseDetail as $pd){
+                            if($pd->idPhase == $p->idPhase){
+                                $phaseStart = date( "Y-m-d H:i:s", strtotime($pd->startTime));
+                                $phaseEnd = date( "Y-m-d H:i:s", strtotime($pd->endTime));
+                            }
+                        } ?>       
+                 
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"><?php echo $p->phaseName;?> - Start Date:</label>
+                        <input class="col-lg-2" type="Text" class="form-control" name="<?php echo $p->idPhase?>PhaseStart" id="<?php echo $p->idPhase?>PhaseStart" value="<?php echo $phaseStart;?>" data-validate="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label"><?php echo $p->phaseName;?> - End Date:</label>
+                        <input class="col-lg-2" type="Text" class="form-control" name="<?php echo $p->idPhase?>PhaseEnd" id="<?php echo $p->idPhase?>PhaseEnd" value="<?php echo $phaseStart;?>" data-validate="required"/>
+                    </div>   
+                <?php endforeach; ?>
 				
 				<div class="form-group" id="selectMeetings">
 					<label for="meetings" class="col-lg-2 control-label">Select Meetings:</label>
 					<div class="col-lg-10">
-						<select multiple class="form-control" name="meetings[]" data-validate="required">
-							<?php foreach($meetings as $m): ?>
-								<option value="<?= $m->idMeeting ?>"><?= date("Y-m-d H:i:s", strtotime($m->startTime)) ?> - <?= date("Y-m-d H:i:s", strtotime($m->endTime)) ?></option>
+						<select multiple class="form-control" name="meetings[]" data-validate="required" size="10">
+							<?php foreach($meetings as $m):    
+                                    $selected = false;
+                                    foreach($meetingDetail as $md){
+                                        if($md->idMeeting == $m->idMeeting){
+                                            $selected= true;
+                                        }
+                                    }?>
+                                    
+								<option value="<?= $m->idMeeting ?>" <?php echo $selected ? 'selected' : '';?>><?= date("Y-m-d H:i:s", strtotime($m->startTime)) ?> - <?= date("Y-m-d H:i:s", strtotime($m->endTime)) ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
 				</div>
 				
 				<input type="hidden" value="<?= $event->idEvent ?>" name="idEvent">
-				<button style="float:right;" class="btn btn-success">Edit</button>
+				<button style="float:right;" class="btn btn-success">Update Event</button>
 			</form>
 		</div>
 		</div>
@@ -162,6 +198,16 @@
 				dateFormat: "yy-mm-dd",
 				timeFormat: "hh:mm:ss"
 			});
+            <?php foreach($phaseType as $p): ?>
+			$("#<?php echo $p->idPhase."PhaseStart";?>").datetimepicker({
+				dateFormat: "yy-mm-dd",
+				timeFormat: "hh:mm:ss"
+			});
+			$("#<?php echo $p->idPhase."PhaseEnd";?>").datetimepicker({
+				dateFormat: "yy-mm-dd",
+				timeFormat: "hh:mm:ss"
+			});
+            <?php endforeach; ?>
 		</script>
     </body>
 </html>

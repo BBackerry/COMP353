@@ -234,9 +234,15 @@ DROP TABLE IF EXISTS `comp353`.`topicHierarchy` ;
 CREATE TABLE IF NOT EXISTS `comp353`.`topicHierarchy` (
   `idTopic` INT NOT NULL,
   `idTopicHierarchy` INT NOT NULL,
-  PRIMARY KEY (`idTopic`, `idTopicHierarchy`),
+  PRIMARY KEY (`idTopic`),
+  INDEX `idTopicHierarchy_idx` (`idTopicHierarchy` ASC),
   CONSTRAINT `idTopic`
     FOREIGN KEY (`idTopic`)
+    REFERENCES `comp353`.`topic` (`idTopic`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `idTopicHierarchy`
+    FOREIGN KEY (`idTopicHierarchy`)
     REFERENCES `comp353`.`topic` (`idTopic`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
@@ -410,7 +416,7 @@ CREATE TABLE IF NOT EXISTS `comp353`.`reviewAssignment` (
   `idAssignedTo` VARCHAR(45) NOT NULL,
   `idPaper` INT NOT NULL,
   `comment` VARCHAR(100) NOT NULL,
-  `score` DECIMAL(2,2) NOT NULL,
+  `score` DECIMAL(4,2) NOT NULL,
   PRIMARY KEY (`idAssignedBy`, `idAssignedTo`, `idPaper`),
   INDEX `idPaper_idx` (`idPaper` ASC),
   INDEX `idAssignedTo_idx` (`idAssignedTo` ASC),
@@ -433,14 +439,14 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `comp353`.`commiteeBid`
+-- Table `comp353`.`committeeBid`
 -- -----------------------------------------------------
-DROP TABLE IF EXISTS `comp353`.`commiteeBid` ;
+DROP TABLE IF EXISTS `comp353`.`committeeBid` ;
 
-CREATE TABLE IF NOT EXISTS `comp353`.`commiteeBid` (
+CREATE TABLE IF NOT EXISTS `comp353`.`committeeBid` (
   `idUser` VARCHAR(45) NOT NULL,
   `idPaper` INT NOT NULL,
-  `bid` DECIMAL(2,2) NOT NULL,
+  `bid` DECIMAL(4,2) NOT NULL,
   PRIMARY KEY (`idUser`, `idPaper`),
   INDEX `idPaper_idx` (`idPaper` ASC),
   CONSTRAINT `commiteeBid_user`
@@ -531,6 +537,7 @@ SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
+
 INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'Computer Science &amp; Engineering');
 INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('1', 'Concordia University');
@@ -579,3 +586,22 @@ INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('
 INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('19', '18');
 INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('20', '19');
 INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('21', '19');
+
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember1', 'pass', 'committee1', 'member1', 'cmember1@confsys.ca', '1', '1', '1', '1');
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember2', 'pass', 'committee2', 'member2', 'cmember2@confsys.ca', '1', '1', '1', '1');
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember3', 'pass', 'committee3', 'member3', 'cmember3@confsys.ca', '1', '1', '1', '1');
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember4', 'pass', 'committee4', 'member4', 'cmember4@confsys.ca', '1', '1', '1', '1');
+
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember1', '1');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember1', '2');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember1', '15');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember1', '14');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember2', '1');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember2', '2');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember2', '3');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember2', '15');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', '1');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', '2');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', '14');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember4', '4');
+
