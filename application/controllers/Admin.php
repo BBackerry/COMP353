@@ -13,6 +13,7 @@ class Admin extends CI_Controller {
         $this->load->model('topicHierarchy_model');
         $this->load->model('interestInTopic_model');
         $this->load->model('expertInTopic_model');
+        $this->load->helper('hierarchy_helper' );
 	}
     
 	public function manageUsers()
@@ -36,13 +37,13 @@ class Admin extends CI_Controller {
         
         $tree = array();
         foreach($param['topic'] as $topic){
-            if($this->isParent($topic->idTopic, $topicParents)){
-                array_push($tree, $this->constructHierarchy($hierarchy, $topic->idTopic));
+            if(isParent($topic->idTopic, $topicParents)){
+                array_push($tree, constructHierarchy($hierarchy, $topic->idTopic));
             }
         }
         $param['hierarchy'] = "";
         foreach($tree as $parent){
-           $param['hierarchy'] .= $this->displayTree($parent, $topicParents);
+           $param['hierarchy'] .= displayTree($parent, $topicParents);
         }
 
         
@@ -55,60 +56,6 @@ class Admin extends CI_Controller {
         $param['department'] = $this->department_model->get_all_department();
         $param['organization'] = $this->organization_model->get_all_organization();
         $this->load->view('edit_user', $param);
-    }
-    function isParent($topic, $topicHierarchy){
-        foreach($topicHierarchy as $relation){
-            if($relation->idTopic == $topic)
-                return false;
-        }
-        return true;
-    }
-    function displayTree($parent,$topicParents,$str=""){    
-        foreach($parent as $key => $value){
-            if($key === "id"){
-                if( $this->isParent($parent["id"], $topicParents)){
-                    $str = $str ."&". $parent["id"];
-                } else {
-                    $str = $str . $parent["id"];
-                }
-            }
-            if($key !== "id"){
-                $str = $str . "["; 
-                $str = $this->displayTree($value, $topicParents, $str);
-                $str = $str . "]";                
-            }
-        }
-        return $str;
-    }
-    
-    function constructHierarchy(array $hierarchyData, $parentId) {
-        $hierarchy = array("id" => $parentId);
-        foreach ($hierarchyData as $relation) {
-            if ($relation['idTopicHierarchy'] == $parentId) {
-                $child = array("id"=>$relation['idTopic']);
-                $children = $this->constructHierarchyNoParent($hierarchyData, $relation['idTopic']);
-                if ($children) {
-                    $child[] = $children;
-                }
-                    $hierarchy[] = $child;
-            }
-        }
-        //print_r($hierarchy);
-        return $hierarchy;
-    }
-    function constructHierarchyNoParent(array $hierarchyData, $parentId = 1) {
-        $hierarchy = array();
-        foreach ($hierarchyData as $relation) {
-            if ($relation['idTopicHierarchy'] == $parentId) {
-                $child = array("id"=>$relation['idTopic']);
-                $children = $this->constructHierarchyNoParent($hierarchyData, $relation['idTopic']);
-                if ($children) {
-                    $child[] = $children;
-                }
-                    $hierarchy[] = $child;
-            }
-        }
-        return $hierarchy;
     }
    
     public function updateUser()
@@ -174,13 +121,13 @@ class Admin extends CI_Controller {
         
         $tree = array();
         foreach($param['topic'] as $topic){
-            if($this->isParent($topic->idTopic, $topicParents)){
-                array_push($tree, $this->constructHierarchy($hierarchy, $topic->idTopic));
+            if(isParent($topic->idTopic, $topicParents)){
+                array_push($tree, constructHierarchy($hierarchy, $topic->idTopic));
             }
         }
         $param['hierarchy'] = "";
         foreach($tree as $parent){
-           $param['hierarchy'] .= $this->displayTree($parent, $topicParents);
+           $param['hierarchy'] .= displayTree($parent, $topicParents);
         }
         $param['interest'] = $this->interestInTopic_model->get_interestInTopic_of_user($username);
         $param['expert'] = $this->expertInTopic_model->get_expertInTopic_of_user($username);
