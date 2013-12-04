@@ -10,8 +10,10 @@ class Event extends CI_Controller {
 		$this->load->model('meetingEvent_model');
 		$this->load->model('eventTopic_model');
 		$this->load->model('topic_model');
+        	$this->load->model('topicHierarchy_model');
 		$this->load->model('phase_model');
 		$this->load->model('phaseType_model');
+       		$this->load->helper('hierarchy_helper');
 		$this->load->model('paper_model');
 	}
 	
@@ -46,12 +48,28 @@ class Event extends CI_Controller {
 	{
 		$admin = $this->session->userdata('isAdmin');
 		$param['meeting']= $this->meeting_model->get_all_meeting();
-		$param['EventTopic']= $this->topic_model->get_all_topic();
-		$param['phaseType']= $this->phaseType_model->get_all_phaseType();
-		
+		$param['phaseType']= $this->phaseType_model->get_all_phaseType();   
 		
 		if ($admin)
 		{
+	            $param['topic'] = $this->topic_model->get_all_topic();
+	            $topicParents = $this->topicHierarchy_model->get_all_topicHierarchy();
+	            $hierarchy = array();
+	            foreach($topicParents as $parent){
+	                array_push($hierarchy, array('idTopic' => $parent->idTopic, 'idTopicHierarchy' =>$parent->idTopicHierarchy));
+	            }
+            
+	            $tree = array();
+	            foreach($param['topic'] as $topic){
+	                if(isParent($topic->idTopic, $topicParents)){
+	                    array_push($tree, constructHierarchy($hierarchy, $topic->idTopic));
+	                }
+	            }
+	            $param['hierarchy'] = "";
+	            foreach($tree as $parent){
+	               $param['hierarchy'] .= displayTree($parent, $topicParents);
+	            }
+        
 			$this->load->view('header');
 			$this->load->view('add_new_event', $param);
 		}
@@ -100,26 +118,10 @@ class Event extends CI_Controller {
 		$endDate = date( "Y-m-d H:i:s", strtotime($this->input->get('endDate')));
 		$idMeeting = $this->input->get('meetingIDs');
 		$idTopic = $this->input->get('eventTopics');
-		$idPhase = $this->input->get('phaseTypes');
-		$firstStartDate = date( "Y-m-d H:i:s", strtotime($this->input->get('firstStartDate')));	
-		$firstEndDate = date( "Y-m-d H:i:s", strtotime($this->input->get('firstEndDate')));
-		$secondStartDate = date( "Y-m-d H:i:s", strtotime($this->input->get('secondStartDate')));	
-		$secondEndDate = date( "Y-m-d H:i:s", strtotime($this->input->get('secondEndDate')));
-		$thirdStartDate = date( "Y-m-d H:i:s", strtotime($this->input->get('thirdStartDate')));	
-		$thirdEndDate = date( "Y-m-d H:i:s", strtotime($this->input->get('thirdEndDate')));
-		$fourthStartDate = date( "Y-m-d H:i:s", strtotime($this->input->get('fourthStartDate')));	
-		$fourthEndDate = date( "Y-m-d H:i:s", strtotime($this->input->get('fourthEndDate')));
-		$fifthStartDate = date( "Y-m-d H:i:s", strtotime($this->input->get('fifthStartDate')));	
-		$fifthEndDate = date( "Y-m-d H:i:s", strtotime($this->input->get('fifthEndDate')));		
+		$idPhase = $this->phaseType_model->get_all_phaseType();	
 		
 		$this->event_model->create_event($startDate, $endDate, $username, $eventDescription, $eventName);
 		$idEvent = mysql_insert_id();
-		
-		$this->phase_model->create_phase(1, $idEvent, $firstStartDate, $firstEndDate);
-		$this->phase_model->create_phase(2, $idEvent, $secondStartDate, $secondEndDate);
-		$this->phase_model->create_phase(3, $idEvent, $thirdStartDate, $thirdEndDate);
-		$this->phase_model->create_phase(4, $idEvent, $fourthStartDate, $fourthEndDate);
-		$this->phase_model->create_phase(5, $idEvent, $fifthStartDate, $fifthEndDate);
 				
 		foreach($idMeeting as $m)
 		{
@@ -132,23 +134,64 @@ class Event extends CI_Controller {
 		}
 
 		foreach($idPhase  as $p)
-		{ 
-			$this->eventTopic_model->create_phase($p, $idEvent, $startDate, $endDate, $username);
+		{
+			$startDate = date( "Y-m-d H:i:s", strtotime($this->input->get($p->idPhase."PhaseStart")));	
+		        $endDate = date( "Y-m-d H:i:s", strtotime($this->input->get($p->idPhase."PhaseEnd")));	
+		        //$this->phase_model->create_phase(1, $idEvent, $firstStartDate, $firstEndDate);
+			$this->phase_model->create_phase($p->idPhase, $idEvent, $startDate, $endDate, $username);
 		}
 		
+        
+		$param['event'] = $this->event_model->get_event($idEvent)[0];
+		$param['meetingDetail']= $this->meetingEvent_model->get_meetingEvent($idEvent);
+		$param['EventTopicDetail']= $this->eventTopic_model->get_eventTopic($idEvent);
+		$param['phaseDetail']= $this->phase_model->get_all_phase_for_event($idEvent);
+		$param['phaseTypeDetail']= $this->phaseType_model->get_all_phaseType();
+		
+		$meetings = array();
+		foreach($param['meetingDetail'] as $row) {
+			$meeting = $this->meeting_model->get_meeting($row->idMeeting);
+			array_push($meetings, $meeting[0]);
+		}
+		$param['meetings'] = $meetings;
+		
+		$topics = array();
+		foreach($param['EventTopicDetail'] as $row) {
+			$topic = $this->topic_model->get_topic($row->idTopic);
+			array_push($topics, $topic[0]);
+		}
+		$param['topics'] = $topics;
+        
 		$this->load->view('header');
-		$this->load->view('event_page');
+		$this->load->view('event_page', $param);
 	}
 	
 	public function editEvent()
 	{
+	        $param['topic'] = $this->topic_model->get_all_topic();
+	        $topicParents = $this->topicHierarchy_model->get_all_topicHierarchy();
+	        $hierarchy = array();
+	        foreach($topicParents as $parent){
+	            array_push($hierarchy, array('idTopic' => $parent->idTopic, 'idTopicHierarchy' =>$parent->idTopicHierarchy));
+	        }
+        
+	        $tree = array();
+	        foreach($param['topic'] as $topic){
+	            if(isParent($topic->idTopic, $topicParents)){
+	                array_push($tree, constructHierarchy($hierarchy, $topic->idTopic));
+	            }
+	        }
+	        $param['hierarchy'] = "";
+	        foreach($tree as $parent){
+	           $param['hierarchy'] .= displayTree($parent, $topicParents);
+	        }
 		$idEvent = $this->input->get('idEvent');
-		$data['event'] = $this->event_model->get_event($idEvent)[0];
-		$data['meetings']= $this->meeting_model->get_all_meeting();
-		$data['topics']= $this->topic_model->get_all_topic();
-		$data['phases']= $this->phaseType_model->get_all_phaseType();
+       		$param['eventTopic'] = $this->eventTopic_model->get_eventTopic($idEvent);
+		$param['event'] = $this->event_model->get_event($idEvent)[0];
+		$param['meetings']= $this->meeting_model->get_all_meeting();
+		$param['phases']= $this->phaseType_model->get_all_phaseType();
 		$this->load->view('header');
-		$this->load->view('event_edit', $data);
+		$this->load->view('event_edit', $param);
 	}
 	
 	public function submitEditEvent()

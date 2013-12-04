@@ -39,9 +39,70 @@
 					<label for="topics" class="col-lg-2 control-label">Select Topics:</label>
 					<div class="col-lg-10">
 						<select multiple class="form-control" name="topics[]" data-validate="required">
-							<?php foreach($topics as $t): ?>
-								<option value="<?= $t->idTopic ?>"><?= $t->topicName ?></option>
-							<?php endforeach; ?>
+							<?php 
+                                $parents = explode("&", substr($hierarchy, 1));
+                                foreach($parents as $parent){
+                                    $strlen = strlen( $str );
+                                    $tab = "";
+                                    $idTopic = "";
+                                    for( $i = 0; $i <= strlen($parent); $i++ ) {
+                                        $char = substr( $parent, $i, 1 );
+                                        if($char === "["){ 
+                                            if($idTopic !== ""){ 
+                                                foreach($topic as $t){
+                                                    if($t->idTopic == $idTopic){ 
+                                                        $selected = false;
+                                                        foreach($eventTopic as $evtTopic){
+                                                            if($evtTopic->idTopic == $idTopic){
+                                                                $selected = true;
+                                                            }
+                                                        } 
+                            ?>
+                                                        <option value="<?php echo $idTopic;?>" <?php echo $selected ? 'selected' : '';?>><?php echo $tab.$t->topicName;?></option>
+                            <?php                       $idTopic ="";
+                                                    }
+                                                }
+                                            }
+                                            $tab = $tab."&nbsp;&nbsp;";    
+                                        }
+                                        else if ($char === "]"){
+                                            if($idTopic !== ""){ 
+                                                foreach($topic as $t){
+                                                    if($t->idTopic == $idTopic){ 
+                                                        $selected = false;
+                                                        foreach($eventTopic as $evtTopic){
+                                                            if($evtTopic->idTopic == $idTopic){
+                                                                $selected = true;
+                                                            }
+                                                        } 
+                            ?>
+                                                        <option value="<?php echo $idTopic;?>" <?php echo $selected ? 'selected' : '';?>><?php echo $tab.$t->topicName;?></option>
+                            <?php                       $idTopic ="";
+                                                    }
+                                                }
+                                            }
+                                            $tab = substr($tab,0, -12);
+                                        }
+                                        else{
+                                            $idTopic = $idTopic.$char;
+                                        }
+                                    }
+                                    if($idTopic !== ""){ 
+                                        foreach($topic as $t){
+                                            if($t->idTopic == $idTopic){ 
+                                                $selected = false;
+                                                foreach($expert as $topicExpert){
+                                                    if($topicExpert->idTopic == $idTopic){
+                                                        $selected = true;
+                                                    }
+                                                } 
+                            ?>
+                                                <option value="<?php echo $idTopic;?>" <?php echo $selected ? 'selected' : '';?>><?php echo $tab.$t->topicName;?></option>
+                            <?php               $idTopic ="";
+                                            }
+                                        }
+                                    }
+                                }?>
 						</select>
 					</div>
 				</div>
