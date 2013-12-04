@@ -1,67 +1,59 @@
-      <div class="container">
-	  <div class="row">
-	  <div class="panel-body">
-	  
-		<div class="panel panel-default">
+	<div class="container">
+		<div class="row">
+			<div class="panel-body">
+				<div class="panel panel-default">
       
-      <h3>Event Page</h3>     
-        <div class="form-group">	 
-			<label class="col-lg-2 control-label">Event Title: </label><p><?= $event->eventName ?></p>
-        </div>                 
-        
-        <div class="form-group">
-			<label class="col-lg-2 control-label"> Event Description: </label><p><?= $event->eventDescription ?></p>
-        </div>
-   
-         <div class="form-group">
-			<label class="col-lg-2 control-label">Created By: </label><p><?= $event->createdBy ?></p>
-        </div>                
-         
-        <div class="form-group">
-			<label class="col-lg-2 control-label">Start Date: </label><p><?= $event->startDate ?></p>
-        </div>
-       
-        <div class="form-group">
-        <label class="col-lg-2 control-label">End Date: </label><p><?= $event->endDate ?></p>               
-        </div>
-       
-        <label class="col-lg-2 control-label">Event Topics:</label>
-	   <?php foreach($topics as $row): ?> 
-				<p><?= $row->topicName?></p>		
-		<?php endforeach; ?>
-	
-		
-		 <?php foreach($meetings as $row): ?> 
-			<div class="form-group">	 
-				<label class="col-lg-2 control-label">Event Meeting(s): </label>
-					<p><?php echo date( "Y-m-d H:i:s", strtotime($row->startTime))?> - <?php echo date( "Y-m-d H:i:s", strtotime($row->endTime)) ?></p>					
-			</div> 
-			<br>
-		<?php endforeach; ?>
-		<label class="col-lg-2 control-label">Phase Date Details: </label> <br/><br/>
-		<?php foreach($phaseTypeDetail as $row): ?>
-		
-			<?php foreach($phaseDetail as $phase): ?> 
-				<?php if($row->idPhase == $phase->idPhase):?>
+      				<h3>Event Page</h3>     
+			        	 
+					<label class="col-lg-2 control-label">Event Title: </label><p><?= $event->eventName ?></p>
+					  
+					<label class="col-lg-2 control-label"> Event Description: </label><p><?= $event->eventDescription ?></p>
 					
-						
-						<label class="col-lg-2 control-label"> Phase <?php echo $row->idPhase?>: <?php echo $row->phaseName?> </label>
-							<br>
-							<br>							
-						<label class="col-lg-2 control-label"> Start Date:</label><p><?php echo date( "Y-m-d H:i:s", strtotime($phase->startTime))?> </p>
-						<label class="col-lg-2 control-label"> End Date:</label> <p><?php echo date( "Y-m-d H:i:s", strtotime($phase->endTime)) ?></p>
-						
-				 
-				<?php endif; ?>				
-			<?php endforeach; ?>	   
-		<?php endforeach; ?>
+					<label class="col-lg-2 control-label">Created By: </label><p><?= $event->createdBy ?></p>
+					      
+					<label class="col-lg-2 control-label">Start Date: </label><p><?= $event->startDate ?></p>
+					
+					<label class="col-lg-2 control-label">End Date: </label><p><?= $event->endDate ?></p>               
+					
+					<label class="col-lg-2 control-label">Event Topics:</label><br />
+					<ul class="list-group">
+						<?php foreach($topics as $row): ?> 
+							<li class="list-group-item"><?= $row->topicName?></li>		
+						<?php endforeach; ?>
+					</ul>
+					<br />
+					
+					<?php if(isset($papers)): ?>
+						<label class="col-lg-2 control-label">Event Meeting(s): </label>
+						<ul class="list-group">
+							<?php foreach($meetings as $row): ?> 
+								<li class="list-group-item">
+									<?php echo date( "Y-m-d H:i:s", strtotime($row->startTime))?> - <?php echo date( "Y-m-d H:i:s", strtotime($row->endTime)) ?>
+								</li>					
+							<?php endforeach; ?>
+						</ul>
+						<br />
+					<?php endif; ?>
+					
+					<label class="col-lg-2 control-label">Event Phases: </label> <br/><br/>
+					<?php foreach($phaseTypeDetail as $row): ?>
+						<?php foreach($phaseDetail as $phase): ?> 
+							<?php if($row->idPhase == $phase->idPhase):?>
+								<label class="col-lg-2 control-label"> Phase <?php echo $row->idPhase?>: </label><p><?php echo $row->phaseName?></p>						
+								<label class="col-lg-2 control-label"> Start Date:</label><p><?php echo date( "Y-m-d H:i:s", strtotime($phase->startTime))?> </p>
+								<label class="col-lg-2 control-label"> End Date:</label> <p><?php echo date( "Y-m-d H:i:s", strtotime($phase->endTime)) ?></p>
+								<br />
+							<?php endif; ?>				
+						<?php endforeach; ?>	   
+					<?php endforeach; ?>
+					
+					<a style="float:left;" href="<?= site_url('Event/eventPapers') . '?idEvent=' . $event->idEvent ?>" class="btn btn-primary">View Submitted Papers</a>
+					<a href="<?= site_url('Event/editEvent') . '?idEvent=' . $event->idEvent ?>" style="float:right;" class="btn btn-primary">Edit Event</a>
 
-		<a href="<?= site_url('Event/editEvent') . '?idEvent=' . $event->idEvent ?>" style="float:right;" class="btn btn-primary">Edit Event</a>
-
+				</div>
+			</div>
 		</div>
-		</div>
-		</div>
-		</div>
+	</div>
 	
     <div class="container">
       <!-- Example row of columns -->
