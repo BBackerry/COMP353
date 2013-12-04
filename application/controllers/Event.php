@@ -34,11 +34,12 @@ class Event extends CI_Controller {
 		}
 	}
 	
-	public function eventPapers()
+		public function eventPapers()
 	{
 		$idEvent = $this->input->get('idEvent');
 		$param['papers'] = $this->paper_model->get_paper_by_event($idEvent);
 		$param['event'] = $this->event_model->get_event($idEvent)[0];
+		$param['reviewPhase'] = $this->phase_model->get_phase(4, $idEvent)[0];
 		
 		$this->load->view('header');
 		$this->load->view('event_papers', $param);

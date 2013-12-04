@@ -1,10 +1,11 @@
      <div class="container">
      	<div class="row">
 			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>Papers To Review: </h3>
+				</div>
 				<div class="panel-body">
       
-       				<h3 class="panel-title"><b><br>Papers To Review: </b></h3>
-       				<br />
       				<h3 class="panel-title">Only papers submitted to events that are currently in the review phase are shown.</h3>
        				<br />
       				<h3 class="panel-title">Please click on a paper title to see detailed information.</h3>

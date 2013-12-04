@@ -20,6 +20,9 @@
 		            		<p><?= $topic->topicName ?></p> 
 		            	<?php endforeach; ?>
 	            		
+						<label for="username" class="col-lg-2 control-label">Submitted By:</label>  
+		            	<p><?= $row->submittedBy ?></p> 
+
 		            	<label for="eventName" class="col-lg-2 control-label">Submitted to Event:</label> 
 		            	<?php foreach($events as $event):?>
 		            		<p><?= $event->eventName ?></p> 

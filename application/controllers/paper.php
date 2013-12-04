@@ -101,8 +101,9 @@ class Paper extends CI_Controller {
 		
 		$query['assignments'] = $this->reviewAssignment_model->get_reviewAssignment_by_assignedTo($username);
 		$query['papers'] = $this->reviewAssignment_model->get_paper_assignedTo_user($username);
-		$phases = array();
 		
+		
+		$phases = array();
 		foreach($query['papers'] as $paper):
 			$phase = $this->phase_model->get_phase(4, $paper->idEvent);
 			array_push($phases, $phase[0]);
@@ -121,6 +122,41 @@ class Paper extends CI_Controller {
 		}
 	}
     
+	public function paperScores()
+	{
+		$this->load->model('reviewAssignment_model');
+		$this->load->model('phase_model');
+		$this->load->model('event_model');
+		$this->load->model('paperTopics_model');
+		
+		$username = $this->session->userdata('idUser');
+		
+		$idPaper = $this->input->get('idPaper');
+		$query['assignments'] = $this->reviewAssignment_model->get_reviewAssignment_by_paper($idPaper);
+		$query['topics'] = $this->paperTopics_model->get_topic_by_paper($idPaper);
+		$query['paper'] = $this->paper_model->get_paper($idPaper)[0];
+		$query['event'] = $this->event_model->get_event($query['paper']->idEvent)[0];
+		$query['papers'] = $this->paper_model->get_paper_by_event($query['paper']->idEvent);
+		$query['reviewPhase'] = $this->phase_model->get_phase(4, $query['paper']->idEvent)[0];
+		if(strtotime($query['reviewPhase']->endTime) < strtotime(date("Y-m-d H:i:s"))){
+			if ($username){
+				$this->load->view('header');
+				$this->load->view('paper_scores', $query);
+			}
+			else {
+				$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to review papers');
+				$this->load->view('header', $errors);
+				$this->load->view('home_page');
+			}
+		}
+		else {
+				$errors['errorMessages'] = array('The review phase for this event has not ended. You can only see scores after it ends.');
+				$this->load->view('header', $errors);
+				$this->load->view('event_papers', $query);
+		}
+		 
+	}
+
 	public function submitReview()
 	{
 		$this->load->model('reviewAssignment_model');

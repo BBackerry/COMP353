@@ -5,6 +5,7 @@
 					<h4>Papers Submitted to Event: <?= $event->eventName ?></h4>
 				</div>
 				<div class="panel-body">
+					<h5>You can view a paper's scores by clicking on its title only after the review phase ends.</h5>
 					<table border="1" class = "table">
       					<tr>
       						 <td><h4 class="panel-title"><b>Paper Title</b> </h4></td> 
@@ -13,7 +14,12 @@
       					</tr>
 						<?php foreach($papers as $row):?>
 							<tr>
-								<td><?= $row->title ?></td>
+								<?php if(strtotime($reviewPhase->endTime) < strtotime(date("Y-m-d H:i:s"))): ?>
+									<td><a href="<?= site_url('Paper/paperScores') . '?idPaper=' . $row->idPaper ?>"><?= $row->title ?></a></td>
+								
+								<?php else: ?>
+									<td><?= $row->title ?></td>
+								<?php endif; ?>
 								<td><?= $row->abstract ?></td>
 								<td><?= $row->submittedBy ?></td>
 							</tr>
