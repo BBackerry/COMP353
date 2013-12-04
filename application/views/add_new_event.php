@@ -7,7 +7,7 @@
 			
 			<div class="form-group">
 				<label> Event Title:</label>
-				<input type="text" class="form-control" name ="eventName" id="eventName">
+				<input type="text" class="form-control" name ="eventName" id="eventName" data-validate="required">
 			</div>
 			
 			<div class="form-group">
@@ -18,12 +18,12 @@
 	   
 			<div class="form-group">
 				<label>Start Date:</label>
-				<input type="Text" class="form-control" name="startDate"  id="startDate" value="">
+				<input type="Text" class="form-control" name="startDate"  id="startDate" value="" data-validate="required">
 			</div>
 			
 			<div class="form-group">
 				<label>End Date:</label>
-				<input type="Text" class="form-control" name="endDate"  id="endDate" value="">
+				<input type="Text" class="form-control" name="endDate"  id="endDate" value="" data-validate="required">
 			</div>
 				
 			

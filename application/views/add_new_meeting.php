@@ -9,14 +9,14 @@
 				<div class="form-group">
 					<label for="startTime" class="col-lg-2 control-label">Start Time</label>
 					<div class="col-lg-10">
-						<input type="text" class="form-control" name="startTime" id="startTime">
+						<input type="text" class="form-control" name="startTime" id="startTime" data-validate="required">
 					</div>
 				</div>
 				
 				<div class="form-group">
 					<label for="endTime" class="col-lg-2 control-label">End Time</label>
 					<div class="col-lg-10">
-						<input type="text" class="form-control" name="endTime" id="endTime">
+						<input type="text" class="form-control" name="endTime" id="endTime" data-validate="required">
 					</div>
 				</div>
 
