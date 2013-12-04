@@ -6,6 +6,7 @@ class Paper extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('paper_model');
+		$this->load->model('paperDecision_model');
 	}
 	public function submitPaper($eventId)
 	{	
@@ -40,7 +41,35 @@ class Paper extends CI_Controller {
 			$this->load->view('home_page');
 		}
 	}
-
+	
+	public function listAcceptedPaper()
+	{
+		
+			$param['allPapers'] = $this->paper_model->get_all_paper();
+			
+			$acceptedPapers = array();
+			foreach($param['allPapers'] as $row)
+			{
+				$acceptedPaper = $this->paperDecision_model->get_paperDecision($row);
+				if($acceptedPaper == 1)
+				{
+					array_push($acceptedPapers, $acceptedPaper[0]);
+				}
+			}
+			$param['papers'] = $acceptedPapers;
+			
+				$this->load->view('header');
+				$this->load->view('acceptedPaper_list', $param);
+		
+		
+	}
+	
+	public function publishPaper{
+	
+		$this->load->view('header');
+		$this->load->view('acceptedPaper_list');
+	
+	}
 	public function submit()
 	{
 		$this->load->model('event_model');

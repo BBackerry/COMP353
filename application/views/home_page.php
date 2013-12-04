@@ -42,7 +42,10 @@
                         $numOfNews = $numOfNews-1;
                     }?>
           <?php } ?>
+		          
         </div>
+			<br>
+		   <a href="<?php echo site_url('Paper/listAcceptedPaper'); ?>"> List all Accepted Papers </a>
        </div>
       </div>
 

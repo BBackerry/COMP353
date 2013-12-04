@@ -586,3 +586,22 @@ INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('
 INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('19', '18');
 INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('20', '19');
 INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('21', '19');
+
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember1', 'pass', 'committee1', 'member1', 'cmember1@confsys.ca', '1', '1', '1', '1');
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember2', 'pass', 'committee2', 'member2', 'cmember2@confsys.ca', '1', '1', '1', '1');
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember3', 'pass', 'committee3', 'member3', 'cmember3@confsys.ca', '1', '1', '1', '1');
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember4', 'pass', 'committee4', 'member4', 'cmember4@confsys.ca', '1', '1', '1', '1');
+
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember1', '1');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember1', '2');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember1', '15');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember1', '14');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember2', '1');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember2', '2');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember2', '3');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember2', '15');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', '1');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', '2');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', '14');
+INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember4', '4');
+

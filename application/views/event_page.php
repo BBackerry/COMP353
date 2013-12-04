@@ -14,12 +14,21 @@
 					<label class="col-lg-3 control-label">Start Date: </label><div class="col-sm-9"><p class="col-sm-9"><?= $event->startDate ?></p></div>
 					
 					<label class="col-lg-3 control-label">End Date: </label><div class="col-sm-9"><p class="col-sm-9"><?= $event->endDate ?></p> </div>              
-					<label class="col-lg-3 control-label">Event Program Chair(s): </label>
+					
+					<label class="col-lg-3 control-label">Program Chair(s): </label>
                     <div class="col-sm-9">
 						<?php foreach($programChairs as $row): ?> 
 								<p class="col-sm-9"><?php echo $row->idUser ?> - <?php echo $row->lastName ?>, <?php echo $row->firstName ?></p>											
 						<?php endforeach; ?>
 					</div>
+					
+					<label class="col-lg-3 control-label">Committee Member(s): </label>
+                    <div class="col-sm-9">
+						<?php foreach($committeeMembers as $row): ?> 
+								<p class="col-sm-9"><?php echo $row->idUser ?> - <?php echo $row->lastName ?>, <?php echo $row->firstName ?></p>											
+						<?php endforeach; ?>
+					</div>
+				
 				
 					<label class="col-lg-3 control-label">Event Topics:</label><br />
                     <div class="col-sm-9">

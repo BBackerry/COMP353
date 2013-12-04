@@ -107,6 +107,16 @@ class Event extends CI_Controller {
 		}
 		$param['programChairs'] = $programChairs;
 		
+		$committeeMembers = array();
+		foreach($param['roles'] as $row) {
+			if($row->idPosition == 3)
+			{
+				$committees = $this->user_model->get_user($row->idUser);
+				array_push($committeeMembers, $committees[0]);
+			}
+		}
+		$param['committeeMembers'] = $committeeMembers;
+		
 		$meetings = array();
 		foreach($param['meetingDetail'] as $row) {
 			$meeting = $this->meeting_model->get_meeting($row->idMeeting);
@@ -137,6 +147,7 @@ class Event extends CI_Controller {
 		$idTopic = $this->input->get('eventTopics');
 		$idPhase = $this->phaseType_model->get_all_phaseType();	
 		$programChair = $this->input->get('setProgramChair');
+		$committeeMember = $this->input->get('setCommitteeMemeber');
 		
 		$this->event_model->create_event($startDate, $endDate, $username, $eventDescription, $eventName);
 		$idEvent = mysql_insert_id();
@@ -145,6 +156,12 @@ class Event extends CI_Controller {
 		{
 			
 			$this->role_model->create_role($p, $idEvent, 2);
+		}
+		
+		foreach($committeeMember as $c)
+		{
+			
+			$this->role_model->create_role($c, $idEvent, 3);
 		}
 		foreach($idMeeting as $m)
 		{
@@ -174,6 +191,16 @@ class Event extends CI_Controller {
 			}
 		}
 		$param['programChairs'] = $programChairs;
+		
+		$committeeMembers = array();
+		foreach($param['roles'] as $row) {
+			if($row->idPosition == 3)
+			{
+				$committees = $this->user_model->get_user($row->idUser);
+				array_push($committeeMembers, $committees[0]);
+			}
+		}
+		$param['committeeMembers'] = $committeeMembers;
         
 		$param['event'] = $this->event_model->get_event($idEvent)[0];
 		$param['meetingDetail']= $this->meetingEvent_model->get_meetingEvent($idEvent);

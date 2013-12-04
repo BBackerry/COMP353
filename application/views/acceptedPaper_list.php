@@ -1,15 +1,13 @@
     <div class="container">
 	<div class="row">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3>Events:</h3>
-			</div>
 			<div class="panel-body">
-      				
+      				<h3>Accepted Papers:</h3>
+					
 					<ul class="list-group">
-					<?php if(isset($events)): ?>
-						<?php foreach($events as $row):?>
-							<li class="list-group-item"><a href="<?= site_url('Event/viewEvent') . '?idEvent=' . $row->idEvent ?>"><?= $row->eventName ?></a></li>
+					<?php if(isset($papers)): ?>
+						<?php foreach($papers as $row):?>
+							<li class="list-group-item"><a href="<?= site_url('Paper/publishPaper') . '?idPaper=' . $row->idPaper ?>"><?= $row->title ?></a></li>
 						<?php endforeach; ?>
 					<?php endif; ?>
 					</ul>
