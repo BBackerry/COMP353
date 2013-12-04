@@ -43,10 +43,10 @@ class ReviewAssignment_model extends CI_Model {
 		return $query->result();
 	}
 
-	function create_reviewAssignment($idAssignedBy, $idAssignedTo, $idPaper, $comment, $score)
+	function create_reviewAssignment($idAssignedBy, $idAssignedTo, $idPaper)
 	{
-		$sql = "INSERT INTO reviewAssignment VALUES( ?, ?, ?, ?, ?)";
-		$query = $this->db->query($sql, array($idAssignedBy, $idAssignedTo, $idPaper, $comment, $score)); 
+		$sql = "INSERT INTO reviewAssignment (idAssignedBy, idAssignedTo, idPaper) VALUES( ?, ?, ?)";
+		$query = $this->db->query($sql, array($idAssignedBy, $idAssignedTo, $idPaper)); 
 		return $query;
 	}
 
@@ -57,10 +57,10 @@ class ReviewAssignment_model extends CI_Model {
 		return $query;
 	}
 
-	function delete_reviewAssignment($idAssignedBy, $idAssignedTo, $idPaper)
+	function delete_reviewAssignment($idAssignedTo, $idPaper)
 	{
-		$sql = "DELETE FROM reviewAssignment WHERE idAssignedBy= ? AND idAssignedTo = ? AND idPaper = ? ";
-		$query = $this->db->query($sql, array($idAssignedBy, $idAssignedTo, $idPaper)); 
+		$sql = "DELETE FROM reviewAssignment WHERE idAssignedTo = ? AND idPaper = ? ";
+		$query = $this->db->query($sql, array($idAssignedTo, $idPaper)); 
 		return $query;
 	}
 
