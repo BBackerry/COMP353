@@ -84,13 +84,8 @@ public function __construct()
         $idEvent = $_POST['idEvent'];
 
 		$this->news_model->create_news($title, date( "Y-m-d H:i:s", $timestamp), $description, $createdBy, $idEvent);
-        $idNews = mysql_insert_id();
         
-        $param['successMessages'][0] = "The news has been successfully saved.";
-		$this->load->view('header', $param);
-        $param['news'] = $this->news_model->get_news($idNews);
-        $param['eventName'] = $this->event_model->get_event_name($idEvent);
-        $this->load->view('news_details', $param);	
+		redirect(site_url('Event/switchEvent?idEvent=' . $idEvent));
 	}
 		
 			

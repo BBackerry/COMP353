@@ -448,7 +448,7 @@ class Event extends CI_Controller {
         $eventName = $this->event_model->get_event_name($idEvent);
         $this->session->set_userdata('eventName', $eventName[0]->eventName);
         
-       $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+		$param['news'] = $this->news_model->get_all_news_for_event($idEvent);
         $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
         
 		$this->load->view('header');
