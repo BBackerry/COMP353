@@ -151,6 +151,85 @@ class Paper extends CI_Controller {
 		$this->load->view('header', $message);
 		$this->load->view('paper_decision', $data);
 	}
+
+	public function bidForPaper()
+	{
+		if($this->session->userdata('isCommitteeMember')) {
+			$this->load->model('phase_model');
+			$this->load->model('event_model');
+			$this->load->model('paperTopics_model');
+			
+			$idPaper = $this->input->get('idPaper');
+			$papers = $this->paper_model->get_paper($idPaper);
+			$query['paper'] = $papers;
+			$query['topics'] = $this->paperTopics_model->get_topic_by_paper($idPaper);
+			
+			$events = array();
+			$bidPhases = array();
+			foreach($query['paper'] as $paper):
+				$event = $this->event_model->get_event($paper->idEvent);
+				array_push($events, $event[0]);
+				$phase = $this->phase_model->get_phase(2, $paper->idEvent);
+				array_push($bidPhases, $phase[0]);
+			endforeach;
+			$query['event'] = $events[0];
+			$query['bidPhase'] = $bidPhases[0];
+			
+			$this->load->view('header');
+			$this->load->view('paper_bid', $query);
+		}
+		else {
+			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to bid on papers');
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
+	
+	}
+	
+	public function submitBid()
+	{	
+		if($this->session->userdata('isCommitteeMember')) {
+			
+			$this->load->model('event_model');
+			$this->load->model('paper_model');
+			$this->load->model('phase_model');
+			$this->load->model('committeeBid_model');
+		
+			$username = $this->session->userdata('idUser');
+			$idPaper = $this->input->get('idPaper');
+			$newBid = $this->input->post('bid');
+			$paperBidOn = $this->paper_model->get_paper($idPaper)[0];
+			$idEvent = $paperBidOn->idEvent;
+			$papers = $this->paper_model->get_paper_by_event($idEvent);
+			$param['event'] = $this->event_model->get_event($idEvent)[0];
+			$param['reviewPhase'] = $this->phase_model->get_phase(4, $idEvent)[0];
+			$bidPhases = $this->phase_model->get_phase(2, $idEvent);
+			foreach($bidPhases as $b)
+			{
+				$param['bidPhase'] = $b;
+			}
+			
+			$this->committeeBid_model->create_committeeBid($username, $paperBidOn->idPaper, $newBid);
+			$param['successMessages'][0] = "Your bid has been saved successfully.";
+			
+			for($i = 0; $i < count($papers); ++$i) {
+			$param['papers'][$i]['paper'] = $papers[$i];
+			$bids = $this->committeeBid_model->get_committeeBid($username, $papers[$i]->idPaper);
+			for($j = 0; $j < count($bids); ++$j){
+				$param['papers'][$i]['bid'] = $bids[$j];
+			}
+		}
+
+			
+			$this->load->view('header', $param);
+			$this->load->view('event_papers', $param);
+		}
+		else {
+			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to bid on papers');
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+		}
+	}
 	
 	public function updateDecision()
 	{

@@ -17,6 +17,7 @@ class Event extends CI_Controller {
 		$this->load->model('paper_model');
 		$this->load->model('user_model');
 		$this->load->model('role_model');
+		$this->load->model('committeeBid_model');
 		
 	}
 	
@@ -37,12 +38,26 @@ class Event extends CI_Controller {
 		}
 	}
 	
-		public function eventPapers()
+	public function eventPapers()
 	{
+		$username = $this->session->userdata('idUser');
 		$idEvent = $this->input->get('idEvent');
-		$param['papers'] = $this->paper_model->get_paper_by_event($idEvent);
+		$papers = $this->paper_model->get_paper_by_event($idEvent);
 		$param['event'] = $this->event_model->get_event($idEvent)[0];
 		$param['reviewPhase'] = $this->phase_model->get_phase(4, $idEvent)[0];
+		$bidPhases = $this->phase_model->get_phase(2, $idEvent);
+		foreach($bidPhases as $b)
+		{
+			$param['bidPhase'] = $b;
+		}
+			
+		for($i = 0; $i < count($papers); ++$i) {
+			$param['papers'][$i]['paper'] = $papers[$i];
+			$bids = $this->committeeBid_model->get_committeeBid($username, $papers[$i]->idPaper);
+			for($j = 0; $j < count($bids); ++$j){
+				$param['papers'][$i]['bid'] = $bids[$j];
+			}
+		}
 		
 		$this->load->view('header');
 		$this->load->view('event_papers', $param);
