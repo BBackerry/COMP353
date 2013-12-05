@@ -9,7 +9,7 @@
 				<div class="form-group">
 					<label for="interest[]" class="col-sm-2 control-label">Interests List:</label>
 					<div class="col-sm-10">
-						<select id="interestSelect" name="interest[]" class="form-control" size="10" multiple>
+						<select id="interestSelect" name="interest[]" class="form-control" size="20" multiple>
 							<?php 
 								$parents = explode("&", substr($hierarchy, 1));
 								foreach($parents as $parent){
