@@ -2,6 +2,8 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-lg-4">
+		
+			
           <h3>Upcoming Meetings:</h3>
 		  <ul class="list-group">
             <?php 
@@ -17,8 +19,16 @@
                 }?>
 		  </ul>
         </div>
+		
+		
+		
+			
         <div class="col-lg-8">
           <h2>News</h2> 
+		  <?php if($this->session->userdata('idEvent') != 1) {?>	  
+			<a href="<?= site_url('Paper/searchPaperforEvent') ?>" style="float:right; position:relative; top:-40px;" class="btn btn-primary">Search for Event Papers</a>
+			<?php } ?>
+			
           <?php if($this->session->userdata('isAdmin') || $this->session->userdata('isProgramChair')): ?>
             <a href="<?php echo site_url('News/createNews'); ?>">Add a News Message</a>
           <?php endif; ?>
@@ -49,6 +59,9 @@
                     }?>
           <?php } ?>
 		          
+				  
+			
+			
         </div>
        </div>
       </div>
