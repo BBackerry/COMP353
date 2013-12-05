@@ -1,11 +1,11 @@
 	<div class="container">
 		<div class="row">
 			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h4>Paper Review</h4>
+				</div>
 				<div class="panel-body">
-    
-	      			<h3 class="panel-title"><b>Paper Review</b></h3>  
-	      			<br />
-	      			
+	      			<h5>Please click on the title to view the paper.</h5>
 	      			<?php foreach($paper as $row):?>
 	      			
 		      			<label for="title" class="col-lg-2 control-label">Paper Title:</label>
