@@ -15,26 +15,12 @@ class Paper_model extends CI_Model {
 		return $query->result();
 	}
 	
-	function get_accepted_paper_match_by_title($title)
+	function get_accepted_paper_match_by_title_submittedBy_Keywords($title, $submittedBy, $keywords)
 	{
-		$sql = "SELECT * FROM paper p WHERE title LIKE = ? AND EXISTS(SELECT * FROM paperDecision d WHERE d.idPaper = p.idPaper AND d.decision = 1) ";
-		$query = $this->db->query($sql, array($title)); 
+		$sql = "select paper.idPaper, paper.title, paper.abstract, paper.submittedBy, paper.document, paper.keywords, paper.idEvent  from paper inner join paperDecision on paper.idPaper = paperDecision.idPaper where keywords LIKE ? OR title LIKE ? OR submittedBy LIKE ? ";
+		$query = $this->db->query($sql, array($title, $submittedBy, $keywords)); 
 		return $query->result();
-	}
-	
-	function get_accepted_paper_match_by_author($submittedBy)
-	{
-		$sql = "SELECT * FROM paper p WHERE submittedBy LIKE = ? AND EXISTS(SELECT * FROM paperDecision d WHERE d.idPaper = p.idPaper AND d.decision = 1) ";
-		$query = $this->db->query($sql, array($submittedBy)); 
-		return $query->result();
-	}
-	
-	function get_accepted_paper_match_by_keywords($keywords)
-	{
-		$sql = "SELECT * FROM paper p WHERE keywords LIKE = ? AND EXISTS(SELECT * FROM paperDecision d WHERE d.idPaper = p.idPaper AND d.decision = 1) ";
-		$query = $this->db->query($sql, array($keywords)); 
-		return $query->result();
-	}
+	}	
 	
 	function get_paper_by_event($idEvent)
 	{

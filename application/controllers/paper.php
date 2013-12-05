@@ -80,18 +80,10 @@ class Paper extends CI_Controller {
 		$title = $this->input->get('title');
 		$matchedPapers = array();
 		$finalMatchedPapers = array();
-		$papers = $this->paper_model->get_accepted_paper_match_by_title('%'.$title.'%');
+		$papers = $this->paper_model->get_accepted_paper_match_by_title_submittedBy_Keywords('%'.$title.'%', '%'.$author.'%', '%'.$keywords).'%';
 		 
 		for($i = 0; $i < count($papers); ++$i){
-			$matchedPapers[$paper[$i]->idPaper] = $paper[$i];
-		}
-		$papers = $this->paper_model->get_accepted_paper_match_by_author('%'.$author.'%');
-		for($i = 0; $i < count($papers); ++$i){
-			$matchedPapers[$paper[$i]->idPaper] = $paper[$i];
-		}
-		$papers = $this->paper_model->get_accepted_paper_match_by_keywords($keywords);
-		for($i = 0; $i < count($papers); ++$i){
-			$matchedPapers[$paper[$i]->idPaper] = $paper[$i];
+			$matchedPapers[$papers[$i]->idPaper] = $papers[$i];
 		}		
 		for($i = 0; $i < count($matchedPapers); ++$i){
 			$event = $this->event_model->get_event($matchedPapers[$i]->idEvent)[0];
