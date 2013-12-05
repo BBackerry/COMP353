@@ -3,8 +3,9 @@
 			<div class="panel-body">
 				<div >
 
-					<h3>Event Page</h3>     
-					 <a href="<?= site_url('Event/editEvent') . '?idEvent=' . $event->idEvent ?>" style="float:left;" class="btn btn-primary"> Search for Paper</a>
+					<h3>Event Page</h3>   
+						
+						
 					<label class="col-lg-3 control-label">Event Title: </label><div class="col-sm-9"><p class="col-sm-9"><?= $event->eventName ?></p></div>
 					
 					<label class="col-lg-3 control-label"> Event Description: </label><div class="col-sm-9"><p class="col-sm-9"><?= $event->eventDescription ?></p></div>
@@ -61,7 +62,12 @@
                             <?php endif; ?>				
                         <?php endforeach; ?>	   
                         <?php endforeach; ?>
+						
 					</div>
+					<form role="form" class="form-horizontal" name="createEvent" action="<?php echo site_url('Paper/searchPaper/') ?>">
+							<button style="float:right;" class="btn btn-primary">Search for Paper</button>
+
+						</form>
 					<a style="float:left;" href="<?= site_url('Event/eventPapers') . '?idEvent=' . $event->idEvent ?>" class="btn btn-primary">View Submitted Papers</a>
 					<a href="<?= site_url('Event/editEvent') . '?idEvent=' . $event->idEvent ?>" style="float:right;" class="btn btn-primary">Edit Event</a>
 					
