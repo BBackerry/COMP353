@@ -175,6 +175,7 @@ CREATE TABLE IF NOT EXISTS `comp353`.`meeting` (
   `createdBy` VARCHAR(45) NOT NULL,
   `startTime` TIMESTAMP NULL,
   `endTime` TIMESTAMP NULL,
+  `meetingTitle` VARCHAR(300) NULL,
   PRIMARY KEY (`idMeeting`),
   INDEX `createdBy_meeting` (`createdBy` ASC),
   INDEX `idPlace_meeting` (`idPlace` ASC),
@@ -397,11 +398,18 @@ CREATE TABLE IF NOT EXISTS `comp353`.`news` (
   `createdBy` VARCHAR(45) NOT NULL,
   `newsDate` TIMESTAMP NOT NULL,
   `newsTitle` VARCHAR(100) NOT NULL,
+  `idEvent` INT NOT NULL,
   PRIMARY KEY (`idNews`),
   INDEX `idUser_news` (`createdBy` ASC),
+  INDEX `news_event_idx` (`idEvent` ASC),
   CONSTRAINT `news_user`
     FOREIGN KEY (`createdBy`)
     REFERENCES `comp353`.`user` (`idUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `news_event`
+    FOREIGN KEY (`idEvent`)
+    REFERENCES `comp353`.`event` (`idEvent`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -605,3 +613,4 @@ INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', 
 INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', '2');
 INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', '14');
 INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember4', '4');
+
