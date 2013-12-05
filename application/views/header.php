@@ -113,7 +113,9 @@
 	            <li class="dropdown">
 	                <a href="<?php echo site_url('Paper/paperReview'); ?>" class="dropdown-toggle" data-toggle="dropdown">Committee Member<b class="caret"></b></a>
 	                <ul class="dropdown-menu">
-	                    <li><a href="<?php echo site_url('Paper/paperReview');?>">My Allocated Papers</a></li>  
+	                	<li><a href="<?php echo site_url('Event/eventPapers').'?idEvent=' . $this->session->userdata('idEvent')?>">Bid on Papers</a></li> 
+	                    <li><a href="<?php echo site_url('Paper/paperReview');?>">My Allocated Papers</a></li> 
+	         
 	                </ul>
                </li> 
             <?php } ?>

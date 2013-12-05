@@ -256,16 +256,18 @@ class Paper extends CI_Controller {
 			$query['paper'] = $papers;
 			$query['topics'] = $this->paperTopics_model->get_topic_by_paper($idPaper);
 			
-			$events = array();
-			$bidPhases = array();
-			foreach($query['paper'] as $paper):
-				$event = $this->event_model->get_event($paper->idEvent);
-				array_push($events, $event[0]);
-				$phase = $this->phase_model->get_phase(2, $paper->idEvent);
-				array_push($bidPhases, $phase[0]);
-			endforeach;
-			$query['event'] = $events[0];
-			$query['bidPhase'] = $bidPhases[0];
+			if(!empty($query['paper'])){
+				$events = array();
+				$bidPhases = array();
+				foreach($query['paper'] as $paper):
+					$event = $this->event_model->get_event($paper->idEvent);
+					array_push($events, $event[0]);
+					$phase = $this->phase_model->get_phase(2, $paper->idEvent);
+					array_push($bidPhases, $phase[0]);
+				endforeach;
+				$query['event'] = $events[0];
+				$query['bidPhase'] = $bidPhases[0];
+			}
 			
 			$this->load->view('header');
 			$this->load->view('paper_bid', $query);
