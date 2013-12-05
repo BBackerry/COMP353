@@ -7,9 +7,18 @@
 					<?php foreach($papers as $paper): ?>
 						<div class="list-group">
 							<div class="list-group-item">
-								<a href="<?= site_url('Paper/viewPaper') . '?idPaper' . $paper->idPaper ?>" class="list-group-item-heading"><?= $paper->title ?></a>
+								<?php if($this->session->userdata('idUser')) {
+										$link_paper = site_url('Paper/viewPaper') . '?idPaper=' . $paper->idPaper;
+										$link_event = site_url('Event/viewEvent') . '?idEvent=' . $paper->idEvent;
+									}
+									else {
+										$link_paper = "#";
+										$link_event = "#";
+									}
+								?>
+								<a href="<?= $link_paper ?>" class="list-group-item-heading"><?= $paper->title ?></a>
 								<p class="list-group-item-text">Abstract:<?= $paper->abstract ?></p>
-								<p class="list-group-item-text">Event: <a href="<?= site_url('Event/viewEvent') . '?idEvent=' . $paper->idEvent ?>"><?= $paper->eventName ?></a></p>
+								<p class="list-group-item-text">Event: <a href="<?= $link_event ?>"><?= $paper->eventName ?></a></p>
 							</div>
 						</div>
 					<?php endforeach; ?>
