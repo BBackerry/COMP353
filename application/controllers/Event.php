@@ -54,14 +54,13 @@ class Event extends CI_Controller {
 			$param['bidPhase'] = $b;
 		}
 			
-		for($i = 0; $i < count($papers); ++$i) {
-			$param['papers'][$i]['paper'] = $papers[$i];
-			$bids = $this->committeeBid_model->get_committeeBid($username, $papers[$i]->idPaper);
-			for($j = 0; $j < count($bids); ++$j){
-				$param['papers'][$i]['bid'] = $bids[$j];
-			}
+		$bids =array();
+		for($i = 0; $i < count($papers); ++$i){
+			
+			$bids[$papers[$i]->idPaper] = $this->committeeBid_model->get_committeeBid($username, $papers[$i]->idPaper);
 		}
-		
+		$param['bids'] = $bids;
+		$param['papers'] = $papers;
 		$this->load->view('header');
 		$this->load->view('event_papers', $param);
 	}

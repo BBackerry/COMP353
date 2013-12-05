@@ -5,6 +5,8 @@
 					<h4>Papers Submitted to Event: <?= $event->eventName ?></h4>
 				</div>
 				<div class="panel-body">
+					<h5>You can only bid on a paper during the bidding phase.</h5>
+					<h5>The bidding phase is from <?= $bidPhase->startTime ?> to <?=$bidPhase->endTime?>.</h5>
 					<h5>You can view a paper's scores by clicking on its title only after the review phase ends.</h5>
 					<h5>The review phase is from <?= $reviewPhase->startTime ?> to <?=$reviewPhase->endTime?>.</h5>
 					<table border="1" class = "table">
@@ -20,20 +22,26 @@
 							<?php foreach($papers as $row): ?>
 							<tr>
 								<?php if(strtotime($reviewPhase->endTime) < strtotime(date("Y-m-d H:i:s"))): ?>
-									<td><a href="<?= site_url('Paper/paperScores') . '?idPaper=' . $row['paper']->idPaper ?>"><?= $row['paper']->title ?></a></td>
+									<td><a href="<?= site_url('Paper/paperScores') . '?idPaper=' . $row->idPaper ?>"><?= $row->title ?></a></td>
 								
 								<?php else: ?>
-									<td><?= $row['paper']->title ?></td>
+										<td><?= $row->title ?></td>
 								<?php endif; ?>
-								<td><?= $row['paper']->abstract ?></td>
-								<td><?= $row['paper']->submittedBy ?></td>
+								<td><?= $row->abstract ?></td>
+								<td><?= $row->submittedBy ?></td>
 								
 								
-									<?php if(isset($row['bid'])): ?>
-										<td>Your Bid: <?= $row['bid']->bid ?></td>
-									<?php endif; ?>
-										<?php if(!isset($row['bid']) && strtotime($bidPhase->startTime) < strtotime(date("Y-m-d H:i:s")) && strtotime($bidPhase->endTime) > strtotime(date("Y-m-d H:i:s"))): ?>
-		      								<td><a href="<?= site_url('Paper/bidForPaper') . '?idPaper=' . $row['paper']->idPaper ?>">bid on this paper</a></td>
+									
+										
+										<?php if(!empty($bids[$row->idPaper])): ?>
+										<td>
+											Your Bid: <?= $bids[$row->idPaper][0]->bid ?>
+											
+												<a href="<?= site_url('Paper/changeBid/') . '?idPaper=' . $bids[$row->idPaper][0]->idPaper ?>" style="float:right;" class="btn btn-primary">Change Bid</a>
+										</td>
+		      							<?php endif; ?>
+		      							<?php if(empty($bids[$row->idPaper]) && strtotime($bidPhase->startTime) < strtotime(date("Y-m-d H:i:s")) && strtotime($bidPhase->endTime) > strtotime(date("Y-m-d H:i:s"))): ?>
+		      								<td><a href="<?= site_url('Paper/bidForPaper') . '?idPaper=' . $row->idPaper ?>">bid on this paper</a></td>
 		      								
 		      							<?php endif; ?>
 	      							
