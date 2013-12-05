@@ -74,6 +74,36 @@ class User extends CI_Controller {
         $this->load->view('user_interests', $data);
 	}
 	
+		public function expertises($success = array())
+	{
+		$username = $this->session->userdata('idUser');
+		
+		$this->load->model('expertInTopic_model');
+		$this->load->model('topicHierarchy_model');
+		$this->load->model('topic_model');
+		$data['topic'] = $this->topic_model->get_all_topic();
+        $topicParents = $this->topicHierarchy_model->get_all_topicHierarchy();
+        $hierarchy = array();
+        foreach($topicParents as $parent){
+            array_push($hierarchy, array('idTopic' => $parent->idTopic, 'idTopicHierarchy' =>$parent->idTopicHierarchy));
+        }
+        
+        $tree = array();
+        foreach($data['topic'] as $topic){
+            if($this->isParent($topic->idTopic, $topicParents)){
+                array_push($tree, $this->constructHierarchy($hierarchy, $topic->idTopic));
+            }
+        }
+        $data['hierarchy'] = "";
+        foreach($tree as $parent){
+           $data['hierarchy'] .= $this->displayTree($parent, $topicParents);
+        }
+        $data['expertise'] = $this->expertInTopic_model->get_expertInTopic_of_user($username);
+		
+		$this->load->view('header', $success);
+        $this->load->view('user_expertise', $data);
+	}
+	
 	public function update_interests()
 	{
 		$idUser = $this->session->userdata('idUser');
@@ -87,6 +117,21 @@ class User extends CI_Controller {
 		
 		$success['successMessages'] = array('Interests List successfully updated');
 		$this->interests($success);
+	}
+	
+	public function update_expertise()
+	{
+		$idUser = $this->session->userdata('idUser');
+		$idTopics = $this->input->post('expertise');
+		$this->load->model('expertInTopic_model');
+		
+		$this->expertInTopic_model->delete_expertInTopic_by_user($idUser);
+		foreach($idTopics as $topic) {
+			$this->expertInTopic_model->create_expertInTopic($idUser, $topic);
+		}
+		
+		$success['successMessages'] = array('Expertises List successfully updated');
+		$this->expertises($success);
 	}
 	
 	//=======================================================HIERARCHY CODE=====================================================================

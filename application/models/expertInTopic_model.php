@@ -35,5 +35,12 @@ class ExpertInTopic_model extends CI_Model {
 		$query = $this->db->query($sql, array($idUser, $idTopic)); 
 		return $query;
 	}
+	
+	function delete_expertInTopic_by_user($idUser)
+	{
+		$sql = "DELETE FROM expertInTopic WHERE idUser= ?";
+		$query = $this->db->query($sql, array($idUser)); 
+		return $query;
+	}
 }
 ?>
