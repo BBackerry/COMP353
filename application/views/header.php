@@ -44,7 +44,7 @@
 		<?php if ($this->session->userdata('idUser') == false) { ?>
             		<li class="active"><a href="<?php echo base_url();?>">Home</a></li>
 		<?php } else { ?>
-			<li class="active"><a href="<?php echo base_url();?>">Home</a></li>
+            <li class="active"><a href="<?php echo site_url('Event/selectEventHomePage');?>">Switch Event</a></li>
 			<li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">My Account<b class="caret"></b></a>
 				<ul class="dropdown-menu">

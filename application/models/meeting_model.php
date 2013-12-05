@@ -28,7 +28,12 @@ class Meeting_model extends CI_Model {
         $query = $this->db->query($sql); 
 		return $query->result();
 	}
-    
+    function get_upcoming_meeting_for_event($idEvent)
+    {
+        $sql = "SELECT * FROM meeting INNER JOIN (SELECT idMeeting from meetingEvent where idEvent = ? OR idEvent = 1) as meet on meet.idMeeting = meeting.idMeeting WHERE startTime > now() ORDER BY startTime ASC ";
+        $query = $this->db->query($sql, array($idEvent)); 
+		return $query->result();
+	}
 	function create_meeting($idPlace, $createdBy, $startTime, $endTime)
 	{
 		$sql = "INSERT INTO meeting (idPlace, createdBy, startTime, endTime) VALUES( ?, ?, ?, ? )";

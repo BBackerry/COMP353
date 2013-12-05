@@ -7,11 +7,13 @@ public function __construct()
 		parent::__construct();
 		$this->load->model('news_model');
       		$this->load->model('meeting_model');
+            $this->load->model('event_model');
 	}
 	public function viewNews()
     {     
         $this->load->view('header');
         $param['news'] = $this->news_model->get_news($this->input->get("id"));
+        $param['eventName'] = $this->event_model->get_event_name( $param['news'][0]->idEvent);
         $this->load->view('news_details', $param);
     }
     
@@ -19,14 +21,17 @@ public function __construct()
 	{
         if($this->session->userdata('isAdmin') || $this->session->userdata('isProgramChair')){
             $this->load->view('header');
-            $this->load->view('add_new_news');
+            $param['events'] = $this->event_model->get_all_event();
+            $this->load->view('add_new_news', $param);
         }
 		else 
 		{
 			$errors['errorMessages'] = array("Sorry but you are no allowed to create News");
 			$this->load->view('header', $errors);
-		        $param['news'] = $this->news_model->get_all_news();
-		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+		    $idEvent = $this->session->userdata('idEvent');
+           
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
 			$this->load->view('home_page', $param);
 		}
 	}
@@ -35,6 +40,7 @@ public function __construct()
     {
         $this->load->view('header');
         $param['news'] = $this->news_model->get_news($this->input->get("id"));
+        $param['events'] = $this->event_model->get_all_event();
         $this->load->view('edit_new_news', $param);
     }
     
@@ -42,8 +48,10 @@ public function __construct()
     {
         $this->news_model->delete_news($this->input->get("id"));
         $param['successMessages'][0] = "The news has been successfully deleted.";
-        $param['news'] = $this->news_model->get_all_news();
-        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+        $idEvent = $this->session->userdata('idEvent');
+        
+        $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+        $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
         $this->load->view('header', $param);
         $this->load->view('home_page', $param);
     }
@@ -55,12 +63,14 @@ public function __construct()
         $description = $_POST['description'];
         $date = date( "Y-m-d H:i:s", strtotime($_POST['date']));	
         $idNews = $_POST['id'];
+        $idEvent = $_POST['idEvent'];
                 
-        $this->news_model->update_news($idNews, $title, $date, $description, $createdBy);
+        $this->news_model->update_news($idNews, $title, $date, $description, $createdBy, $idEvent);
 
         $param['successMessages'][0] = "The news has been successfully updated.";
 		$this->load->view('header', $param);
         $param['news'] = $this->news_model->get_news($idNews);
+        $param['eventName'] = $this->event_model->get_event_name($idEvent);
         $this->load->view('news_details', $param);	
     }
 	
@@ -71,13 +81,15 @@ public function __construct()
         $timestamp = $date->getTimestamp();
         $title = $_POST['title'];
         $description = $_POST['description'];
-        
-		$this->news_model->create_news($title, date( "Y-m-d H:i:s", $timestamp), $description, $createdBy );
+        $idEvent = $_POST['idEvent'];
+
+		$this->news_model->create_news($title, date( "Y-m-d H:i:s", $timestamp), $description, $createdBy, $idEvent);
         $idNews = mysql_insert_id();
         
         $param['successMessages'][0] = "The news has been successfully saved.";
 		$this->load->view('header', $param);
         $param['news'] = $this->news_model->get_news($idNews);
+        $param['eventName'] = $this->event_model->get_event_name($idEvent);
         $this->load->view('news_details', $param);	
 	}
 		
