@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `comp353`.`user` (
   `organization` INT NOT NULL,
   `confirmed` TINYINT NULL DEFAULT 0,
   `department` INT NOT NULL,
+  `registrationTime` TIMESTAMP NULL,
   PRIMARY KEY (`idUser`),
   INDEX `Country_user` (`country` ASC),
   INDEX `Organization_user` (`organization` ASC),
@@ -174,6 +175,7 @@ CREATE TABLE IF NOT EXISTS `comp353`.`meeting` (
   `createdBy` VARCHAR(45) NOT NULL,
   `startTime` TIMESTAMP NULL,
   `endTime` TIMESTAMP NULL,
+  `meetingTitle` VARCHAR(300) NULL,
   PRIMARY KEY (`idMeeting`),
   INDEX `createdBy_meeting` (`createdBy` ASC),
   INDEX `idPlace_meeting` (`idPlace` ASC),
@@ -396,11 +398,18 @@ CREATE TABLE IF NOT EXISTS `comp353`.`news` (
   `createdBy` VARCHAR(45) NOT NULL,
   `newsDate` TIMESTAMP NOT NULL,
   `newsTitle` VARCHAR(100) NOT NULL,
+  `idEvent` INT NOT NULL,
   PRIMARY KEY (`idNews`),
   INDEX `idUser_news` (`createdBy` ASC),
+  INDEX `news_event_idx` (`idEvent` ASC),
   CONSTRAINT `news_user`
     FOREIGN KEY (`createdBy`)
     REFERENCES `comp353`.`user` (`idUser`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `news_event`
+    FOREIGN KEY (`idEvent`)
+    REFERENCES `comp353`.`event` (`idEvent`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -415,8 +424,8 @@ CREATE TABLE IF NOT EXISTS `comp353`.`reviewAssignment` (
   `idAssignedBy` VARCHAR(45) NOT NULL,
   `idAssignedTo` VARCHAR(45) NOT NULL,
   `idPaper` INT NOT NULL,
-  `comment` VARCHAR(100) NOT NULL,
-  `score` DECIMAL(4,2) NOT NULL,
+  `comment` VARCHAR(1000) NULL,
+  `score` DECIMAL(4,2) NULL,
   PRIMARY KEY (`idAssignedBy`, `idAssignedTo`, `idPaper`),
   INDEX `idPaper_idx` (`idPaper` ASC),
   INDEX `idAssignedTo_idx` (`idAssignedTo` ASC),

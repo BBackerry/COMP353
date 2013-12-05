@@ -9,7 +9,7 @@
 				<div class="form-group">
 					<label for="expertise[]" class="col-sm-2 control-label">Expertise List:</label>
 					<div class="col-sm-10">
-						<select id="interestSelect" name="expertise[]" class="form-control" size="10" multiple>
+						<select id="interestSelect" name="expertise[]" class="form-control" size="20" multiple>
 							<?php 
 								$parents = explode("&", substr($hierarchy, 1));
 								foreach($parents as $parent){
@@ -23,8 +23,8 @@
 												foreach($topic as $t){
 													if($t->idTopic == $idTopic){ 
 														$selected = false;
-														foreach($interest as $topicInterest){
-															if($topicInterest->idTopic == $idTopic){
+														foreach($expertise as $topicExpertise){
+															if($topicExpertise->idTopic == $idTopic){
 																$selected = true;
 															}
 														} 
@@ -41,8 +41,8 @@
 												foreach($topic as $t){
 													if($t->idTopic == $idTopic){ 
 														$selected = false;
-														foreach($interest as $topicInterest){
-															if($topicInterest->idTopic == $idTopic){
+														foreach($expertise as $topicExpertise){
+															if($topicExpertise->idTopic == $idTopic){
 																$selected = true;
 															}
 														} 
@@ -62,8 +62,8 @@
 										foreach($topic as $t){
 											if($t->idTopic == $idTopic){ 
 												$selected = false;
-												foreach($interest as $topicInterest){
-													if($topicInterest->idTopic == $idTopic){
+												foreach($expertise as $topicExpertise){
+													if($topicExpertise->idTopic == $idTopic){
 														$selected = true;
 													}
 												} 

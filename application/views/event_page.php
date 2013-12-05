@@ -4,7 +4,7 @@
 				<div >
 
 					<h3>Event Page</h3>     
-					 
+					 <a href="<?= site_url('Event/editEvent') . '?idEvent=' . $event->idEvent ?>" style="float:left;" class="btn btn-primary"> Search for Paper</a>
 					<label class="col-lg-3 control-label">Event Title: </label><div class="col-sm-9"><p class="col-sm-9"><?= $event->eventName ?></p></div>
 					
 					<label class="col-lg-3 control-label"> Event Description: </label><div class="col-sm-9"><p class="col-sm-9"><?= $event->eventDescription ?></p></div>

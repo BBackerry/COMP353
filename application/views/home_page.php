@@ -2,7 +2,7 @@
       <!-- Example row of columns -->
       <div class="row">
         <div class="col-lg-4">
-          <h3>Upcoming Dates:</h3>
+          <h3>Upcoming Meetings:</h3>
 		  <ul class="list-group">
             <?php 
                 $numOfMeetings = 5;
@@ -52,9 +52,9 @@
         </div>
        </div>
       </div>
-
+	  
+	<div class="container">
       <hr>
-
       <footer>
         <p>&copy; Best Concordia Team</p>
       </footer>

@@ -8,6 +8,13 @@ class PaperDecision_model extends CI_Model {
 		return $query->result();
 	}
 	
+	function get_paperDecision_by_decision($decision)
+	{
+		$sql = "SELECT * FROM paperDecision WHERE decision = ? ";
+		$query = $this->db->query($sql, array($decision)); 
+		return $query->result();
+	}
+	
 	function get_paperDecision_by_paper_and_user($idPaper, $idUser)
 	{
 		$sql = "SELECT * FROM paperDecision WHERE idPaper = ? AND decidedBy = ?";

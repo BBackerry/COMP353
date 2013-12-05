@@ -126,13 +126,11 @@
 </div>
 </div>
 
-    <div class="container">
-      <!-- Example row of columns -->
-
-         <footer>
-        <p>&copy; Best Concordia Team</p>
-      </footer>
-    </div> <!-- /container -->
+	<div class="container">
+		<footer>
+			<p>&copy; Best Concordia Team</p>
+		</footer>
+	</div> <!-- /container -->
 	
 		<script src="../assets/js/vendor/jquery-1.10.1.min.js"></script>
 		<script src="../assets/js/vendor/bootstrap.min.js"></script>

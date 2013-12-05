@@ -29,8 +29,8 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="height:50px">
+      <div>
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
@@ -50,10 +50,11 @@
 				<ul class="dropdown-menu">
 					<li><a href="<?php echo site_url('User/profile');?>">My Profile</a></li>
 					<li><a href="<?php echo site_url('User/interests');?>">My Interests</a></li>
+                    <li><a href="<?php echo site_url('User/expertises');?>">My Expertises</a></li>
 				</ul>
            	</li>
            	<li class="dropdown">
-                    <a href="<?php echo site_url('Paper/submittedPapers'); ?>" class="dropdown-toggle" data-toggle="dropdown">Papers<b class="caret"></b></a>
+                    <a href="<?php echo site_url('Paper/submittedPapers'); ?>" class="dropdown-toggle" data-toggle="dropdown">Author<b class="caret"></b></a>
                     <ul class="dropdown-menu">
                     	<li><a href="<?php echo site_url('Paper/submittedPapers');?>">My Papers</a></li>
                         <li><a href="<?php echo site_url('Paper/submit');?>">Submit New Paper</a></li>

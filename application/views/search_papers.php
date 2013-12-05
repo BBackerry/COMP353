@@ -4,36 +4,36 @@
 			<div class="panel-body">
       				<h3>Search for Paper:</h3>
                   
-        			<form role="form" class="form-horizontal">
+        			<form role="form" class="form-horizontal" name="createEvent" action="<?php echo site_url('Paper/submitSearch/') ?>">
 					<div class="form-group">
         					<label for="title" class="col-lg-2 control-label">Event:</label>
         					<div class="col-lg-10">
-							<input type="text" name="event" id="event" name="event"/>
+							<input type="text" name="event" id="event" name="event" />
 						</div>
         				</div>
 
 					<div class="form-group">
         					<label for="title" class="col-lg-2 control-label">Author:</label>
         					<div class="col-lg-10">
-							<input type="text" name="author" id="author" name="author"/>
+							<input type="text" name="author" id="author" name="author" />
 						</div>
        					</div>
  	         
 					<div class="form-group">
         					<label for="title" class="col-lg-2 control-label">Keywords:</label>
         					<div class="col-lg-10">
-						<input type="text" name="keywords" id="keywords" name="keywords"/>
+						<input type="text" name="keywords" id="keywords" name="keywords" />
 						</div>  
         				</div>
 	
 					<div class="form-group">
-        					<label for="title" class="col-lg-2 control-label">Title:</label>
+        					<label for="title" class="col-lg-2 control-label">Paper Title:</label>
         					<div class="col-lg-10">
-							<input type="text" name="title" id="title" name="title"/>
+							<input type="text" name="title" id="title" name="title" />
 						</div>  
         				</div>
 			
-					<a href="#" class="btn btn-success" style="float:right;">Submit</a>
+					<button style="float:right;" class="btn btn-primary">Submit</button>
 
 				</form>
 			</div>

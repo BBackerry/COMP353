@@ -56,7 +56,8 @@
 	</div>
 </div>
 </div>
-	
+
+<div class="container">
     <footer>
         <p>&copy; Best Concordia Team</p>
     </footer>
