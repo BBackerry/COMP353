@@ -10,6 +10,7 @@ class Paper extends CI_Controller {
 	        $this->load->model('news_model');
 	        $this->load->model('meeting_model');
 	}
+
 	public function submitPaper($eventId)
 	{	
 		$this->load->model('event_model');
@@ -44,7 +45,7 @@ class Paper extends CI_Controller {
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name(1);
+                $eventName = $this->event_model->get_event_name($idEvent);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -129,11 +130,20 @@ class Paper extends CI_Controller {
 	{
 		$this->load->model('event_model');
 		$this->load->model('user_model');
-		$this->load->model('phase_model');
+		$this->load->model('phase_model');	
+		$this->load->model('eventTopic_model');
+		$this->load->model('topic_model');
 		
-		$query['events'] = $this->event_model->get_all_event();
+		$eventId = $this->session->userdata('idEvent');
+		$query['event'] = $this->event_model->get_event($eventId);
+		
 		$query['users'] = $this->user_model->get_all_users();
-		$query['phases'] = $this->phase_model->get_all_phase();
+		$query['submitPhase'] = $this->phase_model->get_phase(1, $eventId)[0];
+		$query['eventTopic'] = $this->eventTopic_model->get_eventTopic($eventId);
+		$query['topics'] = array();
+		for($i = 0; $i < count($query['eventTopic']); ++$i){
+			array_push($query['topics'], $this->topic_model->get_topic($query['eventTopic'][$i]->idTopic)[0]);
+		}
 		
 		$username = $this->session->userdata('idUser');
 		$query['username'] = $username;
@@ -148,7 +158,7 @@ class Paper extends CI_Controller {
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name(1);
+                $eventName = $this->event_model->get_event_name($idEvent);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -188,7 +198,7 @@ class Paper extends CI_Controller {
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name(1);
+                $eventName =$this->event_model->get_event_name($idEvent);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -400,7 +410,7 @@ public function changeBid()
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name(1);
+                $eventName = $this->event_model->get_event_name($idEvent);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -472,7 +482,7 @@ public function changeBid()
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name(1);
+                $eventName = $this->event_model->get_event_name($idEvent);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -554,7 +564,7 @@ public function changeBid()
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name(1);
+                $eventName = $this->event_model->get_event_name($idEvent);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -599,7 +609,7 @@ public function changeBid()
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name(1);
+                $eventName = $this->event_model->get_event_name($idEvent);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -619,7 +629,7 @@ public function changeBid()
 		
 		$username = $this->session->userdata('idUser');
 		if ($username) {
-			$idEvent = $this->input->post('idEvent');
+			$idEvent = $this->session->userdata('idEvent');
 			$title = $this->input->post('title');
 			$abstract = $this->input->post('abstract');
 			$keywords = $this->input->post('keywords');
@@ -675,7 +685,7 @@ public function changeBid()
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name(1);
+                $eventName = $this->event_model->get_event_name($idEvent);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
