@@ -93,10 +93,36 @@ class Paper extends CI_Controller {
 		$this->load->view('paper_search_results', $data);
 	}
 	
+	public function submitSearchForEvent()
+	{			
+		$this->load->model('paperDecision_model');
+		$this->load->model('paper_model');
+		$this->load->model('event_model');
+		
+		$idEvent = $this->session->userdata('idEvent');
+		$param['event'] = $this->event_model->get_event($idEvent)[0];
+		$param['papers'] = $this->event_model->get_paper_by_event($idEvent);
+		
+		$author = ($this->input->get('author')) ? "'%".$this->input->get('author')."%'" : "''";		
+		$keywords = ($this->input->get('keywords')) ? "'%".$this->input->get('keywords')."%'" : "''";
+		$title = ($this->input->get('title')) ? "'%".$this->input->get('title')."%'" : "''";
+		
+		$data['papers'] = $this->paper_model->get_accepted_paper_match_by_title_submittedBy_keywords_idEvent($title, $author, $keywords, $idEvent);
+		
+		$this->load->view('header');
+		$this->load->view('paper_search_results', $data);
+	}
+	
 	public function searchPaper()
 	{		
 		$this->load->view('header');
 		$this->load->view('paper_search');
+	}
+	
+	public function searchPaperforEvent()
+	{		
+		$this->load->view('header');
+		$this->load->view('paper_search_for_event');
 	}
 	
 	public function submit()

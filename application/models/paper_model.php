@@ -22,6 +22,13 @@ class Paper_model extends CI_Model {
 		return $query->result();
 	}
 	
+	function get_accepted_paper_match_by_title_submittedBy_keywords($title, $submittedBy, $keywords, $idEvent)
+	{
+		$sql = "SELECT paper.idPaper, paper.title, paper.abstract, paper.submittedBy, paper.keywords, paper.idEvent, event.eventName FROM paper JOIN paperDecision ON paper.idPaper = paperDecision.idPaper JOIN event ON paper.idEvent = event.idEvent WHERE paper.idEvent = $idEvent AND keywords LIKE $keywords OR title LIKE $title OR submittedBy LIKE $submittedBy ";
+		$query = $this->db->query($sql); 
+		return $query->result();
+	}
+	
 	function get_paper_by_event($idEvent)
 	{
 		$sql = "SELECT * FROM paper WHERE idEvent = ? ";
