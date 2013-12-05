@@ -24,7 +24,7 @@ class ReviewAssignment_model extends CI_Model {
 	
 	function get_paper_assignedTo_user($idUser)
 	{
-		$sql = "SELECT * FROM paper p WHERE EXISTS(SELECT * FROM reviewassignment r WHERE p.idPaper = r.idPaper AND r.idAssignedTo = ?)";
+		$sql = "SELECT * FROM paper p WHERE EXISTS(SELECT * FROM reviewAssignment r WHERE p.idPaper = r.idPaper AND r.idAssignedTo = ?)";
 		$query = $this->db->query($sql, array($idUser));
 		return $query->result();
 	}

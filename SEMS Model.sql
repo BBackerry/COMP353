@@ -60,6 +60,7 @@ CREATE TABLE IF NOT EXISTS `comp353`.`user` (
   `organization` INT NOT NULL,
   `confirmed` TINYINT NULL DEFAULT 0,
   `department` INT NOT NULL,
+  `registrationTime` TIMESTAMP NULL,
   PRIMARY KEY (`idUser`),
   INDEX `Country_user` (`country` ASC),
   INDEX `Organization_user` (`organization` ASC),
@@ -415,8 +416,8 @@ CREATE TABLE IF NOT EXISTS `comp353`.`reviewAssignment` (
   `idAssignedBy` VARCHAR(45) NOT NULL,
   `idAssignedTo` VARCHAR(45) NOT NULL,
   `idPaper` INT NOT NULL,
-  `comment` VARCHAR(100) NOT NULL,
-  `score` DECIMAL(4,2) NOT NULL,
+  `comment` VARCHAR(1000) NULL,
+  `score` DECIMAL(4,2) NULL,
   PRIMARY KEY (`idAssignedBy`, `idAssignedTo`, `idPaper`),
   INDEX `idPaper_idx` (`idPaper` ASC),
   INDEX `idAssignedTo_idx` (`idAssignedTo` ASC),
@@ -604,4 +605,3 @@ INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', 
 INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', '2');
 INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember3', '14');
 INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember4', '4');
-
