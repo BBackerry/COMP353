@@ -23,8 +23,8 @@
 												foreach($topic as $t){
 													if($t->idTopic == $idTopic){ 
 														$selected = false;
-														foreach($interest as $topicInterest){
-															if($topicInterest->idTopic == $idTopic){
+														foreach($expertise as $topicExpertise){
+															if($topicExpertise->idTopic == $idTopic){
 																$selected = true;
 															}
 														} 
@@ -41,8 +41,8 @@
 												foreach($topic as $t){
 													if($t->idTopic == $idTopic){ 
 														$selected = false;
-														foreach($interest as $topicInterest){
-															if($topicInterest->idTopic == $idTopic){
+														foreach($expertise as $topicExpertise){
+															if($topicExpertise->idTopic == $idTopic){
 																$selected = true;
 															}
 														} 
@@ -62,8 +62,8 @@
 										foreach($topic as $t){
 											if($t->idTopic == $idTopic){ 
 												$selected = false;
-												foreach($interest as $topicInterest){
-													if($topicInterest->idTopic == $idTopic){
+												foreach($expertise as $topicExpertise){
+													if($topicExpertise->idTopic == $idTopic){
 														$selected = true;
 													}
 												} 

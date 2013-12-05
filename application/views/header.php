@@ -50,6 +50,7 @@
 				<ul class="dropdown-menu">
 					<li><a href="<?php echo site_url('User/profile');?>">My Profile</a></li>
 					<li><a href="<?php echo site_url('User/interests');?>">My Interests</a></li>
+                    <li><a href="<?php echo site_url('User/expertises');?>">My Expertises</a></li>
 				</ul>
            	</li>
            	<li class="dropdown">
