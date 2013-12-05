@@ -104,8 +104,8 @@
 	                </ul>
                </li> 
             <?php } ?>
-			<li><a href="<?= site_url('Paper/searchPaper') ?>">Search</a></li>
 		<?php } ?>
+			<li><a href="<?= site_url('Paper/searchPaper') ?>">Search</a></li>
 
           </ul>
 		  <?php if ($this->session->userdata('idUser') == false) { ?>
