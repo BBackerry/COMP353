@@ -1,9 +1,7 @@
 <div class="container">
 <div class="row">
 	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h2>Add a new Meeting</h2>
-		</div>
+		<div class="panel-heading">Add a new Meeting</div>
 		<div class="panel-body">
 			<form class="form-horizontal" role="form" action="<?= site_url('Meeting/submitMeeting') ?>" method="POST" >
 				<div class="form-group">

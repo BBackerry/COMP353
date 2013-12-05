@@ -1,9 +1,7 @@
 <div class="container">
 <div class="row">
 	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h2>Edit this Meeting</h2>
-		</div>
+		<div class="panel-heading">Edit this Meeting</div>
 		<div class="panel-body">
 			<form class="form-horizontal" role="form" action="<?= site_url('Meeting/updateMeeting') ?>" method="POST" >
 				<div class="form-group">
@@ -58,6 +56,7 @@
 	</div>
 </div>
 </div>
+<div class="container">
     <footer>
         <p>&copy; Best Concordia Team</p>
     </footer>
@@ -76,6 +75,16 @@
 			$("#endTime").datetimepicker({
 				dateFormat: "yy-mm-dd",
 				timeFormat: "hh:mm:ss"
+			});
+			$("#chkNewLocation").click(function () {
+				if($(this).is(":checked")) {
+					$("#newLocation").prop("disabled", false);
+					$("#place").prop("disabled", true);
+				}
+				else {
+					$("#newLocation").prop("disabled", true);
+					$("#place").prop("disabled", false);
+				}
 			});
 		</script>
     </body>

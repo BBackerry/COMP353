@@ -1,9 +1,7 @@
     <div class="container">
 	<div class="row">
 		<div class="panel panel-default">
-			<div class="panel panel-heading">
-				<h2>User Interests</h2>
-			</div>
+			<div class="panel panel-heading">User Interests</div>
 			<div class="panel-body">
 			<form class="form-horizontal" role="form" method="post" action="<?= site_url('User/update_interests') ?>">
 				<div class="form-group">

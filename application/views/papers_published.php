@@ -1,9 +1,7 @@
    <div class="container">
 	<div class="row">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h2>Published Papers</h2>
-			</div>
+			<div class="panel-heading">Published Papers</div>
 			<div class="panel-body">
 				
 				<?php if(isset($papers)): ?>

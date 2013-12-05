@@ -1,31 +1,38 @@
 <div class="container">
 <div class="row">
 	<div class="panel panel-default">
-		<h3>Paper Details:</h3>  
+		<div class="panel-heading">Paper Details</div>
 		<div class="panel-body">
             <div class="panel panel-default">
-                <h3><a href="<?= site_url('Paper/viewPaper') . '?idPaper=' . $paper->idPaper; ?>"><?= $paper->title; ?></a></h3>
-                Abstract: <?= $paper->abstract; ?><br />
-                Keywords: <?= $paper->keywords;?><br />
-                <br />
+				<div class="list-group">
+					<div  class="list-group-item">
+						<h4 class="list-group-item-heading"><a href="<?= site_url('Paper/viewPaper') . '?idPaper=' . $paper->idPaper; ?>"><?= $paper->title ?></a></h4>
+						<p class="list-group-item-text">
+							<p>Abstract: <?= $paper->abstract; ?></p>
+							Keywords: <?= $paper->keywords;?><br />
+						</p>
+					</div>
+				</div>
             </div>
         </div>
-        <!-- $param['commiteeMembers'] = $committeeMember;
-        $param['commiteeExpertise'] = $expert;
-        $param['commiteeBid'] = $bid; -->
-        <h3>Select a Committee Member to Assign This Paper To:</h3>
-        <br/>
-        <div class="col-lg-12">
-            <table border="1">
-                <tr>
-                    <th>Username</th>
-                    <th>First Name </th>
-                    <th>Last Name </th>
-                    <th>Bid Score </th>
-                    <th>Expert in Some of This Paper's Topics </th>
-                    <th>Expert in All of This Paper's Topics </th>
-                    <th></th>
-                </tr>
+	</div>
+	<div class="panel panel-default">
+		<div class="panel-heading">Paper Assignment</div>
+		<div class="panel-body">
+			<p>Select a Committee Member to assign this Paper to:</p>
+            <table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Username</th>
+						<th>First Name </th>
+						<th>Last Name </th>
+						<th>Bid Score </th>
+						<th>Expert in Some of This Paper's Topics </th>
+						<th>Expert in All of This Paper's Topics </th>
+						<th></th>
+					</tr>
+				</thead>
+				<tbody>
                 <?php foreach($committeeMembers as $member){?>
                     <tr>
                         <td><?= $member->idUser; ?></td>
@@ -72,18 +79,18 @@
                                 $btnValue = "Assign This Committee Member";
                             }?>
                             <td>
-                            <form action="<?= $url; ?>">
-                                <input type="hidden" name="idPaper" value="<?=$paper->idPaper;?>"/>
-                                <input type="hidden" name="idEvent" value="<?=$idEvent;?>"/>
-                                <input type="hidden" name="idAssignedTo"  value="<?=$member->idUser;?>"/>
-                                <input class="<?= $btnClass; ?>" style="width:100%" type="submit" value="<?= $btnValue; ?>">
-                            </form>
+								<form action="<?= $url; ?>">
+									<input type="hidden" name="idPaper" value="<?=$paper->idPaper;?>"/>
+									<input type="hidden" name="idEvent" value="<?=$idEvent;?>"/>
+									<input type="hidden" name="idAssignedTo"  value="<?=$member->idUser;?>"/>
+									<input class="<?= $btnClass; ?>" style="width:100%" type="submit" value="<?= $btnValue; ?>">
+								</form>
                             </td>
                    </tr>
                 <?php }?>
+				</tbody>
             </table>
         </div>
-        <br/>
 	</div>
 </div>
 </div>
