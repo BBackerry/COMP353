@@ -136,7 +136,7 @@
       </div>
     </div>
 	<div class="alert alert-info" style="height:25px; padding:2px;text-align:center;">
-        <b>You are current in Event : <?php echo $this->session->userdata('eventName'); ?></b>
+        <b>You are currently on Event : <?php echo $this->session->userdata('eventName'); ?></b>
     </div>
 	<?php if(isset($errorMessages)): ?>
 	<div>
