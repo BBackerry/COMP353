@@ -23,7 +23,7 @@
 				<div class="form-group">
 					<label for="place" class="col-lg-2 control-label">Location</label>
 					<div class="col-lg-10">
-						<select class="form-control" name="place" id="place">
+						<select class="form-control" name="place" id="place" data-validate="required">
 							<?php foreach($place as $p): ?>
 								<option value="<?= $p->idPlace ?>"><?= $p->placeName ?></option>
 							<?php endforeach; ?>
