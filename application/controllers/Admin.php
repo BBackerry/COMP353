@@ -95,8 +95,8 @@ class Admin extends CI_Controller {
    
     public function updateUser()
     {
-        $username = $this->session->userdata('idUser');
-		if ($username) {
+        $name = $this->session->userdata('idUser');
+		if ($name) {
             $username = $_POST['username'];
             $password = $_POST['password'];
             $firstname = $_POST['firstname'];
@@ -169,7 +169,7 @@ class Admin extends CI_Controller {
             $param['expert'] = $this->expertInTopic_model->get_expertInTopic_of_user($username);
             $param['successMessages'][0] = "The user has been successfully updated.";
             $this->load->view('header', $param);
-            $param['users'] = $this->user_model->get_user($username);
+            $param['user'] = $this->user_model->get_user($username)[0];
             $param['country'] = $this->country_model->get_all_country();
             $param['department'] = $this->department_model->get_all_department();
             $param['organization'] = $this->organization_model->get_all_organization();

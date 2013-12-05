@@ -589,6 +589,13 @@ INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('2
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('25', 'Interdisciplinary Studies');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('26', 'Journalism');
 
+INSERT INTO `comp353`.`place` (`placeName`) VALUES ('room1');
+INSERT INTO `comp353`.`place` (`placeName`) VALUES ('room2');
+INSERT INTO `comp353`.`place` (`placeName`) VALUES ('room3');
+INSERT INTO `comp353`.`place` (`placeName`) VALUES ('room4');
+INSERT INTO `comp353`.`place` (`placeName`) VALUES ('room5');
+INSERT INTO `comp353`.`place` (`placeName`) VALUES ('room6');
+
 INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('1', 'Concordia University');
 INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('2', 'McGill University');
 INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('3', 'University of Montreal');

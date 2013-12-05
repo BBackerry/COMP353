@@ -4,11 +4,12 @@
 	<div class="panel-body">
 		<form role="form" class="form-horizontal" action="<?= site_url('Admin/updateUser')?>" method="post">
 				 <div class="form-group">
-					<label class="col-lg-2 control-label" for="username">Username</label>
+					<label class="col-lg-2 control-label" for="user">Username</label>
 					<div class="col-lg-10">
-						<input class="form-control" type="text" name="username" value="<?= $user->idUser?>" disabled>
+						<input class="form-control" type="text" name="user" value="<?= $user->idUser?>" disabled>
 					</div>
 				 </div>
+                 <input type="hidden" name="username" value="<?= $user->idUser?>" />
 				 <div class="form-group">
 					<label class="col-lg-2 control-label" for="password">Password</label>
 					<div class="col-lg-10">

@@ -163,7 +163,7 @@
 				<div class="form-group">
 					<label class="col-lg-2 control-label"><?= ucfirst($p->phaseName)  ?> - End Date:</label>
 					<div class="col-lg-10">
-						<input type="text" class="form-control" name="<?= $p->idPhase?>PhaseEnd" id="<?= $p->idPhase?>PhaseEnd" value="<?= $phaseStart ?>" data-validate="required"/>
+						<input type="text" class="form-control" name="<?= $p->idPhase?>PhaseEnd" id="<?= $p->idPhase?>PhaseEnd" value="<?= $phaseEnd ?>" data-validate="required"/>
 					</div>
 				</div>   
 			<?php endforeach; ?>
