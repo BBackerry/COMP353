@@ -6,6 +6,7 @@ public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('news_model');
+      		$this->load->model('meeting_model');
 	}
 	public function viewNews()
     {     
@@ -24,7 +25,9 @@ public function __construct()
 		{
 			$errors['errorMessages'] = array("Sorry but you are no allowed to create News");
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+		        $param['news'] = $this->news_model->get_all_news();
+		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$this->load->view('home_page', $param);
 		}
 	}
     
@@ -40,6 +43,7 @@ public function __construct()
         $this->news_model->delete_news($this->input->get("id"));
         $param['successMessages'][0] = "The news has been successfully deleted.";
         $param['news'] = $this->news_model->get_all_news();
+        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
         $this->load->view('header', $param);
         $this->load->view('home_page', $param);
     }

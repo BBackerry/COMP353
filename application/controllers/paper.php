@@ -7,6 +7,8 @@ class Paper extends CI_Controller {
 		parent::__construct();
 		$this->load->model('paper_model');
 		$this->load->model('paperDecision_model');
+	        $this->load->model('news_model');
+	        $this->load->model('meeting_model');
 	}
 	public function submitPaper($eventId)
 	{	
@@ -38,7 +40,9 @@ class Paper extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+			$param['news'] = $this->news_model->get_all_news();
+		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$this->load->view('home_page', $param);
 		}
 	}
 	
@@ -83,7 +87,9 @@ class Paper extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+			$param['news'] = $this->news_model->get_all_news();
+		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$this->load->view('home_page', $param);
 		}
 	}
 	
@@ -113,7 +119,8 @@ class Paper extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in to view papers');
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+			$param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$this->load->view('home_page', $param);
 		}
 	}
 	
@@ -289,7 +296,9 @@ class Paper extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to review papers');
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+		        $param['news'] = $this->news_model->get_all_news();
+		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$this->load->view('home_page', $param);
 		}
 	}
     
@@ -317,7 +326,9 @@ class Paper extends CI_Controller {
 			else {
 				$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to review papers');
 				$this->load->view('header', $errors);
-				$this->load->view('home_page');
+		                $param['news'] = $this->news_model->get_all_news();
+		                $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+				$this->load->view('home_page', $param);
 			}
 		}
 		else {
@@ -359,7 +370,9 @@ class Paper extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to review papers');
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+	                $param['news'] = $this->news_model->get_all_news();
+	                $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$this->load->view('home_page', $param);
 		}
 	}
 	
@@ -394,7 +407,9 @@ class Paper extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to review papers');
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+	                $param['news'] = $this->news_model->get_all_news();
+	                $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$this->load->view('home_page', $param);
 		}
 	}
 
@@ -471,7 +486,9 @@ class Paper extends CI_Controller {
 			$error = 'Sorry but you have to be logged in to submit papers';
 			$errors['errorMessages'] = array_push($errors['errorMessages'], $error);
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+		        $param['news'] = $this->news_model->get_all_news();
+		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$this->load->view('home_page', $param);
 		}
 	}
 	

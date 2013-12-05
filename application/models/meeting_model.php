@@ -22,6 +22,13 @@ class Meeting_model extends CI_Model {
 		return $query->result();
 	}
 
+    function get_upcoming_meeting()
+    {
+        $sql = "SELECT * FROM meeting WHERE startTime > now() ORDER BY startTime ASC";
+        $query = $this->db->query($sql); 
+		return $query->result();
+	}
+    
 	function create_meeting($idPlace, $createdBy, $startTime, $endTime)
 	{
 		$sql = "INSERT INTO meeting (idPlace, createdBy, startTime, endTime) VALUES( ?, ?, ?, ? )";

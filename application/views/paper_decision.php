@@ -40,11 +40,11 @@
 												<hr />
 												<div class="form-group">
 													<label class="sr-only" for="reason">Reason</label>
-													<input type="text" class="form-control" name="reason" value="<?= $reason ?>">
+													<input type="text" class="form-control" name="reason" value="<?= $reason ?>" data-validate="required">
 												</div>
 												<div class="form-group">
 													<label class="sr-only" for="decision">Decision</label>
-													<select class="form-control" name="decision">
+													<select class="form-control" name="decision" data-validate="required">
 														<option <?= $selected ? "" : "selected" ?> value="0">Reject</option>
 														<option <?= $selected ? "selected" : "" ?> value="1">Accept</option>
 													</select>

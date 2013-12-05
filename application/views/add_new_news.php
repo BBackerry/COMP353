@@ -7,12 +7,12 @@
     <form name="newsForm" action="<?php echo site_url('News/submitedNews');?>" method="post">
         <div class="form-group">
             <label for="title">Title (limit 100 characters): </label>
-            <input type="Text" name="title" size="100" value="">
+            <input type="Text" name="title" size="100" value="" data-validate="required">
         </div>
         <br/>
         <div class="form-group">
             <label for="description">News Description (limit 2000 characters): </label>
-            <textarea name="description" rows="10" cols="150">
+            <textarea name="description" rows="10" cols="150" data-validate="required">
             </textarea>
         </div>
         <br/>

@@ -87,7 +87,7 @@
 			
 			<?php if($this->session->userdata('isProgramChair')): ?>
 				<li class="dropdown">
-	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Paper Review<b class="caret"></b></a>
+	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Program Chair<b class="caret"></b></a>
 	                <ul class="dropdown-menu">
 	                    <li><a href="<?php echo site_url('Paper/paperDecision'); ?>">Decide on Papers</a></li>
 						<li><a href="<?php echo site_url('ProgramChair/assignPaperSelectEvent');?>">Assign Committee to Review a Paper</a></li>
@@ -97,7 +97,7 @@
             
             <?php if ($this->session->userdata('isCommitteeMember')) { ?>
 	            <li class="dropdown">
-	                <a href="<?php echo site_url('Paper/paperReview'); ?>" class="dropdown-toggle" data-toggle="dropdown">Paper Review<b class="caret"></b></a>
+	                <a href="<?php echo site_url('Paper/paperReview'); ?>" class="dropdown-toggle" data-toggle="dropdown">Committee Member<b class="caret"></b></a>
 	                <ul class="dropdown-menu">
 	                    <li><a href="<?php echo site_url('Paper/paperReview');?>">My Allocated Papers</a></li>  
 	                </ul>

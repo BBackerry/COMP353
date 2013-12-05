@@ -47,7 +47,7 @@
 			
 			<div class="form-group" id = "eventTopics" name = "eventTopics">
 				<label for="eventTopics">Select Topics:</label>
-				 <select multiple class="form-control" name="eventTopics[]" size="15">
+				 <select multiple class="form-control" name="eventTopics[]" size="15" data-validate="required">
 					 <?php 
                         $parents = explode("&", substr($hierarchy, 1));
                         foreach($parents as $parent){
@@ -100,16 +100,16 @@
             <?php foreach($phaseType as $p): ?>
             <div class="form-group">
                 <label><?php echo $p->phaseName;?> - Start Date:</label>
-                <input type="Text" class="form-control" name="<?php echo $p->idPhase?>PhaseStart" id="<?php echo $p->idPhase?>PhaseStart" value=""/>
+                <input type="Text" class="form-control" name="<?php echo $p->idPhase?>PhaseStart" id="<?php echo $p->idPhase?>PhaseStart" value="" data-validate="required"/>
                 <br/>
                 <label><?php echo $p->phaseName;?> - End Date:</label>
-                <input type="Text" class="form-control" name="<?php echo $p->idPhase?>PhaseEnd" id="<?php echo $p->idPhase?>PhaseEnd" value=""/>
+                <input type="Text" class="form-control" name="<?php echo $p->idPhase?>PhaseEnd" id="<?php echo $p->idPhase?>PhaseEnd" value="" data-validate="required"/>
             </div>   
             <?php endforeach; ?>
 			
 			<div class="form-group" id = "selectedMeetings" name = "selectedMeetings">
 				<label for="meetingIDs">Select Meetings:</label>
-				 <select multiple class="form-control" name="meetingIDs[]">
+				 <select multiple class="form-control" name="meetingIDs[]" data-validate="required">
 					 <?php foreach($meeting as $m): ?>
 					<option value="<?php echo $m->idMeeting ?>"><?php echo date( "Y-m-d H:i:s", strtotime($m->startTime))?> - <?php echo date( "Y-m-d H:i:s", strtotime($m->endTime)) ?></option>
 					<?php endforeach; ?>
