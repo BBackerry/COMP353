@@ -7,7 +7,7 @@
         <div class="form-group">
             <label class="col-lg-2 control-label" for="title">Title (limit 100 characters)</label>
 			<div class="col-lg-10">
-				<input class="form-control" type="text" name="title" size="100" value="" data-validate="required">
+				<input class="form-control" type="text" name="title" size="100" value="" data-validate="required,max(100)">
 			</div>
         </div>
         <div class="form-group">
@@ -24,7 +24,7 @@
         <div class="form-group">
             <label class="col-lg-2 control-label" for="description">News Description (limit 2000 characters)</label>
 			<div class="col-lg-10">
-				<textarea class="form-control" name="description" rows="10" cols="150" data-validate="required"></textarea>
+				<textarea class="form-control" name="description" rows="10" cols="150" data-validate="required,max(2000)"></textarea>
 			</div>
         </div>
         <button type="submit" style="float:right;" class="btn btn-success">Create News Message</button>
