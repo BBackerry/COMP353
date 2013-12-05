@@ -13,7 +13,7 @@
 							<p class="list-group-item-text">
 								<p>Abstract: <?= $obj['paper']->abstract ?></p>
 								Submitted by: <?= $obj['paper']->submittedBy ?><br/>
-								Event: <a href="<?= site_url('Event/viewEvents') . '?idEvent=' . $obj['paper']->idEvent ?>"><?= $obj['event'] ?></a><br/>
+								Event: <a href="<?= site_url('Event/viewEvent') . '?idEvent=' . $obj['paper']->idEvent ?>"><?= $obj['event'] ?></a><br/>
 								Keywords: <?= $obj['paper']->keywords ?><br/>
 								<?php if(isset($obj['reviews'])): ?>
 									Comments:<br/>
