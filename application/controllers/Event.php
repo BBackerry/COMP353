@@ -263,6 +263,9 @@ class Event extends CI_Controller {
 	
 	public function editEvent()
 	{
+			$admin = $this->session->userdata('isAdmin');
+			if ($admin)
+			{
 	        $param['topic'] = $this->topic_model->get_all_topic();
 	        $topicParents = $this->topicHierarchy_model->get_all_topicHierarchy();
 	        $hierarchy = array();
@@ -314,6 +317,14 @@ class Event extends CI_Controller {
         	$param['phaseDetail']= $this->phase_model->get_all_phase_for_event($idEvent);
 		$this->load->view('header');
 		$this->load->view('event_edit', $param);
+		
+		}
+		else 
+		{
+			$errors['errorMessagesEvent'] = array("Sorry but you are no allowed to create event");
+			$this->load->view('header', $errors);
+			$this->load->view('home_page');
+			}
 	}
 	
 	public function submitEditEvent()

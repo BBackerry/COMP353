@@ -102,8 +102,9 @@
 			
 			
 			<a href="<?= site_url('Event/eventPapers') . '?idEvent=' . $event->idEvent ?>" class="btn btn-primary" style="float:right;margin-left:10px;">View Submitted Papers</a>
+			<?php if($this->session->userdata('isAdmin')) {?>
 			<a href="<?= site_url('Event/editEvent') . '?idEvent=' . $event->idEvent ?>" class="btn btn-success" style="float:right">Edit Event</a>
-				
+			<?php } ?>
 			</div>
 		</div>
 </div>
