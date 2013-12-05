@@ -135,16 +135,17 @@ class Paper extends CI_Controller {
 		$this->load->model('topic_model');
 		
 		$eventId = $this->session->userdata('idEvent');
-		$query['event'] = $this->event_model->get_event($eventId);
-		
-		$query['users'] = $this->user_model->get_all_users();
-		$query['submitPhase'] = $this->phase_model->get_phase(1, $eventId)[0];
-		$query['eventTopic'] = $this->eventTopic_model->get_eventTopic($eventId);
-		$query['topics'] = array();
-		for($i = 0; $i < count($query['eventTopic']); ++$i){
-			array_push($query['topics'], $this->topic_model->get_topic($query['eventTopic'][$i]->idTopic)[0]);
+		$query['eventId'] = $eventId;
+		if ($eventId != 1){
+			$query['event'] = $this->event_model->get_event($eventId);
+			$query['users'] = $this->user_model->get_all_users();
+			$query['submitPhase'] = $this->phase_model->get_phase(1, $eventId)[0];
+			$query['eventTopic'] = $this->eventTopic_model->get_eventTopic($eventId);
+			$query['topics'] = array();
+			for($i = 0; $i < count($query['eventTopic']); ++$i){
+				array_push($query['topics'], $this->topic_model->get_topic($query['eventTopic'][$i]->idTopic)[0]);
+			}
 		}
-		
 		$username = $this->session->userdata('idUser');
 		$query['username'] = $username;
 		if ($username) {
