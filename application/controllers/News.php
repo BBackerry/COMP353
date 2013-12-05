@@ -67,11 +67,7 @@ public function __construct()
                 
         $this->news_model->update_news($idNews, $title, $date, $description, $createdBy, $idEvent);
 
-        $param['successMessages'][0] = "The news has been successfully updated.";
-		$this->load->view('header', $param);
-        $param['news'] = $this->news_model->get_news($idNews);
-        $param['eventName'] = $this->event_model->get_event_name($idEvent);
-        $this->load->view('news_details', $param);	
+		redirect(site_url('Event/switchEvent?idEvent=' . $idEvent));
     }
 	
 	public function submitedNews()

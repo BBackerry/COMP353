@@ -1,13 +1,9 @@
      <div class="container">
      	<div class="row">
 			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3>Decide on Papers</h3>
-				</div>
+				<div class="panel-heading">Decide on Papers</div>
 				<div class="panel-body">
-      				<h4 class="panel-title">Only papers submitted to events that are currently in the decision phase are shown.</h4>
-      				<br />
-					
+      				<p>Only papers submitted to events that are currently in the decision phase are shown.</p>
 					<?php if(isset($map)): ?>
 						<?php foreach($map as $obj): ?>
 							<div class="list-group">
