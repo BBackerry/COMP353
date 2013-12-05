@@ -66,12 +66,13 @@
                 <li class="dropdown">
                     <a href="<?php echo site_url('Event/viewEvents'); ?>" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                    	<li><a href="<?php echo site_url('Event/listEvents');?>">View Events</a></li>
-                        <?php if ($this->session->userdata('isAdmin')) { ?>
+                    	<li><a href="<?php echo site_url('Event/listEvents');?>">View Events</a></li>  
+							<?php if ($this->session->userdata('isAdmin')) { ?>
 						<li><a href="<?php echo site_url('Event/addEvent');?>">Create Event</a></li>
-						 <?php } ?>
+							<?php } ?>				
                     </ul>
                 </li>
+				
 				 <?php if ($this->session->userdata('isAdmin')) { ?>
                 <li class="dropdown">
                     <a href="<?php echo site_url('Meeting/viewMeetings'); ?>" class="dropdown-toggle" data-toggle="dropdown">Meeting<b class="caret"></b></a>
@@ -80,6 +81,9 @@
                         <li><a href="<?php echo site_url('Meeting/viewMeetings');?>">View Meetings</a></li>
                     </ul>
                 </li>  
+				<?php } ?>
+				
+				<?php if ($this->session->userdata('isAdmin')) { ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Manage<b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -88,6 +92,8 @@
                     </ul>
                 </li>        
             <?php } ?>
+			
+			
 			
 			<?php if($this->session->userdata('isProgramChair')): ?>
 				<li class="dropdown">
