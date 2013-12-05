@@ -24,10 +24,29 @@ class Event extends CI_Controller {
 	
 	public function listEvents()
 	{
-		$param['events'] = $this->event_model->get_all_event();		
+		$username = $this->session->userdata('idUser');
 		
+		$param['events'] = $this->event_model->get_all_event();
+		
+		if ($username) {
 			$this->load->view('header');
-			$this->load->view('events_list', $param);		
+			$this->load->view('events_list', $param);
+		}
+		else {
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
+			$this->load->view('header', $errors);
+		    $idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
+			$this->load->view('home_page', $param);
+		}
 	}
 	
 	public function eventPapers()
@@ -89,8 +108,16 @@ class Event extends CI_Controller {
 		{
 			$errors['errorMessagesEvent'] = array("Sorry but you are no allowed to create event");
 			$this->load->view('header', $errors);
-            		$param['news'] = $this->news_model->get_all_news();
-            		$param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+            $idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
 			$this->load->view('home_page', $param);
 		}
 	}
@@ -389,4 +416,42 @@ class Event extends CI_Controller {
 		
 		$this->listEvents();
 	}
+    
+    public function selectEventHomePage(){
+        $username = $this->session->userdata('idUser');
+		$param['events'] = $this->event_model->get_all_event();
+        
+		if ($username) {
+			$this->load->view('header');
+			$this->load->view('select_events_list', $param);
+		}
+		else {
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
+			$this->load->view('header', $errors);
+		    $idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
+			$this->load->view('home_page', $param);
+		}
+    }
+    
+    public function switchEvent(){
+        $idEvent = $this->input->get('idEvent');
+        $this->session->set_userdata('idEvent', $idEvent);
+        $eventName = $this->event_model->get_event_name($idEvent);
+        $this->session->set_userdata('eventName', $eventName[0]->eventName);
+        
+       $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+        $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
+        
+		$this->load->view('header');
+		$this->load->view('home_page', $param);
+    }
 }

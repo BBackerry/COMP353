@@ -4,6 +4,9 @@
           <?php foreach($news as $article) { ?>
               <div class="panel panel-default row">
 			  <div class="panel-heading"><?php echo $article->newsTitle; ?></div>
+              <div class="col-lg-12">
+                  <p><b>Published in: </b><?php echo $eventName[0]->eventName;?></p> 
+			  </div>
 			  <div class="col-lg-12">
                   <p><?php echo $article->newsDescription; ?></p> 
                   <p><i><?php echo $article->createdBy ?></i> - <?php echo date( "Y-m-d H:i:s", strtotime($article->newsDate)); ?></p>

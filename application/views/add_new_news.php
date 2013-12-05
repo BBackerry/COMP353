@@ -11,6 +11,15 @@
         </div>
         <br/>
         <div class="form-group">
+            <label for="idEvent">Event:</label>
+                <select name="idEvent" data-validate="required">
+                    <?php foreach($events as $event): ?>
+                       <option value="<?=$event->idEvent;?>"> <?= $event->eventName ?> </option>
+                    <?php endforeach; ?>
+                </select>
+        </div>
+        <br/>
+        <div class="form-group">
             <label for="description">News Description (limit 2000 characters): </label>
             <textarea name="description" rows="10" cols="150" data-validate="required">
             </textarea>

@@ -29,8 +29,16 @@ class User extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in to edit your profile');
 			$this->load->view('header', $errors);
-			$param['news'] = $this->news_model->get_all_news();
-			$param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
 			$this->load->view('home_page', $param);
 		}
 	}
@@ -214,6 +222,10 @@ class User extends CI_Controller {
 				$this->load->model('role_model');
 				$query = $this->role_model->get_role_of_user($username);
 				$this->session->set_userdata('isAdmin', false);
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
 				$this->session->set_userdata('isProgramChair', false);
 				$this->session->set_userdata('isCommitteeMember', false);
 				foreach ($query as $row)
@@ -276,6 +288,10 @@ class User extends CI_Controller {
         $this->session->set_userdata('isAdmin', false);
         $this->session->set_userdata('isProgramChair', false);
         $this->session->set_userdata('isCommitteeMember', false);
+        $this->session->set_userdata('idEvent', 1);
+        $this->load->model('event_model');
+        $eventName = $this->event_model->get_event_name($idEvent);
+        $this->session->set_userdata('eventName', $eventName[0]->eventName);
 		redirect('Home', 'index');
 	}
 	

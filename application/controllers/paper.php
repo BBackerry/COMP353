@@ -40,8 +40,16 @@ class Paper extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
 			$this->load->view('header', $errors);
-			$param['news'] = $this->news_model->get_all_news();
-		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
 			$this->load->view('home_page', $param);
 		}
 	}
@@ -110,8 +118,16 @@ class Paper extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
 			$this->load->view('header', $errors);
-			$param['news'] = $this->news_model->get_all_news();
-		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
 			$this->load->view('home_page', $param);
 		}
 	}
@@ -142,7 +158,16 @@ class Paper extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in to view papers');
 			$this->load->view('header', $errors);
-			$param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
 			$this->load->view('home_page', $param);
 		}
 	}
@@ -345,6 +370,16 @@ public function changeBid()
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to bid on papers');
 			$this->load->view('header', $errors);
+            $idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
 			$this->load->view('home_page');
 		}
 	}
@@ -407,8 +442,16 @@ public function changeBid()
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to review papers');
 			$this->load->view('header', $errors);
-		        $param['news'] = $this->news_model->get_all_news();
-		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+		    $idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
 			$this->load->view('home_page', $param);
 		}
 	}
@@ -481,8 +524,16 @@ public function changeBid()
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to review papers');
 			$this->load->view('header', $errors);
-	                $param['news'] = $this->news_model->get_all_news();
-	                $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+	        $idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
 			$this->load->view('home_page', $param);
 		}
 	}
@@ -518,8 +569,16 @@ public function changeBid()
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to review papers');
 			$this->load->view('header', $errors);
-	                $param['news'] = $this->news_model->get_all_news();
-	                $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+	        $idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
 			$this->load->view('home_page', $param);
 		}
 	}
@@ -597,8 +656,16 @@ public function changeBid()
 			$error = 'Sorry but you have to be logged in to submit papers';
 			$errors['errorMessages'] = array_push($errors['errorMessages'], $error);
 			$this->load->view('header', $errors);
-		        $param['news'] = $this->news_model->get_all_news();
-		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+		    $idEvent = $this->session->userdata('idEvent');
+            if (!$idEvent) {
+                $this->session->set_userdata('idEvent', 1);
+                $this->load->model('event_model');
+                $eventName = $this->event_model->get_event_name($idEvent);
+                $this->session->set_userdata('eventName', $eventName[0]->eventName);
+            }
+            
+            $param['news'] = $this->news_model->get_all_news_for_event($idEvent);
+            $param['meetings'] = $this->meeting_model->get_upcoming_meeting_for_event($idEvent);
 			$this->load->view('home_page', $param);
 		}
 	}
