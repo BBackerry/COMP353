@@ -14,6 +14,13 @@ class PaperDecision_model extends CI_Model {
 		$query = $this->db->query($sql, array($idPaper, $idUser)); 
 		return $query->result();
 	}
+	
+	function get_published_paperDecision()
+	{
+		$sql = "SELECT * FROM paperDecision WHERE decision = 1";
+		$query = $this->db->query($sql, array()); 
+		return $query->result();
+	}
 
 	function get_all_paperDecision()
 	{

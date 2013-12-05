@@ -13,9 +13,9 @@
         </div>
         <div class="col-lg-10">
           <h2>News</h2> 
-          <?php if($this->session->userdata('isAdmin') || $this->session->userdata('isProgramChair')) { ?>
+          <?php if($this->session->userdata('isAdmin') || $this->session->userdata('isProgramChair')): ?>
             <a href="<?php echo site_url('News/createNews'); ?>"> Add a News Message </a>
-          <?php } ?>
+          <?php endif; ?>
           <?php $numOfNews = 5;
                 foreach($news as $article) { ?>
               <div class="panel panel-default row">
@@ -44,8 +44,6 @@
           <?php } ?>
 		          
         </div>
-			<br>
-		   <a href="<?php echo site_url('Paper/listAcceptedPaper'); ?>"> List all Accepted Papers </a>
        </div>
       </div>
 

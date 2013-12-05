@@ -57,6 +57,7 @@
                     <ul class="dropdown-menu">
                     	<li><a href="<?php echo site_url('Paper/submittedPapers');?>">My Papers</a></li>
                         <li><a href="<?php echo site_url('Paper/submit');?>">Submit New Paper</a></li>
+                        <li><a href="<?php echo site_url('Paper/publishedPapers');?>">See Published Papers</a></li>
                     </ul>
             </li>
 			

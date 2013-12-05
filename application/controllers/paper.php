@@ -64,12 +64,6 @@ class Paper extends CI_Controller {
 		
 	}
 	
-	public function publishPaper() {
-	
-		$this->load->view('header');
-		$this->load->view('acceptedPaper_list');
-	
-	}
 	public function submit()
 	{
 		$this->load->model('event_model');
@@ -121,6 +115,21 @@ class Paper extends CI_Controller {
 			$this->load->view('header', $errors);
 			$this->load->view('home_page');
 		}
+	}
+	
+	public function publishedPapers()
+	{
+		$this->load->model('paperDecision_model');
+		$this->load->model('paper_model');
+		
+		$publishedPaperDecisions = $this->paperDecision_model->get_published_paperDecision();
+		$data['papers'] = array();
+		foreach($publishedPaperDecisions as $publishedPaperDecision) {
+			array_push($data['papers'], $this->paper_model->get_paper_no_blob($publishedPaperDecision->idPaper)[0]);
+		}
+		
+		$this->load->view('header');
+		$this->load->view('papers_published', $data);
 	}
 	
 	public function paperDecision($message = null)
