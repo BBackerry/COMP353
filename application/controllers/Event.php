@@ -24,21 +24,10 @@ class Event extends CI_Controller {
 	
 	public function listEvents()
 	{
-		$username = $this->session->userdata('idUser');
+		$param['events'] = $this->event_model->get_all_event();		
 		
-		$param['events'] = $this->event_model->get_all_event();
-		
-		if ($username) {
 			$this->load->view('header');
-			$this->load->view('events_list', $param);
-		}
-		else {
-			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
-			$this->load->view('header', $errors);
-		        $param['news'] = $this->news_model->get_all_news();
-		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
-			$this->load->view('home_page', $param);
-		}
+			$this->load->view('events_list', $param);		
 	}
 	
 	public function eventPapers()
