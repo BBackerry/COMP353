@@ -561,13 +561,14 @@ INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('11', 'Isra
 INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('12', 'Sri Lanka');
 INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('13', 'India');
 
+
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'Building, Civil and Environmental Engineering');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('2', 'Electrical and Computer Engineering');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('3', 'Mechanical and Industrial Engineering');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('4', 'General Studies');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('5', 'Computer Science &amp; Software Engineering');
-INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('6', 'Concordia Institute for Information Systems Engineering (CIISE)');
-INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('7', 'Concordia Institute for Aerospace Design and Innovation');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('6', 'Information Systems Engineering');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('7', 'Aerospace Design and Innovation');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('8', 'Accountancy');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('9', 'Finance');
 INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('10', 'Management');
