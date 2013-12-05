@@ -46,7 +46,7 @@ class ProgramChair extends CI_Controller {
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name($idEvent);
+                $eventName = $this->event_model->get_event_name(1);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -74,7 +74,7 @@ class ProgramChair extends CI_Controller {
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name($idEvent);
+                $eventName = $this->event_model->get_event_name(1);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -122,7 +122,7 @@ class ProgramChair extends CI_Controller {
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name($idEvent);
+                $eventName = $this->event_model->get_event_name(1);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -177,7 +177,7 @@ class ProgramChair extends CI_Controller {
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name($idEvent);
+                $eventName = $this->event_model->get_event_name(1);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -233,7 +233,7 @@ class ProgramChair extends CI_Controller {
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name($idEvent);
+                $eventName = $this->event_model->get_event_name(1);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             

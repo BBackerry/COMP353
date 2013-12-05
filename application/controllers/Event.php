@@ -39,7 +39,7 @@ class Event extends CI_Controller {
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name($idEvent);
+                $eventName = $this->event_model->get_event_name(1);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -112,7 +112,7 @@ class Event extends CI_Controller {
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name($idEvent);
+                $eventName = $this->event_model->get_event_name(1);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -432,7 +432,7 @@ class Event extends CI_Controller {
             if (!$idEvent) {
                 $this->session->set_userdata('idEvent', 1);
                 $this->load->model('event_model');
-                $eventName = $this->event_model->get_event_name($idEvent);
+                $eventName = $this->event_model->get_event_name(1);
                 $this->session->set_userdata('eventName', $eventName[0]->eventName);
             }
             
@@ -445,7 +445,7 @@ class Event extends CI_Controller {
     public function switchEvent(){
         $idEvent = $this->input->get('idEvent');
         $this->session->set_userdata('idEvent', $idEvent);
-        $eventName = $this->event_model->get_event_name($idEvent);
+        $eventName = $this->event_model->get_event_name(1);
         $this->session->set_userdata('eventName', $eventName[0]->eventName);
         
 		$param['news'] = $this->news_model->get_all_news_for_event($idEvent);
