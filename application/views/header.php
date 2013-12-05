@@ -43,6 +43,12 @@
           <ul class="nav navbar-nav">
 		<?php if ($this->session->userdata('idUser') == false) { ?>
             <li class="active"><a href="<?php echo base_url();?>">Home</a></li>
+             <li class="dropdown">
+                    <a href="<?php echo site_url('Event/viewEvents'); ?>" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                    	<li><a href="<?php echo site_url('Event/listEvents');?>">View Events</a></li> 					
+                    </ul>
+                </li>
 		<?php } else { ?>
             <li class="active"><a href="<?php echo site_url('Event/selectEventHomePage');?>">Switch Event</a></li>
 			<li class="dropdown">
@@ -62,18 +68,16 @@
                     </ul>
             </li>
 			
-            
+            <?php if ($this->session->userdata('isAdmin')) { ?>
                 <li class="dropdown">
                     <a href="<?php echo site_url('Event/viewEvents'); ?>" class="dropdown-toggle" data-toggle="dropdown">Events<b class="caret"></b></a>
                     <ul class="dropdown-menu">
-                    	<li><a href="<?php echo site_url('Event/listEvents');?>">View Events</a></li>  
-							<?php if ($this->session->userdata('isAdmin')) { ?>
-						<li><a href="<?php echo site_url('Event/addEvent');?>">Create Event</a></li>
-							<?php } ?>				
+                    	<li><a href="<?php echo site_url('Event/listEvents');?>">View Events</a></li> 
+						<li><a href="<?php echo site_url('Event/addEvent');?>">Create Event</a></li>					
                     </ul>
                 </li>
 				
-				 <?php if ($this->session->userdata('isAdmin')) { ?>
+				 
                 <li class="dropdown">
                     <a href="<?php echo site_url('Meeting/viewMeetings'); ?>" class="dropdown-toggle" data-toggle="dropdown">Meeting<b class="caret"></b></a>
                     <ul class="dropdown-menu">
