@@ -15,6 +15,27 @@ class Paper_model extends CI_Model {
 		return $query->result();
 	}
 	
+	function get_accepted_paper_match_by_title($title)
+	{
+		$sql = "SELECT * FROM paper p WHERE title LIKE = ? AND EXISTS(SELECT * FROM paperDecision d WHERE d.idPaper = p.idPaper AND d.decision = 1) ";
+		$query = $this->db->query($sql, array($title)); 
+		return $query->result();
+	}
+	
+	function get_accepted_paper_match_by_author($submittedBy)
+	{
+		$sql = "SELECT * FROM paper p WHERE submittedBy LIKE = ? AND EXISTS(SELECT * FROM paperDecision d WHERE d.idPaper = p.idPaper AND d.decision = 1) ";
+		$query = $this->db->query($sql, array($submittedBy)); 
+		return $query->result();
+	}
+	
+	function get_accepted_paper_match_by_keywords($keywords)
+	{
+		$sql = "SELECT * FROM paper p WHERE keywords LIKE = ? AND EXISTS(SELECT * FROM paperDecision d WHERE d.idPaper = p.idPaper AND d.decision = 1) ";
+		$query = $this->db->query($sql, array($keywords)); 
+		return $query->result();
+	}
+	
 	function get_paper_by_event($idEvent)
 	{
 		$sql = "SELECT * FROM paper WHERE idEvent = ? ";

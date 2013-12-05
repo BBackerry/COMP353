@@ -7,7 +7,14 @@ class PaperAuthor_model extends CI_Model {
 		$query = $this->db->query($sql, array($idPaper)); 
 		return $query->result();
 	}
-
+	
+	function get_paperAuthor_by_author($idUser)
+	{
+		$sql = "SELECT * FROM paperAuthor WHERE idUser = ? ";
+		$query = $this->db->query($sql, array($idUser)); 
+		return $query->result();
+	}
+	
 	function get_all_paperAuthor()
 	{
 		$sql = "SELECT * FROM paperAuthor ";

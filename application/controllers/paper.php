@@ -68,6 +68,50 @@ class Paper extends CI_Controller {
 		
 	}
 	
+	public function submitSearch()
+	{	
+		$this->load->model('paperDecision_model');
+		$this->load->model('paper_model');
+		
+		
+		$eventName = $this->input->get('event');
+		$author = $this->input->get('author');		
+		$keywords = $this->input->get('keywords');
+		$title = $this->input->get('title');
+		$matchedPapers = array();
+		$finalMatchedPapers = array();
+		$papers = $this->paper_model->get_accepted_paper_match_by_title('%'.$title.'%');
+		 
+		for($i = 0; $i < count($papers); ++$i){
+			$matchedPapers[$paper[$i]->idPaper] = $paper[$i];
+		}
+		$papers = $this->paper_model->get_accepted_paper_match_by_author('%'.$author.'%');
+		for($i = 0; $i < count($papers); ++$i){
+			$matchedPapers[$paper[$i]->idPaper] = $paper[$i];
+		}
+		$papers = $this->paper_model->get_accepted_paper_match_by_keywords($keywords);
+		for($i = 0; $i < count($papers); ++$i){
+			$matchedPapers[$paper[$i]->idPaper] = $paper[$i];
+		}		
+		for($i = 0; $i < count($matchedPapers); ++$i){
+			$event = $this->event_model->get_event($matchedPapers[$i]->idEvent)[0];
+			if($event->eventName == $eventName){
+				array_push($finalMatchedPapers, $matchedPapers[$i]);
+			}
+		}
+			
+			$this->load->view('header');
+			$this->load->view('search_papers_result', $param);
+					
+	}
+	
+	public function searchPaper()
+	{		
+		$this->load->view('header');
+		$this->load->view('search_papers');
+	
+	}
+	
 	public function submit()
 	{
 		$this->load->model('event_model');
