@@ -199,21 +199,33 @@ class User extends CI_Controller {
 		$username = $this->input->get('username');
 		$password = $this->input->get('password');
 		if ($this->verify_login($username, $password)) {
-			$this->session->set_userdata('idUser', $username);
-            
-            $this->load->model('role_model');
-            $query = $this->role_model->get_role_of_user($username);
-			$this->session->set_userdata('isAdmin', false);
-            $this->session->set_userdata('isProgramChair', false);
-            $this->session->set_userdata('isCommitteeMember', false);
-			foreach ($query as $row)
+			$user = $this->user_model->get_user($username)[0];
+			if ($user->confirmed == 0 && (time()-strtotime($user->registrationTime) > 60*60*24))
 			{
-				if($row->idPosition == 1 & $row->idEvent == 1)
-				$this->session->set_userdata('isAdmin', true);
-                if($row->idPosition == 2)
-                $this->session->set_userdata('isProgramChair', true);
-                if($row->idPosition == 3)
-                $this->session->set_userdata('isCommitteeMember', true);
+				$this->user_model->delete_user($username);
+				$errors['errorMessages'] = array('Sorry but you had to login within the first 24 hours of the sign-up. Try signing-up again');
+				$this->register_email($errors);
+			}
+			
+			else {
+				$this->user_model->validate_user($username);
+				$this->session->set_userdata('idUser', $username);
+				
+				$this->load->model('role_model');
+				$query = $this->role_model->get_role_of_user($username);
+				$this->session->set_userdata('isAdmin', false);
+				$this->session->set_userdata('isProgramChair', false);
+				$this->session->set_userdata('isCommitteeMember', false);
+				foreach ($query as $row)
+				{
+					if($row->idPosition == 1 & $row->idEvent == 1)
+					$this->session->set_userdata('isAdmin', true);
+					if($row->idPosition == 2)
+					$this->session->set_userdata('isProgramChair', true);
+					if($row->idPosition == 3)
+					$this->session->set_userdata('isCommitteeMember', true);
+				}
+				redirect('Home', 'index'); 
 			}
         }      
 		else {
@@ -221,13 +233,13 @@ class User extends CI_Controller {
             $this->session->set_userdata('isAdmin', false);
             $this->session->set_userdata('isProgramChair', false);
             $this->session->set_userdata('isCommitteeMember', false);
+			redirect('Home', 'index'); 
 		}
-		redirect('Home', 'index'); 
 	}
 	
-	public function register_email()
+	public function register_email($messages = null)
 	{
-		$this->load->view('header');
+		$this->load->view('header', $messages);
 		$this->load->view('user_registration_email');
 	}
 	

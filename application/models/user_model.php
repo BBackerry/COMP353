@@ -17,7 +17,7 @@ class User_model extends CI_Model {
 
 	function create_user($idUser, $password, $firstName, $lastName, $email, $country, $organization, $department)
 	{
-		$sql = "INSERT INTO user VALUES( ?, ?, ?, ?, ?, ?, ?, 0, ?)";
+		$sql = "INSERT INTO user VALUES(?, ?, ?, ?, ?, ?, ?, 0, ?, NULL)";
 		$query = $this->db->query($sql, array($idUser, $password, $firstName, $lastName, $email, $country, $organization, $department)); 
 		return $query;
 	}
