@@ -401,12 +401,14 @@ class Paper extends CI_Controller {
 	{
 		$this->load->model('paperTopics_model');
 		$this->load->model('paperAuthor_model');
+		$this->load->model('event_model');
 		
 		$errors['errorMessages'] = array();
 		
 		$username = $this->session->userdata('idUser');
 		if ($username) {
 			$idEvent = $this->input->post('idEvent');
+			$query['events'] = $this->event_model->get_event($idEvent);
 			$title = $this->input->post('title');
 			$abstract = $this->input->post('abstract');
 			$keywords = $this->input->post('keywords');
