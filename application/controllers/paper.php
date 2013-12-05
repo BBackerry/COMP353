@@ -281,11 +281,12 @@ class Paper extends CI_Controller {
 		
 		
 		$phases = array();
-		foreach($query['papers'] as $paper):
+		foreach($query['papers'] as $paper)
+		{
 			$phase = $this->phase_model->get_phase(4, $paper->idEvent);
-			array_push($phases, $phase[0]);
-		endforeach;
-		
+			$phases[$paper->idEvent]= $phase[0];
+		}
+
 		$query['phases'] = $phases;
 		
 		if($this->session->userdata('isCommitteeMember')) {
@@ -358,7 +359,7 @@ class Paper extends CI_Controller {
 		
 			foreach($query['papers'] as $paper):
 				$phase = $this->phase_model->get_phase(4, $paper->idEvent);
-				array_push($phases, $phase[0]);
+				$phases[$paper->idEvent] = $phase[0];
 			endforeach;
 		
 			$query['phases'] = $phases;
