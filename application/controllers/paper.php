@@ -72,6 +72,7 @@ class Paper extends CI_Controller {
 	{	
 		$this->load->model('paperDecision_model');
 		$this->load->model('paper_model');
+		$this->load->model('event_model');
 		
 		
 		$eventName = $this->input->get('event');
@@ -80,17 +81,17 @@ class Paper extends CI_Controller {
 		$title = $this->input->get('title');
 		$matchedPapers = array();
 		$finalMatchedPapers = array();
-		$papers = $this->paper_model->get_accepted_paper_match_by_title_submittedBy_Keywords('%'.$title.'%', '%'.$author.'%', '%'.$keywords).'%';
-		 
+		
+		$papers = $this->paper_model->get_accepted_paper_match_by_title_submittedBy_Keywords('%'.$title.'%', '%'.$author.'%', '%'.$keywords.'%');
+		var_dump($this->paper_model->get_accepted_paper_match_by_title_submittedBy_Keywords('%'.$title.'%', '%'.$author.'%', '%'.$keywords.'%'));
+		$events = $this->event_model->get_event_by_name($eventName);
 		for($i = 0; $i < count($papers); ++$i){
-			$matchedPapers[$papers[$i]->idPaper] = $papers[$i];
-		}		
-		for($i = 0; $i < count($matchedPapers); ++$i){
-			$event = $this->event_model->get_event($matchedPapers[$i]->idEvent)[0];
-			if($event->eventName == $eventName){
-				array_push($finalMatchedPapers, $matchedPapers[$i]);
+			for($j = 0; $j < count($events); ++$j){
+				if($events[$j]->idEvent == $papers[$i]->idEvent)
+					array_push($matchedPapers, $papers[$i]);
 			}
-		}
+		}		
+		$param['finalMatchedPapers'] = $papers;	
 			
 			$this->load->view('header');
 			$this->load->view('search_papers_result', $param);
@@ -537,13 +538,5 @@ class Paper extends CI_Controller {
 		$data = array('paperData' => $blob);
 		$this->load->view('view_paper', $data);
 	}
-
-	public function getSearchDetails()
-	{
-		$event = $this->input->get('event');
-		$author = $this->input->get('author');
-		$keywords = $this->input->get('keywords');
-		$title = $this->input->get('title');
-	}	
 
 }
