@@ -1,54 +1,42 @@
 	<div class="container">
 		<div class="row">
 			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h4>Papers Submitted to Event: <?= $event->eventName ?></h4>
-				</div>
+				<div class="panel-heading">Papers Submitted to Event: <?= $event->eventName ?></div>
 				<div class="panel-body">
-					<h5>You can only bid on a paper during the bidding phase.</h5>
-					<h5>The bidding phase is from <?= $bidPhase->startTime ?> to <?=$bidPhase->endTime?>.</h5>
-					<h5>You can view a paper's scores by clicking on its title only after the review phase ends.</h5>
-					<h5>The review phase is from <?= $reviewPhase->startTime ?> to <?=$reviewPhase->endTime?>.</h5>
-					<table border="1" class = "table">
+					<table class="table table-hover">
+						<thead>
       					<tr>
-      						<td><h4 class="panel-title"><b>Paper Title</b> </h4></td> 
-      						<td><h4 class="panel-title"><b>Abstract </b></h4></td>
-      						<td><h4 class="panel-title"><b>Submitted By </b></h4></td>
-      						<?php if(strtotime($bidPhase->startTime) < strtotime(date("Y-m-d H:i:s")) && strtotime($bidPhase->endTime) > strtotime(date("Y-m-d H:i:s"))): ?>
-      								<td><h4 class="panel-title"><b>Bidding </b></h4></td>
-      						<?php endif; ?>
-      					</tr>
-						
-							<?php foreach($papers as $row): ?>
-							<tr>
-								<?php if(strtotime($reviewPhase->endTime) < strtotime(date("Y-m-d H:i:s"))): ?>
-									<td><a href="<?= site_url('Paper/paperScores') . '?idPaper=' . $row->idPaper ?>"><?= $row->title ?></a></td>
-								
-								<?php else: ?>
-										<td><?= $row->title ?></td>
+								<th>Paper Title</th> 
+								<th>Abstract</th>
+								<th>Submitted By</th>
+								<?php if(strtotime($bidPhase->startTime) < strtotime(date("Y-m-d H:i:s")) && strtotime($bidPhase->endTime) > strtotime(date("Y-m-d H:i:s"))): ?>
+									<th>Bidding</th>
 								<?php endif; ?>
-								<td><?= $row->abstract ?></td>
-								<td><?= $row->submittedBy ?></td>
-								
-								
-									
-										
-										<?php if(!empty($bids[$row->idPaper])): ?>
-										<td>
-											Your Bid: <?= $bids[$row->idPaper][0]->bid ?>
-											
-												<a href="<?= site_url('Paper/changeBid/') . '?idPaper=' . $bids[$row->idPaper][0]->idPaper ?>" style="float:right;" class="btn btn-primary">Change Bid</a>
-										</td>
-		      							<?php endif; ?>
-		      							<?php if(empty($bids[$row->idPaper]) && strtotime($bidPhase->startTime) < strtotime(date("Y-m-d H:i:s")) && strtotime($bidPhase->endTime) > strtotime(date("Y-m-d H:i:s"))): ?>
-		      								<td><a href="<?= site_url('Paper/bidForPaper') . '?idPaper=' . $row->idPaper ?>">bid on this paper</a></td>
-		      								
-		      							<?php endif; ?>
-	      							
-      						
 							</tr>
+						</thead>
+						<tbody>
+							<?php foreach($papers as $row): ?>
+								<tr>
+									<?php if(strtotime($reviewPhase->endTime) < strtotime(date("Y-m-d H:i:s"))): ?>
+										<td><a href="<?= site_url('Paper/paperScores') . '?idPaper=' . $row->idPaper ?>"><?= $row->title ?></a></td>
+									<?php else: ?>
+										<td><?= $row->title ?></td>
+									<?php endif; ?>
+										<td><?= $row->abstract ?></td>
+										<td><?= $row->submittedBy ?></td>
+									<?php if(!empty($bids[$row->idPaper])): ?>
+										<td>Your Bid: <?= $bids[$row->idPaper][0]->bid ?>
+											<a href="<?= site_url('Paper/changeBid/') . '?idPaper=' . $bids[$row->idPaper][0]->idPaper ?>" style="float:right;" class="btn btn-primary">Change Bid</a>
+										</td>
+									<?php endif; ?>
+									<?php if(empty($bids[$row->idPaper]) && strtotime($bidPhase->startTime) < strtotime(date("Y-m-d H:i:s")) && strtotime($bidPhase->endTime) > strtotime(date("Y-m-d H:i:s"))): ?>
+										<td>
+											<a href="<?= site_url('Paper/bidForPaper') . '?idPaper=' . $row->idPaper ?>">Bid on this paper</a>
+										</td>
+									<?php endif; ?>
+								</tr>
 						<?php endforeach; ?>
-						
+						</tbody>
 					</table>
 				</div>
 			</div>
