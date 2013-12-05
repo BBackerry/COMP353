@@ -1,17 +1,23 @@
     <div class="container">
       <!-- Example row of columns -->
       <div class="row">
-        <div class="col-lg-2">
+        <div class="col-lg-4">
           <h3>Upcoming Dates:</h3>
 		  <ul class="list-group">
-			<li class="list-group-item"><a href="#">Link to event</a></li>
-			<li class="list-group-item"><a href="#">Link to event</a></li>
-			<li class="list-group-item"><a href="#">Link to event</a></li>
-			<li class="list-group-item"><a href="#">Link to event</a></li>
-			<li class="list-group-item"><a href="#">Link to event</a></li>
+            <?php 
+                $numOfMeetings = 5;
+                foreach($meetings as $meeting){?>
+                    <li class="list-group-item"><?= date( "Y-m-d H:i:s", strtotime($meeting->startTime))?> - <?= date( "Y-m-d H:i:s", strtotime($meeting->endTime)) ?></li>
+                <?php
+                    if($numOfMeetings == 1){ 
+                        break; 
+                    }else {
+                        $numOfMeetings = $numOfMeetings-1;
+                    }
+                }?>
 		  </ul>
         </div>
-        <div class="col-lg-10">
+        <div class="col-lg-8">
           <h2>News</h2> 
           <?php if($this->session->userdata('isAdmin') || $this->session->userdata('isProgramChair')): ?>
             <a href="<?php echo site_url('News/createNews'); ?>"> Add a News Message </a>

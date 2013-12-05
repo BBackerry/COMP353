@@ -10,7 +10,9 @@ class User extends CI_Controller {
 			$this->load->model('country_model');
 			$this->load->model('organization_model');
 			$this->load->model('department_model');
-			
+			$this->load->model('news_model');
+            		$this->load->model('meeting_model');
+       
 			$user = $this->user_model->get_user($username)[0];
 			$data['user'] = $user;
 			$data['oldCountryId'] = $this->country_model->get_country($user->country)[0]->idCountry;
@@ -27,7 +29,9 @@ class User extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in to edit your profile');
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+			$param['news'] = $this->news_model->get_all_news();
+			$param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$this->load->view('home_page', $param);
 		}
 	}
 	

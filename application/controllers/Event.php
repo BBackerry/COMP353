@@ -18,6 +18,7 @@ class Event extends CI_Controller {
 		$this->load->model('user_model');
 		$this->load->model('role_model');
 		$this->load->model('committeeBid_model');
+		$this->load->model('news_model');
 		
 	}
 	
@@ -34,7 +35,9 @@ class Event extends CI_Controller {
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+		        $param['news'] = $this->news_model->get_all_news();
+		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$this->load->view('home_page', $param);
 		}
 	}
 	
@@ -98,7 +101,9 @@ class Event extends CI_Controller {
 		{
 			$errors['errorMessagesEvent'] = array("Sorry but you are no allowed to create event");
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+            		$param['news'] = $this->news_model->get_all_news();
+            		$param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+			$this->load->view('home_page', $param);
 		}
 	}
 	

@@ -6,7 +6,8 @@ public function __construct()
 	{
 		parent::__construct();
 		$this->load->model('meeting_model');
-        $this->load->model('place_model');
+	        $this->load->model('place_model');
+	        $this->load->model('news_model');
 	}
 	
 	public function createMeeting()
@@ -18,9 +19,12 @@ public function __construct()
         }
 		else 
 		{
+		        $param['news'] = $this->news_model->get_all_news();
+		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
+            
 			$errors['errorMessages'] = array("Sorry but you are no allowed to create meetings");
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+			$this->load->view('home_page', $param);
 		}
 	}
 	
@@ -36,8 +40,10 @@ public function __construct()
 		else 
 		{
 			$errors['errorMessages'] = array('Sorry you are not allowed to edit a meeting');
+		        $param['news'] = $this->news_model->get_all_news();
+		        $param['meetings'] = $this->meeting_model->get_upcoming_meeting();
 			$this->load->view('header', $errors);
-			$this->load->view('home_page');
+			$this->load->view('home_page', $param);
 		}
 	}
 	
