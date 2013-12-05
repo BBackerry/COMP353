@@ -60,7 +60,7 @@ CREATE TABLE IF NOT EXISTS `comp353`.`user` (
   `organization` INT NOT NULL,
   `confirmed` TINYINT NULL DEFAULT 0,
   `department` INT NOT NULL,
-  `registrationTime` TIMESTAMP NULL,
+  `registrationTime` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`idUser`),
   INDEX `Country_user` (`country` ASC),
   INDEX `Organization_user` (`organization` ASC),
@@ -175,7 +175,6 @@ CREATE TABLE IF NOT EXISTS `comp353`.`meeting` (
   `createdBy` VARCHAR(45) NOT NULL,
   `startTime` TIMESTAMP NULL,
   `endTime` TIMESTAMP NULL,
-  `meetingTitle` VARCHAR(300) NULL,
   PRIMARY KEY (`idMeeting`),
   INDEX `createdBy_meeting` (`createdBy` ASC),
   INDEX `idPlace_meeting` (`idPlace` ASC),
@@ -545,6 +544,7 @@ ENGINE = InnoDB;
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
+
 
 
 INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
