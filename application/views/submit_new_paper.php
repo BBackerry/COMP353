@@ -4,31 +4,10 @@
 			<div class="panel panel-heading">Submit New Paper</div>
 			<div class="panel-body">
 				<p>You can only submit to an event that is currently in the phase of submitting papers.<p>
+				<p>The submit phase is from <?= $submitPhase->startTime ?> to <?=$submitPhase->endTime?>.</p>
 				<p>The abstract must be at least 20 words, but no more than 200 characters including blank spaces. You can write the abstract in a text editor then copy and paste it in the appropriate field.<p>
-			  
+			  	<?php if(strtotime($submitPhase->startTime) < strtotime(date("Y-m-d H:i:s")) && strtotime($submitPhase->endTime) > strtotime(date("Y-m-d H:i:s"))): ?>
 				<form role="form" class="form-horizontal" action="<?php echo site_url('Paper/submitted/') ?>" method="POST" enctype="multipart/form-data">
-					<div class="form-group">
-						<label for="idEvent" class="col-lg-2 control-label">Event:</label>
-						<div class="col-lg-10">
-							<select name="idEvent" id="eventSelect" class="form-control" data-validate="required">
-								<option value="0">-</option>
-								<?php foreach($events as $event): ?>
-									<?php foreach($phases as $phase): ?>
-										<?php if ($event->idEvent == 1) continue;?>
-										<?php if ($event->idEvent == $eventId){
-											echo '<option selected="selected" value="'. $event->idEvent .'">'. $eventName .'</option>';
-											continue;
-										}?>
-										<?php if ($event->idEvent == $phase->idEvent && $phase->idPhase == 1 && 
-												strtotime($phase->startTime) < strtotime(date("Y-m-d H:i:s")) && strtotime($phase->endTime) > strtotime(date("Y-m-d H:i:s"))){
-											echo '<option value="'. $event->idEvent .'">'.$event->eventName.'</option>';
-											break;
-										}?>
-									<?php endforeach; ?>
-	        					<?php endforeach; ?>
-							</select>
-						</div>
-					</div>
 					
 					<div class="form-group">
 						<label for="title" class="col-lg-2 control-label">Paper Title:</label>
@@ -63,11 +42,8 @@
 						<label id="subject" name="subject" for="subject" class="col-lg-2 control-label">Paper Topics:</label>
 						<div class="col-lg-10">
 							<select multiple name="subjects[]" class="form-control" data-validate="required">
-								<?php foreach($eventTopic as $row):?>
-									<?php foreach($topics as $topic):?>
-										<?php if ($row->idTopic != $topic->idTopic) continue; ?>
-										<option value="<?= $topic->idTopic ?>"><?= $topic->topicName ?></option>
-									<?php endforeach; ?>
+								<?php foreach($topics as $row):?>
+									<option value="<?= $row->idTopic ?>"><?= $row->topicName ?></option>
 	        					<?php endforeach; ?>
 							</select>
 						</div>
@@ -88,7 +64,10 @@
 					<button style="float:right;" class="btn btn-success">Submit</button>
 					
 				</form>
-			  
+				<?php endif; ?>
+				<?php if(!(strtotime($submitPhase->startTime) < strtotime(date("Y-m-d H:i:s")) && strtotime($submitPhase->endTime) > strtotime(date("Y-m-d H:i:s")))): ?>
+			  		<h4>This event is not currently in the submit paper phase.</h4>
+				<?php endif; ?>
 			</div>
 		</div>
 
