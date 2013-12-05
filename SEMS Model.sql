@@ -548,19 +548,73 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 
 INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('1', 'Canada');
-INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'Computer Science &amp; Engineering');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('2', 'United States');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('3', 'Japan');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('4', 'China');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('5', 'Australia');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('6', 'England');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('7', 'France');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('8', 'Sweden');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('9', 'Germany');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('10', 'Ireland');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('11', 'Israel');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('12', 'Sri Lanka');
+INSERT INTO `comp353`.`country` (`idCountry`, `countryName`) VALUES ('13', 'India');
+
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('1', 'Building, Civil and Environmental Engineering');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('2', 'Electrical and Computer Engineering');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('3', 'Mechanical and Industrial Engineering');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('4', 'General Studies');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('5', 'Computer Science &amp; Software Engineering');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('6', 'Concordia Institute for Information Systems Engineering (CIISE)');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('7', 'Concordia Institute for Aerospace Design and Innovation');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('8', 'Accountancy');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('9', 'Finance');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('10', 'Management');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('11', 'Marketing');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('12', 'Supply Chain &amp; Business Technology Management');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('13', 'Applied Human Sciences');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('14', 'Biology');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('15', 'Chemistry &amp; Biochemistry');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('16', 'Classics, Modern Languages, and Linguistics');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('17', 'Communication Studies');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('18', 'Economics');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('19', 'Education');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('20', 'English');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('21', 'Exercise science');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('22', 'Geography, Planning and Environment');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('23', 'History');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('24', 'Humanities');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('25', 'Interdisciplinary Studies');
+INSERT INTO `comp353`.`department` (`idDepartment`, `departmentName`) VALUES ('26', 'Journalism');
+
 INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('1', 'Concordia University');
-INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('admin', 'admin', 'admin', 'admin', 'admin@confsys.ca', '1', '1', '1', '1');
-INSERT INTO `comp353`.`event` (`idEvent`, `startDate`, `endDate`, `createdBy`, `eventDescription`, `eventName`) VALUES ('1', '2013-11-01 01:00:00', '2013-11-01 01:00:00', 'admin', 'permit admin rights', 'global event');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('2', 'McGill University');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('3', 'University of Montreal');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('4', 'Dawson College');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('5', 'Vanier College');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('6', 'Marianopolis');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('7', 'Google');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('8', 'Amazon');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('9', 'Microsoft');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('10', 'RIM');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('11', 'CAE');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('12', 'Bombardier');
+INSERT INTO `comp353`.`organization` (`idOrganization`, `organizationName`) VALUES ('13', 'Pratt and Whitney');
+
 INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('1', 'admin');
 INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('2', 'program chair');
 INSERT INTO `comp353`.`position` (`idPosition`, `positionName`) VALUES ('3', 'committee member');
+
+INSERT INTO `comp353`.`phaseType` (`phaseName`) VALUES ('submit');
+INSERT INTO `comp353`.`phaseType` (`phaseName`) VALUES ('bid');
+INSERT INTO `comp353`.`phaseType` (`phaseName`) VALUES ('allocate');
+INSERT INTO `comp353`.`phaseType` (`phaseName`) VALUES ('review');
+INSERT INTO `comp353`.`phaseType` (`phaseName`) VALUES ('decide');
+
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('admin', 'admin', 'admin', 'admin', 'admin@confsys.ca', '1', '1', '1', '1');
+INSERT INTO `comp353`.`event` (`idEvent`, `startDate`, `endDate`, `createdBy`, `eventDescription`, `eventName`) VALUES ('1', '2013-11-01 01:00:00', '2013-11-01 01:00:00', 'admin', 'permit admin rights', 'global event');
 INSERT INTO `comp353`.`role` (`idUser`, `idEvent`, `idPosition`) VALUES ('admin', '1', '1');
-INSERT INTO `comp353`.`phasetype` (`phaseName`) VALUES ('submit');
-INSERT INTO `comp353`.`phasetype` (`phaseName`) VALUES ('bid');
-INSERT INTO `comp353`.`phasetype` (`phaseName`) VALUES ('allocate');
-INSERT INTO `comp353`.`phasetype` (`phaseName`) VALUES ('review');
-INSERT INTO `comp353`.`phasetype` (`phaseName`) VALUES ('decide');
 
 INSERT INTO `comp353`.`topic` (`idTopic`, `topicName`) VALUES ('1', 'Item1');
 INSERT INTO `comp353`.`topic` (`idTopic`, `topicName`) VALUES ('10', 'Item10');
@@ -584,22 +638,25 @@ INSERT INTO `comp353`.`topic` (`idTopic`, `topicName`) VALUES ('7', 'Item7');
 INSERT INTO `comp353`.`topic` (`idTopic`, `topicName`) VALUES ('8', 'Item8');
 INSERT INTO `comp353`.`topic` (`idTopic`, `topicName`) VALUES ('9', 'Item9');
 
-INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('2', '1');
-INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('3', '2');
-INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('4', '3');
-INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('6', '5');
-INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('8', '7');
-INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('9', '8');
-INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('12', '11');
-INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('14', '13');
-INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('19', '18');
-INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('20', '19');
-INSERT INTO `comp353`.`topichierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('21', '19');
+INSERT INTO `comp353`.`topicHierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('2', '1');
+INSERT INTO `comp353`.`topicHierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('3', '2');
+INSERT INTO `comp353`.`topicHierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('4', '3');
+INSERT INTO `comp353`.`topicHierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('6', '5');
+INSERT INTO `comp353`.`topicHierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('8', '7');
+INSERT INTO `comp353`.`topicHierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('9', '8');
+INSERT INTO `comp353`.`topicHierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('12', '11');
+INSERT INTO `comp353`.`topicHierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('14', '13');
+INSERT INTO `comp353`.`topicHierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('19', '18');
+INSERT INTO `comp353`.`topicHierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('20', '19');
+INSERT INTO `comp353`.`topicHierarchy` (`idTopic`, `idTopicHierarchy`) VALUES ('21', '19');
 
 INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember1', 'pass', 'committee1', 'member1', 'cmember1@confsys.ca', '1', '1', '1', '1');
 INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember2', 'pass', 'committee2', 'member2', 'cmember2@confsys.ca', '1', '1', '1', '1');
 INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember3', 'pass', 'committee3', 'member3', 'cmember3@confsys.ca', '1', '1', '1', '1');
 INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('cmember4', 'pass', 'committee4', 'member4', 'cmember4@confsys.ca', '1', '1', '1', '1');
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('chair1', 'pass', 'chair1', 'member1', 'chair1@confsys.ca', '1', '1', '1', '1');
+INSERT INTO `comp353`.`user` (`idUser`, `password`, `firstName`, `lastName`, `email`, `country`, `organization`, `confirmed`, `department`) VALUES ('chair2', 'pass', 'chair2', 'member2', 'chair2@confsys.ca', '1', '1', '1', '1');
+
 
 INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember1', '1');
 INSERT INTO `comp353`.`expertintopic` (`idUser`, `idTopic`) VALUES ('cmember1', '2');
