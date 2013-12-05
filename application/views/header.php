@@ -29,8 +29,8 @@
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
         <![endif]-->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
+    <div class="navbar navbar-inverse navbar-fixed-top" style="height:50px">
+      <div>
         <div class="navbar-header">
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
             <span class="icon-bar"></span>
@@ -87,7 +87,7 @@
 			
 			<?php if($this->session->userdata('isProgramChair')): ?>
 				<li class="dropdown">
-	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Program Chair<b class="caret"></b></a>
+	                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Paper Review<b class="caret"></b></a>
 	                <ul class="dropdown-menu">
 	                    <li><a href="<?php echo site_url('Paper/paperDecision'); ?>">Decide on Papers</a></li>
 						<li><a href="<?php echo site_url('ProgramChair/assignPaperSelectEvent');?>">Assign Committee to Review a Paper</a></li>
@@ -97,7 +97,7 @@
             
             <?php if ($this->session->userdata('isCommitteeMember')) { ?>
 	            <li class="dropdown">
-	                <a href="<?php echo site_url('Paper/paperReview'); ?>" class="dropdown-toggle" data-toggle="dropdown">Committee Member<b class="caret"></b></a>
+	                <a href="<?php echo site_url('Paper/paperReview'); ?>" class="dropdown-toggle" data-toggle="dropdown">Paper Review<b class="caret"></b></a>
 	                <ul class="dropdown-menu">
 	                    <li><a href="<?php echo site_url('Paper/paperReview');?>">My Allocated Papers</a></li>  
 	                </ul>
