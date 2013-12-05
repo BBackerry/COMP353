@@ -355,17 +355,17 @@ public function changeBid()
 			$this->committeeBid_model->create_committeeBid($username, $paperBidOn->idPaper, $newBid);
 			$param['successMessages'][0] = "Your bid has been saved successfully.";
 			
-			for($i = 0; $i < count($papers); ++$i) {
-			$param['papers'][$i]['paper'] = $papers[$i];
-			$bids = $this->committeeBid_model->get_committeeBid($username, $papers[$i]->idPaper);
-			for($j = 0; $j < count($bids); ++$j){
-				$param['papers'][$i]['bid'] = $bids[$j];
+			$bids =array();
+			for($i = 0; $i < count($papers); ++$i){
+				
+				$bids[$papers[$i]->idPaper] = $this->committeeBid_model->get_committeeBid($username, $papers[$i]->idPaper);
 			}
-		}
-
+			$param['bids'] = $bids;
+			$param['papers'] = $papers;
 			
 			$this->load->view('header', $param);
 			$this->load->view('event_papers', $param);
+		
 		}
 		else {
 			$errors['errorMessages'] = array('Sorry but you have to be logged in as a committee member to bid on papers');
