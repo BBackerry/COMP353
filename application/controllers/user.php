@@ -2,7 +2,7 @@
 
 class User extends CI_Controller {
 	
-	public function profile()
+	public function profile($success = array())
 	{
 		$username = $this->session->userdata('idUser');
 		if ($username) {
@@ -23,7 +23,7 @@ class User extends CI_Controller {
 			$data['organizations'] = $this->organization_model->get_all_organization();
 			$data['departments'] = $this->department_model->get_all_department();
 			
-			$this->load->view('header');
+			$this->load->view('header',$success);
 			$this->load->view('user_profile', $data);
 		}
 		else {
@@ -49,7 +49,8 @@ class User extends CI_Controller {
 		$username = $this->session->userdata('idUser');
 		$form = $this->input->post();
 		if ($this->user_model->update_user($username, $form['password'], $form['firstName'], $form['lastName'], $form['email'], (int)$form['country'], (int)$form['organization'], (int)$form['department'])) {
-			$this->profile();
+			$success['successMessages'] = array('User Profile successfully updated');
+            $this->profile($success);
 		}
 		else {
 			redirect('Home', 'index');
