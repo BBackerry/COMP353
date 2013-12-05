@@ -25,13 +25,13 @@
 						<div class="form-group">
 							<label for="firstName" class="col-lg-2 control-label">First Name</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" id="firstName" name="firstName" data-validate="required">
+								<input type="text" class="form-control" id="firstName" name="firstName" data-validate="required,regex([a-zA-Z])">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="lastName" class="col-lg-2 control-label">Last Name</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" id="lastName" name="lastName" data-validate="required">
+								<input type="text" class="form-control" id="lastName" name="lastName" data-validate="required,regex([a-zA-Z])">
 							</div>
 						</div>
 						<div class="form-group">
@@ -73,13 +73,13 @@
 						<div class="form-group">
 							<label for="city" class="col-lg-2 control-label">City</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" id="city" name="city" data-validate="required">
+								<input type="text" class="form-control" id="city" name="city" data-validate="required,regex([a-zA-Z])">
 							</div>
 						</div>
 						<div class="form-group">
 							<label for="province" class="col-lg-2 control-label">Province/State</label>
 							<div class="col-lg-10">
-								<input type="text" class="form-control" id="province" name="province" data-validate="required">
+								<input type="text" class="form-control" id="province" name="province" data-validate="required,regex([a-zA-Z])">
 							</div>
 						</div>
 						<div class="form-group">
