@@ -1,27 +1,25 @@
     <div class="container">
 	<div class="row">
 		<div class="panel panel-default">
+			<div class="panel-heading">Search Results</div>
 			<div class="panel-body">
-      				<h3>Search for Paper Result:</h3>
-                  <?php foreach($finalMatchedPapers as $m): ?>
-					
-					<div class="list-group">
-					<a href="<?= site_url('Paper/viewPaper') . '?idPaper=' . $m->idPaper ?>" class="list-group-item">
-	                 <h4 class="list-group-item-heading">head</h4>
-	                 <p class="list-group-item-text">abstract</p>
-	               </a>
-	             </div>
-           <?php endforeach; ?>
-
-			
+				<?php if(!empty($papers)): ?>
+					<?php foreach($papers as $paper): ?>
+						<div class="list-group">
+							<div class="list-group-item">
+								<a href="<?= site_url('Paper/viewPaper') . '?idPaper' . $paper->idPaper ?>" class="list-group-item-heading"><?= $paper->title ?></a>
+								<p class="list-group-item-text">Abstract:<?= $paper->abstract ?></p>
+								<p class="list-group-item-text">Event: <a href="<?= site_url('Event/viewEvent') . '?idEvent=' . $paper->idEvent ?>"><?= $paper->eventName ?></a></p>
+							</div>
+						</div>
+					<?php endforeach; ?>
+				<?php endif; ?>
 			</div>
 		</div>
 	</div>
       </div>
 
     <div class="container">
-      <!-- Example row of columns -->
-
          <footer>
         <p>&copy; Best Concordia Team</p>
       </footer>

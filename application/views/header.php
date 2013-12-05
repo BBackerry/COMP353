@@ -42,7 +42,7 @@
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
 		<?php if ($this->session->userdata('idUser') == false) { ?>
-            		<li class="active"><a href="<?php echo base_url();?>">Home</a></li>
+            <li class="active"><a href="<?php echo base_url();?>">Home</a></li>
 		<?php } else { ?>
 			<li class="active"><a href="<?php echo base_url();?>">Home</a></li>
 			<li class="dropdown">
@@ -104,6 +104,7 @@
 	                </ul>
                </li> 
             <?php } ?>
+			<li><a href="<?= site_url('Paper/searchPaper') ?>">Search</a></li>
 		<?php } ?>
 
           </ul>
