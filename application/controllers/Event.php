@@ -426,7 +426,7 @@ class Event extends CI_Controller {
 			$this->load->view('select_events_list', $param);
 		}
 		else {
-			$errors['errorMessages'] = array('Sorry but you have to be logged in to submit papers');
+			$errors['errorMessages'] = array('Sorry but you have to be logged in to change events');
 			$this->load->view('header', $errors);
 		    $idEvent = $this->session->userdata('idEvent');
             if (!$idEvent) {

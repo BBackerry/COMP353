@@ -1,45 +1,45 @@
-     <div class="container">
-     	<div class="row">
-			<div class="panel panel-default">
-				<div class="panel-heading">
-					<h3>Papers To Review: </h3>
-				</div>
-				<div class="panel-body">
-      
-      				<h3 class="panel-title">Only papers submitted to events that are currently in the review phase are shown.</h3>
-       				<br />
-      				<h3 class="panel-title">Please click on a paper title to see detailed information.</h3>
-      				<br />
-      				<table border="1" class = "table">
-      					<tr>
-      						 <td><h4 class="panel-title"><b>Paper Title</b> </h4></td> 
-      						 <td><h4 class="panel-title"><b>Comments </b></h4></td>
-      						 <td><h4 class="panel-title"><b>Score </b></h4></td>
-      					</tr>
-					   	<?php if(isset($assignments)): ?>
-							<?php foreach($assignments as $assignment):?>
-								<?php foreach($papers as $paper):?>
-									<?php foreach($phases as $phase):?>
-										<?php if($phase->idEvent == $paper->idEvent && 
-											strtotime($phase->startTime) < strtotime(date("Y-m-d H:i:s")) && 
-												strtotime($phase->endTime) > strtotime(date("Y-m-d H:i:s"))): ?>
-											<?php if($assignment->idPaper == $paper->idPaper): ?>
-												<tr>
-													<td><a href="<?= site_url('Paper/detailedPaperReview') . '?idPaper=' . $assignment->idPaper ?>"><?= $paper->title ?></a></td>
-													<td><?= $assignment->comment ?></td>
-													<td><?= $assignment->score ?></td>
-												</tr>
-											<?php endif; ?>
+<div class="container">
+<div class="row">
+	<div class="panel panel-default">
+		<div class="panel-heading">Papers To Review</div>
+		<div class="panel-body">
+			<p>Only papers submitted to events that are currently in the review phase are shown.</p>
+			<p>Please click on a paper title to see its detailed information.</p>
+			
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>Paper Title</th>
+						<th>Comments</th>
+						<th>Score</th>
+					</tr>
+				</thead>
+				<tbody>
+					<?php if(isset($assignments)): ?>
+						<?php foreach($assignments as $assignment):?>
+							<?php foreach($papers as $paper):?>
+								<?php foreach($phases as $phase):?>
+									<?php if($phase->idEvent == $paper->idEvent && 
+										strtotime($phase->startTime) < strtotime(date("Y-m-d H:i:s")) && 
+											strtotime($phase->endTime) > strtotime(date("Y-m-d H:i:s"))): ?>
+										<?php if($assignment->idPaper == $paper->idPaper): ?>
+											<tr>
+												<td><a href="<?= site_url('Paper/detailedPaperReview') . '?idPaper=' . $assignment->idPaper ?>"><?= $paper->title ?></a></td>
+												<td><?= $assignment->comment ?></td>
+												<td><?= $assignment->score ?></td>
+											</tr>
 										<?php endif; ?>
-									<?php endforeach; ?>
+									<?php endif; ?>
 								<?php endforeach; ?>
 							<?php endforeach; ?>
-						<?php endif; ?>
-					</table>
-      			</div>
-    		</div>
-   		</div>
+						<?php endforeach; ?>
+					<?php endif; ?>
+				</tbody>
+			</table>
+		</div>
 	</div>
+</div>
+</div>
 	
     <div class="container">
       <!-- Example row of columns -->

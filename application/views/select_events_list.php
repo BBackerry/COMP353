@@ -1,11 +1,8 @@
     <div class="container">
 	<div class="row">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3>Select the Event You Wish to Visit:</h3>
-			</div>
+			<div class="panel-heading">Select the Event You Wish to Visit</div>
 			<div class="panel-body">
-      				
 					<ul class="list-group">
 					<?php if(isset($events)): ?>
 						<?php foreach($events as $row):?>

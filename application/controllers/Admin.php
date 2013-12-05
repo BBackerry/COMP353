@@ -71,7 +71,7 @@ class Admin extends CI_Controller {
             
             $param['interest'] = $this->interestInTopic_model->get_interestInTopic_of_user($UserID);
             $param['expert'] = $this->expertInTopic_model->get_expertInTopic_of_user($UserID);
-            $param['users'] = $this->user_model->get_user($UserID);
+            $param['user'] = $this->user_model->get_user($UserID)[0];
             $param['country'] = $this->country_model->get_all_country();
             $param['department'] = $this->department_model->get_all_department();
             $param['organization'] = $this->organization_model->get_all_organization();

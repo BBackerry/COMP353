@@ -1,9 +1,7 @@
     <div class="container">
 	<div class="row">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3>Events:</h3>
-			</div>
+			<div class="panel-heading">Events</div>
 			<div class="panel-body">
       				
 					<ul class="list-group">

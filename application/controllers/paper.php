@@ -82,35 +82,21 @@ class Paper extends CI_Controller {
 		$this->load->model('paper_model');
 		$this->load->model('event_model');
 		
+		$eventName = ($this->input->get('eventName')) ? "'%".$this->input->get('eventName')."%'" : "''";
+		$author = ($this->input->get('author')) ? "'%".$this->input->get('author')."%'" : "''";		
+		$keywords = ($this->input->get('keywords')) ? "'%".$this->input->get('keywords')."%'" : "''";
+		$title = ($this->input->get('title')) ? "'%".$this->input->get('title')."%'" : "''";
 		
-		$eventName = $this->input->get('event');
-		$author = $this->input->get('author');		
-		$keywords = $this->input->get('keywords');
-		$title = $this->input->get('title');
-		$matchedPapers = array();
-		$finalMatchedPapers = array();
+		$data['papers'] = $this->paper_model->get_accepted_paper_match_by_title_submittedBy_keywords_eventName($title, $author, $keywords, $eventName);
 		
-		$papers = $this->paper_model->get_accepted_paper_match_by_title_submittedBy_Keywords('%'.$title.'%', '%'.$author.'%', '%'.$keywords.'%');
-		
-		$events = $this->event_model->get_event_by_name($eventName);
-		for($i = 0; $i < count($papers); ++$i){
-			for($j = 0; $j < count($events); ++$j){
-				if($events[$j]->idEvent == $papers[$i]->idEvent)
-					array_push($matchedPapers, $papers[$i]);
-			}
-		}		
-		$param['finalMatchedPapers'] = $papers;	
-			
-			$this->load->view('header');
-			$this->load->view('search_papers_result', $param);
-					
+		$this->load->view('header');
+		$this->load->view('paper_search_results', $data);
 	}
 	
 	public function searchPaper()
 	{		
 		$this->load->view('header');
-		$this->load->view('search_papers');
-	
+		$this->load->view('paper_search');
 	}
 	
 	public function submit()
@@ -146,7 +132,7 @@ class Paper extends CI_Controller {
 		}
 	}
 	
-	public function submittedPapers()
+	public function submittedPapers($messages = null)
 	{
 		$username = $this->session->userdata('idUser');
 		if ($username) {
@@ -166,7 +152,7 @@ class Paper extends CI_Controller {
 				$data['papers'][$i]['decision'] = $this->paperDecision_model->get_paperDecision($papers[$i]->idPaper);
 			}
 
-			$this->load->view('header');
+			$this->load->view('header', $messages);
 			$this->load->view('papers_submitted', isset($data) ? $data : null);
 		}
 		else {
@@ -554,29 +540,29 @@ public function changeBid()
 	
    	public function detailedPaperReview()
 	{
-		$this->load->model('paper_model');
-		$this->load->model('paperTopics_model');
-		$this->load->model('event_model');
-		$this->load->model('phase_model');
-		
-		$username = $this->session->userdata('idUser');
-		$idPaper = $this->input->get('idPaper');
-		$query['paper'] = $this->paper_model->get_paper($idPaper);
-		$query['topics'] = $this->paperTopics_model->get_topic_by_paper($idPaper);
-		$events = array();
-		$phases = array();
-		
-		foreach($query['paper'] as $paper):
-			$event = $this->event_model->get_event($paper->idEvent);
-			array_push($events, $event[0]);
-			$phase = $this->phase_model->get_phase(4, $paper->idEvent);
-			array_push($phases, $phase[0]);
-		endforeach;
-		
-		$query['events'] = $events;
-		$query['phases'] = $phases;
-		
 		if ($this->session->userdata('isCommitteeMember')){
+			$this->load->model('paper_model');
+			$this->load->model('paperTopics_model');
+			$this->load->model('event_model');
+			$this->load->model('phase_model');
+
+			$username = $this->session->userdata('idUser');
+			$idPaper = $this->input->get('idPaper');
+			$query['paper'] = $this->paper_model->get_paper($idPaper);
+			$query['topics'] = $this->paperTopics_model->get_topic_by_paper($idPaper);
+			$events = array();
+			$phases = array();
+
+			foreach($query['paper'] as $paper) {
+				$event = $this->event_model->get_event($paper->idEvent);
+				array_push($events, $event[0]);
+				$phase = $this->phase_model->get_phase(4, $paper->idEvent);
+				array_push($phases, $phase[0]);
+			}
+
+			$query['events'] = $events;
+			$query['phases'] = $phases;
+
 			$this->load->view('header');
 			$this->load->view('detailed_paper_review',$query);
 		}
@@ -603,25 +589,22 @@ public function changeBid()
 		$this->load->model('paperAuthor_model');
 		$this->load->model('event_model');
 		
-		$errors['errorMessages'] = array();
+		$messages['errorMessages'] = array();
 		
 		$username = $this->session->userdata('idUser');
 		if ($username) {
 			$idEvent = $this->input->post('idEvent');
-			$query['events'] = $this->event_model->get_event($idEvent);
 			$title = $this->input->post('title');
 			$abstract = $this->input->post('abstract');
 			$keywords = $this->input->post('keywords');
 			$subjects = $this->input->post('subjects');
 			$authors = $this->input->post('coauthors');
-			$submittedby = $username;
 			
 			//FILE UPLOAD
 			if (!empty($_FILES['file'])) {
 				$file = $_FILES['file'];
 				if ($file['error'] != UPLOAD_ERR_OK) {
-					$error = 'File upload failed. Please try again.';
-					$errors['errorMessages'] = array_push($errors['errorMessages'], $error);
+					$messages['errorMessages'] = array_push($messages['errorMessages'], 'File upload failed. Please try again');
 				}
 				
 				$name = preg_replace('/[^A-Z0-9._-]/i', '_', $file['name']);
@@ -636,8 +619,8 @@ public function changeBid()
 				}
 			}
 			
-			if (empty($errors['errorMessages'])) {
-				$create_paper_check = $this->paper_model->create_paper($title, $abstract, $submittedby, addslashes(file_get_contents($file["tmp_name"])), $keywords, $idEvent);
+			if (empty($messages['errorMessages'])) {
+				$create_paper_check = $this->paper_model->create_paper($title, $abstract, $username, addslashes(file_get_contents($file["tmp_name"])), $keywords, $idEvent);
 				if($create_paper_check) {
 					$idpaper = mysql_insert_id();
 					for ($j = 0; $j < count($subjects); $j++) {
@@ -648,27 +631,19 @@ public function changeBid()
 						if($authors[$k] == NULL) break;
 						$this->paperAuthor_model->create_paperAuthor($idpaper, $authors[$k]);
 					}
-					
-					$query['papers'] = $this->paper_model->get_paper_by_user($username);
-					$query['successMessages'][0] = "Your paper has been submitted successfully.";
-					
-					$this->load->view('header', $query);
-					$this->load->view('submitted_papers', $query);
+
+					$messages['successMessages'] = array("Your paper has been submitted successfully");
 				}
 				else {
-					$error = 'Your paper could not be created. Please try again.';
-					$errors['errorMessages'] = array_push($errors['errorMessages'], $error);
+					$messages['errorMessages'] = array_push($messages['errorMessages'], 'Your paper could not be created. Please try again');
 				}
 			}
-			else {
-				$this->load->view('header', $errors);
-				$this->load->view('submitted_papers');
-			}
+			
+			$this->submittedPapers($messages);
 			
 		}
 		else {
-			$error = 'Sorry but you have to be logged in to submit papers';
-			$errors['errorMessages'] = array_push($errors['errorMessages'], $error);
+			$errors['errorMessages'] = array_push($errors['errorMessages'], 'Sorry but you have to be logged in to submit papers');
 			$this->load->view('header', $errors);
 		    $idEvent = $this->session->userdata('idEvent');
             if (!$idEvent) {

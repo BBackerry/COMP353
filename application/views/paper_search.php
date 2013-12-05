@@ -1,40 +1,38 @@
     <div class="container">
 	<div class="row">
 		<div class="panel panel-default">
+			<div class="panel-heading">Search for Paper</div>
 			<div class="panel-body">
-      				<h3>Search for Paper:</h3>
-                  
-        			<form role="form" class="form-horizontal" name="createEvent" action="<?php echo site_url('Paper/submitSearch/') ?>">
+				<form role="form" class="form-horizontal" action="<?= site_url('Paper/submitSearch/') ?>">
 					<div class="form-group">
-        					<label for="title" class="col-lg-2 control-label">Event:</label>
-        					<div class="col-lg-10">
-							<input type="text" name="event" id="event" name="event" />
+						<label for="title" class="col-lg-2 control-label">Event Name</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" name="eventName">
 						</div>
-        				</div>
+					</div>
 
 					<div class="form-group">
-        					<label for="title" class="col-lg-2 control-label">Author:</label>
-        					<div class="col-lg-10">
-							<input type="text" name="author" id="author" name="author" />
+						<label for="title" class="col-lg-2 control-label">Author</label>
+						<div class="col-lg-10">
+							<input type="text" name="author" class="form-control" name="author">
 						</div>
-       					</div>
- 	         
+					</div>
+			 
 					<div class="form-group">
-        					<label for="title" class="col-lg-2 control-label">Keywords:</label>
-        					<div class="col-lg-10">
-						<input type="text" name="keywords" id="keywords" name="keywords" />
+						<label for="title" class="col-lg-2 control-label">Keywords</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" name="keywords">
 						</div>  
-        				</div>
-	
+					</div>
+
 					<div class="form-group">
-        					<label for="title" class="col-lg-2 control-label">Paper Title:</label>
-        					<div class="col-lg-10">
-							<input type="text" name="title" id="title" name="title" />
+						<label for="title" class="col-lg-2 control-label">Paper Title</label>
+						<div class="col-lg-10">
+							<input type="text" class="form-control" name="title">
 						</div>  
-        				</div>
+					</div>
 			
 					<button style="float:right;" class="btn btn-primary">Submit</button>
-
 				</form>
 			</div>
 		</div>

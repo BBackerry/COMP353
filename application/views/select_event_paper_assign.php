@@ -1,20 +1,18 @@
 <div class="container">
 <div class="row">
 	<div class="panel panel-default">
-		<h3>Select an Event to See the Paper Available for Assigning:</h3>  
+		<div class="panel-heading">Select an Event to see Papers available for assigning</div>
 		<div class="panel-body">
-            <ul>
-            <?php 
-                if(count($events) > 0) {
-                    foreach($events as $eventId => $eventName){?>
-                    <li>
-                        <h3><a href="<?php echo site_url('ProgramChair/assignPaperSelectPaper?idEvent='.$eventId);?>"><?php echo $eventName ?></a></h3>
-                    </li>
-            <?php   }
-                }else {?>
-                    <h4> There are no events available for you. </h4>
-            <?php } ?>
-            <ul>
+			<div class="list-group">
+				<?php
+					if(count($events) > 0) {
+						foreach($events as $eventId => $eventName){ ?>
+							<a class="list-group-item" href="<?php echo site_url('ProgramChair/assignPaperSelectPaper?idEvent='.$eventId);?>"><?php echo $eventName ?></a>
+				<?php   }
+					} else { ?>
+						<h4> There are no events available for you. </h4>
+				<?php } ?>
+			</div>
         </div>
 	</div>
 </div>

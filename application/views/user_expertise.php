@@ -1,9 +1,7 @@
     <div class="container">
 	<div class="row">
 		<div class="panel panel-default">
-			<div class="panel panel-heading">
-				<h2>User Expertise</h2>
-			</div>
+			<div class="panel panel-heading">User Expertise</div>
 			<div class="panel-body">
 			<form class="form-horizontal" role="form" method="post" action="<?= site_url('User/update_expertise') ?>">
 				<div class="form-group">

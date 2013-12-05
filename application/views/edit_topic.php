@@ -1,45 +1,50 @@
-  
-    <div class="container">
-          <h3>Manage Topics:</h3>  
-    <div class="panel-body">
-    
-    <h3>Add a new Topic</h3>
-    <br/>
-    <form name="newTopicForm" action="<?php echo site_url('Admin/createTopic');?>" method="post">
+<div class="container">
+<div class="panel panel-default">
+	<div class="panel-heading">Manage Topics</div>
+	<div class="panel-body">
+    <form role="form" class="form-horizontal" action="<?= site_url('Admin/createTopic');?>" method="post">
          <div class="form-group">
-            <label for="topicName">Topic Name: </label>
-            <input type="Text" name="topicName" value=""/>
+            <label class="col-lg-2 control-label" for="topicName">Topic Name</label>
+			<div class="col-lg-10">
+				<input class="form-control" type="text" name="topicName" value=""/>
+			</div>
          </div>
-        <br/>
          <div class="form-group">
-            <label for="topicParent">Topic Parent: </label>
-            <select name="topicParent">
-                <option value="0" selected> None </option>        
-                <?php   foreach($topic as $aTopic){?>
-                            <option value="<?php echo $aTopic->idTopic;?>"> <?php echo $aTopic->topicName; ?> </option>
-                <?php  } ?>
-            </select>
+            <label class="col-lg-2 control-label" for="topicParent">Topic Parent</label>
+			<div class="col-lg-10">
+				<select class="form-control" name="topicParent">
+					<option value="0" selected>None</option>        
+					<?php foreach($topic as $aTopic): ?>
+								<option value="<?= $aTopic->idTopic;?>"> <?= $aTopic->topicName; ?> </option>
+					<?php endforeach; ?>
+				</select>
+			</div>
          </div>
         <br/>  
-        <button type="submit" class="btn btn-success">Create Topic</button>
-    </form> 
-    <br/>
-    <hr/>
-    <br/>
-    <h3>Edit Topics </h3>
-    <form name="topicHierarchyForm" action="<?php echo site_url('Admin/updateTopic');?>" method="post">
-        <table border="1">
-            <tr>
-                <th> Topic Name </th>
-                <th> Topic Parent </th>
-            </tr>
-            <?php foreach ($topic as $t) { ?>
+        <button type="submit" style="float:right;" class="btn btn-success">Create Topic</button>
+    </form>
+	</div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Edit Topics</div>
+	<div class="panel-body">
+    <form role="form" class="form-horizontal" action="<?= site_url('Admin/updateTopic');?>" method="post">
+        <table class="table table-hover">
+			<thead>
+				<tr>
+					<th>Topic Name</th>
+					<th>Parent Topic</th>
+				</tr>
+			</thead>
+			<tbody>
+            <?php foreach ($topic as $t): ?>
                 <tr>
                     <td> 
-                        <input type="text" name="<?php echo $t->idTopic; ?>" value="<?php echo $t->topicName; ?>"/>
+                        <input class="form-control" type="text" name="<?= $t->idTopic; ?>" value="<?= $t->topicName; ?>"/>
                     </td>
                     <td>
-                        <select name="<?php echo $t->idTopic."Parent"; ?>">
+                        <select class="form-control" name="<?= $t->idTopic."Parent"; ?>">
                             <?php  
                                     $idParent = 0;
                                     foreach($hierarchy as $parent){
@@ -49,25 +54,26 @@
                                         }
                                     }
                             ?>
-                                    <option value="0" <?php echo ($idParent == 0) ? 'selected' : '';?>> None </option>
+                                    <option value="0" <?= ($idParent == 0) ? 'selected' : '';?>>None</option>
                                     
                             <?php   foreach($topic as $aTopic){
                                         if($aTopic->idTopic != $t->idTopic){ ?>
-                                    <option value="<?php echo $aTopic->idTopic;?>" <?php echo ($idParent == $aTopic->idTopic) ? 'selected' : ''; ?>> <?php echo $aTopic->topicName; ?> </option>
+                                    <option value="<?= $aTopic->idTopic;?>" <?= ($idParent == $aTopic->idTopic) ? 'selected' : ''; ?>> <?= $aTopic->topicName; ?> </option>
                             <?php  }
                             }?>
                         </select>
                     </td>
                 </tr>
-            <?php } ?>                 
-        </table> 
-        <br/>
-        <button type="submit" class="btn btn-success">Update Topics</button>
-    </form>  
-    <br/> 
+            <?php endforeach; ?>
+			</tbody>
+        </table>
+        <button type="submit" style="float:right;" class="btn btn-success">Update Topics</button>
+    </form>
+	</div>
     </div>
-    <!-- Example row of columns -->
+</div>
 
+	<div class="container">
     <footer>
         <p>&copy; Best Concordia Team</p>
     </footer>

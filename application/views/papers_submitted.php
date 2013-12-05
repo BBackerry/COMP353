@@ -1,11 +1,9 @@
    <div class="container">
 	<div class="row">
 		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h2>My Papers</h2>
-			</div>
+			<div class="panel-heading">My Papers</div>
 			<div class="panel-body">
-				<h4>Decisions are displayed only for papers that have been decided on.</h4>
+				<p>Decisions are displayed only for papers that have been decided on.</p>
 				
 				<?php if(isset($papers)): ?>
 				<?php foreach($papers as $obj): ?>
@@ -18,8 +16,8 @@
 								Event: <a href="<?= site_url('Event/viewEvents') . '?idEvent=' . $obj['paper']->idEvent ?>"><?= $obj['event'] ?></a><br/>
 								Keywords: <?= $obj['paper']->keywords ?><br/>
 								<?php if(isset($obj['reviews'])): ?>
+									Comments:<br/>
 									<?php foreach($obj['reviews'] as $review): ?>
-										Comments:<br/>
 										<ul class="list-group">
 											<li class="list-group-item"><?= $review->comment ?></li>
 										</ul>

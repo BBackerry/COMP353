@@ -1,36 +1,40 @@
-  
-     <div class="container">
-          <h3>Add a News Message:</h3>  
-      <div class="panel-body">
-        
-        
-    <form name="newsForm" action="<?php echo site_url('News/submitedNews');?>" method="post">
+<div class="container">
+	<div class="panel panel-default">
+	<div class="panel-heading">Add a News Message</div>
+	<div class="panel-body">
+
+    <form class="form-horizontal" role="form" action="<?php echo site_url('News/submitedNews');?>" method="post">
         <div class="form-group">
-            <label for="title">Title (limit 100 characters): </label>
-            <input type="Text" name="title" size="100" value="" data-validate="required">
+            <label class="col-lg-2 control-label" for="title">Title (limit 100 characters)</label>
+			<div class="col-lg-10">
+				<input class="form-control" type="text" name="title" size="100" value="" data-validate="required">
+			</div>
         </div>
-        <br/>
         <div class="form-group">
-            <label for="idEvent">Event:</label>
-                <select name="idEvent" data-validate="required">
+            <label class="col-lg-2 control-label" for="idEvent">Event</label>
+			<div class="col-lg-10">
+                <select class="form-control" name="idEvent" data-validate="required">
                     <?php foreach($events as $event): ?>
                        <option value="<?=$event->idEvent;?>"> <?= $event->eventName ?> </option>
                     <?php endforeach; ?>
                 </select>
+			</div>
         </div>
         <br/>
         <div class="form-group">
-            <label for="description">News Description (limit 2000 characters): </label>
-            <textarea name="description" rows="10" cols="150" data-validate="required">
-            </textarea>
+            <label class="col-lg-2 control-label" for="description">News Description (limit 2000 characters)</label>
+			<div class="col-lg-10">
+				<textarea class="form-control" name="description" rows="10" cols="150" data-validate="required"></textarea>
+			</div>
         </div>
-        <br/>
-        <button type="submit" class="btn btn-success">Create News Message</button>
+        <button type="submit" style="float:right;" class="btn btn-success">Create News Message</button>
     </form>  
        
     </div>
-    <!-- Example row of columns -->
+</div>
+</div>
 
+	<div class="container">
     <footer>
         <p>&copy; Best Concordia Team</p>
     </footer>
@@ -39,5 +43,6 @@
 		<script src="../assets/js/vendor/bootstrap.min.js"></script>
 		<script src="../assets/js/plugins.js"></script>
 		<script src="../assets/js/main.js"></script>
+		<script src="<?php echo base_url();?>/assets/js/vendor/verify.notify.min.js"></script>
     </body>
 </html>

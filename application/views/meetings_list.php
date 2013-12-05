@@ -1,16 +1,15 @@
 	<div class="container">
 	<div class="row">
 		<div class="panel panel-default">
+			<div class="panel-heading">List of Meetings</div>
 			<div class="panel-body">
-					<h3>Meetings:</h3>
-					
-					<div class="list-group">
-						<?php if(isset($meetings)): ?>
-							<?php foreach($meetings as $row):?>
-								<a class="list-group-item" href="<?= site_url('Meeting/editMeeting') . '?idMeeting=' . $row->idMeeting ?>"><?= date( "Y-m-d H:i:s", strtotime($row->startTime))?> - <?= date( "Y-m-d H:i:s", strtotime($row->endTime)) ?></a>
-							<?php endforeach; ?>
-						<?php endif; ?>
-					</div>
+				<div class="list-group">
+					<?php if(isset($meetings)): ?>
+						<?php foreach($meetings as $row):?>
+							<a class="list-group-item" href="<?= site_url('Meeting/editMeeting') . '?idMeeting=' . $row->idMeeting ?>"><?= date( "Y-m-d H:i:s", strtotime($row->startTime))?> - <?= date( "Y-m-d H:i:s", strtotime($row->endTime)) ?></a>
+						<?php endforeach; ?>
+					<?php endif; ?>
+				</div>
 			</div>
 		</div>
 	</div>
