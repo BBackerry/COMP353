@@ -28,7 +28,7 @@
 			
 				<div class="form-group" id = "setProgramChair" name = "setProgramChair">
 				<label for="users">Set Program Chair:</label>
-				 <select multiple class="form-control" name="setProgramChair[]">
+				 <select multiple class="form-control" name="setProgramChair[]" data-validate="required">
 					 <?php foreach($users as $u): ?>
 					<option value="<?php echo $u->idUser ?>"><?php echo $u->idUser ?> - <?php echo $u->lastName ?>, <?php echo $u->firstName ?></option>
 					<?php endforeach; ?>
@@ -37,7 +37,7 @@
 			
 			<div class="form-group" id = "setCommitteeMember" name = "setCommitteeMemeber">
 				<label for="users">Set Committee Member:</label>
-				 <select multiple class="form-control" name="setCommitteeMemeber[]">
+				 <select multiple class="form-control" name="setCommitteeMemeber[]" data-validate="required">
 					 <?php foreach($users as $u): ?>
 					<option value="<?php echo $u->idUser ?>"><?php echo $u->idUser ?> - <?php echo $u->lastName ?>, <?php echo $u->firstName ?></option>
 					<?php endforeach; ?>

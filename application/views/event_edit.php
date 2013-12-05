@@ -55,6 +55,24 @@
 					</div>
 				</div>
 				
+				<div class="form-group" id="setCommitteeMember">
+					<label for="meetings" class="col-lg-2 control-label">Set Committee Member(s):</label>
+					<div class="col-lg-10">
+						<select multiple class="form-control" name="setCommitteeMember[]" data-validate="required" size="10">
+							<?php foreach($users as $m):    
+                                    $selected = false;
+                                    foreach($committeeMembers as $md){
+                                        if($md->idUser == $m->idUser){
+                                            $selected= true;
+                                        }
+                                    }?>
+                                    
+								<option value="<?= $m->idUser ?>" <?php echo $selected ? 'selected' : '';?>><?php echo $m->idUser ?> - <?php echo $m->lastName ?>, <?php echo $m->firstName ?></option>
+							<?php endforeach; ?>
+						</select>
+					</div>
+				</div>
+				
 				<div class="form-group" id="selectTopics">
 					<label for="topics" class="col-lg-2 control-label">Select Topics:</label>
 					<div class="col-lg-10">

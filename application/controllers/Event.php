@@ -159,8 +159,7 @@ class Event extends CI_Controller {
 		}
 		
 		foreach($committeeMember as $c)
-		{
-			
+		{			
 			$this->role_model->create_role($c, $idEvent, 3);
 		}
 		foreach($idMeeting as $m)
@@ -249,7 +248,7 @@ class Event extends CI_Controller {
 		$idEvent = $this->input->get('idEvent');
 		
 		$param['roles'] = $this->role_model->get_role_by_event($idEvent);
-			$programChairs = array();
+		$programChairs = array();
 		foreach($param['roles'] as $row) {
 			if($row->idPosition == 2)
 			{
@@ -258,6 +257,18 @@ class Event extends CI_Controller {
 			}
 		}
 		$param['programChairs'] = $programChairs;
+		// changed 
+		$committeeMembers = array();
+		foreach($param['roles'] as $row) {
+			if($row->idPosition == 3)
+			{
+				$committees = $this->user_model->get_user($row->idUser);
+				array_push($committeeMembers, $committees[0]);
+			}
+		}
+		$param['committeeMembers'] = $committeeMembers;
+		// finished
+		
 		$param['users'] = $this->user_model->get_all_users();
         
        		$param['eventTopic'] = $this->eventTopic_model->get_eventTopic($idEvent);
@@ -282,6 +293,8 @@ class Event extends CI_Controller {
 		$idPhase = $this->phaseType_model->get_all_phaseType();	
 		$meetings = $this->input->post('meetings');
 		$programChair = $this->input->post('setProgramChair');
+		//changed one line
+		$committeeMember = $this->input->post('setCommitteeMember');
 		
 		$this->event_model->update_event($idEvent, $startDate, $endDate, $username, $eventDescription, $eventName);
 		 $param['roles'] = $this->role_model->get_role_by_event($idEvent);
@@ -303,7 +316,20 @@ class Event extends CI_Controller {
 					
 				$this->role_model->create_role($p, $idEvent, 2);
 			}
+			
+		// changed		
+		foreach($param['roles'] as $row) {
+			if($row->idPosition == 3)
+			{
+				$this->role_model->delete_role($row->idUser, $idEvent);
+			}
+		}
 		
+		foreach($committeeMember as $c)
+		{		
+			$this->role_model->create_role($c, $idEvent, 3);
+		}
+		// till here
 		$this->eventTopic_model->delete_eventTopic($idEvent);	//Remove previous associations
 		if(isset($topics) && !empty($topics)) {
 			foreach($topics as $t)
@@ -324,6 +350,20 @@ class Event extends CI_Controller {
 		
 		}
 		$param['programChairs'] = $programChairs;
+		
+		// changed
+		$committeeMembers = array();
+		foreach($param['roles'] as $row) {
+			if($row->idPosition == 3)
+			{
+				$committees = $this->user_model->get_user($row->idUser);
+				array_push($committeeMembers, $committees[0]);
+			}
+		
+		}
+		$param['committeeMembers'] = $committeeMembers;
+		// done
+		
 		foreach($idPhase  as $p)
 		{
 			$startTime = date( "Y-m-d H:i:s", strtotime($this->input->post($p->idPhase."PhaseStart")));	
