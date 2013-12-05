@@ -83,7 +83,7 @@ class Paper extends CI_Controller {
 		$finalMatchedPapers = array();
 		
 		$papers = $this->paper_model->get_accepted_paper_match_by_title_submittedBy_Keywords('%'.$title.'%', '%'.$author.'%', '%'.$keywords.'%');
-		var_dump($this->paper_model->get_accepted_paper_match_by_title_submittedBy_Keywords('%'.$title.'%', '%'.$author.'%', '%'.$keywords.'%'));
+		
 		$events = $this->event_model->get_event_by_name($eventName);
 		for($i = 0; $i < count($papers); ++$i){
 			for($j = 0; $j < count($events); ++$j){

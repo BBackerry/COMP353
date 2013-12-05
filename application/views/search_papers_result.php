@@ -3,7 +3,6 @@
 		<div class="panel panel-default">
 			<div class="panel-body">
       				<h3>Search for Paper Result:</h3>
-					<?php var_dump($finalMatchedPapers) ?>
                   <?php foreach($finalMatchedPapers as $m): ?>
 					
 					<div class="list-group">
